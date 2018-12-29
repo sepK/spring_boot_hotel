@@ -5,10 +5,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
- * @author t.k
+ * @author sepK
  */
 @SpringBootApplication
-@MapperScan(value = "com.ecjtu.kongtao.dao")
+@MapperScan(value = "com.ecjtu.kongtao.mapper")
 public class HotelWebApplication {
 
 	public static void main(String[] args) {
