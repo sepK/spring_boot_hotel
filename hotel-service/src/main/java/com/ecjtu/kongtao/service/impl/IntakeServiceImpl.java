@@ -10,7 +10,7 @@ import com.ecjtu.kongtao.service.BaseService;
 import com.ecjtu.kongtao.service.CustomerService;
 import com.ecjtu.kongtao.service.IntakeService;
 import com.ecjtu.kongtao.service.RoomService;
-import com.ecjtu.kongtao.utils.Msg;
+import com.ecjtu.kongtao.utils.Result;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -38,26 +38,26 @@ public class IntakeServiceImpl extends BaseService implements IntakeService {
     }
 
     @Override
-    public Msg saveIntake(Intake intake) {
+    public Result saveIntake(Intake intake) {
         String msg = "";
         try {
             if(intake.getEndTime().compareTo(intake.getStartTime()) <= 0){
                 throw new OverTimeException("结束时间小于开始时间");
             }else{
                 intakeMapper.updateByPrimaryKeySelective(intake);
-                return Msg.success();
+                return Result.success();
             }
         }catch (OverTimeException e) {
             msg += e.getMessage();
         }catch (Exception e){
             msg += e.toString();
         }
-        return Msg.fail(msg);
+        return Result.fail(msg);
     }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public Msg addIntake(Intake intake) {
+    public Result addIntake(Intake intake) {
         String msg = "";
         try{
             if(roomService.getRoom(intake.getRoomid()) == null) {
@@ -72,7 +72,7 @@ public class IntakeServiceImpl extends BaseService implements IntakeService {
                         String uid = String.valueOf((Math.random() * 9 + 1) * 1000000).substring(0, 7);
                         intake.setId(Integer.parseInt(uid));
                         intakeMapper.insert(intake);
-                        return Msg.success();
+                        return Result.success();
                     }
                 }
             }
@@ -85,7 +85,7 @@ public class IntakeServiceImpl extends BaseService implements IntakeService {
         }catch (Exception e){
             throw new ExtraException("保存数据失败" + e.toString());
         }
-        return Msg.fail(msg);
+        return Result.fail(msg);
     }
 
     @Override

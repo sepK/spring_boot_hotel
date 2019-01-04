@@ -17,7 +17,6 @@ public class CustomerServiceImpl extends BaseService implements CustomerService 
 
 	@Override
 	public List<Customer> getCustomers() {
-
 		return customerMapper.selectByExample(null);
 	}
 
@@ -57,6 +56,7 @@ public class CustomerServiceImpl extends BaseService implements CustomerService 
 		return customerMapper.selectByExample(example).size() == 0;
 	}
 
+	@Override
 	public boolean login(Customer customer) {
 		CustomerExample example = new CustomerExample();
         Criteria criteria = example.createCriteria();

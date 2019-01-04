@@ -8,7 +8,7 @@ import com.ecjtu.kongtao.service.BaseService;
 import com.ecjtu.kongtao.service.CommentService;
 import com.ecjtu.kongtao.service.CustomerService;
 import com.ecjtu.kongtao.service.RoomService;
-import com.ecjtu.kongtao.utils.Msg;
+import com.ecjtu.kongtao.utils.Result;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -46,7 +46,7 @@ public class CommentServiceImpl extends BaseService implements CommentService {
     }
 
     @Override
-    public Msg addComment(Comment comment) {
+    public Result addComment(Comment comment) {
         String msg = null;
         comment.setId(UUID.randomUUID().toString().substring(0,10));
         try {
@@ -57,7 +57,7 @@ public class CommentServiceImpl extends BaseService implements CommentService {
                   throw new CustomerNotFoundException("用户不存在");
                 }else{
                     commentMapper.insert(comment);
-                    return Msg.success();
+                    return Result.success();
                 }
             }
         } catch (RoomNotFoundException rnfe) {
@@ -67,7 +67,7 @@ public class CommentServiceImpl extends BaseService implements CommentService {
         } catch (Exception e) {
             msg = e.getMessage();
         }
-        return Msg.fail(msg);
+        return Result.fail(msg);
     }
 
     @Override

@@ -6,21 +6,20 @@ import com.ecjtu.kongtao.exception.CustomerNotFoundException;
 import com.ecjtu.kongtao.exception.EmployeeNotFoundException;
 import com.ecjtu.kongtao.exception.RepeatOrderException;
 import com.ecjtu.kongtao.exception.RoomNotFoundException;
-import com.ecjtu.kongtao.service.OrderInfoService;
-import com.ecjtu.kongtao.utils.Msg;
+import com.ecjtu.kongtao.utils.Result;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.Resource;
 import java.util.List;
 
+/**
+ * @author sepK
+ */
 @Controller
 @RequestMapping("/order")
-public class OrderInfoController {
-    @Resource
-    private OrderInfoService orderInfoService;
+public class OrderInfoController extends BaseController{
 
     @RequestMapping("/index04")
     public String toIndex(){
@@ -29,88 +28,78 @@ public class OrderInfoController {
 
     @RequestMapping(value = "/orders",method = RequestMethod.GET)
     @ResponseBody
-    public Msg getOrders(@RequestParam("pn") Integer pn){
+    public Result getOrders(@RequestParam("pn") Integer pn){
         PageHelper.startPage(pn,10);
         List<OrderInfo> list = orderInfoService.getOrders();
-        PageInfo<OrderInfo> pageInfo = new PageInfo<OrderInfo>(list,5);
-        return Msg.success().add("pageInfo", pageInfo);
+        PageInfo<OrderInfo> pageInfo = new PageInfo<>(list,5);
+        return Result.success().add("pageInfo", pageInfo);
     }
 
     @RequestMapping(value = "/order/{id}",method = RequestMethod.GET)
     @ResponseBody
-    public Msg getOrder(@PathVariable("id") Integer id){
+    public Result getOrder(@PathVariable("id") Integer id){
         OrderInfo orderInfo = orderInfoService.getOrder(id);
-        return Msg.success().add("orderInfo", orderInfo);
+        return Result.success().add("orderInfo", orderInfo);
     }
     @RequestMapping(value = "/order/{id}", method = RequestMethod.PUT)
     @ResponseBody
-    public Msg saveOrder(OrderInfo orderInfo){
+    public Result saveOrder(OrderInfo orderInfo){
         String msg = null;
         try {
             if(orderInfoService.saveOrder(orderInfo)){
-                return Msg.success();
+                return Result.success();
             }
-        }catch (RoomNotFoundException r){
+        }catch (RoomNotFoundException | RepeatOrderException r){
             msg = r.getMessage();
-        }catch (RepeatOrderException roe){
-            msg = roe.getMessage();
-        }catch (Exception e){
-            msg = e.getMessage();
         }
-        return Msg.fail(msg);
+        return Result.fail(msg);
     }
     @RequestMapping(value = "/order", method = RequestMethod.POST)
     @ResponseBody
-    public Msg addOrder(OrderInfo orderInfo){
+    public Result addOrder(OrderInfo orderInfo){
         String msg = null;
         try{
             if(orderInfoService.addOrder(orderInfo)){
-                return Msg.success();
+                return Result.success();
             }
-        }catch (RoomNotFoundException rnfe){
+        }catch (RoomNotFoundException | CustomerNotFoundException | EmployeeNotFoundException rnfe){
             msg = rnfe.getMessage();
-        }catch (CustomerNotFoundException cnfe){
-            msg = cnfe.getMessage();
-        }catch (EmployeeNotFoundException enfe){
-            msg = enfe.getMessage();
-        }catch (Exception e){
-            msg = e.getMessage();
         }
-        return Msg.fail(msg);
+        return Result.fail(msg);
     }
     @RequestMapping(value = "/searchOrders",method = RequestMethod.GET)
     @ResponseBody
-    public Msg searchOrders(@RequestParam("roomid") Integer roomid){
+    public Result searchOrders(@RequestParam("roomid") Integer roomid){
         List<OrderInfo> list = orderInfoService.getOrdersByRoomId(roomid);
-        return Msg.success().add("list",list);
+        return Result.success().add("list",list);
     }
 
     @RequestMapping(value = "/order/{id}", method = RequestMethod.DELETE)
     @ResponseBody
-    public Msg delOrder(@PathVariable("id") Integer id){
+    public Result delOrder(@PathVariable("id") Integer id){
         if(orderInfoService.delOrder(id)){
-            return Msg.success();
+            return Result.success();
         }else{
-            return Msg.fail();
+            return Result.fail();
         }
     }
 
     @RequestMapping(value = "/addIndent/{id}",method = RequestMethod.POST)
     @ResponseBody
-    public Msg addIndent(@PathVariable("id") Integer roomId, Indent indent){
+    public Result addIndent(@PathVariable("id") Integer roomId, Indent indent){
         return orderInfoService.addIndent(roomId,indent);
     }
 
     @RequestMapping(value = "/getIndents",method = RequestMethod.GET)
     @ResponseBody
-    public Msg getIndents(@RequestParam("cusname") String cusname){
+    public Result getIndents(@RequestParam("cusname") String cusname){
         List<Indent> indents = orderInfoService.getIndents(cusname);
-        return Msg.success().add("indents",indents);
+        return Result.success().add("indents",indents);
     }
 
     @RequestMapping(value = "/updateIndent",method = RequestMethod.POST)
     @ResponseBody
-    public Msg updateIndent(OrderInfo orderInfo){
+    public Result updateIndent(OrderInfo orderInfo){
 
         return orderInfoService.updateIndent(orderInfo);
     }

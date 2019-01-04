@@ -47,7 +47,7 @@ public class EmployeeServiceImpl extends BaseService implements EmployeeService 
         return employeeMapper.selectByExample(example).size() == 0;
     }
 
-
+    @Override
     public List<Employee> getEmpsByName(String empName) {
         EmployeeExample example = new EmployeeExample();
         EmployeeExample.Criteria criteria = example.createCriteria();

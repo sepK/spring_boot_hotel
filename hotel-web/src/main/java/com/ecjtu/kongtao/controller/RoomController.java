@@ -2,21 +2,20 @@ package com.ecjtu.kongtao.controller;
 
 import com.ecjtu.kongtao.bean.Picture;
 import com.ecjtu.kongtao.bean.Room;
-import com.ecjtu.kongtao.service.RoomService;
-import com.ecjtu.kongtao.utils.Msg;
+import com.ecjtu.kongtao.utils.Result;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.Resource;
 import java.util.List;
 
+/**
+ * @author sepK
+ */
 @Controller
 @RequestMapping("/room")
-public class RoomController {
-    @Resource
-    private RoomService roomService;
+public class RoomController extends BaseController{
 
     @RequestMapping("/index02")
     public String toIndex(){
@@ -24,89 +23,89 @@ public class RoomController {
     }
     @RequestMapping(value="/rooms",method = RequestMethod.GET)
     @ResponseBody
-    public Msg getRooms(@RequestParam() Integer pn){
+    public Result getRooms(@RequestParam() Integer pn){
         PageHelper.startPage(pn,10);
         List<Room> list = roomService.getRooms();
-        PageInfo<Room> pageInfo = new PageInfo<Room>(list,5);
-        return Msg.success().add("pageInfo",pageInfo);
+        PageInfo<Room> pageInfo = new PageInfo<>(list,5);
+        return Result.success().add("pageInfo",pageInfo);
     }
 
     @RequestMapping(value = "/room/{id}", method = RequestMethod.GET)
     @ResponseBody
-    public Msg getRoom(@PathVariable("id") Integer id){
+    public Result getRoom(@PathVariable("id") Integer id){
         Room room = roomService.getRoom(id);
-        return Msg.success().add("room",room);
+        return Result.success().add("room",room);
     }
 
     @RequestMapping(value = "/room/{id}", method = RequestMethod.POST)
     @ResponseBody
-    public Msg saveRoom(Room room){
+    public Result saveRoom(@PathVariable("id") Integer id, Room room){
         if(roomService.saveRoom(room)){
-            return Msg.success();
+            return Result.success();
         }else {
-            return  Msg.fail();
+            return  Result.fail();
         }
 
     }
 
     @RequestMapping(value = "/room/{id}",method = RequestMethod.DELETE)
     @ResponseBody
-    public Msg delRoom(@PathVariable("id") Integer id){
+    public Result delRoom(@PathVariable("id") Integer id){
         if(roomService.delRoom(id)){
-            return Msg.success();
+            return Result.success();
         }else{
-            return Msg.fail();
+            return Result.fail();
         }
     }
     @RequestMapping(value = "/searchRoom",method = RequestMethod.POST)
     @ResponseBody
-    public Msg searchRoom(@RequestParam("roomNumber") String roomNumber){
+    public Result searchRoom(@RequestParam("roomNumber") String roomNumber){
         List<Room> list = roomService.searchRoomByRoomNumber(roomNumber);
-        return Msg.success().add("list",list);
+        return Result.success().add("list",list);
     }
 
 
     @RequestMapping(value = "/room", method = RequestMethod.POST)
     @ResponseBody
-    public Msg addRoom(Room room){
+    public Result addRoom(Room room){
         if(roomService.addRoom(room)) {
-            return Msg.success();
+            return Result.success();
         }else{
-            return Msg.fail();
+            return Result.fail();
         }
     }
 
     @RequestMapping(value = "/checkRoomNumber", method = RequestMethod.POST)
     @ResponseBody
-    public Msg checkRoomNumber(@RequestParam("roomNumber") String number){
+    public Result checkRoomNumber(@RequestParam("roomNumber") String number){
         if(roomService.checkRoomNumber(number)){
-            return Msg.success();
+            return Result.success();
         }else {
-            return Msg.fail();
+            return Result.fail();
         }
     }
 
     @RequestMapping(value = "/emptyRooms",method = RequestMethod.GET)
     @ResponseBody
-    public Msg emptyRooms(){
+    public Result emptyRooms(){
         List<Picture> rooms = roomService.getEmptyRooms();
-        return Msg.success().add("rooms",rooms);
+        return Result.success().add("rooms",rooms);
     }
 
 
     @RequestMapping("/searchByStatus")
     @ResponseBody
-    public Msg searchByStatus(@RequestParam("status") short status){
+    public Result searchByStatus(@RequestParam("status") short status){
         List<Room> list = roomService.getRoomByStatus(status);
-        return Msg.success().add("list",list);
+        return Result.success().add("list",list);
     }
 
     @RequestMapping("/pictures")
     @ResponseBody
-    public Msg pictures(@RequestParam("pn") Integer pn){
+    public Result pictures(@RequestParam("pn") Integer pn){
         PageHelper.startPage(pn,3000);
         List<Picture> list = roomService.getPictures();
-        PageInfo<Picture> pageInfo = new PageInfo<Picture>(list,5);
-        return Msg.success().add("pageInfo",pageInfo);
+        PageInfo<Picture> pageInfo = new PageInfo<>(list,5);
+        return Result.success().add("pageInfo",pageInfo);
     }
 }

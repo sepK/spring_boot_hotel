@@ -3,7 +3,7 @@ package com.ecjtu.kongtao.service.impl;
 import com.ecjtu.kongtao.bean.*;
 import com.ecjtu.kongtao.exception.*;
 import com.ecjtu.kongtao.service.*;
-import com.ecjtu.kongtao.utils.Msg;
+import com.ecjtu.kongtao.utils.Result;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -109,7 +109,7 @@ public class OrderInfoServiceImpl extends BaseService implements OrderInfoServic
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public Msg addIndent(Integer roomId, Indent indent) {
+    public Result addIndent(Integer roomId, Indent indent) {
         String msg = "";
         OrderInfo orderInfo = indent.getOrderInfo();
         Intake intake = indent.getIntake();
@@ -132,7 +132,7 @@ public class OrderInfoServiceImpl extends BaseService implements OrderInfoServic
         }catch (ExtraException e){
             msg += e.getMessage();
         }
-        return Msg.fail(msg);
+        return Result.fail(msg);
     }
     public List<OrderInfo> getOrdersByCusname(String cusname){
         OrderInfoExample example = new OrderInfoExample();
@@ -158,7 +158,7 @@ public class OrderInfoServiceImpl extends BaseService implements OrderInfoServic
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public Msg updateIndent(OrderInfo orderInfo) {
+    public Result updateIndent(OrderInfo orderInfo) {
         try{
             OrderInfo order = getOrder(orderInfo.getId());
             Room room = roomService.getRoom(order.getRoomid());
@@ -169,15 +169,15 @@ public class OrderInfoServiceImpl extends BaseService implements OrderInfoServic
                 if(!roomService.saveRoom(room)){
                     throw new RoomHasOrderException("房间更新失败");
                 }else {
-                    return Msg.success();
+                    return Result.success();
                 }
             }
         }catch (OrderException e){
-            return Msg.fail(e.getMessage());
+            return Result.fail(e.getMessage());
         }catch (RoomHasOrderException e){
-            return Msg.fail(e.getMessage());
+            return Result.fail(e.getMessage());
         }catch (Exception e){
-            return Msg.fail(e.getMessage());
+            return Result.fail(e.getMessage());
         }
 
     }

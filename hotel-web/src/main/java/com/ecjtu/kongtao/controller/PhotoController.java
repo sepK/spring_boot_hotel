@@ -2,84 +2,81 @@ package com.ecjtu.kongtao.controller;
 
 import com.ecjtu.kongtao.bean.Photo;
 import com.ecjtu.kongtao.exception.RoomNotFoundException;
-import com.ecjtu.kongtao.service.PhotoService;
-import com.ecjtu.kongtao.utils.Msg;
+import com.ecjtu.kongtao.utils.Result;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.annotation.Resource;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
 import java.util.UUID;
 
+/**
+ * @author sepK
+ */
 @Controller
 @RequestMapping("/photo")
-public class PhotoController {
-    @Resource
-    private PhotoService photoService;
+public class PhotoController extends BaseController{
 
     @RequestMapping(value = "/index07",method = RequestMethod.GET)
     public String toIndex(){
         return "/admin/index07";
     }
 
-    @RequestMapping(value = "/photos",method = RequestMethod.GET)
+    @RequestMapping(value = "/photos", method = RequestMethod.GET)
     @ResponseBody
-    public Msg getPhotos(@RequestParam("pn") Integer pn){
-        PageHelper.startPage(pn,10);
+    public Result getPhotos(@RequestParam("pn") Integer pn){
+        PageHelper.startPage(pn, 10);
         List<Photo> list = photoService.getPhotos();
-        PageInfo<Photo> pageInfo = new PageInfo<Photo>(list,5);
-        return Msg.success().add("pageInfo",pageInfo);
+        PageInfo<Photo> pageInfo = new PageInfo<>(list, 5);
+        return Result.success().add("pageInfo", pageInfo);
     }
 
-    @RequestMapping(value = "/photo/{id}",method = RequestMethod.GET)
+    @RequestMapping(value = "/photo/{id}", method = RequestMethod.GET)
     @ResponseBody
-    public Msg getPhoto(@PathVariable("id") Integer id){
+    public Result getPhoto(@PathVariable("id") Integer id){
         Photo photo = photoService.getPhoto(id);
-        return Msg.success().add("photo",photo);
+        return Result.success().add("photo", photo);
     }
 
-    @RequestMapping(value = "/photo",method = RequestMethod.POST)
+    @RequestMapping(value = "/photo", method = RequestMethod.POST)
     @ResponseBody
-    public Msg savePhoto(Photo photo,MultipartFile file){
-        upLoadPhoto(file,photo);
+    public Result savePhoto(Photo photo, MultipartFile file){
+        upLoadPhoto(file, photo);
         boolean b = photoService.savePhoto(photo);
-        return Msg.success();
+        return Result.success();
     }
 
-    @RequestMapping(value = "/addPhoto",method = RequestMethod.POST)
+    @RequestMapping(value = "/addPhoto", method = RequestMethod.POST)
     @ResponseBody
-    public Msg addPhoto(Photo photo,MultipartFile file){
-        upLoadPhoto(file,photo);
-        String msg = null;
+    public Result addPhoto(Photo photo, MultipartFile file){
+        upLoadPhoto(file, photo);
+        String message = null;
         try {
             boolean b = photoService.addPhoto(photo);
-            return Msg.success();
+            return Result.success();
         }catch (RoomNotFoundException e){
-            msg = e.getMessage();
-        }catch (Exception e){
-            msg = e.getMessage();
+            message = e.getMessage();
         }
-        return Msg.fail(msg);
+        return Result.fail(message);
     }
 
-    @RequestMapping(value = "/photo/{id}",method = RequestMethod.DELETE)
+    @RequestMapping(value = "/photo/{id}", method = RequestMethod.DELETE)
     @ResponseBody
-    public Msg delPhoto(@PathVariable("id") Integer id){
+    public Result delPhoto(@PathVariable("id") Integer id){
 
         boolean b = photoService.delPhoto(id);
-        return Msg.success();
+        return Result.success();
     }
 
-    @RequestMapping(value = "/searchPhotos",method = RequestMethod.GET)
+    @RequestMapping(value = "/searchPhotos", method = RequestMethod.GET)
     @ResponseBody
-    public Msg searchPhotos(@RequestParam("roomId") Integer roomId){
+    public Result searchPhotos(@RequestParam("roomId") Integer roomId){
         List<Photo> photos = photoService.searchPhotos(roomId);
-        return Msg.success().add("photos",photos);
+        return Result.success().add("photos", photos);
     }
 
     private void upLoadPhoto(MultipartFile file, Photo photo){
@@ -92,9 +89,7 @@ public class PhotoController {
             photo.setPicture("/images/" + newFileName);
             try {
                 file.transferTo(newFile);
-            } catch (IllegalStateException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
+            } catch (IllegalStateException | IOException e) {
                 e.printStackTrace();
             }
         }

@@ -2,7 +2,7 @@ package com.ecjtu.kongtao.service;
 
 
 import com.ecjtu.kongtao.bean.Intake;
-import com.ecjtu.kongtao.utils.Msg;
+import com.ecjtu.kongtao.utils.Result;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,9 +16,9 @@ public interface IntakeService {
 
     Intake getIntake(Integer id);
 
-    Msg saveIntake(Intake intake);
+    Result saveIntake(Intake intake);
 
-    Msg addIntake(Intake intake);
+    Result addIntake(Intake intake);
 
     boolean delIntake(Integer id);
 

@@ -79,7 +79,7 @@ public class RoomServiceImpl implements RoomService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public List<Picture> getPictures() {
-        List<Picture> pictures = new ArrayList<Picture>();
+        List<Picture> pictures = new ArrayList<>();
         List<Room> rooms = roomMapper.selectByExampleWithBLOBs(null);
         for (Room room:rooms) {
             List<Photo> photos = photoService.searchPhotos(room.getId());
@@ -90,12 +90,12 @@ public class RoomServiceImpl implements RoomService {
     }
 
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public List<Picture> getEmptyRooms() {
         RoomExample roomExample = new RoomExample();
         Criteria criteria = roomExample.createCriteria();
         criteria.andStatusEqualTo(Short.valueOf("0"));
-        List<Picture> pictures = new ArrayList<Picture>();
+        List<Picture> pictures = new ArrayList<>();
         List<Room> rooms = roomMapper.selectByExampleWithBLOBs(roomExample);
         for (Room room:rooms) {
             List<Photo> photos = photoService.searchPhotos(room.getId());

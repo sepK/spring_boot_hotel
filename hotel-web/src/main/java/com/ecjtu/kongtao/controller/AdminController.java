@@ -1,19 +1,19 @@
 package com.ecjtu.kongtao.controller;
 
 import com.ecjtu.kongtao.bean.Admin;
-import com.ecjtu.kongtao.service.AdminService;
-import com.ecjtu.kongtao.utils.Msg;
+import com.ecjtu.kongtao.utils.Result;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * @author adm
+ */
 @Controller
-public class AdminController {
-    @Resource
-    private AdminService adminService;
+public class AdminController extends BaseController{
+
 
     @RequestMapping("/login")
     public String toLogin(){
@@ -22,12 +22,13 @@ public class AdminController {
 
     @RequestMapping("/adminLogin")
     @ResponseBody
-    public Msg checkAdminInfo(Admin admin, HttpServletRequest httpServletRequest){
+    public Result checkAdminInfo(Admin admin, HttpServletRequest httpServletRequest){
         if(adminService.checkInfo(admin)){
             httpServletRequest.getSession().setAttribute("loginUser", admin);
-            return Msg.success();
+            httpServletRequest.getSession().setMaxInactiveInterval(60 * 5);
+            return Result.success();
         }
-        return Msg.fail();
+        return Result.fail();
     }
     @RequestMapping("/index07")
     public String toIndex(){
