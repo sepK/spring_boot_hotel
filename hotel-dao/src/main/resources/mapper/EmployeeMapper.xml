@@ -2,12 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ecjtu.kongtao.mapper.EmployeeMapper">
   <resultMap id="BaseResultMap" type="com.ecjtu.kongtao.bean.Employee">
-    <id column="id" jdbcType="INTEGER" property="id" />
+    <id column="emp_id" jdbcType="INTEGER" property="empId" />
     <result column="emp_name" jdbcType="CHAR" property="empName" />
     <result column="sex" jdbcType="CHAR" property="sex" />
     <result column="age" jdbcType="INTEGER" property="age" />
     <result column="phone" jdbcType="CHAR" property="phone" />
-    <result column="duty" jdbcType="CHAR" property="duty" />
+    <result column="duty" jdbcType="VARCHAR" property="duty" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -68,7 +68,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, emp_name, sex, age, phone, duty
+    emp_id, emp_name, sex, age, phone, duty
   </sql>
   <select id="selectByExample" parameterType="com.ecjtu.kongtao.bean.EmployeeExample" resultMap="BaseResultMap">
     select
@@ -76,7 +76,7 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from employee
+    from t_employee
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -87,30 +87,30 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from employee
-    where id = #{id,jdbcType=INTEGER}
+    from t_employee
+    where emp_id = #{empId,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from employee
-    where id = #{id,jdbcType=INTEGER}
+    delete from t_employee
+    where emp_id = #{empId,jdbcType=INTEGER}
   </delete>
   <delete id="deleteByExample" parameterType="com.ecjtu.kongtao.bean.EmployeeExample">
-    delete from employee
+    delete from t_employee
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
   <insert id="insert" parameterType="com.ecjtu.kongtao.bean.Employee">
-    insert into employee (id, emp_name, sex, age, 
-      phone, duty)
-    values (#{id,jdbcType=INTEGER}, #{empName,jdbcType=CHAR}, #{sex,jdbcType=CHAR}, #{age,jdbcType=INTEGER}, 
-      #{phone,jdbcType=CHAR}, #{duty,jdbcType=CHAR})
+    insert into t_employee (emp_id, emp_name, sex, 
+      age, phone, duty)
+    values (#{empId,jdbcType=INTEGER}, #{empName,jdbcType=CHAR}, #{sex,jdbcType=CHAR}, 
+      #{age,jdbcType=INTEGER}, #{phone,jdbcType=CHAR}, #{duty,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.ecjtu.kongtao.bean.Employee">
-    insert into employee
+    insert into t_employee
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
+      <if test="empId != null">
+        emp_id,
       </if>
       <if test="empName != null">
         emp_name,
@@ -129,8 +129,8 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=INTEGER},
+      <if test="empId != null">
+        #{empId,jdbcType=INTEGER},
       </if>
       <if test="empName != null">
         #{empName,jdbcType=CHAR},
@@ -145,21 +145,21 @@
         #{phone,jdbcType=CHAR},
       </if>
       <if test="duty != null">
-        #{duty,jdbcType=CHAR},
+        #{duty,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
   <select id="countByExample" parameterType="com.ecjtu.kongtao.bean.EmployeeExample" resultType="java.lang.Long">
-    select count(*) from employee
+    select count(*) from t_employee
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update employee
+    update t_employee
     <set>
-      <if test="record.id != null">
-        id = #{record.id,jdbcType=INTEGER},
+      <if test="record.empId != null">
+        emp_id = #{record.empId,jdbcType=INTEGER},
       </if>
       <if test="record.empName != null">
         emp_name = #{record.empName,jdbcType=CHAR},
@@ -174,7 +174,7 @@
         phone = #{record.phone,jdbcType=CHAR},
       </if>
       <if test="record.duty != null">
-        duty = #{record.duty,jdbcType=CHAR},
+        duty = #{record.duty,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null">
@@ -182,19 +182,19 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update employee
-    set id = #{record.id,jdbcType=INTEGER},
+    update t_employee
+    set emp_id = #{record.empId,jdbcType=INTEGER},
       emp_name = #{record.empName,jdbcType=CHAR},
       sex = #{record.sex,jdbcType=CHAR},
       age = #{record.age,jdbcType=INTEGER},
       phone = #{record.phone,jdbcType=CHAR},
-      duty = #{record.duty,jdbcType=CHAR}
+      duty = #{record.duty,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
   <update id="updateByPrimaryKeySelective" parameterType="com.ecjtu.kongtao.bean.Employee">
-    update employee
+    update t_employee
     <set>
       <if test="empName != null">
         emp_name = #{empName,jdbcType=CHAR},
@@ -209,18 +209,18 @@
         phone = #{phone,jdbcType=CHAR},
       </if>
       <if test="duty != null">
-        duty = #{duty,jdbcType=CHAR},
+        duty = #{duty,jdbcType=VARCHAR},
       </if>
     </set>
-    where id = #{id,jdbcType=INTEGER}
+    where emp_id = #{empId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.ecjtu.kongtao.bean.Employee">
-    update employee
+    update t_employee
     set emp_name = #{empName,jdbcType=CHAR},
       sex = #{sex,jdbcType=CHAR},
       age = #{age,jdbcType=INTEGER},
       phone = #{phone,jdbcType=CHAR},
-      duty = #{duty,jdbcType=CHAR}
-    where id = #{id,jdbcType=INTEGER}
+      duty = #{duty,jdbcType=VARCHAR}
+    where emp_id = #{empId,jdbcType=INTEGER}
   </update>
 </mapper>

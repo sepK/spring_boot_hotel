@@ -7,10 +7,13 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.util.Random;
 
+/**
+ * @author sepK
+ */
 public final class GraphicHelper {
 	
 	public static String create(final int width, final int height, final String imgType, OutputStream output) {
-		StringBuffer sb = new StringBuffer();
+		StringBuilder stringBuilder = new StringBuilder();
 		Random random = new Random();
 
 		BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
@@ -36,7 +39,7 @@ public final class GraphicHelper {
 		for (int i = 0; i < 6; i++) {
 			final int temp = random.nextInt(26) + 97;
 			String s = String.valueOf((char) temp);
-			sb.append(s);
+			stringBuilder.append(s);
 			graphic.setColor(colors[random.nextInt(colors.length)]);
 			graphic.drawString(s, i * (width / 6), height - (height / 3));
 		}
@@ -46,6 +49,6 @@ public final class GraphicHelper {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		return sb.toString();
+		return stringBuilder.toString();
 	}
 }

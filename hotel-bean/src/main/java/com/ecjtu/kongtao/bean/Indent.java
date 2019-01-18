@@ -4,15 +4,16 @@ import java.io.Serializable;
 
 public class Indent implements Serializable{
     private OrderInfo orderInfo;
-    private Intake intake;
+    private Housing housing;
     private String picture;
 
     public Indent() {
     }
 
-    public Indent(OrderInfo orderInfo, Intake intake) {
+    public Indent(OrderInfo orderInfo, Housing housing, String picture) {
         this.orderInfo = orderInfo;
-        this.intake = intake;
+        this.housing = housing;
+        this.picture = picture;
     }
 
     public OrderInfo getOrderInfo() {
@@ -23,12 +24,12 @@ public class Indent implements Serializable{
         this.orderInfo = orderInfo;
     }
 
-    public Intake getIntake() {
-        return intake;
+    public Housing getHousing() {
+        return housing;
     }
 
-    public void setIntake(Intake intake) {
-        this.intake = intake;
+    public void setHousing(Housing housing) {
+        this.housing = housing;
     }
 
     public String getPicture() {

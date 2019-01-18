@@ -18,7 +18,7 @@ public class AdminServiceImpl extends BaseService implements AdminService {
     public boolean checkInfo(Admin admin) {
         AdminExample example = new AdminExample();
         AdminExample.Criteria criteria = example.createCriteria();
-        criteria.andAdminnameEqualTo(admin.getAdminName());
+        criteria.andAdminNameEqualTo(admin.getAdminName());
         criteria.andPasswordEqualTo(admin.getPassword());
         List<Admin> admins = adminMapper.selectByExample(example);
         return admins.size() != 0;

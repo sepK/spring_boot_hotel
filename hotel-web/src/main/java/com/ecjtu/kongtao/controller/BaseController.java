@@ -18,11 +18,7 @@ public class BaseController {
     @Autowired
     protected EmployeeService employeeService;
     @Autowired
-    protected IntakeService intakeService;
-    @Autowired
     protected OrderInfoService orderInfoService;
-    @Autowired
-    protected PhotoService photoService;
     @Autowired
     protected RoomService roomService;
 }

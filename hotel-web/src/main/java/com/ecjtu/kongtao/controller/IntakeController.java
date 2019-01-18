@@ -1,28 +1,15 @@
 package com.ecjtu.kongtao.controller;
 
-import com.ecjtu.kongtao.bean.Intake;
-import com.ecjtu.kongtao.exception.ExtraException;
-import com.ecjtu.kongtao.exception.OverTimeException;
-import com.ecjtu.kongtao.utils.Result;
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
-import org.springframework.beans.propertyeditors.CustomDateEditor;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.*;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  * @author sepK
  */
-@Controller
+@Deprecated
 @RequestMapping("/intake")
-public class IntakeController extends BaseController{
+public class IntakeController{
 
-    @RequestMapping("/index06")
+/*    @RequestMapping("/index06")
     public String toIndex(){
         return "/admin/index06";
     }
@@ -87,5 +74,5 @@ public class IntakeController extends BaseController{
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         dateFormat.setLenient(false);
         binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
-    }
+    }*/
 }

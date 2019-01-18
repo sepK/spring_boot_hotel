@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.ecjtu.kongtao.mapper.IntakeMapper">
-  <resultMap id="BaseResultMap" type="com.ecjtu.kongtao.bean.Intake">
-    <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="roomid" jdbcType="INTEGER" property="roomid" />
-    <result column="cusName" jdbcType="VARCHAR" property="cusname" />
-    <result column="start_time" jdbcType="TIMESTAMP" property="startTime" />
-    <result column="end_time" jdbcType="TIMESTAMP" property="endTime" />
-    <result column="money" jdbcType="DOUBLE" property="money" />
+<mapper namespace="com.ecjtu.kongtao.mapper.UserMapper">
+  <resultMap id="BaseResultMap" type="com.ecjtu.kongtao.bean.User">
+    <id column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="sex" jdbcType="CHAR" property="sex" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="mail" jdbcType="VARCHAR" property="mail" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -68,15 +68,15 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, roomid, cusName, start_time, end_time, money
+    user_id, user_name, password, sex, phone, mail
   </sql>
-  <select id="selectByExample" parameterType="com.ecjtu.kongtao.bean.IntakeExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.ecjtu.kongtao.bean.UserExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from intake
+    from t_user
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -87,96 +87,94 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from intake
-    where id = #{id,jdbcType=INTEGER}
+    from t_user
+    where user_id = #{userId,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from intake
-    where id = #{id,jdbcType=INTEGER}
+    delete from t_user
+    where user_id = #{userId,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.ecjtu.kongtao.bean.IntakeExample">
-    delete from intake
+  <delete id="deleteByExample" parameterType="com.ecjtu.kongtao.bean.UserExample">
+    delete from t_user
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.ecjtu.kongtao.bean.Intake">
-    insert into intake (id, roomid, cusName, 
-      start_time, end_time, money
-      )
-    values (#{id,jdbcType=INTEGER}, #{roomid,jdbcType=INTEGER}, #{cusname,jdbcType=VARCHAR}, 
-      #{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, #{money,jdbcType=DOUBLE}
-      )
+  <insert id="insert" parameterType="com.ecjtu.kongtao.bean.User">
+    insert into t_user (user_id, user_name, password, 
+      sex, phone, mail)
+    values (#{userId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{sex,jdbcType=CHAR}, #{phone,jdbcType=VARCHAR}, #{mail,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.ecjtu.kongtao.bean.Intake">
-    insert into intake
+  <insert id="insertSelective" parameterType="com.ecjtu.kongtao.bean.User">
+    insert into t_user
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
+      <if test="userId != null">
+        user_id,
       </if>
-      <if test="roomid != null">
-        roomid,
+      <if test="userName != null">
+        user_name,
       </if>
-      <if test="cusname != null">
-        cusName,
+      <if test="password != null">
+        password,
       </if>
-      <if test="startTime != null">
-        start_time,
+      <if test="sex != null">
+        sex,
       </if>
-      <if test="endTime != null">
-        end_time,
+      <if test="phone != null">
+        phone,
       </if>
-      <if test="money != null">
-        money,
+      <if test="mail != null">
+        mail,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=INTEGER},
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
       </if>
-      <if test="roomid != null">
-        #{roomid,jdbcType=INTEGER},
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
       </if>
-      <if test="cusname != null">
-        #{cusname,jdbcType=VARCHAR},
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
       </if>
-      <if test="startTime != null">
-        #{startTime,jdbcType=TIMESTAMP},
+      <if test="sex != null">
+        #{sex,jdbcType=CHAR},
       </if>
-      <if test="endTime != null">
-        #{endTime,jdbcType=TIMESTAMP},
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
       </if>
-      <if test="money != null">
-        #{money,jdbcType=DOUBLE},
+      <if test="mail != null">
+        #{mail,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.ecjtu.kongtao.bean.IntakeExample" resultType="java.lang.Long">
-    select count(*) from intake
+  <select id="countByExample" parameterType="com.ecjtu.kongtao.bean.UserExample" resultType="java.lang.Long">
+    select count(*) from t_user
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update intake
+    update t_user
     <set>
-      <if test="record.id != null">
-        id = #{record.id,jdbcType=INTEGER},
+      <if test="record.userId != null">
+        user_id = #{record.userId,jdbcType=INTEGER},
       </if>
-      <if test="record.roomid != null">
-        roomid = #{record.roomid,jdbcType=INTEGER},
+      <if test="record.userName != null">
+        user_name = #{record.userName,jdbcType=VARCHAR},
       </if>
-      <if test="record.cusname != null">
-        cusName = #{record.cusname,jdbcType=VARCHAR},
+      <if test="record.password != null">
+        password = #{record.password,jdbcType=VARCHAR},
       </if>
-      <if test="record.startTime != null">
-        start_time = #{record.startTime,jdbcType=TIMESTAMP},
+      <if test="record.sex != null">
+        sex = #{record.sex,jdbcType=CHAR},
       </if>
-      <if test="record.endTime != null">
-        end_time = #{record.endTime,jdbcType=TIMESTAMP},
+      <if test="record.phone != null">
+        phone = #{record.phone,jdbcType=VARCHAR},
       </if>
-      <if test="record.money != null">
-        money = #{record.money,jdbcType=DOUBLE},
+      <if test="record.mail != null">
+        mail = #{record.mail,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null">
@@ -184,45 +182,45 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update intake
-    set id = #{record.id,jdbcType=INTEGER},
-      roomid = #{record.roomid,jdbcType=INTEGER},
-      cusName = #{record.cusname,jdbcType=VARCHAR},
-      start_time = #{record.startTime,jdbcType=TIMESTAMP},
-      end_time = #{record.endTime,jdbcType=TIMESTAMP},
-      money = #{record.money,jdbcType=DOUBLE}
+    update t_user
+    set user_id = #{record.userId,jdbcType=INTEGER},
+      user_name = #{record.userName,jdbcType=VARCHAR},
+      password = #{record.password,jdbcType=VARCHAR},
+      sex = #{record.sex,jdbcType=CHAR},
+      phone = #{record.phone,jdbcType=VARCHAR},
+      mail = #{record.mail,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.ecjtu.kongtao.bean.Intake">
-    update intake
+  <update id="updateByPrimaryKeySelective" parameterType="com.ecjtu.kongtao.bean.User">
+    update t_user
     <set>
-      <if test="roomid != null">
-        roomid = #{roomid,jdbcType=INTEGER},
+      <if test="userName != null">
+        user_name = #{userName,jdbcType=VARCHAR},
       </if>
-      <if test="cusname != null">
-        cusName = #{cusname,jdbcType=VARCHAR},
+      <if test="password != null">
+        password = #{password,jdbcType=VARCHAR},
       </if>
-      <if test="startTime != null">
-        start_time = #{startTime,jdbcType=TIMESTAMP},
+      <if test="sex != null">
+        sex = #{sex,jdbcType=CHAR},
       </if>
-      <if test="endTime != null">
-        end_time = #{endTime,jdbcType=TIMESTAMP},
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
       </if>
-      <if test="money != null">
-        money = #{money,jdbcType=DOUBLE},
+      <if test="mail != null">
+        mail = #{mail,jdbcType=VARCHAR},
       </if>
     </set>
-    where id = #{id,jdbcType=INTEGER}
+    where user_id = #{userId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.ecjtu.kongtao.bean.Intake">
-    update intake
-    set roomid = #{roomid,jdbcType=INTEGER},
-      cusName = #{cusname,jdbcType=VARCHAR},
-      start_time = #{startTime,jdbcType=TIMESTAMP},
-      end_time = #{endTime,jdbcType=TIMESTAMP},
-      money = #{money,jdbcType=DOUBLE}
-    where id = #{id,jdbcType=INTEGER}
+  <update id="updateByPrimaryKey" parameterType="com.ecjtu.kongtao.bean.User">
+    update t_user
+    set user_name = #{userName,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=CHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      mail = #{mail,jdbcType=VARCHAR}
+    where user_id = #{userId,jdbcType=INTEGER}
   </update>
 </mapper>

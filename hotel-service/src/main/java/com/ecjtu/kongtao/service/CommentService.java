@@ -1,7 +1,7 @@
 package com.ecjtu.kongtao.service;
 
 
-import com.ecjtu.kongtao.bean.Comment;
+import com.ecjtu.kongtao.bean.UserComment;
 import com.ecjtu.kongtao.utils.Result;
 import org.springframework.stereotype.Service;
 
@@ -13,15 +13,15 @@ import java.util.List;
 @Service
 public interface CommentService {
 
-    List<Comment> getComments();
+    List<UserComment> getComments();
 
-    Comment getComment(String id);
+    UserComment getComment(String id);
 
     boolean delComment(String id);
 
-    boolean saveComment(Comment comment);
+    boolean saveComment(UserComment comment);
 
-    Result addComment(Comment comment);
+    Result addComment(UserComment comment);
 
-    List<Comment> searchComments(String cusName);
+    List<UserComment> searchComments(String cusName);
 }

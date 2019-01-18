@@ -9,5 +9,10 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public interface AdminService {
+    /**
+     * 检查管理员信息
+     * @param admin
+     * @return
+     */
     boolean checkInfo(Admin admin);
 }

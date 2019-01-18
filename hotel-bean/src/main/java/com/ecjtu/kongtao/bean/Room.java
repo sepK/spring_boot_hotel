@@ -1,32 +1,45 @@
 package com.ecjtu.kongtao.bean;
 
+/**
+ * @author sepK
+ */
 public class Room {
-    private Integer id;
+    private Integer roomId;
 
-    private String type;
+    private String roomNumber;
+
+    private Integer type;
 
     private Double price;
 
     private Short status;
 
-    private String roomNumber;
+    private String picture;
 
     private String introduce;
 
-    public Integer getId() {
-        return id;
+    public Integer getRoomId() {
+        return roomId;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setRoomId(Integer roomId) {
+        this.roomId = roomId;
     }
 
-    public String getType() {
+    public String getRoomNumber() {
+        return roomNumber;
+    }
+
+    public void setRoomNumber(String roomNumber) {
+        this.roomNumber = roomNumber == null ? null : roomNumber.trim();
+    }
+
+    public Integer getType() {
         return type;
     }
 
-    public void setType(String type) {
-        this.type = type == null ? null : type.trim();
+    public void setType(Integer type) {
+        this.type = type;
     }
 
     public Double getPrice() {
@@ -45,12 +58,12 @@ public class Room {
         this.status = status;
     }
 
-    public String getRoomNumber() {
-        return roomNumber;
+    public String getPicture() {
+        return picture;
     }
 
-    public void setRoomNumber(String roomNumber) {
-        this.roomNumber = roomNumber == null ? null : roomNumber.trim();
+    public void setPicture(String picture) {
+        this.picture = picture == null ? null : picture.trim();
     }
 
     public String getIntroduce() {

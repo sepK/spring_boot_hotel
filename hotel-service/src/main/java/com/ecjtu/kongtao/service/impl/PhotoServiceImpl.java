@@ -1,24 +1,15 @@
 package com.ecjtu.kongtao.service.impl;
 
 
-import com.ecjtu.kongtao.bean.Photo;
-import com.ecjtu.kongtao.bean.PhotoExample;
-import com.ecjtu.kongtao.exception.ExtraException;
-import com.ecjtu.kongtao.exception.RoomNotFoundException;
-import com.ecjtu.kongtao.service.BaseService;
-import com.ecjtu.kongtao.service.PhotoService;
-import com.ecjtu.kongtao.service.RoomService;
 import org.springframework.stereotype.Service;
-
-import javax.annotation.Resource;
-import java.util.List;
 
 /**
  * @author sepK
  */
+@Deprecated
 @Service
-public class PhotoServiceImpl extends BaseService implements PhotoService {
-    @Resource
+public class PhotoServiceImpl{
+/*    @Resource
     private RoomService roomService;
 
     @Override
@@ -63,5 +54,5 @@ public class PhotoServiceImpl extends BaseService implements PhotoService {
     @Override
     public boolean delPhoto(Integer id) {
         return photoMapper.deleteByPrimaryKey(id) > 0;
-    }
+    }*/
 }

@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.ecjtu.kongtao.mapper.PhotoMapper">
-  <resultMap id="BaseResultMap" type="com.ecjtu.kongtao.bean.Photo">
-    <id column="id" jdbcType="INTEGER" property="id" />
+<mapper namespace="com.ecjtu.kongtao.mapper.HousingMapper">
+  <resultMap id="BaseResultMap" type="com.ecjtu.kongtao.bean.Housing">
+    <id column="housing_id" jdbcType="INTEGER" property="housingId" />
     <result column="room_id" jdbcType="INTEGER" property="roomId" />
-    <result column="picture" jdbcType="VARCHAR" property="picture" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="start_time" jdbcType="TIMESTAMP" property="startTime" />
+    <result column="end_time" jdbcType="TIMESTAMP" property="endTime" />
+    <result column="cost_money" jdbcType="DOUBLE" property="costMoney" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -65,15 +68,15 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, room_id, picture
+    housing_id, room_id, user_id, start_time, end_time, cost_money
   </sql>
-  <select id="selectByExample" parameterType="com.ecjtu.kongtao.bean.PhotoExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.ecjtu.kongtao.bean.HousingExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from photo
+    from t_housing
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -84,67 +87,96 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from photo
-    where id = #{id,jdbcType=INTEGER}
+    from t_housing
+    where housing_id = #{housingId,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from photo
-    where id = #{id,jdbcType=INTEGER}
+    delete from t_housing
+    where housing_id = #{housingId,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.ecjtu.kongtao.bean.PhotoExample">
-    delete from photo
+  <delete id="deleteByExample" parameterType="com.ecjtu.kongtao.bean.HousingExample">
+    delete from t_housing
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.ecjtu.kongtao.bean.Photo">
-    insert into photo (id, room_id, picture
+  <insert id="insert" parameterType="com.ecjtu.kongtao.bean.Housing">
+    insert into t_housing (housing_id, room_id, user_id, 
+      start_time, end_time, cost_money
       )
-    values (#{id,jdbcType=INTEGER}, #{roomId,jdbcType=INTEGER}, #{picture,jdbcType=VARCHAR}
+    values (#{housingId,jdbcType=INTEGER}, #{roomId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, 
+      #{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, #{costMoney,jdbcType=DOUBLE}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.ecjtu.kongtao.bean.Photo">
-    insert into photo
+  <insert id="insertSelective" parameterType="com.ecjtu.kongtao.bean.Housing">
+    insert into t_housing
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
+      <if test="housingId != null">
+        housing_id,
       </if>
       <if test="roomId != null">
         room_id,
       </if>
-      <if test="picture != null">
-        picture,
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="startTime != null">
+        start_time,
+      </if>
+      <if test="endTime != null">
+        end_time,
+      </if>
+      <if test="costMoney != null">
+        cost_money,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=INTEGER},
+      <if test="housingId != null">
+        #{housingId,jdbcType=INTEGER},
       </if>
       <if test="roomId != null">
         #{roomId,jdbcType=INTEGER},
       </if>
-      <if test="picture != null">
-        #{picture,jdbcType=VARCHAR},
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="startTime != null">
+        #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null">
+        #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="costMoney != null">
+        #{costMoney,jdbcType=DOUBLE},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.ecjtu.kongtao.bean.PhotoExample" resultType="java.lang.Long">
-    select count(*) from photo
+  <select id="countByExample" parameterType="com.ecjtu.kongtao.bean.HousingExample" resultType="java.lang.Long">
+    select count(*) from t_housing
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update photo
+    update t_housing
     <set>
-      <if test="record.id != null">
-        id = #{record.id,jdbcType=INTEGER},
+      <if test="record.housingId != null">
+        housing_id = #{record.housingId,jdbcType=INTEGER},
       </if>
       <if test="record.roomId != null">
         room_id = #{record.roomId,jdbcType=INTEGER},
       </if>
-      <if test="record.picture != null">
-        picture = #{record.picture,jdbcType=VARCHAR},
+      <if test="record.userId != null">
+        user_id = #{record.userId,jdbcType=INTEGER},
+      </if>
+      <if test="record.startTime != null">
+        start_time = #{record.startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.endTime != null">
+        end_time = #{record.endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.costMoney != null">
+        cost_money = #{record.costMoney,jdbcType=DOUBLE},
       </if>
     </set>
     <if test="_parameter != null">
@@ -152,30 +184,45 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update photo
-    set id = #{record.id,jdbcType=INTEGER},
+    update t_housing
+    set housing_id = #{record.housingId,jdbcType=INTEGER},
       room_id = #{record.roomId,jdbcType=INTEGER},
-      picture = #{record.picture,jdbcType=VARCHAR}
+      user_id = #{record.userId,jdbcType=INTEGER},
+      start_time = #{record.startTime,jdbcType=TIMESTAMP},
+      end_time = #{record.endTime,jdbcType=TIMESTAMP},
+      cost_money = #{record.costMoney,jdbcType=DOUBLE}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.ecjtu.kongtao.bean.Photo">
-    update photo
+  <update id="updateByPrimaryKeySelective" parameterType="com.ecjtu.kongtao.bean.Housing">
+    update t_housing
     <set>
       <if test="roomId != null">
         room_id = #{roomId,jdbcType=INTEGER},
       </if>
-      <if test="picture != null">
-        picture = #{picture,jdbcType=VARCHAR},
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="startTime != null">
+        start_time = #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null">
+        end_time = #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="costMoney != null">
+        cost_money = #{costMoney,jdbcType=DOUBLE},
       </if>
     </set>
-    where id = #{id,jdbcType=INTEGER}
+    where housing_id = #{housingId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.ecjtu.kongtao.bean.Photo">
-    update photo
+  <update id="updateByPrimaryKey" parameterType="com.ecjtu.kongtao.bean.Housing">
+    update t_housing
     set room_id = #{roomId,jdbcType=INTEGER},
-      picture = #{picture,jdbcType=VARCHAR}
-    where id = #{id,jdbcType=INTEGER}
+      user_id = #{userId,jdbcType=INTEGER},
+      start_time = #{startTime,jdbcType=TIMESTAMP},
+      end_time = #{endTime,jdbcType=TIMESTAMP},
+      cost_money = #{costMoney,jdbcType=DOUBLE}
+    where housing_id = #{housingId,jdbcType=INTEGER}
   </update>
 </mapper>

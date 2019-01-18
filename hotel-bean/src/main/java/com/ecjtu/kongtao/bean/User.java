@@ -1,13 +1,14 @@
 package com.ecjtu.kongtao.bean;
 
-import java.io.Serializable;
+/**
+ * @author sepK
+ */
+public class User {
+    private Integer userId;
 
-public class Customer implements Serializable{
-    private Integer id;
+    private String userName;
 
-    private String customerName;
-
-    private transient String password;
+    private String password;
 
     private String sex;
 
@@ -15,20 +16,20 @@ public class Customer implements Serializable{
 
     private String mail;
 
-    public Integer getId() {
-        return id;
+    public Integer getUserId() {
+        return userId;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 
-    public String getCustomerName() {
-        return customerName;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setCustomerName(String customerName) {
-        this.customerName = customerName == null ? null : customerName.trim();
+    public void setUserName(String userName) {
+        this.userName = userName == null ? null : userName.trim();
     }
 
     public String getPassword() {

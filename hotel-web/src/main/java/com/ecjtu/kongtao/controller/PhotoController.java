@@ -1,27 +1,15 @@
 package com.ecjtu.kongtao.controller;
 
-import com.ecjtu.kongtao.bean.Photo;
-import com.ecjtu.kongtao.exception.RoomNotFoundException;
-import com.ecjtu.kongtao.utils.Result;
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
-
-import java.io.File;
-import java.io.IOException;
-import java.util.List;
-import java.util.UUID;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  * @author sepK
  */
-@Controller
 @RequestMapping("/photo")
-public class PhotoController extends BaseController{
+@Deprecated
+public class PhotoController{
 
-    @RequestMapping(value = "/index07",method = RequestMethod.GET)
+/*    @RequestMapping(value = "/index07",method = RequestMethod.GET)
     public String toIndex(){
         return "/admin/index07";
     }
@@ -93,5 +81,5 @@ public class PhotoController extends BaseController{
                 e.printStackTrace();
             }
         }
-    }
+    }*/
 }

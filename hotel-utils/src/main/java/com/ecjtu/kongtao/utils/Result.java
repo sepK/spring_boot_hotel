@@ -43,7 +43,7 @@ public class Result {
 		return result;
 	}
 
-	public Result add(String key,Object value){
+	public Result add(String key, Object value){
 		this.getExtend().put(key, value);
 		return this;
 	}
@@ -71,6 +71,5 @@ public class Result {
 	public void setExtend(Map<String, Object> extend) {
 		this.extend = extend;
 	}
-	
-	
+
 }

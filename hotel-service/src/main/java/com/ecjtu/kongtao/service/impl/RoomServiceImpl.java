@@ -1,19 +1,15 @@
 package com.ecjtu.kongtao.service.impl;
 
 
-import com.ecjtu.kongtao.bean.Photo;
-import com.ecjtu.kongtao.bean.Picture;
 import com.ecjtu.kongtao.bean.Room;
 import com.ecjtu.kongtao.bean.RoomExample;
 import com.ecjtu.kongtao.bean.RoomExample.Criteria;
 import com.ecjtu.kongtao.mapper.RoomMapper;
-import com.ecjtu.kongtao.service.PhotoService;
 import com.ecjtu.kongtao.service.RoomService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -24,8 +20,6 @@ public class RoomServiceImpl implements RoomService {
 
     @Resource
     private RoomMapper roomMapper;
-    @Resource
-    private PhotoService photoService;
 
     @Override
     public List<Room> getRooms() {
@@ -76,23 +70,24 @@ public class RoomServiceImpl implements RoomService {
         return roomMapper.selectByExampleWithBLOBs(example);
     }
 
-    @Override
+    @Deprecated
     @Transactional(rollbackFor = Exception.class)
-    public List<Picture> getPictures() {
-        List<Picture> pictures = new ArrayList<>();
+    public List<Room> getPictures() {
+        /*List<Picture> pictures = new ArrayList<>();
         List<Room> rooms = roomMapper.selectByExampleWithBLOBs(null);
         for (Room room:rooms) {
             List<Photo> photos = photoService.searchPhotos(room.getId());
             Picture picture = new Picture(room,photos);
             pictures.add(picture);
         }
-        return pictures;
+        return pictures;*/
+        return null;
     }
 
-    @Override
+    @Deprecated
     @Transactional(rollbackFor = Exception.class)
-    public List<Picture> getEmptyRooms() {
-        RoomExample roomExample = new RoomExample();
+    public List<Room> getEmptyRooms() {
+        /*RoomExample roomExample = new RoomExample();
         Criteria criteria = roomExample.createCriteria();
         criteria.andStatusEqualTo(Short.valueOf("0"));
         List<Picture> pictures = new ArrayList<>();
@@ -102,6 +97,7 @@ public class RoomServiceImpl implements RoomService {
             Picture picture = new Picture(room,photos);
             pictures.add(picture);
         }
-        return pictures;
+        return pictures;*/
+        return null;
     }
 }

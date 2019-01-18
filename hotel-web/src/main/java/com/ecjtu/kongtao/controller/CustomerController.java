@@ -1,6 +1,6 @@
 package com.ecjtu.kongtao.controller;
 
-import com.ecjtu.kongtao.bean.Customer;
+import com.ecjtu.kongtao.bean.User;
 import com.ecjtu.kongtao.utils.GraphicHelper;
 import com.ecjtu.kongtao.utils.Result;
 import com.github.pagehelper.PageHelper;
@@ -32,15 +32,15 @@ public class CustomerController extends BaseController{
 	@ResponseBody
 	public Result getCustomers(@RequestParam(value = "pn", defaultValue = "1") Integer pn) {
 		PageHelper.startPage(pn, 10);
-		List<Customer> list = customerService.getCustomers();
-		PageInfo<Customer> pageInfo = new PageInfo<>(list,5);
+		List<User> list = customerService.getCustomers();
+		PageInfo<User> pageInfo = new PageInfo<>(list,5);
 		return Result.success().add("pageInfo", pageInfo);
 	}
 	
 	@RequestMapping(value="/customer/{id}",method= RequestMethod.GET)
 	@ResponseBody
 	public Result getCustomer(@PathVariable("id") Integer id) {
-		Customer customer = customerService.getCustomer(id);
+		User customer = customerService.getCustomer(id);
 		return Result.success().add("customer", customer);
 	}
 	@RequestMapping(value="/customer/{id}",method= RequestMethod.DELETE)
@@ -51,20 +51,20 @@ public class CustomerController extends BaseController{
 	}
 	@RequestMapping(value="/customer/{id}", method= RequestMethod.POST)
 	@ResponseBody
-	public Result updateCustomer(@PathVariable("id") Integer id, Customer customer) {
-		boolean b = customerService.updateCustomer(customer);
+	public Result updateCustomer(@PathVariable("id") Integer id, User user) {
+		boolean b = customerService.updateCustomer(user);
 		return Result.success();
 	}
 	@RequestMapping("/customer")
 	@ResponseBody
-	public Result addCustomer(Customer customer) {
-		Boolean boolean1 = customerService.addCustomer(customer);
+	public Result addCustomer(User user) {
+		Boolean boolean1 = customerService.addCustomer(user);
 		return Result.success();
 	}
 	@RequestMapping("/searchCus")
 	@ResponseBody
 	public Result searchCus(@RequestParam("cusName") String cusName) {
-		List<Customer> list = customerService.searchCus(cusName);
+		List<User> list = customerService.searchCus(cusName);
 		return Result.success().add("list", list);
 	}
 	@RequestMapping("/checkName")
@@ -79,9 +79,9 @@ public class CustomerController extends BaseController{
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
     @ResponseBody
-    public Result login(Customer customer, Model model){
-        if(customerService.login(customer)){
-            return Result.success("登陆成功").add("user",customer);
+    public Result login(User user, Model model){
+        if(customerService.login(user)){
+            return Result.success("登陆成功").add("user",user);
         }else{
             return Result.fail("用户名或者密码错误");
         }

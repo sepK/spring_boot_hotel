@@ -87,7 +87,7 @@ public class OrderInfoController extends BaseController{
     @RequestMapping(value = "/addIndent/{id}",method = RequestMethod.POST)
     @ResponseBody
     public Result addIndent(@PathVariable("id") Integer roomId, Indent indent){
-        return orderInfoService.addIndent(roomId,indent);
+        return orderInfoService.addIndent(roomId, indent);
     }
 
     @RequestMapping(value = "/getIndents",method = RequestMethod.GET)

@@ -3,6 +3,9 @@ package com.ecjtu.kongtao.bean;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author sepK
+ */
 public class AdminExample {
     protected String orderByClause;
 
@@ -104,73 +107,133 @@ public class AdminExample {
             criteria.add(new Criterion(condition, value1, value2));
         }
 
-        public Criteria andAdminnameIsNull() {
-            addCriterion("AdminName is null");
+        public Criteria andAdminIdIsNull() {
+            addCriterion("admin_id is null");
             return (Criteria) this;
         }
 
-        public Criteria andAdminnameIsNotNull() {
-            addCriterion("AdminName is not null");
+        public Criteria andAdminIdIsNotNull() {
+            addCriterion("admin_id is not null");
             return (Criteria) this;
         }
 
-        public Criteria andAdminnameEqualTo(String value) {
-            addCriterion("AdminName =", value, "adminname");
+        public Criteria andAdminIdEqualTo(Integer value) {
+            addCriterion("admin_id =", value, "adminId");
             return (Criteria) this;
         }
 
-        public Criteria andAdminnameNotEqualTo(String value) {
-            addCriterion("AdminName <>", value, "adminname");
+        public Criteria andAdminIdNotEqualTo(Integer value) {
+            addCriterion("admin_id <>", value, "adminId");
             return (Criteria) this;
         }
 
-        public Criteria andAdminnameGreaterThan(String value) {
-            addCriterion("AdminName >", value, "adminname");
+        public Criteria andAdminIdGreaterThan(Integer value) {
+            addCriterion("admin_id >", value, "adminId");
             return (Criteria) this;
         }
 
-        public Criteria andAdminnameGreaterThanOrEqualTo(String value) {
-            addCriterion("AdminName >=", value, "adminname");
+        public Criteria andAdminIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("admin_id >=", value, "adminId");
             return (Criteria) this;
         }
 
-        public Criteria andAdminnameLessThan(String value) {
-            addCriterion("AdminName <", value, "adminname");
+        public Criteria andAdminIdLessThan(Integer value) {
+            addCriterion("admin_id <", value, "adminId");
             return (Criteria) this;
         }
 
-        public Criteria andAdminnameLessThanOrEqualTo(String value) {
-            addCriterion("AdminName <=", value, "adminname");
+        public Criteria andAdminIdLessThanOrEqualTo(Integer value) {
+            addCriterion("admin_id <=", value, "adminId");
             return (Criteria) this;
         }
 
-        public Criteria andAdminnameLike(String value) {
-            addCriterion("AdminName like", value, "adminname");
+        public Criteria andAdminIdIn(List<Integer> values) {
+            addCriterion("admin_id in", values, "adminId");
             return (Criteria) this;
         }
 
-        public Criteria andAdminnameNotLike(String value) {
-            addCriterion("AdminName not like", value, "adminname");
+        public Criteria andAdminIdNotIn(List<Integer> values) {
+            addCriterion("admin_id not in", values, "adminId");
             return (Criteria) this;
         }
 
-        public Criteria andAdminnameIn(List<String> values) {
-            addCriterion("AdminName in", values, "adminname");
+        public Criteria andAdminIdBetween(Integer value1, Integer value2) {
+            addCriterion("admin_id between", value1, value2, "adminId");
             return (Criteria) this;
         }
 
-        public Criteria andAdminnameNotIn(List<String> values) {
-            addCriterion("AdminName not in", values, "adminname");
+        public Criteria andAdminIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("admin_id not between", value1, value2, "adminId");
             return (Criteria) this;
         }
 
-        public Criteria andAdminnameBetween(String value1, String value2) {
-            addCriterion("AdminName between", value1, value2, "adminname");
+        public Criteria andAdminNameIsNull() {
+            addCriterion("admin_name is null");
             return (Criteria) this;
         }
 
-        public Criteria andAdminnameNotBetween(String value1, String value2) {
-            addCriterion("AdminName not between", value1, value2, "adminname");
+        public Criteria andAdminNameIsNotNull() {
+            addCriterion("admin_name is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAdminNameEqualTo(String value) {
+            addCriterion("admin_name =", value, "adminName");
+            return (Criteria) this;
+        }
+
+        public Criteria andAdminNameNotEqualTo(String value) {
+            addCriterion("admin_name <>", value, "adminName");
+            return (Criteria) this;
+        }
+
+        public Criteria andAdminNameGreaterThan(String value) {
+            addCriterion("admin_name >", value, "adminName");
+            return (Criteria) this;
+        }
+
+        public Criteria andAdminNameGreaterThanOrEqualTo(String value) {
+            addCriterion("admin_name >=", value, "adminName");
+            return (Criteria) this;
+        }
+
+        public Criteria andAdminNameLessThan(String value) {
+            addCriterion("admin_name <", value, "adminName");
+            return (Criteria) this;
+        }
+
+        public Criteria andAdminNameLessThanOrEqualTo(String value) {
+            addCriterion("admin_name <=", value, "adminName");
+            return (Criteria) this;
+        }
+
+        public Criteria andAdminNameLike(String value) {
+            addCriterion("admin_name like", value, "adminName");
+            return (Criteria) this;
+        }
+
+        public Criteria andAdminNameNotLike(String value) {
+            addCriterion("admin_name not like", value, "adminName");
+            return (Criteria) this;
+        }
+
+        public Criteria andAdminNameIn(List<String> values) {
+            addCriterion("admin_name in", values, "adminName");
+            return (Criteria) this;
+        }
+
+        public Criteria andAdminNameNotIn(List<String> values) {
+            addCriterion("admin_name not in", values, "adminName");
+            return (Criteria) this;
+        }
+
+        public Criteria andAdminNameBetween(String value1, String value2) {
+            addCriterion("admin_name between", value1, value2, "adminName");
+            return (Criteria) this;
+        }
+
+        public Criteria andAdminNameNotBetween(String value1, String value2) {
+            addCriterion("admin_name not between", value1, value2, "adminName");
             return (Criteria) this;
         }
 

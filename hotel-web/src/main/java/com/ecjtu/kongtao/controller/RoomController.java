@@ -1,6 +1,5 @@
 package com.ecjtu.kongtao.controller;
 
-import com.ecjtu.kongtao.bean.Picture;
 import com.ecjtu.kongtao.bean.Room;
 import com.ecjtu.kongtao.utils.Result;
 import com.github.pagehelper.PageHelper;
@@ -88,7 +87,8 @@ public class RoomController extends BaseController{
     @RequestMapping(value = "/emptyRooms",method = RequestMethod.GET)
     @ResponseBody
     public Result emptyRooms(){
-        List<Picture> rooms = roomService.getEmptyRooms();
+        //todo
+        List<Room> rooms = null;
         return Result.success().add("rooms",rooms);
     }
 
@@ -100,12 +100,4 @@ public class RoomController extends BaseController{
         return Result.success().add("list",list);
     }
 
-    @RequestMapping("/pictures")
-    @ResponseBody
-    public Result pictures(@RequestParam("pn") Integer pn){
-        PageHelper.startPage(pn,3000);
-        List<Picture> list = roomService.getPictures();
-        PageInfo<Picture> pageInfo = new PageInfo<>(list,5);
-        return Result.success().add("pageInfo",pageInfo);
-    }
 }

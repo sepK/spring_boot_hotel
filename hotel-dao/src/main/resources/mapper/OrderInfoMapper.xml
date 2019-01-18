@@ -2,10 +2,10 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ecjtu.kongtao.mapper.OrderInfoMapper">
   <resultMap id="BaseResultMap" type="com.ecjtu.kongtao.bean.OrderInfo">
-    <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="roomid" jdbcType="INTEGER" property="roomid" />
-    <result column="cusName" jdbcType="VARCHAR" property="cusname" />
-    <result column="ostatus" jdbcType="INTEGER" property="ostatus" />
+    <id column="order_id" jdbcType="INTEGER" property="orderId" />
+    <result column="room_id" jdbcType="INTEGER" property="roomId" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="order_status" jdbcType="INTEGER" property="orderStatus" />
     <result column="emp_id" jdbcType="INTEGER" property="empId" />
   </resultMap>
   <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.ecjtu.kongtao.bean.OrderInfo">
@@ -70,7 +70,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, roomid, cusName, ostatus, emp_id
+    order_id, room_id, user_id, order_status, emp_id
   </sql>
   <sql id="Blob_Column_List">
     introduce
@@ -83,7 +83,7 @@
     <include refid="Base_Column_List" />
     ,
     <include refid="Blob_Column_List" />
-    from orderinfo
+    from t_order_info
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -97,7 +97,7 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from orderinfo
+    from t_order_info
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -110,41 +110,41 @@
     <include refid="Base_Column_List" />
     ,
     <include refid="Blob_Column_List" />
-    from orderinfo
-    where id = #{id,jdbcType=INTEGER}
+    from t_order_info
+    where order_id = #{orderId,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from orderinfo
-    where id = #{id,jdbcType=INTEGER}
+    delete from t_order_info
+    where order_id = #{orderId,jdbcType=INTEGER}
   </delete>
   <delete id="deleteByExample" parameterType="com.ecjtu.kongtao.bean.OrderInfoExample">
-    delete from orderinfo
+    delete from t_order_info
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
   <insert id="insert" parameterType="com.ecjtu.kongtao.bean.OrderInfo">
-    insert into orderinfo (id, roomid, cusName, 
-      ostatus, emp_id, introduce
+    insert into t_order_info (order_id, room_id, user_id, 
+      order_status, emp_id, introduce
       )
-    values (#{id,jdbcType=INTEGER}, #{roomid,jdbcType=INTEGER}, #{cusname,jdbcType=VARCHAR}, 
-      #{ostatus,jdbcType=INTEGER}, #{empId,jdbcType=INTEGER}, #{introduce,jdbcType=LONGVARCHAR}
+    values (#{orderId,jdbcType=INTEGER}, #{roomId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, 
+      #{orderStatus,jdbcType=INTEGER}, #{empId,jdbcType=INTEGER}, #{introduce,jdbcType=LONGVARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.ecjtu.kongtao.bean.OrderInfo">
-    insert into orderinfo
+    insert into t_order_info
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
+      <if test="orderId != null">
+        order_id,
       </if>
-      <if test="roomid != null">
-        roomid,
+      <if test="roomId != null">
+        room_id,
       </if>
-      <if test="cusname != null">
-        cusName,
+      <if test="userId != null">
+        user_id,
       </if>
-      <if test="ostatus != null">
-        ostatus,
+      <if test="orderStatus != null">
+        order_status,
       </if>
       <if test="empId != null">
         emp_id,
@@ -154,17 +154,17 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=INTEGER},
+      <if test="orderId != null">
+        #{orderId,jdbcType=INTEGER},
       </if>
-      <if test="roomid != null">
-        #{roomid,jdbcType=INTEGER},
+      <if test="roomId != null">
+        #{roomId,jdbcType=INTEGER},
       </if>
-      <if test="cusname != null">
-        #{cusname,jdbcType=VARCHAR},
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
       </if>
-      <if test="ostatus != null">
-        #{ostatus,jdbcType=INTEGER},
+      <if test="orderStatus != null">
+        #{orderStatus,jdbcType=INTEGER},
       </if>
       <if test="empId != null">
         #{empId,jdbcType=INTEGER},
@@ -175,25 +175,25 @@
     </trim>
   </insert>
   <select id="countByExample" parameterType="com.ecjtu.kongtao.bean.OrderInfoExample" resultType="java.lang.Long">
-    select count(*) from orderinfo
+    select count(*) from t_order_info
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update orderinfo
+    update t_order_info
     <set>
-      <if test="record.id != null">
-        id = #{record.id,jdbcType=INTEGER},
+      <if test="record.orderId != null">
+        order_id = #{record.orderId,jdbcType=INTEGER},
       </if>
-      <if test="record.roomid != null">
-        roomid = #{record.roomid,jdbcType=INTEGER},
+      <if test="record.roomId != null">
+        room_id = #{record.roomId,jdbcType=INTEGER},
       </if>
-      <if test="record.cusname != null">
-        cusName = #{record.cusname,jdbcType=VARCHAR},
+      <if test="record.userId != null">
+        user_id = #{record.userId,jdbcType=INTEGER},
       </if>
-      <if test="record.ostatus != null">
-        ostatus = #{record.ostatus,jdbcType=INTEGER},
+      <if test="record.orderStatus != null">
+        order_status = #{record.orderStatus,jdbcType=INTEGER},
       </if>
       <if test="record.empId != null">
         emp_id = #{record.empId,jdbcType=INTEGER},
@@ -207,11 +207,11 @@
     </if>
   </update>
   <update id="updateByExampleWithBLOBs" parameterType="map">
-    update orderinfo
-    set id = #{record.id,jdbcType=INTEGER},
-      roomid = #{record.roomid,jdbcType=INTEGER},
-      cusName = #{record.cusname,jdbcType=VARCHAR},
-      ostatus = #{record.ostatus,jdbcType=INTEGER},
+    update t_order_info
+    set order_id = #{record.orderId,jdbcType=INTEGER},
+      room_id = #{record.roomId,jdbcType=INTEGER},
+      user_id = #{record.userId,jdbcType=INTEGER},
+      order_status = #{record.orderStatus,jdbcType=INTEGER},
       emp_id = #{record.empId,jdbcType=INTEGER},
       introduce = #{record.introduce,jdbcType=LONGVARCHAR}
     <if test="_parameter != null">
@@ -219,27 +219,27 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update orderinfo
-    set id = #{record.id,jdbcType=INTEGER},
-      roomid = #{record.roomid,jdbcType=INTEGER},
-      cusName = #{record.cusname,jdbcType=VARCHAR},
-      ostatus = #{record.ostatus,jdbcType=INTEGER},
+    update t_order_info
+    set order_id = #{record.orderId,jdbcType=INTEGER},
+      room_id = #{record.roomId,jdbcType=INTEGER},
+      user_id = #{record.userId,jdbcType=INTEGER},
+      order_status = #{record.orderStatus,jdbcType=INTEGER},
       emp_id = #{record.empId,jdbcType=INTEGER}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
   <update id="updateByPrimaryKeySelective" parameterType="com.ecjtu.kongtao.bean.OrderInfo">
-    update orderinfo
+    update t_order_info
     <set>
-      <if test="roomid != null">
-        roomid = #{roomid,jdbcType=INTEGER},
+      <if test="roomId != null">
+        room_id = #{roomId,jdbcType=INTEGER},
       </if>
-      <if test="cusname != null">
-        cusName = #{cusname,jdbcType=VARCHAR},
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
       </if>
-      <if test="ostatus != null">
-        ostatus = #{ostatus,jdbcType=INTEGER},
+      <if test="orderStatus != null">
+        order_status = #{orderStatus,jdbcType=INTEGER},
       </if>
       <if test="empId != null">
         emp_id = #{empId,jdbcType=INTEGER},
@@ -248,23 +248,23 @@
         introduce = #{introduce,jdbcType=LONGVARCHAR},
       </if>
     </set>
-    where id = #{id,jdbcType=INTEGER}
+    where order_id = #{orderId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.ecjtu.kongtao.bean.OrderInfo">
-    update orderinfo
-    set roomid = #{roomid,jdbcType=INTEGER},
-      cusName = #{cusname,jdbcType=VARCHAR},
-      ostatus = #{ostatus,jdbcType=INTEGER},
+    update t_order_info
+    set room_id = #{roomId,jdbcType=INTEGER},
+      user_id = #{userId,jdbcType=INTEGER},
+      order_status = #{orderStatus,jdbcType=INTEGER},
       emp_id = #{empId,jdbcType=INTEGER},
       introduce = #{introduce,jdbcType=LONGVARCHAR}
-    where id = #{id,jdbcType=INTEGER}
+    where order_id = #{orderId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.ecjtu.kongtao.bean.OrderInfo">
-    update orderinfo
-    set roomid = #{roomid,jdbcType=INTEGER},
-      cusName = #{cusname,jdbcType=VARCHAR},
-      ostatus = #{ostatus,jdbcType=INTEGER},
+    update t_order_info
+    set room_id = #{roomId,jdbcType=INTEGER},
+      user_id = #{userId,jdbcType=INTEGER},
+      order_status = #{orderStatus,jdbcType=INTEGER},
       emp_id = #{empId,jdbcType=INTEGER}
-    where id = #{id,jdbcType=INTEGER}
+    where order_id = #{orderId,jdbcType=INTEGER}
   </update>
 </mapper>

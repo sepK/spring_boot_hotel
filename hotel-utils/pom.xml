@@ -12,4 +12,17 @@
     <artifactId>hotel-utils</artifactId>
     <packaging>jar</packaging>
 
+    <dependencies>
+
+        <!-- MBG -->
+        <!-- https://mvnrepository.com/artifact/org.mybatis.generator/mybatis-generator-core -->
+        <dependency>
+            <groupId>org.mybatis.generator</groupId>
+            <artifactId>mybatis-generator-core</artifactId>
+            <version>1.3.5</version>
+        </dependency>
+
+    </dependencies>
+
+
 </project>

@@ -16,7 +16,7 @@ public interface EmployeeMapper {
 
     int deleteByExample(EmployeeExample example);
 
-    int deleteByPrimaryKey(Integer id);
+    int deleteByPrimaryKey(Integer empId);
 
     int insert(Employee record);
 
@@ -24,7 +24,7 @@ public interface EmployeeMapper {
 
     List<Employee> selectByExample(EmployeeExample example);
 
-    Employee selectByPrimaryKey(Integer id);
+    Employee selectByPrimaryKey(Integer empId);
 
     int updateByExampleSelective(@Param("record") Employee record, @Param("example") EmployeeExample example);
 

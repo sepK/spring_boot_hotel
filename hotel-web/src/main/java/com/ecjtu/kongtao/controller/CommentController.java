@@ -1,6 +1,6 @@
 package com.ecjtu.kongtao.controller;
 
-import com.ecjtu.kongtao.bean.Comment;
+import com.ecjtu.kongtao.bean.UserComment;
 import com.ecjtu.kongtao.utils.Result;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -30,15 +30,15 @@ public class CommentController extends BaseController{
     @ResponseBody
     public Result getComments(@RequestParam("pn") Integer pn){
         PageHelper.startPage(pn,10);
-        List<Comment> list = commentService.getComments();
-        PageInfo<Comment> pageInfo = new PageInfo<>(list,5);
+        List<UserComment> list = commentService.getComments();
+        PageInfo<UserComment> pageInfo = new PageInfo<>(list,5);
         return Result.success().add("pageInfo", pageInfo);
     }
 
     @RequestMapping(value = "/comment/{id}", method = RequestMethod.GET)
     @ResponseBody
     public Result getComment(@PathVariable("id") String id){
-        Comment comment = commentService.getComment(id);
+        UserComment comment = commentService.getComment(id);
         return Result.success().add("comment", comment);
     }
 
@@ -54,7 +54,7 @@ public class CommentController extends BaseController{
 
     @RequestMapping(value = "/comment/{id}", method = RequestMethod.PUT)
     @ResponseBody
-    public Result saveComment(@PathVariable("id") Integer id, Comment comment) {
+    public Result saveComment(@PathVariable("id") Integer id, UserComment comment) {
         if (commentService.saveComment(comment)) {
             return Result.success();
         }else{
@@ -64,14 +64,14 @@ public class CommentController extends BaseController{
     }
     @RequestMapping(value = "/comment", method = RequestMethod.POST)
     @ResponseBody
-    public Result addComment(Comment comment){
+    public Result addComment(UserComment comment){
         return  commentService.addComment(comment);
     }
 
     @RequestMapping(value = "/searchComments", method = RequestMethod.GET)
     @ResponseBody
     public Result searchComments(@RequestParam("cusname") String cusname) {
-        List<Comment> comments = commentService.searchComments(cusname);
+        List<UserComment> comments = commentService.searchComments(cusname);
         return Result.success().add("comments", comments);
     }
 

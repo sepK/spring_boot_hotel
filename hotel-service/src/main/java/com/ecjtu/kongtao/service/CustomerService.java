@@ -1,7 +1,7 @@
 package com.ecjtu.kongtao.service;
 
 
-import com.ecjtu.kongtao.bean.Customer;
+import com.ecjtu.kongtao.bean.User;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,19 +12,19 @@ import java.util.List;
 @Service
 public interface CustomerService {
 
-	List<Customer> getCustomers();
+	List<User> getCustomers();
 
-	Customer getCustomer(Integer id);
+	User getCustomer(Integer id);
 
 	Boolean delCustomer(Integer id);
 
-	boolean updateCustomer(Customer customer);
+	boolean updateCustomer(User user);
 
-	List<Customer> searchCus(String cusName);
+	List<User> searchCus(String user);
 
-	Boolean addCustomer(Customer customer);
+	Boolean addCustomer(User user);
 
 	boolean checkName(String name);
 
-    boolean login(Customer customer);
+    boolean login(User user);
 }

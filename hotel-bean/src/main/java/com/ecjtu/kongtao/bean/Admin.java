@@ -4,9 +4,19 @@ package com.ecjtu.kongtao.bean;
  * @author sepK
  */
 public class Admin {
+    private Integer adminId;
+
     private String adminName;
 
     private String password;
+
+    public Integer getAdminId() {
+        return adminId;
+    }
+
+    public void setAdminId(Integer adminId) {
+        this.adminId = adminId;
+    }
 
     public String getAdminName() {
         return adminName;

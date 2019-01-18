@@ -2,11 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ecjtu.kongtao.mapper.RoomMapper">
   <resultMap id="BaseResultMap" type="com.ecjtu.kongtao.bean.Room">
-    <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="type" jdbcType="VARCHAR" property="type" />
+    <id column="room_id" jdbcType="INTEGER" property="roomId" />
+    <result column="room_number" jdbcType="VARCHAR" property="roomNumber" />
+    <result column="type" jdbcType="INTEGER" property="type" />
     <result column="price" jdbcType="DOUBLE" property="price" />
     <result column="status" jdbcType="SMALLINT" property="status" />
-    <result column="room_number" jdbcType="CHAR" property="roomNumber" />
+    <result column="picture" jdbcType="VARCHAR" property="picture" />
   </resultMap>
   <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.ecjtu.kongtao.bean.Room">
     <result column="introduce" jdbcType="LONGVARCHAR" property="introduce" />
@@ -70,7 +71,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, type, price, status, room_number
+    room_id, room_number, type, price, status, picture
   </sql>
   <sql id="Blob_Column_List">
     introduce
@@ -83,7 +84,7 @@
     <include refid="Base_Column_List" />
     ,
     <include refid="Blob_Column_List" />
-    from room
+    from t_room
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -97,7 +98,7 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from room
+    from t_room
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -110,32 +111,35 @@
     <include refid="Base_Column_List" />
     ,
     <include refid="Blob_Column_List" />
-    from room
-    where id = #{id,jdbcType=INTEGER}
+    from t_room
+    where room_id = #{roomId,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from room
-    where id = #{id,jdbcType=INTEGER}
+    delete from t_room
+    where room_id = #{roomId,jdbcType=INTEGER}
   </delete>
   <delete id="deleteByExample" parameterType="com.ecjtu.kongtao.bean.RoomExample">
-    delete from room
+    delete from t_room
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
   <insert id="insert" parameterType="com.ecjtu.kongtao.bean.Room">
-    insert into room (id, type, price, 
-      status, room_number, introduce
-      )
-    values (#{id,jdbcType=INTEGER}, #{type,jdbcType=VARCHAR}, #{price,jdbcType=DOUBLE}, 
-      #{status,jdbcType=SMALLINT}, #{roomNumber,jdbcType=CHAR}, #{introduce,jdbcType=LONGVARCHAR}
-      )
+    insert into t_room (room_id, room_number, type, 
+      price, status, picture, 
+      introduce)
+    values (#{roomId,jdbcType=INTEGER}, #{roomNumber,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER}, 
+      #{price,jdbcType=DOUBLE}, #{status,jdbcType=SMALLINT}, #{picture,jdbcType=VARCHAR}, 
+      #{introduce,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.ecjtu.kongtao.bean.Room">
-    insert into room
+    insert into t_room
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
+      <if test="roomId != null">
+        room_id,
+      </if>
+      <if test="roomNumber != null">
+        room_number,
       </if>
       <if test="type != null">
         type,
@@ -146,19 +150,22 @@
       <if test="status != null">
         status,
       </if>
-      <if test="roomNumber != null">
-        room_number,
+      <if test="picture != null">
+        picture,
       </if>
       <if test="introduce != null">
         introduce,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=INTEGER},
+      <if test="roomId != null">
+        #{roomId,jdbcType=INTEGER},
+      </if>
+      <if test="roomNumber != null">
+        #{roomNumber,jdbcType=VARCHAR},
       </if>
       <if test="type != null">
-        #{type,jdbcType=VARCHAR},
+        #{type,jdbcType=INTEGER},
       </if>
       <if test="price != null">
         #{price,jdbcType=DOUBLE},
@@ -166,8 +173,8 @@
       <if test="status != null">
         #{status,jdbcType=SMALLINT},
       </if>
-      <if test="roomNumber != null">
-        #{roomNumber,jdbcType=CHAR},
+      <if test="picture != null">
+        #{picture,jdbcType=VARCHAR},
       </if>
       <if test="introduce != null">
         #{introduce,jdbcType=LONGVARCHAR},
@@ -175,19 +182,22 @@
     </trim>
   </insert>
   <select id="countByExample" parameterType="com.ecjtu.kongtao.bean.RoomExample" resultType="java.lang.Long">
-    select count(*) from room
+    select count(*) from t_room
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update room
+    update t_room
     <set>
-      <if test="record.id != null">
-        id = #{record.id,jdbcType=INTEGER},
+      <if test="record.roomId != null">
+        room_id = #{record.roomId,jdbcType=INTEGER},
+      </if>
+      <if test="record.roomNumber != null">
+        room_number = #{record.roomNumber,jdbcType=VARCHAR},
       </if>
       <if test="record.type != null">
-        type = #{record.type,jdbcType=VARCHAR},
+        type = #{record.type,jdbcType=INTEGER},
       </if>
       <if test="record.price != null">
         price = #{record.price,jdbcType=DOUBLE},
@@ -195,8 +205,8 @@
       <if test="record.status != null">
         status = #{record.status,jdbcType=SMALLINT},
       </if>
-      <if test="record.roomNumber != null">
-        room_number = #{record.roomNumber,jdbcType=CHAR},
+      <if test="record.picture != null">
+        picture = #{record.picture,jdbcType=VARCHAR},
       </if>
       <if test="record.introduce != null">
         introduce = #{record.introduce,jdbcType=LONGVARCHAR},
@@ -207,33 +217,38 @@
     </if>
   </update>
   <update id="updateByExampleWithBLOBs" parameterType="map">
-    update room
-    set id = #{record.id,jdbcType=INTEGER},
-      type = #{record.type,jdbcType=VARCHAR},
+    update t_room
+    set room_id = #{record.roomId,jdbcType=INTEGER},
+      room_number = #{record.roomNumber,jdbcType=VARCHAR},
+      type = #{record.type,jdbcType=INTEGER},
       price = #{record.price,jdbcType=DOUBLE},
       status = #{record.status,jdbcType=SMALLINT},
-      room_number = #{record.roomNumber,jdbcType=CHAR},
+      picture = #{record.picture,jdbcType=VARCHAR},
       introduce = #{record.introduce,jdbcType=LONGVARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update room
-    set id = #{record.id,jdbcType=INTEGER},
-      type = #{record.type,jdbcType=VARCHAR},
+    update t_room
+    set room_id = #{record.roomId,jdbcType=INTEGER},
+      room_number = #{record.roomNumber,jdbcType=VARCHAR},
+      type = #{record.type,jdbcType=INTEGER},
       price = #{record.price,jdbcType=DOUBLE},
       status = #{record.status,jdbcType=SMALLINT},
-      room_number = #{record.roomNumber,jdbcType=CHAR}
+      picture = #{record.picture,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
   <update id="updateByPrimaryKeySelective" parameterType="com.ecjtu.kongtao.bean.Room">
-    update room
+    update t_room
     <set>
+      <if test="roomNumber != null">
+        room_number = #{roomNumber,jdbcType=VARCHAR},
+      </if>
       <if test="type != null">
-        type = #{type,jdbcType=VARCHAR},
+        type = #{type,jdbcType=INTEGER},
       </if>
       <if test="price != null">
         price = #{price,jdbcType=DOUBLE},
@@ -241,30 +256,32 @@
       <if test="status != null">
         status = #{status,jdbcType=SMALLINT},
       </if>
-      <if test="roomNumber != null">
-        room_number = #{roomNumber,jdbcType=CHAR},
+      <if test="picture != null">
+        picture = #{picture,jdbcType=VARCHAR},
       </if>
       <if test="introduce != null">
         introduce = #{introduce,jdbcType=LONGVARCHAR},
       </if>
     </set>
-    where id = #{id,jdbcType=INTEGER}
+    where room_id = #{roomId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.ecjtu.kongtao.bean.Room">
-    update room
-    set type = #{type,jdbcType=VARCHAR},
+    update t_room
+    set room_number = #{roomNumber,jdbcType=VARCHAR},
+      type = #{type,jdbcType=INTEGER},
       price = #{price,jdbcType=DOUBLE},
       status = #{status,jdbcType=SMALLINT},
-      room_number = #{roomNumber,jdbcType=CHAR},
+      picture = #{picture,jdbcType=VARCHAR},
       introduce = #{introduce,jdbcType=LONGVARCHAR}
-    where id = #{id,jdbcType=INTEGER}
+    where room_id = #{roomId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.ecjtu.kongtao.bean.Room">
-    update room
-    set type = #{type,jdbcType=VARCHAR},
+    update t_room
+    set room_number = #{roomNumber,jdbcType=VARCHAR},
+      type = #{type,jdbcType=INTEGER},
       price = #{price,jdbcType=DOUBLE},
       status = #{status,jdbcType=SMALLINT},
-      room_number = #{roomNumber,jdbcType=CHAR}
-    where id = #{id,jdbcType=INTEGER}
+      picture = #{picture,jdbcType=VARCHAR}
+    where room_id = #{roomId,jdbcType=INTEGER}
   </update>
 </mapper>

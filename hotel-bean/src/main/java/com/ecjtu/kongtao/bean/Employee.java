@@ -1,7 +1,10 @@
 package com.ecjtu.kongtao.bean;
 
+/**
+ * @author sepK
+ */
 public class Employee {
-    private Integer id;
+    private Integer empId;
 
     private String empName;
 
@@ -13,12 +16,12 @@ public class Employee {
 
     private String duty;
 
-    public Integer getId() {
-        return id;
+    public Integer getEmpId() {
+        return empId;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setEmpId(Integer empId) {
+        this.empId = empId;
     }
 
     public String getEmpName() {

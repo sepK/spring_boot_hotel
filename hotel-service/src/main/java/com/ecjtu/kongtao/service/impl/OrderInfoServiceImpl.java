@@ -22,10 +22,6 @@ public class OrderInfoServiceImpl extends BaseService implements OrderInfoServic
     private CustomerService customerService;
     @Resource
     private EmployeeService employeeService;
-    @Resource
-    private IntakeService intakeService;
-    @Resource
-    private PhotoService photoService;
 
     @Override
     public List<OrderInfo> getOrders() {
@@ -42,8 +38,8 @@ public class OrderInfoServiceImpl extends BaseService implements OrderInfoServic
     public boolean saveOrder(OrderInfo orderInfo) {
         try {
             Room room = new Room();
-            room.setId(orderInfo.getRoomid());
-            room.setStatus(Short.valueOf(orderInfo.getOstatus().toString()));
+            room.setRoomId(orderInfo.getRoomId());
+            room.setStatus(Short.valueOf(orderInfo.getOrderStatus().toString()));
             if(!roomService.saveRoom(room)){
                 throw new RoomNotFoundException("找不到房间");
             }else{
@@ -67,17 +63,17 @@ public class OrderInfoServiceImpl extends BaseService implements OrderInfoServic
     @Transactional(rollbackFor = Exception.class)
     public boolean addOrder(OrderInfo orderInfo) {
         try {
-            Room room = roomService.getRoom(orderInfo.getRoomid());
+            Room room = roomService.getRoom(orderInfo.getRoomId());
             if(room == null || room.getStatus() != 0){
                 throw new RoomNotFoundException("房间找不到或者房间不是空闲状态");
             }else{
-                if(customerService.checkName(orderInfo.getCusname())){
+                if(customerService.checkName(String.valueOf(orderInfo.getUserId()))){
                     throw new CustomerNotFoundException("用户不存在");
                 }else{
                     if(orderInfo.getEmpId() != null&&employeeService.getEmp(orderInfo.getEmpId()) == null){
                         throw new EmployeeNotFoundException("员工不存在");
                     }else{
-                        room.setStatus(Short.valueOf(orderInfo.getOstatus().toString()));
+                        room.setStatus(Short.valueOf(orderInfo.getOrderStatus().toString()));
                         roomService.saveRoom(room);
                         return orderInfoMapper.insertSelective(orderInfo) > 0;
                     }
@@ -95,10 +91,10 @@ public class OrderInfoServiceImpl extends BaseService implements OrderInfoServic
     }
 
     @Override
-    public List<OrderInfo> getOrdersByRoomId(Integer roomid) {
+    public List<OrderInfo> getOrdersByRoomId(Integer roomId) {
         OrderInfoExample example = new OrderInfoExample();
         OrderInfoExample.Criteria criteria = example.createCriteria();
-        criteria.andRoomidEqualTo(roomid);
+        criteria.andRoomIdEqualTo(roomId);
         return orderInfoMapper.selectByExampleWithBLOBs(example);
     }
 
@@ -112,16 +108,16 @@ public class OrderInfoServiceImpl extends BaseService implements OrderInfoServic
     public Result addIndent(Integer roomId, Indent indent) {
         String msg = "";
         OrderInfo orderInfo = indent.getOrderInfo();
-        Intake intake = indent.getIntake();
-        orderInfo.setOstatus(Integer.valueOf("1"));
-        orderInfo.setRoomid(roomId);
-        intake.setCusname(orderInfo.getCusname());
-        intake.setRoomid(roomId);
+        Housing housing = indent.getHousing();
+        orderInfo.setOrderStatus(Integer.valueOf("1"));
+        orderInfo.setRoomId(roomId);
+        housing.setUserId(orderInfo.getUserId());
+        housing.setRoomId(roomId);
         try{
             if(!addOrder(orderInfo)){
                 throw new ExtraException("预定失败");
             }else{
-               return intakeService.addIntake(intake);
+               return /*intakeService.addIntake(housing)*/null;
             }
         }catch (RoomNotFoundException rnfe){
             msg += rnfe.getMessage();
@@ -134,10 +130,10 @@ public class OrderInfoServiceImpl extends BaseService implements OrderInfoServic
         }
         return Result.fail(msg);
     }
-    public List<OrderInfo> getOrdersByCusname(String cusname){
+    public List<OrderInfo> getOrdersByCusname(String userName){
         OrderInfoExample example = new OrderInfoExample();
         OrderInfoExample.Criteria criteria = example.createCriteria();
-        criteria.andCusnameEqualTo(cusname);
+        //criteria.andUserIdEqualTo(userName);
         return orderInfoMapper.selectByExampleWithBLOBs(example);
     }
 
@@ -149,8 +145,8 @@ public class OrderInfoServiceImpl extends BaseService implements OrderInfoServic
         for (OrderInfo orderInfo:orderInfos) {
             Indent indent = new Indent();
             indent.setOrderInfo(orderInfo);
-            indent.setPicture(photoService.searchPhotos(orderInfo.getRoomid()).get(0).getPicture());
-            indent.setIntake(intakeService.getIntakeByCusNameAndRoomId(orderInfo.getRoomid(),orderInfo.getCusname()));
+           // indent.setPicture(photoService.searchPhotos(orderInfo.getRoomid()).get(0).getPicture());
+            //indent.setIntake(intakeService.getIntakeByCusNameAndRoomId(orderInfo.getRoomid(),orderInfo.getCusname()));
             indents.add(indent);
         }
         return indents;
@@ -160,12 +156,12 @@ public class OrderInfoServiceImpl extends BaseService implements OrderInfoServic
     @Transactional(rollbackFor = Exception.class)
     public Result updateIndent(OrderInfo orderInfo) {
         try{
-            OrderInfo order = getOrder(orderInfo.getId());
-            Room room = roomService.getRoom(order.getRoomid());
+            OrderInfo order = getOrder(orderInfo.getOrderId());
+            Room room = roomService.getRoom(order.getRoomId());
             if(orderInfoMapper.updateByPrimaryKeySelective(orderInfo) == 0){
                 throw new OrderException("订单更新失败");
             }else{
-                room.setStatus(Short.valueOf(orderInfo.getOstatus().toString()));
+                room.setStatus(Short.valueOf(orderInfo.getOrderStatus().toString()));
                 if(!roomService.saveRoom(room)){
                     throw new RoomHasOrderException("房间更新失败");
                 }else {

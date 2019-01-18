@@ -12,17 +12,15 @@ public class BaseService {
     @Autowired
     protected AdminMapper adminMapper;
     @Autowired
-    protected CommentMapper commentMapper;
+    protected UserCommentMapper userCommentMapper;
     @Autowired
-    protected CustomerMapper customerMapper;
+    protected UserMapper userMapper;
     @Autowired
     protected EmployeeMapper employeeMapper;
     @Autowired
-    protected IntakeMapper intakeMapper;
+    protected HousingMapper housingMapper;
     @Autowired
     protected OrderInfoMapper orderInfoMapper;
-    @Autowired
-    protected PhotoMapper photoMapper;
     @Autowired
     protected RoomMapper roomMapper;
 

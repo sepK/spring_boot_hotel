@@ -1,33 +1,21 @@
 package com.ecjtu.kongtao.service.impl;
 
-import com.ecjtu.kongtao.bean.Intake;
-import com.ecjtu.kongtao.bean.IntakeExample;
-import com.ecjtu.kongtao.exception.CustomerNotFoundException;
-import com.ecjtu.kongtao.exception.ExtraException;
-import com.ecjtu.kongtao.exception.OverTimeException;
-import com.ecjtu.kongtao.exception.RoomNotFoundException;
-import com.ecjtu.kongtao.service.BaseService;
 import com.ecjtu.kongtao.service.CustomerService;
-import com.ecjtu.kongtao.service.IntakeService;
 import com.ecjtu.kongtao.service.RoomService;
-import com.ecjtu.kongtao.utils.Result;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
-import java.util.List;
 
 /**
  * @author sepK
  */
-@Service
-public class IntakeServiceImpl extends BaseService implements IntakeService {
+@Deprecated
+public class IntakeServiceImpl{
     @Resource
     private RoomService roomService;
     @Resource
     private CustomerService customerService;
 
-    @Override
+/*    @Override
     public List<Intake> getIntakes() {
         return intakeMapper.selectByExample(null);
     }
@@ -108,6 +96,6 @@ public class IntakeServiceImpl extends BaseService implements IntakeService {
     @Override
     public boolean delIntake(Integer id) {
         return intakeMapper.deleteByPrimaryKey(id) > 0;
-    }
+    }*/
 
 }

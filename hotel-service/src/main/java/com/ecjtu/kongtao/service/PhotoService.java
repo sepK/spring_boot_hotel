@@ -1,17 +1,15 @@
 package com.ecjtu.kongtao.service;
 
 
-import com.ecjtu.kongtao.bean.Photo;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 /**
  * @author sepK
  */
+@Deprecated
 @Service
 public interface PhotoService {
-    List<Photo> getPhotos();
+/*    List<Photo> getPhotos();
 
     Photo getPhoto(Integer id);
 
@@ -21,5 +19,5 @@ public interface PhotoService {
 
     boolean delPhoto(Integer id);
 
-    List<Photo> searchPhotos(Integer roomId);
+    List<Photo> searchPhotos(Integer roomId);*/
 }

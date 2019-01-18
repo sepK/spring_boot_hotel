@@ -1,28 +1,27 @@
 package com.ecjtu.kongtao.service;
 
 
-import com.ecjtu.kongtao.bean.Intake;
+import com.ecjtu.kongtao.bean.Housing;
 import com.ecjtu.kongtao.utils.Result;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 /**
  * @author sepK
  */
-@Service
+@Deprecated
 public interface IntakeService {
-    List<Intake> getIntakes();
+    List<Housing> getIntakes();
 
-    Intake getIntake(Integer id);
+    Housing getIntake(Integer id);
 
-    Result saveIntake(Intake intake);
+    Result saveIntake(Housing housing);
 
-    Result addIntake(Intake intake);
+    Result addIntake(Housing housing);
 
     boolean delIntake(Integer id);
 
-    List<Intake> searchIntakes(String cusName);
+    List<Housing> searchIntakes(String userName);
 
-    Intake getIntakeByCusNameAndRoomId(Integer roomid, String cusname);
+    Housing getIntakeByCusNameAndRoomId(Integer roomId, String userName);
 }

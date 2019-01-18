@@ -3,7 +3,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>后台界面</title>
+    <title>后台管理系统</title>
     <script type="text/javascript" th:src="@{/js/jquery-3.2.1.min.js}"></script>
     <link th:href="@{/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
     <link rel="stylesheet" th:href="@{/bootstrap/css/bootstrap.css}">
@@ -68,8 +68,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"
-                        aria-label="Close">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
                 <h4 class="modal-title" id="myModalLabel02">会员新增</h4>
@@ -79,8 +78,7 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label">用户名</label>
                         <div class="col-sm-10">
-                            <input type="text" name="customerName" class="form-control"
-                                   id="cusName_add_input"> <span class="help-block"></span>
+                            <input type="text" name="customerName" class="form-control" id="cusName_add_input"> <span class="help-block"></span>
                         </div>
                     </div>
                     <div class="form-group">
@@ -103,8 +101,7 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label">邮箱</label>
                         <div class="col-sm-10">
-                            <input type="text" name="mail" class="form-control"
-                                   id="email_add_input"> <span class="help-block"></span>
+                            <input type="text" name="mail" class="form-control" id="email_add_input"> <span class="help-block"></span>
                         </div>
                     </div>
                     <div class="form-group">
@@ -142,7 +139,10 @@
         </div>
         <div class="col-md-2 header-right login">
             <span class="glyphicon glyphicon-user"></span>
-            <span class="username" th:text="${session.loginUser.getAdminName()}">xx</span>
+            <p th:if="${session.loginUser} ne null">
+                <span class="username" th:text="${session.loginUser.getAdminName()}">admin</span>
+            </p>
+
         </div>
     </div>
 </div>
@@ -567,13 +567,10 @@
                     if (result.code === 400) {
                         show_validate_msg("#verifyCode_add_input",
                             "error", "验证码错误");
-                        $("#verifyCode_add_input").attr("ajax-va",
-                            "error");
+                        $("#verifyCode_add_input").attr("ajax-va", "error");
                     } else {
-                        show_validate_msg("#verifyCode_add_input",
-                            "success", "");
-                        $("#verifyCode_add_input").attr("ajax-va",
-                            "success");
+                        show_validate_msg("#verifyCode_add_input", "success", "");
+                        $("#verifyCode_add_input").attr("ajax-va", "success");
                     }
                 }
             });

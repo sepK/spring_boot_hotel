@@ -16,7 +16,7 @@ public interface RoomMapper {
 
     int deleteByExample(RoomExample example);
 
-    int deleteByPrimaryKey(Integer id);
+    int deleteByPrimaryKey(Integer roomId);
 
     int insert(Room record);
 
@@ -26,7 +26,7 @@ public interface RoomMapper {
 
     List<Room> selectByExample(RoomExample example);
 
-    Room selectByPrimaryKey(Integer id);
+    Room selectByPrimaryKey(Integer roomId);
 
     int updateByExampleSelective(@Param("record") Room record, @Param("example") RoomExample example);
 

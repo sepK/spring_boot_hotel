@@ -1,48 +1,51 @@
 package com.ecjtu.kongtao.bean;
 
+/**
+ * @author sepK
+ */
 public class OrderInfo {
-    private Integer id;
+    private Integer orderId;
 
-    private Integer roomid;
+    private Integer roomId;
 
-    private String cusname;
+    private Integer userId;
 
-    private Integer ostatus;
+    private Integer orderStatus;
 
     private Integer empId;
 
     private String introduce;
 
-    public Integer getId() {
-        return id;
+    public Integer getOrderId() {
+        return orderId;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setOrderId(Integer orderId) {
+        this.orderId = orderId;
     }
 
-    public Integer getRoomid() {
-        return roomid;
+    public Integer getRoomId() {
+        return roomId;
     }
 
-    public void setRoomid(Integer roomid) {
-        this.roomid = roomid;
+    public void setRoomId(Integer roomId) {
+        this.roomId = roomId;
     }
 
-    public String getCusname() {
-        return cusname;
+    public Integer getUserId() {
+        return userId;
     }
 
-    public void setCusname(String cusname) {
-        this.cusname = cusname == null ? null : cusname.trim();
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 
-    public Integer getOstatus() {
-        return ostatus;
+    public Integer getOrderStatus() {
+        return orderStatus;
     }
 
-    public void setOstatus(Integer ostatus) {
-        this.ostatus = ostatus;
+    public void setOrderStatus(Integer orderStatus) {
+        this.orderStatus = orderStatus;
     }
 
     public Integer getEmpId() {
