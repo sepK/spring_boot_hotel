@@ -476,7 +476,7 @@
         $.ajax({
             url: "${BasePath}/comment/searchComments",
             type: "GET",
-            data: "cusname=" + $("#cusname_search_input").val(),
+            data: "userName=" + $("#cusname_search_input").val(),
             success: function (result) {
                 build_comment_table(result.extend.comments);
             }

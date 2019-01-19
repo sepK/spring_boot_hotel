@@ -1,11 +1,13 @@
 package com.ecjtu.kongtao.controller;
 
 import com.ecjtu.kongtao.bean.UserComment;
+import com.ecjtu.kongtao.utils.ConfigKey;
 import com.ecjtu.kongtao.utils.Result;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,49 +31,45 @@ public class CommentController extends BaseController{
     @RequestMapping(value = "/comments", method = RequestMethod.GET)
     @ResponseBody
     public Result getComments(@RequestParam("pn") Integer pn){
-        PageHelper.startPage(pn,10);
-        List<UserComment> list = commentService.getComments();
-        PageInfo<UserComment> pageInfo = new PageInfo<>(list,5);
+        PageHelper.startPage(pn, ConfigKey.DEFAULT_PAGE_SIZE);
+        List<UserComment> userComments = commentService.getAllComments();
+        PageInfo<UserComment> pageInfo = new PageInfo<>(userComments, ConfigKey.NAVIGATE_PAGE);
         return Result.success().add("pageInfo", pageInfo);
     }
 
     @RequestMapping(value = "/comment/{id}", method = RequestMethod.GET)
     @ResponseBody
-    public Result getComment(@PathVariable("id") String id){
-        UserComment comment = commentService.getComment(id);
+    public Result getUserComment(@PathVariable("id") String id){
+        UserComment comment = commentService.getCommentById(id);
         return Result.success().add("comment", comment);
     }
 
     @RequestMapping(value = "/comment/{id}", method = RequestMethod.DELETE)
     @ResponseBody
-    public Result delComment(@PathVariable("id") String id){
-        if (commentService.delComment(id)) {
-            return Result.success();
-        } else {
-            return Result.fail();
-        }
+    public Result delUserComment(@PathVariable("id") String id){
+        commentService.delUserCommentById(id);
+        return Result.success();
     }
 
     @RequestMapping(value = "/comment/{id}", method = RequestMethod.PUT)
     @ResponseBody
-    public Result saveComment(@PathVariable("id") Integer id, UserComment comment) {
-        if (commentService.saveComment(comment)) {
-            return Result.success();
-        }else{
-            return Result.fail();
-        }
-
+    public Result saveUserComment(@PathVariable("id") Integer id, UserComment comment) {
+        commentService.saveUserComment(comment);
+        return Result.success();
     }
     @RequestMapping(value = "/comment", method = RequestMethod.POST)
     @ResponseBody
-    public Result addComment(UserComment comment){
-        return  commentService.addComment(comment);
+    public Result addUserComment(UserComment comment){
+        return  commentService.addUserComment(comment);
     }
 
     @RequestMapping(value = "/searchComments", method = RequestMethod.GET)
     @ResponseBody
-    public Result searchComments(@RequestParam("cusname") String cusname) {
-        List<UserComment> comments = commentService.searchComments(cusname);
+    public Result searchComments(@RequestParam("userName") String userName) {
+        List<UserComment> comments = commentService.searchUserComments(userName);
+        if (ObjectUtils.isEmpty(comments)) {
+            return Result.fail("用户没有评论");
+        }
         return Result.success().add("comments", comments);
     }
 

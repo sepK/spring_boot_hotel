@@ -15,7 +15,7 @@ public class UserCommentExample {
     protected List<Criteria> oredCriteria;
 
     public UserCommentExample() {
-        oredCriteria = new ArrayList<Criteria>();
+        oredCriteria = new ArrayList<>();
     }
 
     public void setOrderByClause(String orderByClause) {
@@ -72,7 +72,7 @@ public class UserCommentExample {
 
         protected GeneratedCriteria() {
             super();
-            criteria = new ArrayList<Criterion>();
+            criteria = new ArrayList<>();
         }
 
         public boolean isValid() {

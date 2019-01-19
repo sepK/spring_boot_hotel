@@ -4,7 +4,7 @@
   <resultMap id="BaseResultMap" type="com.ecjtu.kongtao.bean.UserComment">
     <id column="comment_id" jdbcType="INTEGER" property="commentId" />
     <result column="user_id" jdbcType="INTEGER" property="userId" />
-    <result column="room_number" jdbcType="INTEGER" property="roomNumber" />
+    <result column="room_id" jdbcType="INTEGER" property="roomId" />
     <result column="level" jdbcType="INTEGER" property="level" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="last_modify_time" jdbcType="TIMESTAMP" property="lastModifyTime" />
@@ -71,7 +71,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    comment_id, user_id, room_number, level, create_time, last_modify_time
+    comment_id, user_id, room_id, level, create_time, last_modify_time
   </sql>
   <sql id="Blob_Column_List">
     comment
@@ -125,10 +125,10 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.ecjtu.kongtao.bean.UserComment">
-    insert into t_user_comment (comment_id, user_id, room_number, 
+    insert into t_user_comment (comment_id, user_id, room_id,
       level, create_time, last_modify_time, 
       comment)
-    values (#{commentId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{roomNumber,jdbcType=INTEGER}, 
+    values (#{commentId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{roomId,jdbcType=INTEGER},
       #{level,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{lastModifyTime,jdbcType=TIMESTAMP}, 
       #{comment,jdbcType=LONGVARCHAR})
   </insert>
@@ -141,8 +141,8 @@
       <if test="userId != null">
         user_id,
       </if>
-      <if test="roomNumber != null">
-        room_number,
+      <if test="roomId != null">
+        room_id,
       </if>
       <if test="level != null">
         level,
@@ -164,8 +164,8 @@
       <if test="userId != null">
         #{userId,jdbcType=INTEGER},
       </if>
-      <if test="roomNumber != null">
-        #{roomNumber,jdbcType=INTEGER},
+      <if test="roomId != null">
+        #{roomId,jdbcType=INTEGER},
       </if>
       <if test="level != null">
         #{level,jdbcType=INTEGER},
@@ -196,8 +196,8 @@
       <if test="record.userId != null">
         user_id = #{record.userId,jdbcType=INTEGER},
       </if>
-      <if test="record.roomNumber != null">
-        room_number = #{record.roomNumber,jdbcType=INTEGER},
+      <if test="record.rroomId!= null">
+        room_id = #{record.roomId,jdbcType=INTEGER},
       </if>
       <if test="record.level != null">
         level = #{record.level,jdbcType=INTEGER},
@@ -220,7 +220,7 @@
     update t_user_comment
     set comment_id = #{record.commentId,jdbcType=INTEGER},
       user_id = #{record.userId,jdbcType=INTEGER},
-      room_number = #{record.roomNumber,jdbcType=INTEGER},
+      room_id = #{record.roomId,jdbcType=INTEGER},
       level = #{record.level,jdbcType=INTEGER},
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
       last_modify_time = #{record.lastModifyTime,jdbcType=TIMESTAMP},
@@ -233,7 +233,7 @@
     update t_user_comment
     set comment_id = #{record.commentId,jdbcType=INTEGER},
       user_id = #{record.userId,jdbcType=INTEGER},
-      room_number = #{record.roomNumber,jdbcType=INTEGER},
+      room_id = #{record.roomId,jdbcType=INTEGER},
       level = #{record.level,jdbcType=INTEGER},
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
       last_modify_time = #{record.lastModifyTime,jdbcType=TIMESTAMP}
@@ -247,8 +247,8 @@
       <if test="userId != null">
         user_id = #{userId,jdbcType=INTEGER},
       </if>
-      <if test="roomNumber != null">
-        room_number = #{roomNumber,jdbcType=INTEGER},
+      <if test="roomId != null">
+        room_id = #{roomId,jdbcType=INTEGER},
       </if>
       <if test="level != null">
         level = #{level,jdbcType=INTEGER},
@@ -268,7 +268,7 @@
   <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.ecjtu.kongtao.bean.UserComment">
     update t_user_comment
     set user_id = #{userId,jdbcType=INTEGER},
-      room_number = #{roomNumber,jdbcType=INTEGER},
+      room_id = #{roomId,jdbcType=INTEGER},
       level = #{level,jdbcType=INTEGER},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       last_modify_time = #{lastModifyTime,jdbcType=TIMESTAMP},
@@ -278,7 +278,7 @@
   <update id="updateByPrimaryKey" parameterType="com.ecjtu.kongtao.bean.UserComment">
     update t_user_comment
     set user_id = #{userId,jdbcType=INTEGER},
-      room_number = #{roomNumber,jdbcType=INTEGER},
+      room_id = #{roomId,jdbcType=INTEGER},
       level = #{level,jdbcType=INTEGER},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       last_modify_time = #{lastModifyTime,jdbcType=TIMESTAMP}

@@ -14,7 +14,7 @@ public class BaseController {
     @Autowired
     protected CommentService commentService;
     @Autowired
-    protected CustomerService customerService;
+    protected UserService userService;
     @Autowired
     protected EmployeeService employeeService;
     @Autowired

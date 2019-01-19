@@ -1,6 +1,7 @@
 package com.ecjtu.kongtao.controller;
 
 import com.ecjtu.kongtao.bean.User;
+import com.ecjtu.kongtao.utils.ConfigKey;
 import com.ecjtu.kongtao.utils.GraphicHelper;
 import com.ecjtu.kongtao.utils.Result;
 import com.github.pagehelper.PageHelper;
@@ -8,6 +9,7 @@ import com.github.pagehelper.PageInfo;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import sun.security.krb5.Config;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -20,7 +22,7 @@ import java.util.List;
  * @author sepK
  */
 @Controller
-@RequestMapping("/customer")
+@RequestMapping("/user")
 public class CustomerController extends BaseController{
 	
 	@RequestMapping("/index")
@@ -28,49 +30,54 @@ public class CustomerController extends BaseController{
 		return "index";
 	}
 	
-	@RequestMapping(value="/customers",method= RequestMethod.GET)
+	@RequestMapping(value="/users",method= RequestMethod.GET)
 	@ResponseBody
-	public Result getCustomers(@RequestParam(value = "pn", defaultValue = "1") Integer pn) {
-		PageHelper.startPage(pn, 10);
-		List<User> list = customerService.getCustomers();
-		PageInfo<User> pageInfo = new PageInfo<>(list,5);
+	public Result getUsers(@RequestParam(value = "pn", defaultValue = "1") Integer pn) {
+		PageHelper.startPage(pn, ConfigKey.DEFAULT_PAGE_SIZE);
+		List<User> list = userService.getUsers();
+		PageInfo<User> pageInfo = new PageInfo<>(list, ConfigKey.NAVIGATE_PAGE);
 		return Result.success().add("pageInfo", pageInfo);
 	}
 	
-	@RequestMapping(value="/customer/{id}",method= RequestMethod.GET)
+	@RequestMapping(value="/user/{id}",method= RequestMethod.GET)
 	@ResponseBody
-	public Result getCustomer(@PathVariable("id") Integer id) {
-		User customer = customerService.getCustomer(id);
-		return Result.success().add("customer", customer);
+	public Result getUser(@PathVariable("id") Integer id) {
+		User user = userService.getUser(id);
+		return Result.success().add("user", user);
 	}
-	@RequestMapping(value="/customer/{id}",method= RequestMethod.DELETE)
+
+	@RequestMapping(value="/user/{id}",method= RequestMethod.DELETE)
 	@ResponseBody
-	public Result delCustomer(@PathVariable("id") Integer id) {
-		Boolean b = customerService.delCustomer(id);
+	public Result delUser(@PathVariable("id") Integer id) {
+		userService.delUser(id);
 		return Result.success();
 	}
-	@RequestMapping(value="/customer/{id}", method= RequestMethod.POST)
+
+	@RequestMapping(value="/user/{id}", method= RequestMethod.POST)
 	@ResponseBody
-	public Result updateCustomer(@PathVariable("id") Integer id, User user) {
-		boolean b = customerService.updateCustomer(user);
+	public Result updateUser(@PathVariable("id") Integer id, User user) {
+		userService.updateUser(user);
 		return Result.success();
 	}
-	@RequestMapping("/customer")
+
+	@RequestMapping("/user")
 	@ResponseBody
-	public Result addCustomer(User user) {
-		Boolean boolean1 = customerService.addCustomer(user);
+	public Result addUser(User user) {
+		userService.addUser(user);
 		return Result.success();
 	}
-	@RequestMapping("/searchCus")
+
+	@RequestMapping("/searchUser")
 	@ResponseBody
-	public Result searchCus(@RequestParam("cusName") String cusName) {
-		List<User> list = customerService.searchCus(cusName);
+	public Result searchUser(@RequestParam("userName") String userName) {
+		List<User> list = userService.searchUser(userName);
 		return Result.success().add("list", list);
 	}
+
 	@RequestMapping("/checkName")
 	@ResponseBody
-	public Result checkName(@RequestParam("cusName") String name) {
-		if(customerService.checkName(name)) {
+	public Result checkName(@RequestParam("userName") String userName) {
+		if(userService.checkName(userName)) {
 			return Result.success();
 		}else {
 			return Result.fail();
@@ -80,7 +87,7 @@ public class CustomerController extends BaseController{
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
     @ResponseBody
     public Result login(User user, Model model){
-        if(customerService.login(user)){
+        if(userService.login(user)){
             return Result.success("登陆成功").add("user",user);
         }else{
             return Result.fail("用户名或者密码错误");

@@ -14,7 +14,7 @@ public class AdminExample {
     protected List<Criteria> oredCriteria;
 
     public AdminExample() {
-        oredCriteria = new ArrayList<Criteria>();
+        oredCriteria = new ArrayList<>();
     }
 
     public void setOrderByClause(String orderByClause) {
@@ -71,7 +71,7 @@ public class AdminExample {
 
         protected GeneratedCriteria() {
             super();
-            criteria = new ArrayList<Criterion>();
+            criteria = new ArrayList<>();
         }
 
         public boolean isValid() {

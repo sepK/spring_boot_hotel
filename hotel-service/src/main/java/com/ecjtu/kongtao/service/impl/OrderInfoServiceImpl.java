@@ -19,7 +19,7 @@ public class OrderInfoServiceImpl extends BaseService implements OrderInfoServic
     @Resource
     private RoomService roomService;
     @Resource
-    private CustomerService customerService;
+    private UserService userService;
     @Resource
     private EmployeeService employeeService;
 
@@ -67,7 +67,7 @@ public class OrderInfoServiceImpl extends BaseService implements OrderInfoServic
             if(room == null || room.getStatus() != 0){
                 throw new RoomNotFoundException("房间找不到或者房间不是空闲状态");
             }else{
-                if(customerService.checkName(String.valueOf(orderInfo.getUserId()))){
+                if(userService.checkName(String.valueOf(orderInfo.getUserId()))){
                     throw new CustomerNotFoundException("用户不存在");
                 }else{
                     if(orderInfo.getEmpId() != null&&employeeService.getEmp(orderInfo.getEmpId()) == null){
@@ -79,12 +79,6 @@ public class OrderInfoServiceImpl extends BaseService implements OrderInfoServic
                     }
                 }
             }
-        }catch (RoomNotFoundException rnfe){
-            throw rnfe;
-        }catch (CustomerNotFoundException cnfe){
-            throw cnfe;
-        }catch (EmployeeNotFoundException enfe){
-            throw enfe;
         }catch (Exception e){
             throw new OrderException("插入数据异常"+e.getMessage());
         }

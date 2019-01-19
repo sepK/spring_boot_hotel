@@ -16,6 +16,13 @@ public class OrderInfo {
 
     private String introduce;
 
+    /**非入库字段 用户*/
+    private User user;
+    /**非入库字段 房间*/
+    private Room room;
+    /**非入库字段 员工*/
+    private Employee employee;
+
     public Integer getOrderId() {
         return orderId;
     }
@@ -62,5 +69,29 @@ public class OrderInfo {
 
     public void setIntroduce(String introduce) {
         this.introduce = introduce == null ? null : introduce.trim();
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Room getRoom() {
+        return room;
+    }
+
+    public void setRoom(Room room) {
+        this.room = room;
+    }
+
+    public Employee getEmployee() {
+        return employee;
+    }
+
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
     }
 }

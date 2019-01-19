@@ -2,6 +2,9 @@ package com.ecjtu.kongtao.bean;
 
 import java.io.Serializable;
 
+/**
+ * @author sepK
+ */
 public class Indent implements Serializable{
     private OrderInfo orderInfo;
     private Housing housing;

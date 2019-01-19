@@ -10,7 +10,7 @@ public class UserComment {
 
     private Integer userId;
 
-    private Integer roomNumber;
+    private Integer roomId;
 
     private Integer level;
 
@@ -19,6 +19,10 @@ public class UserComment {
     private Date lastModifyTime;
 
     private String comment;
+    /**非入库字段 用户*/
+    private User user;
+    /**非入库字段 房间*/
+    private Room room;
 
     public Integer getCommentId() {
         return commentId;
@@ -36,12 +40,12 @@ public class UserComment {
         this.userId = userId;
     }
 
-    public Integer getRoomNumber() {
-        return roomNumber;
+    public Integer getRoomId() {
+        return roomId;
     }
 
-    public void setRoomNumber(Integer roomNumber) {
-        this.roomNumber = roomNumber;
+    public void setRoomId(Integer roomId) {
+        this.roomId = roomId;
     }
 
     public Integer getLevel() {
@@ -74,5 +78,21 @@ public class UserComment {
 
     public void setComment(String comment) {
         this.comment = comment == null ? null : comment.trim();
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Room getRoom() {
+        return room;
+    }
+
+    public void setRoom(Room room) {
+        this.room = room;
     }
 }

@@ -13,15 +13,42 @@ import java.util.List;
 @Service
 public interface CommentService {
 
-    List<UserComment> getComments();
+    /**
+     * 获取所有用户的评论
+     * @return 评论列表
+     */
+    List<UserComment> getAllComments();
 
-    UserComment getComment(String id);
+    /**
+     * 通过主键获取评论
+     * @param id 主键
+     * @return 评论
+     */
+    UserComment getCommentById(String id);
 
-    boolean delComment(String id);
+    /**
+     * 通过主键删除评论
+     * @param id 主键
+     */
+    void delUserCommentById(String id);
 
-    boolean saveComment(UserComment comment);
+    /**
+     * 保存评论
+     * @param comment bean
+     */
+    void saveUserComment(UserComment comment);
 
-    Result addComment(UserComment comment);
+    /**
+     * 添加评论
+     * @param comment bean
+     * @return Result
+     */
+    Result addUserComment(UserComment comment);
 
-    List<UserComment> searchComments(String cusName);
+    /**
+     * 搜索评论 根据用户名称
+     * @param userName 用户名称
+     * @return 用户评论集合
+     */
+    List<UserComment> searchUserComments(String userName);
 }

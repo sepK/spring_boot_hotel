@@ -41,6 +41,8 @@ public class RoomServiceImpl implements RoomService {
         return roomMapper.insert(room) > 0;
     }
 
+
+
     @Override
     public boolean checkRoomNumber(String number) {
         RoomExample example = new RoomExample();

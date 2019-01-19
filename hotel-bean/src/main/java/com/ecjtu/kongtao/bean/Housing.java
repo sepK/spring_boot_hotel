@@ -18,6 +18,11 @@ public class Housing {
 
     private Double costMoney;
 
+    /**非入库字段 用户*/
+    private User user;
+    /**非入库字段 房间*/
+    private Room room;
+
     public Integer getHousingId() {
         return housingId;
     }
@@ -64,5 +69,21 @@ public class Housing {
 
     public void setCostMoney(Double costMoney) {
         this.costMoney = costMoney;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Room getRoom() {
+        return room;
+    }
+
+    public void setRoom(Room room) {
+        this.room = room;
     }
 }

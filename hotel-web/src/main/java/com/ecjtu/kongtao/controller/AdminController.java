@@ -2,6 +2,7 @@ package com.ecjtu.kongtao.controller;
 
 import com.ecjtu.kongtao.bean.Admin;
 import com.ecjtu.kongtao.utils.Result;
+import com.ecjtu.kongtao.utils.SessionKey;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -9,11 +10,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * @author adm
+ * @author sepK
  */
 @Controller
 public class AdminController extends BaseController{
-
 
     @RequestMapping("/login")
     public String toLogin(){
@@ -24,7 +24,7 @@ public class AdminController extends BaseController{
     @ResponseBody
     public Result checkAdminInfo(Admin admin, HttpServletRequest httpServletRequest){
         if(adminService.checkInfo(admin)){
-            httpServletRequest.getSession().setAttribute("loginUser", admin);
+            httpServletRequest.getSession().setAttribute(SessionKey.USER, admin);
             httpServletRequest.getSession().setMaxInactiveInterval(60 * 5);
             return Result.success();
         }

@@ -20,7 +20,12 @@ public interface RoomService {
 
     boolean addRoom(Room room);
 
-    boolean checkRoomNumber(String number);
+    /**
+     * 检查房间是否存在
+     * @param roomNumber 房间号
+     * @return true or false
+     */
+    boolean checkRoomNumber(String roomNumber);
 
     boolean delRoom(Integer id);
 

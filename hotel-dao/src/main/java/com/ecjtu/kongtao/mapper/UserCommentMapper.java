@@ -12,13 +12,22 @@ import java.util.List;
  */
 @Repository
 public interface UserCommentMapper {
+    /**
+     * example
+     * @param example
+     * @return
+     */
     long countByExample(UserCommentExample example);
 
     int deleteByExample(UserCommentExample example);
 
     int deleteByPrimaryKey(Integer commentId);
 
-    int insert(UserComment record);
+    /**
+     * 插入一条评论
+     * @param userComment bean
+     */
+    void insert(UserComment userComment);
 
     int insertSelective(UserComment record);
 

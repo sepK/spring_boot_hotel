@@ -566,7 +566,7 @@
             data: "cusName=" + cusName,
             type: "POST",
             success: function (result) {
-                if (result.code == 400) {
+                if (result.code === 400) {
                     show_validate_msg(element, "error", "用户名已存在");
                     $(element).attr("ajax-va", "error");
                 } else {

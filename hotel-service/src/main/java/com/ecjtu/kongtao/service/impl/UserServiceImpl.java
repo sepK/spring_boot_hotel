@@ -3,7 +3,7 @@ package com.ecjtu.kongtao.service.impl;
 import com.ecjtu.kongtao.bean.User;
 import com.ecjtu.kongtao.bean.UserExample;
 import com.ecjtu.kongtao.service.BaseService;
-import com.ecjtu.kongtao.service.CustomerService;
+import com.ecjtu.kongtao.service.UserService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,46 +13,46 @@ import java.util.List;
  * @author sepK
  */
 @Service
-public class CustomerServiceImpl extends BaseService implements CustomerService {
+public class UserServiceImpl extends BaseService implements UserService {
 
 	@Override
-	public List<User> getCustomers() {
+	public List<User> getUsers() {
 		return userMapper.selectByExample(null);
 	}
 
 	@Override
-	public User getCustomer(Integer id) {
-		return userMapper.selectByPrimaryKey(id);
+	public User getUser(Integer userId) {
+		return userMapper.selectByPrimaryKey(userId);
 	}
 
 	@Override
-	public Boolean delCustomer(Integer id) {
-		return userMapper.deleteByPrimaryKey(id) > 0;
+	public void delUser(Integer userId) {
+		userMapper.deleteByPrimaryKey(userId);
 	}
 
 	@Override
-	public boolean updateCustomer(User customer) {
-		return userMapper.updateByPrimaryKeySelective(customer) > 0;
+	public void updateUser(User user) {
+		userMapper.updateByPrimaryKeySelective(user);
 	}
 
 	@Override
-	public List<User> searchCus(String cusName) {
+	public List<User> searchUser(String userName) {
 		UserExample customerExample = new UserExample();
 		UserExample.Criteria criteria = customerExample.createCriteria();
-		criteria.andUserNameLike("%" + cusName + "%");
+		criteria.andUserNameLike("%" + userName + "%");
 		return userMapper.selectByExample(customerExample);
 	}
 
 	@Override
-	public Boolean addCustomer(User user) {
-		return userMapper.insert(user) > 0;
+	public void addUser(User user) {
+		userMapper.insert(user);
 	}
 
 	@Override
-	public boolean checkName(String name) {
+	public boolean checkUserById(Integer userId) {
 		UserExample example = new UserExample();
 		UserExample.Criteria criteria = example.createCriteria();
-		criteria.andUserNameEqualTo(name);
+		criteria.andUserIdEqualTo(userId);
 		return userMapper.selectByExample(example).size() == 0;
 	}
 
@@ -63,6 +63,19 @@ public class CustomerServiceImpl extends BaseService implements CustomerService 
         criteria.andUserNameEqualTo(user.getUserName());
         criteria.andPasswordEqualTo(user.getPassword());
         return userMapper.selectByExample(example) != null;
+	}
+
+	/**
+	 * 检查用户名是否被占用
+	 * @param name 名称
+	 * @return true or false
+	 */
+	@Override
+	public boolean checkName(String name) {
+		UserExample example = new UserExample();
+		UserExample.Criteria criteria = example.createCriteria();
+		criteria.andUserNameEqualTo(name);
+		return userMapper.selectByExample(example).size() == 0;
 	}
 
 }

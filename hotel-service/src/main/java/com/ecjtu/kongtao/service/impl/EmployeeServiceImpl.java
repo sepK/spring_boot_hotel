@@ -25,18 +25,18 @@ public class EmployeeServiceImpl extends BaseService implements EmployeeService 
     }
 
     @Override
-    public boolean saveEmp(Employee employee) {
-        return employeeMapper.updateByPrimaryKey(employee) > 0;
+    public void saveEmp(Employee employee) {
+        employeeMapper.updateByPrimaryKey(employee);
     }
 
     @Override
-    public boolean addEmp(Employee employee) {
-        return employeeMapper.insert(employee) > 0;
+    public void addEmp(Employee employee) {
+        employeeMapper.insert(employee);
     }
 
     @Override
-    public boolean delEmp(Integer id) {
-        return employeeMapper.deleteByPrimaryKey(id) > 0;
+    public void delEmp(Integer id) {
+        employeeMapper.deleteByPrimaryKey(id);
     }
 
     @Override

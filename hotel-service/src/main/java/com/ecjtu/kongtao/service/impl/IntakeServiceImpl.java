@@ -1,7 +1,7 @@
 package com.ecjtu.kongtao.service.impl;
 
-import com.ecjtu.kongtao.service.CustomerService;
 import com.ecjtu.kongtao.service.RoomService;
+import com.ecjtu.kongtao.service.UserService;
 
 import javax.annotation.Resource;
 
@@ -13,7 +13,7 @@ public class IntakeServiceImpl{
     @Resource
     private RoomService roomService;
     @Resource
-    private CustomerService customerService;
+    private UserService userService;
 
 /*    @Override
     public List<Intake> getIntakes() {
