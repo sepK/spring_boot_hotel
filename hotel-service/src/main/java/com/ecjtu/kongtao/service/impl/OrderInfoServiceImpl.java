@@ -3,6 +3,7 @@ package com.ecjtu.kongtao.service.impl;
 import com.ecjtu.kongtao.bean.*;
 import com.ecjtu.kongtao.exception.*;
 import com.ecjtu.kongtao.service.*;
+import com.ecjtu.kongtao.utils.ErrorCode;
 import com.ecjtu.kongtao.utils.Result;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -35,53 +36,31 @@ public class OrderInfoServiceImpl extends BaseService implements OrderInfoServic
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public boolean saveOrder(OrderInfo orderInfo) {
-        try {
-            Room room = new Room();
-            room.setRoomId(orderInfo.getRoomId());
-            room.setStatus(Short.valueOf(orderInfo.getOrderStatus().toString()));
-            if(!roomService.saveRoom(room)){
-                throw new RoomNotFoundException("找不到房间");
-            }else{
-                int result = orderInfoMapper.updateByPrimaryKey(orderInfo);
-                if(result <= 0){
-                    throw new RepeatOrderException();
-                }else{
-                    return true;
-                }
-            }
-        }catch (RoomNotFoundException r){
-            throw r;
-        }catch (RepeatOrderException roe){
-            throw roe;
-        }catch (Exception e){
-            throw new OrderException("保存数据异常"+e.getMessage());
-        }
+    public void updateOrder(OrderInfo orderInfo) {
+        Room room = new Room();
+        room.setRoomId(orderInfo.getRoomId());
+        room.setStatus(Short.valueOf(orderInfo.getOrderStatus().toString()));
+        roomService.updateRoom(room);
+        orderInfoMapper.updateByPrimaryKey(orderInfo);
     }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public boolean addOrder(OrderInfo orderInfo) {
-        try {
+    public void addOrder(OrderInfo orderInfo) {
             Room room = roomService.getRoom(orderInfo.getRoomId());
-            if(room == null || room.getStatus() != 0){
-                throw new RoomNotFoundException("房间找不到或者房间不是空闲状态");
-            }else{
-                if(userService.checkName(String.valueOf(orderInfo.getUserId()))){
-                    throw new CustomerNotFoundException("用户不存在");
-                }else{
-                    if(orderInfo.getEmpId() != null&&employeeService.getEmp(orderInfo.getEmpId()) == null){
-                        throw new EmployeeNotFoundException("员工不存在");
-                    }else{
-                        room.setStatus(Short.valueOf(orderInfo.getOrderStatus().toString()));
-                        roomService.saveRoom(room);
-                        return orderInfoMapper.insertSelective(orderInfo) > 0;
-                    }
-                }
+            if (room == null) {
+                throw new UserException(ErrorCode.ERROR_PARA);
+            } else if (room.getStatus() != 0) {
+                throw new UserException(ErrorCode.ERROR_HOUSE_NOT_UNOCCUPIED);
+            } else if (userService.checkName(String.valueOf(orderInfo.getUserId()))) {
+                throw new UserException(ErrorCode.ERROR_USER_NOT_EXIST);
+            } else if(orderInfo.getEmpId() != null && employeeService.getEmp(orderInfo.getEmpId()) == null) {
+                throw new UserException(ErrorCode.ERROR_EMPLOYEE_NOT_EXIST);
+            } else {
+                room.setStatus(Short.valueOf(orderInfo.getOrderStatus().toString()));
+                roomService.updateRoom(room);
+                orderInfoMapper.insertSelective(orderInfo);
             }
-        }catch (Exception e){
-            throw new OrderException("插入数据异常"+e.getMessage());
-        }
     }
 
     @Override
@@ -107,22 +86,8 @@ public class OrderInfoServiceImpl extends BaseService implements OrderInfoServic
         orderInfo.setRoomId(roomId);
         housing.setUserId(orderInfo.getUserId());
         housing.setRoomId(roomId);
-        try{
-            if(!addOrder(orderInfo)){
-                throw new ExtraException("预定失败");
-            }else{
-               return /*intakeService.addIntake(housing)*/null;
-            }
-        }catch (RoomNotFoundException rnfe){
-            msg += rnfe.getMessage();
-        }catch (CustomerNotFoundException cnfe){
-            msg += cnfe.getMessage();
-        }catch (EmployeeNotFoundException enfe){
-            msg += enfe.getMessage();
-        }catch (ExtraException e){
-            msg += e.getMessage();
-        }
-        return Result.fail(msg);
+        addOrder(orderInfo);
+        return Result.success();
     }
     public List<OrderInfo> getOrdersByCusname(String userName){
         OrderInfoExample example = new OrderInfoExample();
@@ -149,26 +114,18 @@ public class OrderInfoServiceImpl extends BaseService implements OrderInfoServic
     @Override
     @Transactional(rollbackFor = Exception.class)
     public Result updateIndent(OrderInfo orderInfo) {
-        try{
-            OrderInfo order = getOrder(orderInfo.getOrderId());
-            Room room = roomService.getRoom(order.getRoomId());
-            if(orderInfoMapper.updateByPrimaryKeySelective(orderInfo) == 0){
-                throw new OrderException("订单更新失败");
-            }else{
-                room.setStatus(Short.valueOf(orderInfo.getOrderStatus().toString()));
-                if(!roomService.saveRoom(room)){
-                    throw new RoomHasOrderException("房间更新失败");
-                }else {
-                    return Result.success();
-                }
+        /*OrderInfo order = getOrder(orderInfo.getOrderId());
+        Room room = roomService.getRoom(order.getRoomId());
+        if(orderInfoMapper.updateByPrimaryKeySelective(orderInfo) == 0){
+            throw new OrderException("订单更新失败");
+        }else{
+            room.setStatus(Short.valueOf(orderInfo.getOrderStatus().toString()));
+            if(!roomService.saveRoom(room)){
+                throw new RoomHasOrderException("房间更新失败");
+            }else {
+                return Result.success();
             }
-        }catch (OrderException e){
-            return Result.fail(e.getMessage());
-        }catch (RoomHasOrderException e){
-            return Result.fail(e.getMessage());
-        }catch (Exception e){
-            return Result.fail(e.getMessage());
-        }
-
+        }*/
+        return null;
     }
 }

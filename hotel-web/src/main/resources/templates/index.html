@@ -13,7 +13,7 @@
     <script th:src="@{/bootstrap/js/bootstrap.js}"></script>
 </head>
 <body>
-<div class="modal fade" id="cusUpdateModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade" id="userUpdateModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -27,7 +27,7 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label">用户名</label>
                         <div class="col-sm-10">
-                            <input type="text" name="customerName" class="form-control" id="cusName_update_input"> <span class="help-block"></span>
+                            <input type="text" name="userName" class="form-control" id="userName_update_input"> <span class="help-block"></span>
                         </div>
                     </div>
                     <input type="hidden" name="password" id="password_update_input"/>
@@ -58,13 +58,12 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <button type="button" class="btn btn-primary" id="cus_update_btn">保存</button>
+                <button type="button" class="btn btn-primary" id="user_update_btn">保存</button>
             </div>
         </div>
     </div>
 </div>
-<div class="modal fade" id="cusAddModal" tabindex="-1" role="dialog"
-     aria-labelledby="myModalLabel">
+<div class="modal fade" id="userAddModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -78,13 +77,13 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label">用户名</label>
                         <div class="col-sm-10">
-                            <input type="text" name="customerName" class="form-control" id="cusName_add_input"> <span class="help-block"></span>
+                            <input type="text" name="userName" class="form-control" id="userName_add_input"> <span class="help-block"></span>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-2 control-label">密码</label>
                         <div class="col-sm-10">
-                            <input type="password" name="password" class="form-control" id="cusPassWord_add_input"> <span class="help-block"></span>
+                            <input type="password" name="password" class="form-control" id="userPassWord_add_input"> <span class="help-block"></span>
                         </div>
                     </div>
                     <div class="form-group">
@@ -110,20 +109,11 @@
                             <input type="text" name="phone" class="form-control" id="phone_add_input"> <span class="help-block"></span>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">验证码</label>
-                        <div class="col-sm-5">
-                            <input type="text" name="verifyCode" class="form-control" placeholder="请输入验证码" id="verifyCode_add_input"/> <span class="help-block"></span>
-                        </div>
-                        <div class="col-sm-5">
-                            <img src="/customer/verifyCode" onclick="myRefresh(this)" id="img_add"/>
-                        </div>
-                    </div>
                 </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <button type="button" class="btn btn-primary" id="cus_add_btn">保存</button>
+                <button type="button" class="btn btn-primary" id="user_add_btn">保存</button>
             </div>
         </div>
     </div>
@@ -149,7 +139,7 @@
 <div class="content">
     <div class="left">
         <ul class="nav nav-pills">
-            <li role="presentation"><a th:href="@{/customer/index}">会员管理</a></li>
+            <li role="presentation"><a th:href="@{/user/index}">会员管理</a></li>
             <li role="presentation"><a th:href="@{/room/index02}">客房管理</a></li>
             <li role="presentation"><a th:href="@{/employee/index03}">员工管理</a></li>
             <li role="presentation"><a th:href="@{/order/index04}">订单管理</a></li>
@@ -162,16 +152,16 @@
         <div class="row">
 
             <div class="col-md-2 col-md-offset-4">
-                <input type="text" name="cusName" id="cusName_search_input" placeholder="请输入要查询的用户名">
+                <input type="text" name="userName" id="userName_search_input" placeholder="请输入要查询的用户名">
                 <span class="help-block"></span>
             </div>
             <div class="col-md-1">
-                <button class="btn btn-info" id="cus_search_modal_btn">搜索</button>
+                <button class="btn btn-info" id="user_search_modal_btn">搜索</button>
                 <span class="help-block"></span>
             </div>
 
             <div class="col-md-2 col-md-offset-3">
-                <button class="btn btn-primary" id="cus_add_modal_btn">新增</button>
+                <button class="btn btn-primary" id="user_add_modal_btn">新增</button>
                 <span class="help-block"></span>
             </div>
         </div>
@@ -179,7 +169,7 @@
         <div class="row">
             <div class="col-md-12">
                 <table class="table table-hover table-striped table-bordered"
-                       id="cus_table">
+                       id="user_table">
                     <thead>
                     <tr>
                         <th>用户ID</th>
@@ -208,7 +198,7 @@
 </div>
 <!--
 <ul class="nav nav-pills">
-    <li role="presentation" class="active"><a th:href="customer/index">会员管理</a></li>
+    <li role="presentation" class="active"><a th:href="user/index">会员管理</a></li>
     <li role="presentation"><a th:href="room/index02">客房管理</a></li>
     <li role="presentation"><a th:href="employee/index03">员工管理</a></li>
     <li role="presentation"><a th:href="order/index04">订单管理</a></li>
@@ -226,7 +216,7 @@
 <div class="right">
     <div class="row">
         <div class="col-md-2 col-md-offset-4">
-            <input type="text" name="cusName" id="cusName_search_input"
+            <input type="text" name="userName" id="userName_search_input"
                    placeholder="请输入要查询的用户名"> <span class="help-block"></span>
         </div>
         &lt;!&ndash; <div class="col-md-2">
@@ -234,11 +224,11 @@
         <span class="help-block"></span>
     </div> &ndash;&gt;
         <div class="col-md-1">
-            <button class="btn btn-info" id="cus_search_modal_btn">搜索</button>
+            <button class="btn btn-info" id="user_search_modal_btn">搜索</button>
             <span class="help-block"></span>
         </div>
         <div class="col-md-2 col-md-offset-3">
-            <button class="btn btn-primary" id="cus_add_modal_btn">新增</button>
+            <button class="btn btn-primary" id="user_add_modal_btn">新增</button>
             <span class="help-block"></span>
         </div>
     </div>
@@ -246,7 +236,7 @@
     <div class="row">
         <div class="col-md-12">
             <table class="table table-hover table-striped table-bordered"
-                   id="cus_table">
+                   id="user_table">
                 <thead>
                 <tr>
                     <th>用户ID</th>
@@ -276,17 +266,17 @@
 <script type="text/javascript">
     var totalRecord, currentPage;
     $(function () {
-        to_page("customers", 1);
+        to_page("users", 1);
     });
 
     function to_page(method, pn) {
         $.ajax({
-            url: "/customer/" + method,
+            url: "/user/" + method,
             data: "pn=" + pn,
             type: "GET",
             dataType: "json",
             success: function (result) {
-                build_cus_table(result.extend.pageInfo.list);
+                build_user_table(result.extend.pageInfo.list);
                 build_page_info(result);
                 build_page_nav(method, result);
             }
@@ -294,11 +284,11 @@
     }
 
     //生成table表格内容
-    function build_cus_table(result) {
-        $("#cus_table tbody").empty();
+    function build_user_table(result) {
+        $("#user_table tbody").empty();
         $.each(result, function (index, item) {
-            var idTd = $("<td></td>").append(item.id);
-            var cusNameTd = $("<td></td>").append(item.customerName);
+            var idTd = $("<td></td>").append(item.userId);
+            var userNameTd = $("<td></td>").append(item.userName);
             var sexTd = $("<td></td>").append(item.sex);
             var emailTd = $("<td></td>").append(item.mail);
             var phoneTd = $("<td></td>").append(item.phone);
@@ -306,14 +296,13 @@
             var editBtn = $("<button></button>").addClass("btn btn-primary btn-sm edit_btn")
                 .append($("<span></span>").addClass("glyphicon glyphicon-pencil")).append("编辑");
 
-            editBtn.attr("edit-id", item.id);
-            var delBtn = $("<button></button>").addClass("btn btn-danger btn-sm delete_btn")
-                .append($("<span></span>").addClass("glyphicon glyphicon-trash")).append("删除");
-            delBtn.attr("del-id", item.id);
+            editBtn.attr("edit-id", item.userId);
+            var delBtn = $("<button></button>").addClass("btn btn-danger btn-sm delete_btn").append($("<span></span>").addClass("glyphicon glyphicon-trash")).append("删除");
+            delBtn.attr("del-id", item.userId);
             var btnTd = $("<td></td>").append(editBtn).append(" ").append(delBtn);
-            $("<tr></tr>").append(idTd).append(cusNameTd).append(sexTd)
+            $("<tr></tr>").append(idTd).append(userNameTd).append(sexTd)
                 .append(emailTd).append(phoneTd).append(btnTd)
-                .appendTo("#cus_table tbody");
+                .appendTo("#user_table tbody");
         });
     }
 
@@ -387,112 +376,111 @@
         $(ele).find(".help-block").text("");
     }
 
-    $("#cus_add_modal_btn").click(function () {
-        reset_form("#cusAddModal form");
-        myRefresh(document.getElementById("img_add"));
-        $("#cusAddModal").modal({
+    $("#user_add_modal_btn").click(function () {
+        reset_form("#userAddModal form");
+        $("#userAddModal").modal({
             backdrop: "static"
         });
     });
     $(document).on("click", ".edit_btn", function () {
-        getCus($(this).attr("edit-id"));
+        getUser($(this).attr("edit-id"));
 
-        $("#cus_update_btn").attr("edit-id", $(this).attr("edit-id"));
-        $("#cusUpdateModal").modal({
+        $("#user_update_btn").attr("edit-id", $(this).attr("edit-id"));
+        $("#userUpdateModal").modal({
             backdrop: "static"
         });
     });
 
     //回显会员信息
-    function getCus(id) {
+    function getUser(id) {
         $.ajax({
-            url: "customer/customer/" + id,
+            url: "/user/user/" + id,
             type: "GET",
             success: function (result) {
-                var cus = result.extend.customer;
-                $("#password_update_input").val(cus.password);
-                $("#phone_update_input").val(cus.phone);
-                $("#sex_update_input").val(cus.sex);
-                $("#cusName_update_input").val(cus.customerName);
-                $("#email_update_input").val(cus.mail);
+                var user = result.extend.user;
+                $("#password_update_input").val(user.password);
+                $("#phone_update_input").val(user.phone);
+                $("#sex_update_input").val(user.sex);
+                $("#userName_update_input").val(user.userName);
+                $("#email_update_input").val(user.mail);
             }
         });
     }
 
     //删除会员
     $(document).on("click", ".delete_btn", function () {
-        var cusName = $(this).parents("tr").find("td:eq(1)").text();
+        var userName = $(this).parents("tr").find("td:eq(1)").text();
         var id = $(this).attr("del-id");
-        if (confirm("确认删除【" + cusName + "】吗？")) {
+        if (confirm("确认删除【" + userName + "】吗？")) {
             $.ajax({
-                url: "customer/customer/" + id,
+                url: "/user/user/" + id,
                 type: "DELETE",
                 success: function (result) {
                     alert(result.msg);
-                    to_page("customers", currentPage);
+                    to_page("users", currentPage);
                 }
             });
         }
     });
-    $("#cus_update_btn").click(
+    $("#user_update_btn").click(
         function () {
             $.ajax({
-                url: "customer/customer/"
+                url: "/user/user/"
                 + $(this).attr("edit-id"),
                 type: "POST",
-                data: $("#cusUpdateModal form").serialize(),
+                data: $("#userUpdateModal form").serialize(),
                 success: function (result) {
-                    $("#cusUpdateModal").modal("hide");
+                    $("#userUpdateModal").modal("hide");
                     alert(result.msg);
-                    to_page("customers", currentPage);
+                    to_page("users", currentPage);
                 }
             });
         });
-    $("#cus_add_btn").click(function () {
+    $("#user_add_btn").click(function () {
         if (!validate_add_form()) {
             return false;
         }
         $.ajax({
-            url: "customer/customer",
+            url: "/user/user",
             type: "POST",
-            data: $("#cusAddModal form").serialize(),
+            data: $("#userAddModal form").serialize(),
             success: function (result) {
-                $("#cusAddModal").modal("hide");
+                $("#userAddModal").modal("hide");
                 alert(result.msg);
-                to_page("customers", totalRecord);
+                to_page("users", totalRecord);
             }
         });
     });
-    $("#cus_search_modal_btn").click(function () {
-        //cusName_search_input phone_search_input
-        $("#cus_table tbody").empty();
+    $("#user_search_modal_btn").click(function () {
+        //userName_search_input phone_search_input
+        $("#user_table tbody").empty();
         $("#page_info_area").empty();
         $("#page_nav_area").empty();
         $.ajax({
-            url: "customer/searchCus",
+            url: "/user/searchUser",
             type: "POST",
-            data: "cusName=" + $("#cusName_search_input").val(),
+            data: "userName=" + $("#userName_search_input").val(),
             success: function (result) {
-                build_cus_table(result.extend.list);
+                build_user_table(result.extend.list);
             }
         });
     });
 
     function validate_add_form() {
         //1、拿到要校验的数据，使用正则表达式
-        if ($("#cusName_add_input").attr("ajax-va") === "error") {
+        if ($("#userName_add_input").attr("ajax-va") === "error") {
             return false;
         }
         if ($("#verifyCode_add_input").attr("ajax-va") === "error") {
             return false;
         }
-        var cusName = $("#cusName_add_input").val();
+        var userName = $("#userName_add_input").val();
         var regName = /(^[a-zA-Z0-9_-]{6,16}$)|(^[\u2E80-\u9FFF]{2,5})/;
-        if (!regName.test(cusName)) {
-            show_validate_msg("#cusName_add_input", "error", "用户名可以是2-5位中文或者6-16位英文和数字的组合");
+        if (!regName.test(userName)) {
+            show_validate_msg("#userName_add_input", "error", "用户名可以是2-5位中文或者6-16位英文和数字的组合");
             return false;
         } else {
-            show_validate_msg("#cusName_add_input", "success", "");
+            show_validate_msg("#userName_add_input", "success", "");
         }
 
         //2、校验邮箱信息
@@ -530,19 +518,19 @@
         }
     }
 
-    $("#cusName_update_input").change(function () {
-        //cusName_update_input
-        checkName("#cusName_update_input");
+    $("#userName_update_input").change(function () {
+        //userName_update_input
+        checkName("#userName_update_input");
     });
-    $("#cusName_add_input").change(function () {
-        checkName("#cusName_add_input");
+    $("#userName_add_input").change(function () {
+        checkName("#userName_add_input");
     });
 
     function checkName(element) {
-        var cusName = $(element).val();
+        var userName = $(element).val();
         $.ajax({
-            url: "customer/checkName",
-            data: "cusName=" + cusName,
+            url: "/user/checkName",
+            data: "userName=" + userName,
             type: "POST",
             success: function (result) {
                 if (result.code === 400) {
@@ -560,7 +548,7 @@
         function () {
             var verifyCode = $("#verifyCode_add_input").val();
             $.ajax({
-                url: "customer/checkVerifyCode",
+                url: "/user/checkVerifyCode",
                 type: "POST",
                 data: "verifyCode=" + verifyCode,
                 success: function (result) {
@@ -575,20 +563,6 @@
                 }
             });
         });
-
-    //todo 是否需要验证码功能
-    function myRefresh(e) {
-        const source = e.src; // 获得原来的 src 中的内容
-        var index = source.indexOf("?"); // 从 source 中寻找 ? 第一次出现的位置 (如果不存在则返回 -1 )
-        var date = new Date(); // 创建一个 Date 对象的 一个 实例
-        if (index > -1) { // 如果找到了 ?  就进入内部
-            var s = source.substring(0, index); // 从 source 中截取 index 之前的内容 ( index 以及 index 之后的内容都被舍弃 )
-            var time = date.getTime(); // 从 新创建的 Date 对象的实例中获得该时间对应毫秒值
-            e.src = s + "?time=" + time; // 将 加了 尾巴 的 地址 重新放入到 src 上
-        } else {
-            e.src = source + "?time=" + date.getTime();
-        }
-    }
 </script>
 </body>
 </html>

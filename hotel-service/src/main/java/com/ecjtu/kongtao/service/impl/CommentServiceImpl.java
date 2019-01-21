@@ -4,12 +4,12 @@ import com.ecjtu.kongtao.bean.User;
 import com.ecjtu.kongtao.bean.UserComment;
 import com.ecjtu.kongtao.bean.UserCommentExample;
 import com.ecjtu.kongtao.bean.UserExample;
-import com.ecjtu.kongtao.exception.CustomerNotFoundException;
-import com.ecjtu.kongtao.exception.RoomNotFoundException;
+import com.ecjtu.kongtao.exception.UserException;
 import com.ecjtu.kongtao.service.BaseService;
 import com.ecjtu.kongtao.service.CommentService;
 import com.ecjtu.kongtao.service.RoomService;
 import com.ecjtu.kongtao.service.UserService;
+import com.ecjtu.kongtao.utils.ErrorCode;
 import com.ecjtu.kongtao.utils.Result;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
@@ -50,21 +50,16 @@ public class CommentServiceImpl extends BaseService implements CommentService {
     @Override
     public Result addUserComment(UserComment comment) {
         String msg;
-        try {
-            if (roomService.checkRoomNumber(comment.getRoom().getRoomNumber())) {
-               throw new RoomNotFoundException("房间不存在");
+        if (roomService.checkRoomNumber(comment.getRoom().getRoomNumber())) {
+           throw new UserException(ErrorCode.ERROR_HOUSE_NOT_EXIST);
+        } else {
+            if (userService.checkUserById(comment.getUserId())) {
+              throw new UserException(ErrorCode.ERROR_USER_NOT_EXIST);
             } else {
-                if (userService.checkUserById(comment.getUserId())) {
-                  throw new CustomerNotFoundException("用户不存在");
-                } else {
-                    userCommentMapper.insert(comment);
-                    return Result.success();
-                }
+                userCommentMapper.insert(comment);
+                return Result.success();
             }
-        }  catch (Exception e) {
-            msg = e.getMessage();
         }
-        return Result.fail(msg);
     }
 
     @Override

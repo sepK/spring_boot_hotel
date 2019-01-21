@@ -39,22 +39,16 @@ public class RoomController extends BaseController{
     @RequestMapping(value = "/room/{id}", method = RequestMethod.POST)
     @ResponseBody
     public Result saveRoom(@PathVariable("id") Integer id, Room room){
-        if(roomService.saveRoom(room)){
-            return Result.success();
-        }else {
-            return  Result.fail();
-        }
-
+        roomService.updateRoom(room);
+        return Result.success();
     }
 
     @RequestMapping(value = "/room/{id}",method = RequestMethod.DELETE)
     @ResponseBody
     public Result delRoom(@PathVariable("id") Integer id){
-        if(roomService.delRoom(id)){
-            return Result.success();
-        }else{
-            return Result.fail();
-        }
+        roomService.delRoom(id);
+        return Result.success();
+
     }
     @RequestMapping(value = "/searchRoom",method = RequestMethod.POST)
     @ResponseBody
@@ -67,11 +61,8 @@ public class RoomController extends BaseController{
     @RequestMapping(value = "/room", method = RequestMethod.POST)
     @ResponseBody
     public Result addRoom(Room room){
-        if(roomService.addRoom(room)) {
-            return Result.success();
-        }else{
-            return Result.fail();
-        }
+        roomService.addRoom(room);
+        return Result.success();
     }
 
     @RequestMapping(value = "/checkRoomNumber", method = RequestMethod.POST)
@@ -89,7 +80,7 @@ public class RoomController extends BaseController{
     public Result emptyRooms(){
         //todo
         List<Room> rooms = null;
-        return Result.success().add("rooms",rooms);
+        return Result.success().add("rooms", rooms);
     }
 
 

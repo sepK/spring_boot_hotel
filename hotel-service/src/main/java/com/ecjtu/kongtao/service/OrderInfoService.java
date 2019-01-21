@@ -13,15 +13,33 @@ import java.util.List;
  */
 @Service
 public interface OrderInfoService {
+    /**
+     * 获取所有订单信息
+     * @return 订单信息列表
+     */
     List<OrderInfo> getOrders();
 
+    /**
+     * 通过id获取订单
+     * @param id
+     * @return
+     */
     OrderInfo getOrder(Integer id);
 
-    boolean saveOrder(OrderInfo orderInfo);
+    /**
+     * 更新订单信息
+     * @param orderInfo 订单信息
+     * @return
+     */
+    void updateOrder(OrderInfo orderInfo);
 
-    boolean addOrder(OrderInfo orderInfo);
+    /**
+     * 添加订单信息
+     * @param orderInfo 订单信息
+     */
+    void addOrder(OrderInfo orderInfo);
 
-    List<OrderInfo> getOrdersByRoomId(Integer roomid);
+    List<OrderInfo> getOrdersByRoomId(Integer roomId);
 
     boolean delOrder(Integer id);
 

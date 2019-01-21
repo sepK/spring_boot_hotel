@@ -17,29 +17,29 @@ public class Result {
 
 	public static Result success(){
 		Result result = new Result();
-		result.setCode(200);
-		result.setMsg("处理成功！");
+		result.setCode(ErrorCode.ERROR_SUCCESS.getCode());
+		result.setMsg(ErrorCode.ERROR_SUCCESS.getMsg());
 		return result;
 	}
 
-	public static Result success(String msg){
+	public static Result success(ErrorCode errorCode){
 		Result result = new Result();
-		result.setCode(200);
-		result.setMsg(msg);
+		result.setCode(errorCode.getCode());
+		result.setMsg(errorCode.getMsg());
 		return result;
 	}
 	
 	public static Result fail(){
 		Result result = new Result();
-		result.setCode(400);
-		result.setMsg("处理失败！");
+		result.setCode(ErrorCode.ERROR_PARA.getCode());
+		result.setMsg(ErrorCode.ERROR_PARA.getMsg());
 		return result;
 	}
 
-	public static Result fail(String msg){
+	public static Result fail(ErrorCode errorCode){
 		Result result = new Result();
-		result.setCode(400);
-		result.setMsg(msg);
+		result.setCode(errorCode.getCode());
+		result.setMsg(errorCode.getMsg());
 		return result;
 	}
 
@@ -47,7 +47,7 @@ public class Result {
 		this.getExtend().put(key, value);
 		return this;
 	}
-	
+
 	public int getCode() {
 		return code;
 	}

@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50530
 File Encoding         : 65001
 
-Date: 2019-01-18 15:43:04
+Date: 2019-01-19 16:30:32
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -24,11 +24,12 @@ CREATE TABLE `t_admin` (
   `admin_name` varchar(10) NOT NULL COMMENT '管理员登录名',
   `password` varchar(20) NOT NULL COMMENT '密码',
   PRIMARY KEY (`admin_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_admin
 -- ----------------------------
+INSERT INTO `t_admin` VALUES ('1', 'admin', 'admin');
 
 -- ----------------------------
 -- Table structure for t_employee
@@ -133,13 +134,13 @@ DROP TABLE IF EXISTS `t_user_comment`;
 CREATE TABLE `t_user_comment` (
   `comment_id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '评论id  自增',
   `user_id` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '评论人id',
-  `room_number` int(2) NOT NULL COMMENT '房间号',
+  `room_id` int(2) NOT NULL COMMENT '房间id',
   `level` int(5) unsigned NOT NULL DEFAULT '1' COMMENT '评级等级',
   `comment` text NOT NULL COMMENT '评论',
   `create_time` timestamp NOT NULL DEFAULT '1978-12-31 16:00:00' COMMENT '评论时间',
   `last_modify_time` timestamp NOT NULL DEFAULT '1978-12-31 16:00:00' ON UPDATE CURRENT_TIMESTAMP COMMENT '上次修改时间',
   PRIMARY KEY (`comment_id`),
-  KEY `user_id` (`user_id`,`room_number`) USING BTREE
+  KEY `user_id` (`user_id`,`room_id`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------

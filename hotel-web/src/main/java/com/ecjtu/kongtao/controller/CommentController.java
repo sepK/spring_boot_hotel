@@ -2,6 +2,7 @@ package com.ecjtu.kongtao.controller;
 
 import com.ecjtu.kongtao.bean.UserComment;
 import com.ecjtu.kongtao.utils.ConfigKey;
+import com.ecjtu.kongtao.utils.ErrorCode;
 import com.ecjtu.kongtao.utils.Result;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -46,7 +47,7 @@ public class CommentController extends BaseController{
 
     @RequestMapping(value = "/comment/{id}", method = RequestMethod.DELETE)
     @ResponseBody
-    public Result delUserComment(@PathVariable("id") String id){
+    public Result delUserComment(@PathVariable("id") String id) {
         commentService.delUserCommentById(id);
         return Result.success();
     }
@@ -68,7 +69,7 @@ public class CommentController extends BaseController{
     public Result searchComments(@RequestParam("userName") String userName) {
         List<UserComment> comments = commentService.searchUserComments(userName);
         if (ObjectUtils.isEmpty(comments)) {
-            return Result.fail("用户没有评论");
+            return Result.fail(ErrorCode.ERROR_USER_NOT_COMMENT);
         }
         return Result.success().add("comments", comments);
     }

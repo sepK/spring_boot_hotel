@@ -2,6 +2,7 @@ package com.ecjtu.kongtao.controller;
 
 import com.ecjtu.kongtao.bean.User;
 import com.ecjtu.kongtao.utils.ConfigKey;
+import com.ecjtu.kongtao.utils.ErrorCode;
 import com.ecjtu.kongtao.utils.GraphicHelper;
 import com.ecjtu.kongtao.utils.Result;
 import com.github.pagehelper.PageHelper;
@@ -46,7 +47,7 @@ public class CustomerController extends BaseController{
 		return Result.success().add("user", user);
 	}
 
-	@RequestMapping(value="/user/{id}",method= RequestMethod.DELETE)
+	@RequestMapping(value="/user/{id}", method= RequestMethod.DELETE)
 	@ResponseBody
 	public Result delUser(@PathVariable("id") Integer id) {
 		userService.delUser(id);
@@ -88,9 +89,9 @@ public class CustomerController extends BaseController{
     @ResponseBody
     public Result login(User user, Model model){
         if(userService.login(user)){
-            return Result.success("登陆成功").add("user",user);
+            return Result.success().add("user",user);
         }else{
-            return Result.fail("用户名或者密码错误");
+            return Result.fail(ErrorCode.ERROR_PARAM_LOGIN);
         }
     }
 
@@ -102,7 +103,7 @@ public class CustomerController extends BaseController{
 	@RequestMapping("/checkVerifyCode")
 	@ResponseBody
 	public Result checkVerifyCode(String verifyCode, HttpSession session) {
-		if (session.getAttribute("/customer/verifyCode").equals(verifyCode)) {
+		if (session.getAttribute("/user/verifyCode").equals(verifyCode)) {
 			return Result.success();
 		} else {
 			return Result.fail();

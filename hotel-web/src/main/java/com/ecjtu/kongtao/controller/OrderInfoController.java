@@ -2,10 +2,7 @@ package com.ecjtu.kongtao.controller;
 
 import com.ecjtu.kongtao.bean.Indent;
 import com.ecjtu.kongtao.bean.OrderInfo;
-import com.ecjtu.kongtao.exception.CustomerNotFoundException;
-import com.ecjtu.kongtao.exception.EmployeeNotFoundException;
-import com.ecjtu.kongtao.exception.RepeatOrderException;
-import com.ecjtu.kongtao.exception.RoomNotFoundException;
+import com.ecjtu.kongtao.utils.ConfigKey;
 import com.ecjtu.kongtao.utils.Result;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -29,9 +26,9 @@ public class OrderInfoController extends BaseController{
     @RequestMapping(value = "/orders",method = RequestMethod.GET)
     @ResponseBody
     public Result getOrders(@RequestParam("pn") Integer pn){
-        PageHelper.startPage(pn,10);
+        PageHelper.startPage(pn, ConfigKey.DEFAULT_PAGE_SIZE);
         List<OrderInfo> list = orderInfoService.getOrders();
-        PageInfo<OrderInfo> pageInfo = new PageInfo<>(list,5);
+        PageInfo<OrderInfo> pageInfo = new PageInfo<>(list, ConfigKey.NAVIGATE_PAGE);
         return Result.success().add("pageInfo", pageInfo);
     }
 
@@ -43,29 +40,17 @@ public class OrderInfoController extends BaseController{
     }
     @RequestMapping(value = "/order/{id}", method = RequestMethod.PUT)
     @ResponseBody
-    public Result saveOrder(OrderInfo orderInfo){
-        String msg = null;
-        try {
-            if(orderInfoService.saveOrder(orderInfo)){
-                return Result.success();
-            }
-        }catch (RoomNotFoundException | RepeatOrderException r){
-            msg = r.getMessage();
-        }
-        return Result.fail(msg);
+    public Result updateOrder(OrderInfo orderInfo){
+        orderInfoService.updateOrder(orderInfo);
+        return Result.success();
+
     }
     @RequestMapping(value = "/order", method = RequestMethod.POST)
     @ResponseBody
     public Result addOrder(OrderInfo orderInfo){
-        String msg = null;
-        try{
-            if(orderInfoService.addOrder(orderInfo)){
-                return Result.success();
-            }
-        }catch (RoomNotFoundException | CustomerNotFoundException | EmployeeNotFoundException rnfe){
-            msg = rnfe.getMessage();
-        }
-        return Result.fail(msg);
+        orderInfoService.addOrder(orderInfo);
+        return Result.success();
+
     }
     @RequestMapping(value = "/searchOrders",method = RequestMethod.GET)
     @ResponseBody
@@ -100,7 +85,6 @@ public class OrderInfoController extends BaseController{
     @RequestMapping(value = "/updateIndent",method = RequestMethod.POST)
     @ResponseBody
     public Result updateIndent(OrderInfo orderInfo){
-
         return orderInfoService.updateIndent(orderInfo);
     }
 }

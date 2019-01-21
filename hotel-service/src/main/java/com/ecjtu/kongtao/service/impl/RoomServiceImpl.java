@@ -32,16 +32,14 @@ public class RoomServiceImpl implements RoomService {
     }
 
     @Override
-    public boolean saveRoom(Room room) {
-        return roomMapper.updateByPrimaryKeySelective(room) > 0;
+    public void updateRoom(Room room) {
+        roomMapper.updateByPrimaryKeySelective(room);
     }
 
     @Override
-    public boolean addRoom(Room room) {
-        return roomMapper.insert(room) > 0;
+    public void addRoom(Room room) {
+        roomMapper.insert(room);
     }
-
-
 
     @Override
     public boolean checkRoomNumber(String number) {
@@ -52,8 +50,8 @@ public class RoomServiceImpl implements RoomService {
     }
 
     @Override
-    public boolean delRoom(Integer id) {
-        return roomMapper.deleteByPrimaryKey(id) > 0;
+    public void delRoom(Integer id) {
+        roomMapper.deleteByPrimaryKey(id);
     }
 
     @Override
