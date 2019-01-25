@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50530
 File Encoding         : 65001
 
-Date: 2019-01-19 16:30:32
+Date: 2019-01-25 09:23:26
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -44,7 +44,7 @@ CREATE TABLE `t_employee` (
   `duty` varchar(10) NOT NULL COMMENT '职责',
   PRIMARY KEY (`emp_id`),
   UNIQUE KEY `emp_name` (`emp_name`)
-) ENGINE=InnoDB AUTO_INCREMENT=144 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_employee
@@ -82,7 +82,7 @@ CREATE TABLE `t_order_info` (
   `emp_id` int(10) unsigned DEFAULT NULL COMMENT '操作员工id',
   PRIMARY KEY (`order_id`),
   KEY `order_id` (`order_id`,`room_id`,`user_id`,`order_status`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=55 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_order_info
@@ -102,7 +102,7 @@ CREATE TABLE `t_room` (
   `introduce` text NOT NULL COMMENT '房间简介',
   PRIMARY KEY (`room_id`),
   KEY `room_number` (`room_number`,`type`,`status`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_room
@@ -121,7 +121,7 @@ CREATE TABLE `t_user` (
   `mail` varchar(50) NOT NULL COMMENT '邮箱',
   PRIMARY KEY (`user_id`),
   KEY `user_id` (`user_id`,`user_name`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=60 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=10000 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_user
