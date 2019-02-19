@@ -18,6 +18,9 @@ public class LoginFilter implements Filter {
     /**不过滤的uri*/
     private static String[] notFilter = new String[] {
             "/login",
+            "/assets",
+            "/adminLogin",
+            "/static",
     };
     @Override
     public void destroy() {
@@ -38,9 +41,12 @@ public class LoginFilter implements Filter {
             }
         }
         if (doFilter) {
-            if(request.getSession().getAttribute("loginUser") != null){
+            if(request.getSession().getAttribute(SessionKey.USER) != null){
                 chain.doFilter(req, res);
+                return;
             }
+            response.sendRedirect("/login");
+            return;
         }
         chain.doFilter(req, res);
     }

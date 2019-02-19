@@ -24,7 +24,7 @@ import java.util.List;
  */
 @Controller
 @RequestMapping("/user")
-public class CustomerController extends BaseController{
+public class UserController extends BaseController{
 	
 	@RequestMapping("/index")
 	public String toIndex() {

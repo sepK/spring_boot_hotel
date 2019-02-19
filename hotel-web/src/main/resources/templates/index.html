@@ -9,8 +9,8 @@
     <link rel="stylesheet" th:href="@{/bootstrap/css/bootstrap.css}">
     <link rel="stylesheet" th:href="@{/css/index.css}">
     <link rel="shortcut icon" th:href="@{/favicon.ico}"/>
-    <script th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
-    <script th:src="@{/bootstrap/js/bootstrap.js}"></script>
+    <script type="text/javascript" th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
+    <script type="text/javascript" th:src="@{/bootstrap/js/bootstrap.js}"></script>
 </head>
 <body>
 <div class="modal fade" id="userUpdateModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -129,10 +129,7 @@
         </div>
         <div class="col-md-2 header-right login">
             <span class="glyphicon glyphicon-user"></span>
-            <p th:if="${session.loginUser} ne null">
-                <span class="username" th:text="${session.loginUser.getAdminName()}">admin</span>
-            </p>
-
+            <span class="username" th:text="${session.USER.getAdminName()}">admin</span>
         </div>
     </div>
 </div>
@@ -140,21 +137,20 @@
     <div class="left">
         <ul class="nav nav-pills">
             <li role="presentation"><a th:href="@{/user/index}">会员管理</a></li>
-            <li role="presentation"><a th:href="@{/room/index02}">客房管理</a></li>
+            <li role="presentation"><a th:href="@{/room/index02}">房间管理</a></li>
             <li role="presentation"><a th:href="@{/employee/index03}">员工管理</a></li>
             <li role="presentation"><a th:href="@{/order/index04}">订单管理</a></li>
             <li role="presentation"><a th:href="@{/comment/index05}">评论管理</a></li>
             <li role="presentation"><a th:href="@{/intake/index06}">入住管理</a></li>
-            <li role="presentation"><a th:href="@{/photo/index07}">客房照片管理</a></li>
         </ul>
     </div>
     <div class="right">
         <div class="row">
-
             <div class="col-md-2 col-md-offset-4">
-                <input type="text" name="userName" id="userName_search_input" placeholder="请输入要查询的用户名">
+                <input class="form-control" type="text" name="userName" id="userName_search_input" placeholder="请输入要查询的用户名">
                 <span class="help-block"></span>
             </div>
+
             <div class="col-md-1">
                 <button class="btn btn-info" id="user_search_modal_btn">搜索</button>
                 <span class="help-block"></span>
@@ -196,73 +192,6 @@
         </div>
     </div>
 </div>
-<!--
-<ul class="nav nav-pills">
-    <li role="presentation" class="active"><a th:href="user/index">会员管理</a></li>
-    <li role="presentation"><a th:href="room/index02">客房管理</a></li>
-    <li role="presentation"><a th:href="employee/index03">员工管理</a></li>
-    <li role="presentation"><a th:href="order/index04">订单管理</a></li>
-    <li role="presentation"><a th:href="comment/index05">评论管理</a></li>
-    <li role="presentation"><a th:href="intake/index06">入住管理</a></li>
-</ul>
-&lt;!&ndash; 标题 &ndash;&gt;
-<div class="row">
-    <div class="col-md-12">
-        <h1>酒店后台管理</h1>
-    </div>
-</div>
-
-&lt;!&ndash; 按钮 &ndash;&gt;
-<div class="right">
-    <div class="row">
-        <div class="col-md-2 col-md-offset-4">
-            <input type="text" name="userName" id="userName_search_input"
-                   placeholder="请输入要查询的用户名"> <span class="help-block"></span>
-        </div>
-        &lt;!&ndash; <div class="col-md-2">
-        <input type="text" name="phone"  id="phone_search_input" placeholder="请输入要查询的电话">
-        <span class="help-block"></span>
-    </div> &ndash;&gt;
-        <div class="col-md-1">
-            <button class="btn btn-info" id="user_search_modal_btn">搜索</button>
-            <span class="help-block"></span>
-        </div>
-        <div class="col-md-2 col-md-offset-3">
-            <button class="btn btn-primary" id="user_add_modal_btn">新增</button>
-            <span class="help-block"></span>
-        </div>
-    </div>
-    &lt;!&ndash; 显示表格数据 &ndash;&gt;
-    <div class="row">
-        <div class="col-md-12">
-            <table class="table table-hover table-striped table-bordered"
-                   id="user_table">
-                <thead>
-                <tr>
-                    <th>用户ID</th>
-                    <th>用户名</th>
-                    <th>性别</th>
-                    <th>邮箱</th>
-                    <th>电话</th>
-                    <th>操作</th>
-                </tr>
-                </thead>
-                <tbody>
-
-                </tbody>
-            </table>
-        </div>
-    </div>
-
-    &lt;!&ndash; 显示分页信息 &ndash;&gt;
-    <div class="row">
-        &lt;!&ndash;分页文字信息  &ndash;&gt;
-        <div class="col-md-6" id="page_info_area"></div>
-        &lt;!&ndash; 分页条信息 &ndash;&gt;
-        <div class="col-md-6" id="page_nav_area"></div>
-    </div>
-</div>-->
-
 <script type="text/javascript">
     var totalRecord, currentPage;
     $(function () {

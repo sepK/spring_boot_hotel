@@ -4,16 +4,17 @@ package com.ecjtu.kongtao.bean;
  * @author sepK
  */
 public class OrderInfo {
+    /**订单id*/
     private Integer orderId;
-
+    /**房间id*/
     private Integer roomId;
-
+    /**用户id*/
     private Integer userId;
-
+    /**订单状态*/
     private Integer orderStatus;
-
+    /**操作员工id*/
     private Integer empId;
-
+    /**备注*/
     private String introduce;
 
     /**非入库字段 用户*/

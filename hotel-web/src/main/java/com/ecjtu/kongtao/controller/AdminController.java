@@ -20,6 +20,11 @@ public class AdminController extends BaseController{
         return "login";
     }
 
+    @RequestMapping("/index07")
+    public String toIndex(){
+        return "/admin/index07";
+    }
+
     @RequestMapping("/adminLogin")
     @ResponseBody
     public Result checkAdminInfo(Admin admin, HttpServletRequest httpServletRequest){
@@ -29,10 +34,6 @@ public class AdminController extends BaseController{
             return Result.success();
         }
         return Result.fail();
-    }
-    @RequestMapping("/index07")
-    public String toIndex(){
-        return "/admin/index07";
     }
 
 }

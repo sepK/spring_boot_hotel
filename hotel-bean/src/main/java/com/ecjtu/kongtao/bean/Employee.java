@@ -4,16 +4,17 @@ package com.ecjtu.kongtao.bean;
  * @author sepK
  */
 public class Employee {
+    /**员工id*/
     private Integer empId;
-
+    /**员工名字*/
     private String empName;
-
+    /**性别*/
     private String sex;
-
+    /**年龄*/
     private Integer age;
-
+    /**电话*/
     private String phone;
-
+    /**职责*/
     private String duty;
 
     public Integer getEmpId() {

@@ -1,13 +1,19 @@
 package com.ecjtu.kongtao.controller;
 
 import com.ecjtu.kongtao.bean.Room;
+import com.ecjtu.kongtao.utils.ConfigKey;
 import com.ecjtu.kongtao.utils.Result;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import sun.security.krb5.Config;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * @author sepK
@@ -18,22 +24,23 @@ public class RoomController extends BaseController{
 
     @RequestMapping("/index02")
     public String toIndex(){
-        return "/admin/index02";
+        return "index02";
     }
+
     @RequestMapping(value="/rooms",method = RequestMethod.GET)
     @ResponseBody
     public Result getRooms(@RequestParam() Integer pn){
-        PageHelper.startPage(pn,10);
+        PageHelper.startPage(pn, ConfigKey.DEFAULT_PAGE_SIZE);
         List<Room> list = roomService.getRooms();
-        PageInfo<Room> pageInfo = new PageInfo<>(list,5);
-        return Result.success().add("pageInfo",pageInfo);
+        PageInfo<Room> pageInfo = new PageInfo<>(list, ConfigKey.NAVIGATE_PAGE);
+        return Result.success().add("pageInfo", pageInfo);
     }
 
     @RequestMapping(value = "/room/{id}", method = RequestMethod.GET)
     @ResponseBody
     public Result getRoom(@PathVariable("id") Integer id){
         Room room = roomService.getRoom(id);
-        return Result.success().add("room",room);
+        return Result.success().add("room", room);
     }
 
     @RequestMapping(value = "/room/{id}", method = RequestMethod.POST)
@@ -43,24 +50,25 @@ public class RoomController extends BaseController{
         return Result.success();
     }
 
-    @RequestMapping(value = "/room/{id}",method = RequestMethod.DELETE)
+    @RequestMapping(value = "/room/{id}", method = RequestMethod.DELETE)
     @ResponseBody
     public Result delRoom(@PathVariable("id") Integer id){
         roomService.delRoom(id);
         return Result.success();
 
     }
-    @RequestMapping(value = "/searchRoom",method = RequestMethod.POST)
+    @RequestMapping(value = "/searchRoom", method = RequestMethod.POST)
     @ResponseBody
     public Result searchRoom(@RequestParam("roomNumber") String roomNumber){
         List<Room> list = roomService.searchRoomByRoomNumber(roomNumber);
-        return Result.success().add("list",list);
+        return Result.success().add("list", list);
     }
 
 
     @RequestMapping(value = "/room", method = RequestMethod.POST)
     @ResponseBody
-    public Result addRoom(Room room){
+    public Result addRoom(Room room, MultipartFile file) {
+        upLoadPhoto(file, room);
         roomService.addRoom(room);
         return Result.success();
     }
@@ -75,7 +83,7 @@ public class RoomController extends BaseController{
         }
     }
 
-    @RequestMapping(value = "/emptyRooms",method = RequestMethod.GET)
+    @RequestMapping(value = "/emptyRooms", method = RequestMethod.GET)
     @ResponseBody
     public Result emptyRooms(){
         //todo
@@ -88,7 +96,22 @@ public class RoomController extends BaseController{
     @ResponseBody
     public Result searchByStatus(@RequestParam("status") short status){
         List<Room> list = roomService.getRoomByStatus(status);
-        return Result.success().add("list",list);
+        return Result.success().add("list", list);
     }
 
+    private void upLoadPhoto(MultipartFile file, Room room){
+        if(!file.isEmpty()) {
+            String originalFilename = file.getOriginalFilename();
+            String path = "F:\\Idea Project\\spring-boot\\hotel-web\\src\\main\\resources\\static\\images\\";
+
+            String newFileName = UUID.randomUUID() + originalFilename.substring(originalFilename.lastIndexOf("."));
+            File newFile = new File(path + newFileName);
+            room.setPicture("/images/" + newFileName);
+            try {
+                file.transferTo(newFile);
+            } catch (IllegalStateException | IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 }

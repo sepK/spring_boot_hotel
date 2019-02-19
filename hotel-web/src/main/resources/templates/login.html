@@ -1,5 +1,4 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
@@ -60,11 +59,11 @@
 
 </div>
 <!-- Javascript -->
-<script th:src="@{assets/js/jquery-1.11.1.min.js}"></script>
-<script th:src="@{assets/bootstrap/js/bootstrap.min.js}"></script>
-<script th:src="@{assets/js/jquery.backstretch.min.js}"></script>
-<script th:src="@{assets/js/scripts.js}"></script>
-<script>
+<script type="text/javascript" th:src="@{assets/js/jquery-1.11.1.min.js}"></script>
+<script type="text/javascript" th:src="@{assets/bootstrap/js/bootstrap.min.js}"></script>
+<script type="text/javascript" th:src="@{assets/js/jquery.backstretch.min.js}"></script>
+<script type="text/javascript" th:src="@{assets/js/scripts.js}"></script>
+<script type="text/javascript">
     $("#login_btn").click(function () {
         $.ajax({
             url: "/adminLogin",

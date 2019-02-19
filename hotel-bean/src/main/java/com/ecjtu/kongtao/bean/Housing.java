@@ -6,16 +6,17 @@ import java.util.Date;
  * @author sepK
  */
 public class Housing {
+    /**入住id*/
     private Integer housingId;
-
+    /**房间id*/
     private Integer roomId;
-
+    /**用户id*/
     private Integer userId;
-
+    /**开始时间*/
     private Date startTime;
-
+    /**结束时间*/
     private Date endTime;
-
+    /**支付金额*/
     private Double costMoney;
 
     /**非入库字段 用户*/

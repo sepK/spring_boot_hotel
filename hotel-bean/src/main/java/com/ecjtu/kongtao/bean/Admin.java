@@ -4,10 +4,11 @@ package com.ecjtu.kongtao.bean;
  * @author sepK
  */
 public class Admin {
+    /**管理员id*/
     private Integer adminId;
-
+    /**管理员登录名*/
     private String adminName;
-
+    /**管理员密码*/
     private String password;
 
     public Integer getAdminId() {

@@ -4,16 +4,17 @@ package com.ecjtu.kongtao.bean;
  * @author sepK
  */
 public class User {
+    /**用户id*/
     private Integer userId;
-
+    /**用户名*/
     private String userName;
-
+    /**用户密码*/
     private String password;
-
+    /**性别*/
     private String sex;
-
+    /**电话*/
     private String phone;
-
+    /**邮箱*/
     private String mail;
 
     public Integer getUserId() {

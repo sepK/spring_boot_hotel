@@ -17,20 +17,10 @@ public class UserException extends RuntimeException {
      */
     private long extra;
 
-    /**
-     * Constructs a new runtime exception with {@code null} as its
-     * detail message.  The cause is not initialized, and may subsequently be
-     * initialized by a call to {@link #initCause}.
-     */
     public UserException() {
 
     }
 
-    /**
-     * Constructs a new runtime exception with {@code null} as its
-     * detail message.  The cause is not initialized, and may subsequently be
-     * initialized by a call to {@link #initCause}.
-     */
     public UserException(ErrorCode errorCode) {
         this.errorCode = errorCode;
     }

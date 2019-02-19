@@ -4,18 +4,19 @@ package com.ecjtu.kongtao.bean;
  * @author sepK
  */
 public class Room {
+    /**房间id*/
     private Integer roomId;
-
+    /**房间号*/
     private String roomNumber;
-
+    /**房间类型*/
     private Integer type;
-
+    /**房间价格*/
     private Double price;
-
+    /**房间状态*/
     private Short status;
-
+    /**照片地址*/
     private String picture;
-
+    /**房间简介*/
     private String introduce;
 
     public Integer getRoomId() {

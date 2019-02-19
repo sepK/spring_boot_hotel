@@ -5,7 +5,7 @@ import com.ecjtu.kongtao.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
- * @author t.k
+ * @author sepK
  * @date 2018/12/11 11:42
  */
 public class BaseController {
