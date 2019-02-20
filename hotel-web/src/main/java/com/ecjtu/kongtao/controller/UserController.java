@@ -40,23 +40,23 @@ public class UserController extends BaseController{
 		return Result.success().add("pageInfo", pageInfo);
 	}
 	
-	@RequestMapping(value="/user/{id}",method= RequestMethod.GET)
+	@RequestMapping(value="/user/{userId}",method= RequestMethod.GET)
 	@ResponseBody
-	public Result getUser(@PathVariable("id") Integer id) {
-		User user = userService.getUser(id);
+	public Result getUser(@PathVariable("userId") Integer userId) {
+		User user = userService.getUser(userId);
 		return Result.success().add("user", user);
 	}
 
-	@RequestMapping(value="/user/{id}", method= RequestMethod.DELETE)
+	@RequestMapping(value="/user/{userId}", method= RequestMethod.DELETE)
 	@ResponseBody
-	public Result delUser(@PathVariable("id") Integer id) {
-		userService.delUser(id);
+	public Result delUser(@PathVariable("userId") Integer userId) {
+		userService.delUser(userId);
 		return Result.success();
 	}
 
-	@RequestMapping(value="/user/{id}", method= RequestMethod.POST)
+	@RequestMapping(value="/user/{userId}", method= RequestMethod.POST)
 	@ResponseBody
-	public Result updateUser(@PathVariable("id") Integer id, User user) {
+	public Result updateUser(User user) {
 		userService.updateUser(user);
 		return Result.success();
 	}

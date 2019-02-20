@@ -321,9 +321,9 @@
     });
 
     //回显会员信息
-    function getUser(id) {
+    function getUser(userId) {
         $.ajax({
-            url: "/user/user/" + id,
+            url: "/user/user/" + userId,
             type: "GET",
             success: function (result) {
                 var user = result.extend.user;
@@ -339,10 +339,10 @@
     //删除会员
     $(document).on("click", ".delete_btn", function () {
         var userName = $(this).parents("tr").find("td:eq(1)").text();
-        var id = $(this).attr("del-id");
+        var userId = $(this).attr("del-id");
         if (confirm("确认删除【" + userName + "】吗？")) {
             $.ajax({
-                url: "/user/user/" + id,
+                url: "/user/user/" + userId,
                 type: "DELETE",
                 success: function (result) {
                     alert(result.msg);

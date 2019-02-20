@@ -36,24 +36,25 @@ public class RoomController extends BaseController{
         return Result.success().add("pageInfo", pageInfo);
     }
 
-    @RequestMapping(value = "/room/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/room/{roomId}", method = RequestMethod.GET)
     @ResponseBody
-    public Result getRoom(@PathVariable("id") Integer id){
-        Room room = roomService.getRoom(id);
+    public Result getRoom(@PathVariable("roomId") Integer roomId){
+        Room room = roomService.getRoom(roomId);
         return Result.success().add("room", room);
     }
 
-    @RequestMapping(value = "/room/{id}", method = RequestMethod.POST)
+    @RequestMapping(value = "/room/{roomId}", method = RequestMethod.POST)
     @ResponseBody
-    public Result saveRoom(@PathVariable("id") Integer id, Room room){
+    public Result saveRoom(Room room, MultipartFile file) {
+        upLoadPhoto(file, room);
         roomService.updateRoom(room);
         return Result.success();
     }
 
-    @RequestMapping(value = "/room/{id}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/room/{roomId}", method = RequestMethod.DELETE)
     @ResponseBody
-    public Result delRoom(@PathVariable("id") Integer id){
-        roomService.delRoom(id);
+    public Result delRoom(@PathVariable("roomId") Integer roomId){
+        roomService.delRoom(roomId);
         return Result.success();
 
     }

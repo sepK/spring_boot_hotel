@@ -15,47 +15,47 @@ import java.util.List;
  */
 @Controller
 @RequestMapping("/employee")
-public class EmployeeController extends BaseController{
+public class EmployeeController extends BaseController {
 
     @RequestMapping("/index03")
     public  String toIndex(){
-        return "/admin/index03";
+        return "index03";
     }
 
     @RequestMapping(value = "/employees", method = RequestMethod.GET)
     @ResponseBody
-    public Result getEmployee(@RequestParam("pn") Integer pn){
+    public Result getEmployee(@RequestParam("pn") Integer pn) {
         PageHelper.startPage(pn, ConfigKey.DEFAULT_PAGE_SIZE);
         List<Employee> list = employeeService.getEmps();
         PageInfo<Employee> pageInfo = new PageInfo<>(list, ConfigKey.NAVIGATE_PAGE);
         return  Result.success().add("pageInfo", pageInfo);
     }
 
-    @RequestMapping(value = "/employee/{id}",method = RequestMethod.GET)
+    @RequestMapping(value = "/employee/{empId}", method = RequestMethod.GET)
     @ResponseBody
-    public Result getEmp(@PathVariable("id") Integer id){
-        Employee employee = employeeService.getEmp(id);
+    public Result getEmp(@PathVariable("empId") Integer empId) {
+        Employee employee = employeeService.getEmp(empId);
         return  Result.success().add("emp",employee);
     }
 
-    @RequestMapping(value = "/employee/{id}",method = RequestMethod.PUT)
+    @RequestMapping(value = "/employee/{empId}", method = RequestMethod.PUT)
     @ResponseBody
-    public Result saveEmp(@PathVariable("id") Integer id, Employee employee){
+    public Result saveEmp(Employee employee) {
         employeeService.saveEmp(employee);
         return  Result.success();
     }
 
-    @RequestMapping(value = "/employee",method = RequestMethod.POST)
+    @RequestMapping(value = "/employee", method = RequestMethod.POST)
     @ResponseBody
-    public Result addEmp(Employee employee){
+    public Result addEmp(Employee employee) {
         employeeService.addEmp(employee);
         return  Result.success();
     }
 
-    @RequestMapping(value = "/employee/{id}",method = RequestMethod.DELETE)
+    @RequestMapping(value = "/employee/{empId}", method = RequestMethod.DELETE)
     @ResponseBody
-    public Result delEmp(@PathVariable("id") Integer id){
-        employeeService.delEmp(id);
+    public Result delEmp(@PathVariable("empId") Integer empId) {
+        employeeService.delEmp(empId);
         return  Result.success();
     }
 
@@ -71,7 +71,7 @@ public class EmployeeController extends BaseController{
 
     @RequestMapping(value = "/searchEmps")
     @ResponseBody
-    public Result searchEmps(@RequestParam("empName") String empName){
+    public Result searchEmps(@RequestParam("empName") String empName) {
         List<Employee> list = employeeService.getEmpsByName(empName);
         return  Result.success().add("list",list);
     }
