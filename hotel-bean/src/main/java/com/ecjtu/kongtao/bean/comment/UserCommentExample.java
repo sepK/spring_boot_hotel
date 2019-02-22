@@ -1,4 +1,4 @@
-package com.ecjtu.kongtao.bean;
+package com.ecjtu.kongtao.bean.comment;
 
 import java.util.ArrayList;
 import java.util.Date;

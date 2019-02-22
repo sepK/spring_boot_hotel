@@ -1,7 +1,7 @@
 package com.ecjtu.kongtao.service;
 
 
-import com.ecjtu.kongtao.bean.User;
+import com.ecjtu.kongtao.bean.user.User;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

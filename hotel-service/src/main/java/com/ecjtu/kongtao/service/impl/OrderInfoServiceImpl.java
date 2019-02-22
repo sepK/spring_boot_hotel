@@ -1,6 +1,10 @@
 package com.ecjtu.kongtao.service.impl;
 
-import com.ecjtu.kongtao.bean.*;
+import com.ecjtu.kongtao.bean.housing.Housing;
+import com.ecjtu.kongtao.bean.housing.Indent;
+import com.ecjtu.kongtao.bean.order.OrderInfo;
+import com.ecjtu.kongtao.bean.order.OrderInfoExample;
+import com.ecjtu.kongtao.bean.room.Room;
 import com.ecjtu.kongtao.exception.*;
 import com.ecjtu.kongtao.service.*;
 import com.ecjtu.kongtao.utils.ErrorCode;

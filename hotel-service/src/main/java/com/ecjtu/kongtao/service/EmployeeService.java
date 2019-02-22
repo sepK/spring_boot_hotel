@@ -1,6 +1,6 @@
 package com.ecjtu.kongtao.service;
 
-import com.ecjtu.kongtao.bean.Employee;
+import com.ecjtu.kongtao.bean.employee.Employee;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

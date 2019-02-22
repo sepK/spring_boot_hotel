@@ -1,4 +1,4 @@
-package com.ecjtu.kongtao.bean;
+package com.ecjtu.kongtao.bean.room;
 
 import java.util.ArrayList;
 import java.util.List;

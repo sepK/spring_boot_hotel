@@ -1,7 +1,7 @@
 package com.ecjtu.kongtao.mapper;
 
-import com.ecjtu.kongtao.bean.User;
-import com.ecjtu.kongtao.bean.UserExample;
+import com.ecjtu.kongtao.bean.user.User;
+import com.ecjtu.kongtao.bean.user.UserExample;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 

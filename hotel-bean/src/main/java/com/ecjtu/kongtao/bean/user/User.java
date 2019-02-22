@@ -1,4 +1,4 @@
-package com.ecjtu.kongtao.bean;
+package com.ecjtu.kongtao.bean.user;
 
 /**
  * @author sepK

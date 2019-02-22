@@ -1,7 +1,7 @@
 package com.ecjtu.kongtao.mapper;
 
-import com.ecjtu.kongtao.bean.OrderInfo;
-import com.ecjtu.kongtao.bean.OrderInfoExample;
+import com.ecjtu.kongtao.bean.order.OrderInfo;
+import com.ecjtu.kongtao.bean.order.OrderInfoExample;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 

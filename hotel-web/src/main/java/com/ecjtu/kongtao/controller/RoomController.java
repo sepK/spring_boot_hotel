@@ -1,19 +1,25 @@
 package com.ecjtu.kongtao.controller;
 
-import com.ecjtu.kongtao.bean.Room;
+import com.ecjtu.kongtao.bean.room.Room;
+import com.ecjtu.kongtao.bean.room.RoomType;
+import com.ecjtu.kongtao.manager.SessionManager;
 import com.ecjtu.kongtao.utils.ConfigKey;
 import com.ecjtu.kongtao.utils.Result;
+import com.ecjtu.kongtao.utils.SessionKey;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import sun.security.krb5.Config;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * @author sepK
@@ -29,7 +35,8 @@ public class RoomController extends BaseController{
 
     @RequestMapping(value="/rooms",method = RequestMethod.GET)
     @ResponseBody
-    public Result getRooms(@RequestParam() Integer pn){
+    public Result getRooms(@RequestParam() Integer pn, HttpServletRequest request) {
+        SessionManager.setSession(request);
         PageHelper.startPage(pn, ConfigKey.DEFAULT_PAGE_SIZE);
         List<Room> list = roomService.getRooms();
         PageInfo<Room> pageInfo = new PageInfo<>(list, ConfigKey.NAVIGATE_PAGE);
@@ -45,7 +52,7 @@ public class RoomController extends BaseController{
 
     @RequestMapping(value = "/room/{roomId}", method = RequestMethod.POST)
     @ResponseBody
-    public Result saveRoom(Room room, MultipartFile file) {
+    public Result saveRoom(@PathVariable("roomId") Integer roomId, Room room, MultipartFile file) {
         upLoadPhoto(file, room);
         roomService.updateRoom(room);
         return Result.success();

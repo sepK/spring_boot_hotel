@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50530
 File Encoding         : 65001
 
-Date: 2019-02-20 15:12:18
+Date: 2019-02-22 18:05:46
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -24,7 +24,7 @@ CREATE TABLE `t_admin` (
   `admin_name` varchar(10) NOT NULL COMMENT '管理员登录名',
   `password` varchar(20) NOT NULL COMMENT '密码',
   PRIMARY KEY (`admin_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10000 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for t_employee
@@ -39,7 +39,7 @@ CREATE TABLE `t_employee` (
   `duty` varchar(10) NOT NULL COMMENT '职责',
   PRIMARY KEY (`emp_id`),
   UNIQUE KEY `emp_name` (`emp_name`)
-) ENGINE=InnoDB AUTO_INCREMENT=10001 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for t_housing
@@ -54,7 +54,7 @@ CREATE TABLE `t_housing` (
   `cost_money` double NOT NULL COMMENT '支付',
   PRIMARY KEY (`housing_id`),
   KEY `roomid` (`room_id`,`user_id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=10000 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for t_order_info
@@ -69,7 +69,7 @@ CREATE TABLE `t_order_info` (
   `emp_id` int(10) unsigned DEFAULT NULL COMMENT '操作员工id',
   PRIMARY KEY (`order_id`),
   KEY `order_id` (`order_id`,`room_id`,`user_id`,`order_status`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=10000 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for t_room
@@ -85,7 +85,7 @@ CREATE TABLE `t_room` (
   `introduce` text NOT NULL COMMENT '房间简介',
   PRIMARY KEY (`room_id`),
   KEY `room_number` (`room_number`,`type`,`status`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=10001 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for t_user
@@ -100,7 +100,7 @@ CREATE TABLE `t_user` (
   `mail` varchar(50) NOT NULL COMMENT '邮箱',
   PRIMARY KEY (`user_id`),
   KEY `user_id` (`user_id`,`user_name`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=10000 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for t_user_comment
@@ -116,5 +116,5 @@ CREATE TABLE `t_user_comment` (
   `last_modify_time` timestamp NOT NULL DEFAULT '1978-12-31 16:00:00' ON UPDATE CURRENT_TIMESTAMP COMMENT '上次修改时间',
   PRIMARY KEY (`comment_id`),
   KEY `user_id` (`user_id`,`room_id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=10000 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 SET FOREIGN_KEY_CHECKS=1;

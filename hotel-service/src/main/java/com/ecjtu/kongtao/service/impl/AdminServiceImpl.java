@@ -1,7 +1,7 @@
 package com.ecjtu.kongtao.service.impl;
 
-import com.ecjtu.kongtao.bean.Admin;
-import com.ecjtu.kongtao.bean.AdminExample;
+import com.ecjtu.kongtao.bean.admin.Admin;
+import com.ecjtu.kongtao.bean.admin.AdminExample;
 import com.ecjtu.kongtao.service.AdminService;
 import com.ecjtu.kongtao.service.BaseService;
 import org.springframework.stereotype.Service;

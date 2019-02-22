@@ -1,4 +1,8 @@
-package com.ecjtu.kongtao.bean;
+package com.ecjtu.kongtao.bean.comment;
+
+import com.ecjtu.kongtao.bean.room.Room;
+import com.ecjtu.kongtao.bean.user.User;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.util.Date;
 
@@ -56,7 +60,7 @@ public class UserComment {
     public void setLevel(Integer level) {
         this.level = level;
     }
-
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     public Date getCreateTime() {
         return createTime;
     }

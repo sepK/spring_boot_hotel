@@ -1,4 +1,7 @@
-package com.ecjtu.kongtao.bean;
+package com.ecjtu.kongtao.bean.housing;
+
+import com.ecjtu.kongtao.bean.room.Room;
+import com.ecjtu.kongtao.bean.user.User;
 
 import java.util.Date;
 

@@ -1,7 +1,7 @@
 package com.ecjtu.kongtao.service;
 
 
-import com.ecjtu.kongtao.bean.Room;
+import com.ecjtu.kongtao.bean.room.Room;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,10 +20,10 @@ public interface RoomService {
 
     /**
      * 通过主键id获取房间
-     * @param id 主键id
+     * @param roomId 主键id
      * @return 房间信息
      */
-    Room getRoom(Integer id);
+    Room getRoom(Integer roomId);
 
     /**
      * 更新房间信息

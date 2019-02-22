@@ -1,7 +1,7 @@
 package com.ecjtu.kongtao.service.impl;
 
-import com.ecjtu.kongtao.bean.User;
-import com.ecjtu.kongtao.bean.UserExample;
+import com.ecjtu.kongtao.bean.user.User;
+import com.ecjtu.kongtao.bean.user.UserExample;
 import com.ecjtu.kongtao.service.BaseService;
 import com.ecjtu.kongtao.service.UserService;
 import org.springframework.stereotype.Service;

@@ -1,7 +1,7 @@
 package com.ecjtu.kongtao.controller;
 
-import com.ecjtu.kongtao.bean.Indent;
-import com.ecjtu.kongtao.bean.OrderInfo;
+import com.ecjtu.kongtao.bean.housing.Indent;
+import com.ecjtu.kongtao.bean.order.OrderInfo;
 import com.ecjtu.kongtao.utils.ConfigKey;
 import com.ecjtu.kongtao.utils.Result;
 import com.github.pagehelper.PageHelper;
@@ -20,7 +20,7 @@ public class OrderInfoController extends BaseController{
 
     @RequestMapping("/index04")
     public String toIndex(){
-        return "/admin/index04";
+        return "index04";
     }
 
     @RequestMapping(value = "/orders",method = RequestMethod.GET)

@@ -1,7 +1,7 @@
 package com.ecjtu.kongtao.mapper;
 
-import com.ecjtu.kongtao.bean.UserComment;
-import com.ecjtu.kongtao.bean.UserCommentExample;
+import com.ecjtu.kongtao.bean.comment.UserComment;
+import com.ecjtu.kongtao.bean.comment.UserCommentExample;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 

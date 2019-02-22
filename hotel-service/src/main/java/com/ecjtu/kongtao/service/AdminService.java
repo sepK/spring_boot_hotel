@@ -1,7 +1,7 @@
 package com.ecjtu.kongtao.service;
 
 
-import com.ecjtu.kongtao.bean.Admin;
+import com.ecjtu.kongtao.bean.admin.Admin;
 import org.springframework.stereotype.Service;
 
 /**

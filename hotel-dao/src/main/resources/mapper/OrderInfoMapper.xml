@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ecjtu.kongtao.mapper.OrderInfoMapper">
-  <resultMap id="BaseResultMap" type="com.ecjtu.kongtao.bean.OrderInfo">
+  <resultMap id="BaseResultMap" type="com.ecjtu.kongtao.bean.order.OrderInfo">
     <id column="order_id" jdbcType="INTEGER" property="orderId" />
     <result column="room_id" jdbcType="INTEGER" property="roomId" />
     <result column="user_id" jdbcType="INTEGER" property="userId" />
     <result column="order_status" jdbcType="INTEGER" property="orderStatus" />
     <result column="emp_id" jdbcType="INTEGER" property="empId" />
   </resultMap>
-  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.ecjtu.kongtao.bean.OrderInfo">
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.ecjtu.kongtao.bean.order.OrderInfo">
     <result column="introduce" jdbcType="LONGVARCHAR" property="introduce" />
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -75,7 +75,7 @@
   <sql id="Blob_Column_List">
     introduce
   </sql>
-  <select id="selectByExampleWithBLOBs" parameterType="com.ecjtu.kongtao.bean.OrderInfoExample" resultMap="ResultMapWithBLOBs">
+  <select id="selectByExampleWithBLOBs" parameterType="com.ecjtu.kongtao.bean.order.OrderInfoExample" resultMap="ResultMapWithBLOBs">
     select
     <if test="distinct">
       distinct
@@ -91,7 +91,7 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByExample" parameterType="com.ecjtu.kongtao.bean.OrderInfoExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.ecjtu.kongtao.bean.order.OrderInfoExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -117,13 +117,13 @@
     delete from t_order_info
     where order_id = #{orderId,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.ecjtu.kongtao.bean.OrderInfoExample">
+  <delete id="deleteByExample" parameterType="com.ecjtu.kongtao.bean.order.OrderInfoExample">
     delete from t_order_info
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.ecjtu.kongtao.bean.OrderInfo">
+  <insert id="insert" parameterType="com.ecjtu.kongtao.bean.order.OrderInfo">
     insert into t_order_info (order_id, room_id, user_id, 
       order_status, emp_id, introduce
       )
@@ -131,7 +131,7 @@
       #{orderStatus,jdbcType=INTEGER}, #{empId,jdbcType=INTEGER}, #{introduce,jdbcType=LONGVARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.ecjtu.kongtao.bean.OrderInfo">
+  <insert id="insertSelective" parameterType="com.ecjtu.kongtao.bean.order.OrderInfo">
     insert into t_order_info
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="orderId != null">
@@ -174,7 +174,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.ecjtu.kongtao.bean.OrderInfoExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="com.ecjtu.kongtao.bean.order.OrderInfoExample" resultType="java.lang.Long">
     select count(*) from t_order_info
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -229,7 +229,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.ecjtu.kongtao.bean.OrderInfo">
+  <update id="updateByPrimaryKeySelective" parameterType="com.ecjtu.kongtao.bean.order.OrderInfo">
     update t_order_info
     <set>
       <if test="roomId != null">
@@ -250,7 +250,7 @@
     </set>
     where order_id = #{orderId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.ecjtu.kongtao.bean.OrderInfo">
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.ecjtu.kongtao.bean.order.OrderInfo">
     update t_order_info
     set room_id = #{roomId,jdbcType=INTEGER},
       user_id = #{userId,jdbcType=INTEGER},
@@ -259,7 +259,7 @@
       introduce = #{introduce,jdbcType=LONGVARCHAR}
     where order_id = #{orderId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.ecjtu.kongtao.bean.OrderInfo">
+  <update id="updateByPrimaryKey" parameterType="com.ecjtu.kongtao.bean.order.OrderInfo">
     update t_order_info
     set room_id = #{roomId,jdbcType=INTEGER},
       user_id = #{userId,jdbcType=INTEGER},

@@ -1,9 +1,10 @@
 package com.ecjtu.kongtao.service.impl;
 
-import com.ecjtu.kongtao.bean.User;
-import com.ecjtu.kongtao.bean.UserComment;
-import com.ecjtu.kongtao.bean.UserCommentExample;
-import com.ecjtu.kongtao.bean.UserExample;
+import com.ecjtu.kongtao.bean.comment.UserComment;
+import com.ecjtu.kongtao.bean.comment.UserCommentExample;
+import com.ecjtu.kongtao.bean.room.Room;
+import com.ecjtu.kongtao.bean.user.User;
+import com.ecjtu.kongtao.bean.user.UserExample;
 import com.ecjtu.kongtao.exception.UserException;
 import com.ecjtu.kongtao.service.BaseService;
 import com.ecjtu.kongtao.service.CommentService;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
 import javax.annotation.Resource;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -29,17 +31,22 @@ public class CommentServiceImpl extends BaseService implements CommentService {
 
     @Override
     public List<UserComment> getAllComments() {
-        return userCommentMapper.selectByExampleWithBLOBs(null);
+        List<UserComment> userComments = userCommentMapper.selectByExampleWithBLOBs(null);
+        userComments.forEach(userComment -> {
+            userComment.setUser(userService.getUser(userComment.getUserId()));
+            userComment.setRoom(roomService.getRoom(userComment.getRoomId()));
+        });
+        return userComments;
     }
 
     @Override
-    public UserComment getCommentById(String id) {
-        return userCommentMapper.selectByPrimaryKey(Integer.valueOf(id));
+    public UserComment getCommentById(Integer roomId) {
+        return userCommentMapper.selectByPrimaryKey(roomId);
     }
 
     @Override
-    public void delUserCommentById(String id) {
-        userCommentMapper.deleteByPrimaryKey(Integer.valueOf(id));
+    public void delUserCommentById(Integer roomId) {
+        userCommentMapper.deleteByPrimaryKey(roomId);
     }
 
     @Override
@@ -48,14 +55,17 @@ public class CommentServiceImpl extends BaseService implements CommentService {
     }
 
     @Override
-    public Result addUserComment(UserComment comment) {
-        String msg;
-        if (roomService.checkRoomNumber(comment.getRoom().getRoomNumber())) {
+    public Result addUserComment(UserComment comment, Room room, User user) {
+        if (roomService.checkRoomNumber(room.getRoomNumber())) {
            throw new UserException(ErrorCode.ERROR_HOUSE_NOT_EXIST);
         } else {
-            if (userService.checkUserById(comment.getUserId())) {
+            if (userService.checkUserById(user.getUserId())) {
               throw new UserException(ErrorCode.ERROR_USER_NOT_EXIST);
             } else {
+                comment.setRoomId(room.getRoomId());
+                comment.setUserId(user.getUserId());
+                comment.setCreateTime(new Date());
+                comment.setLastModifyTime(new Date());
                 userCommentMapper.insert(comment);
                 return Result.success();
             }

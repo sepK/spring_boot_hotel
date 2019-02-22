@@ -1,4 +1,4 @@
-package com.ecjtu.kongtao.bean;
+package com.ecjtu.kongtao.bean.employee;
 
 import java.util.ArrayList;
 import java.util.List;

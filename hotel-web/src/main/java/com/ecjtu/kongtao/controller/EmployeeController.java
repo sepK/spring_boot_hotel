@@ -1,6 +1,6 @@
 package com.ecjtu.kongtao.controller;
 
-import com.ecjtu.kongtao.bean.Employee;
+import com.ecjtu.kongtao.bean.employee.Employee;
 import com.ecjtu.kongtao.utils.ConfigKey;
 import com.ecjtu.kongtao.utils.Result;
 import com.github.pagehelper.PageHelper;

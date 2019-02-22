@@ -1,7 +1,7 @@
 package com.ecjtu.kongtao.mapper;
 
-import com.ecjtu.kongtao.bean.Housing;
-import com.ecjtu.kongtao.bean.HousingExample;
+import com.ecjtu.kongtao.bean.housing.Housing;
+import com.ecjtu.kongtao.bean.housing.HousingExample;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 

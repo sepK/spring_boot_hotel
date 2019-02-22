@@ -1,4 +1,6 @@
-package com.ecjtu.kongtao.bean;
+package com.ecjtu.kongtao.bean.housing;
+
+import com.ecjtu.kongtao.bean.order.OrderInfo;
 
 import java.io.Serializable;
 

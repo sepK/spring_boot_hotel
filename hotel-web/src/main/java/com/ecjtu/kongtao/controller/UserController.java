@@ -1,6 +1,6 @@
 package com.ecjtu.kongtao.controller;
 
-import com.ecjtu.kongtao.bean.User;
+import com.ecjtu.kongtao.bean.user.User;
 import com.ecjtu.kongtao.utils.ConfigKey;
 import com.ecjtu.kongtao.utils.ErrorCode;
 import com.ecjtu.kongtao.utils.GraphicHelper;
@@ -10,7 +10,6 @@ import com.github.pagehelper.PageInfo;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import sun.security.krb5.Config;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

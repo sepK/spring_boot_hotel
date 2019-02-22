@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ecjtu.kongtao.mapper.UserMapper">
-  <resultMap id="BaseResultMap" type="com.ecjtu.kongtao.bean.User">
+  <resultMap id="BaseResultMap" type="com.ecjtu.kongtao.bean.user.User">
     <id column="user_id" jdbcType="INTEGER" property="userId" />
     <result column="user_name" jdbcType="VARCHAR" property="userName" />
     <result column="password" jdbcType="VARCHAR" property="password" />
@@ -70,7 +70,7 @@
   <sql id="Base_Column_List">
     user_id, user_name, password, sex, phone, mail
   </sql>
-  <select id="selectByExample" parameterType="com.ecjtu.kongtao.bean.UserExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.ecjtu.kongtao.bean.user.UserExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -94,19 +94,19 @@
     delete from t_user
     where user_id = #{userId,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.ecjtu.kongtao.bean.UserExample">
+  <delete id="deleteByExample" parameterType="com.ecjtu.kongtao.bean.user.UserExample">
     delete from t_user
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.ecjtu.kongtao.bean.User">
+  <insert id="insert" parameterType="com.ecjtu.kongtao.bean.user.User">
     insert into t_user (user_id, user_name, password, 
       sex, phone, mail)
     values (#{userId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
       #{sex,jdbcType=CHAR}, #{phone,jdbcType=VARCHAR}, #{mail,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.ecjtu.kongtao.bean.User">
+  <insert id="insertSelective" parameterType="com.ecjtu.kongtao.bean.user.User">
     insert into t_user
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="userId != null">
@@ -149,7 +149,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.ecjtu.kongtao.bean.UserExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="com.ecjtu.kongtao.bean.user.UserExample" resultType="java.lang.Long">
     select count(*) from t_user
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -193,7 +193,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.ecjtu.kongtao.bean.User">
+  <update id="updateByPrimaryKeySelective" parameterType="com.ecjtu.kongtao.bean.user.User">
     update t_user
     <set>
       <if test="userName != null">
@@ -214,7 +214,7 @@
     </set>
     where user_id = #{userId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.ecjtu.kongtao.bean.User">
+  <update id="updateByPrimaryKey" parameterType="com.ecjtu.kongtao.bean.user.User">
     update t_user
     set user_name = #{userName,jdbcType=VARCHAR},
       password = #{password,jdbcType=VARCHAR},

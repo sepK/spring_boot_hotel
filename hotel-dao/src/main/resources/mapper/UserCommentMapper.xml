@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ecjtu.kongtao.mapper.UserCommentMapper">
-  <resultMap id="BaseResultMap" type="com.ecjtu.kongtao.bean.UserComment">
+  <resultMap id="BaseResultMap" type="com.ecjtu.kongtao.bean.comment.UserComment">
     <id column="comment_id" jdbcType="INTEGER" property="commentId" />
     <result column="user_id" jdbcType="INTEGER" property="userId" />
     <result column="room_id" jdbcType="INTEGER" property="roomId" />
@@ -9,7 +9,7 @@
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="last_modify_time" jdbcType="TIMESTAMP" property="lastModifyTime" />
   </resultMap>
-  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.ecjtu.kongtao.bean.UserComment">
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.ecjtu.kongtao.bean.comment.UserComment">
     <result column="comment" jdbcType="LONGVARCHAR" property="comment" />
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -76,7 +76,7 @@
   <sql id="Blob_Column_List">
     comment
   </sql>
-  <select id="selectByExampleWithBLOBs" parameterType="com.ecjtu.kongtao.bean.UserCommentExample" resultMap="ResultMapWithBLOBs">
+  <select id="selectByExampleWithBLOBs" parameterType="com.ecjtu.kongtao.bean.comment.UserCommentExample" resultMap="ResultMapWithBLOBs">
     select
     <if test="distinct">
       distinct
@@ -92,7 +92,7 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByExample" parameterType="com.ecjtu.kongtao.bean.UserCommentExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.ecjtu.kongtao.bean.comment.UserCommentExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -118,13 +118,13 @@
     delete from t_user_comment
     where comment_id = #{commentId,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.ecjtu.kongtao.bean.UserCommentExample">
+  <delete id="deleteByExample" parameterType="com.ecjtu.kongtao.bean.comment.UserCommentExample">
     delete from t_user_comment
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.ecjtu.kongtao.bean.UserComment">
+  <insert id="insert" parameterType="com.ecjtu.kongtao.bean.comment.UserComment">
     insert into t_user_comment (comment_id, user_id, room_id,
       level, create_time, last_modify_time, 
       comment)
@@ -132,7 +132,7 @@
       #{level,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{lastModifyTime,jdbcType=TIMESTAMP}, 
       #{comment,jdbcType=LONGVARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.ecjtu.kongtao.bean.UserComment">
+  <insert id="insertSelective" parameterType="com.ecjtu.kongtao.bean.comment.UserComment">
     insert into t_user_comment
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="commentId != null">
@@ -181,7 +181,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.ecjtu.kongtao.bean.UserCommentExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="com.ecjtu.kongtao.bean.comment.UserCommentExample" resultType="java.lang.Long">
     select count(*) from t_user_comment
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -241,7 +241,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.ecjtu.kongtao.bean.UserComment">
+  <update id="updateByPrimaryKeySelective" parameterType="com.ecjtu.kongtao.bean.comment.UserComment">
     update t_user_comment
     <set>
       <if test="userId != null">
@@ -265,7 +265,7 @@
     </set>
     where comment_id = #{commentId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.ecjtu.kongtao.bean.UserComment">
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.ecjtu.kongtao.bean.comment.UserComment">
     update t_user_comment
     set user_id = #{userId,jdbcType=INTEGER},
       room_id = #{roomId,jdbcType=INTEGER},
@@ -275,7 +275,7 @@
       comment = #{comment,jdbcType=LONGVARCHAR}
     where comment_id = #{commentId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.ecjtu.kongtao.bean.UserComment">
+  <update id="updateByPrimaryKey" parameterType="com.ecjtu.kongtao.bean.comment.UserComment">
     update t_user_comment
     set user_id = #{userId,jdbcType=INTEGER},
       room_id = #{roomId,jdbcType=INTEGER},

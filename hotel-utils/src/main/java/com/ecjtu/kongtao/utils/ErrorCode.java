@@ -23,6 +23,8 @@ public enum ErrorCode {
     ERROR_EMPLOYEE_NOT_EXIST(5, "请选择在职的员工"),
     /**用户名或者密码错误*/
     ERROR_PARAM_LOGIN(6, "请输入正确的用户名或密码"),
+    /**房间不存在*/
+    ERROR_ROOM_NOT_EXIST(7, "请选择合适的房间")
     ;
 
     /**错误码*/

@@ -1,8 +1,8 @@
 package com.ecjtu.kongtao.service;
 
 
-import com.ecjtu.kongtao.bean.Indent;
-import com.ecjtu.kongtao.bean.OrderInfo;
+import com.ecjtu.kongtao.bean.housing.Indent;
+import com.ecjtu.kongtao.bean.order.OrderInfo;
 import com.ecjtu.kongtao.utils.Result;
 import org.springframework.stereotype.Service;
 

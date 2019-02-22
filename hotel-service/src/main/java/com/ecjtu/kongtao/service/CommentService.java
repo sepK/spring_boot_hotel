@@ -1,7 +1,9 @@
 package com.ecjtu.kongtao.service;
 
 
-import com.ecjtu.kongtao.bean.UserComment;
+import com.ecjtu.kongtao.bean.room.Room;
+import com.ecjtu.kongtao.bean.user.User;
+import com.ecjtu.kongtao.bean.comment.UserComment;
 import com.ecjtu.kongtao.utils.Result;
 import org.springframework.stereotype.Service;
 
@@ -24,13 +26,13 @@ public interface CommentService {
      * @param id 主键
      * @return 评论
      */
-    UserComment getCommentById(String id);
+    UserComment getCommentById(Integer id);
 
     /**
      * 通过主键删除评论
      * @param id 主键
      */
-    void delUserCommentById(String id);
+    void delUserCommentById(Integer id);
 
     /**
      * 保存评论
@@ -41,9 +43,10 @@ public interface CommentService {
     /**
      * 添加评论
      * @param comment bean
-     * @return Result
+     * @param roomNumber
+     * @param userName @return Result
      */
-    Result addUserComment(UserComment comment);
+    Result addUserComment(UserComment comment, Room roomNumber, User userName);
 
     /**
      * 搜索评论 根据用户名称

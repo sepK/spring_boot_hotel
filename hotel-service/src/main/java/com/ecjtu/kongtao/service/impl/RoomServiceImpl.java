@@ -1,9 +1,9 @@
 package com.ecjtu.kongtao.service.impl;
 
 
-import com.ecjtu.kongtao.bean.Room;
-import com.ecjtu.kongtao.bean.RoomExample;
-import com.ecjtu.kongtao.bean.RoomExample.Criteria;
+import com.ecjtu.kongtao.bean.room.Room;
+import com.ecjtu.kongtao.bean.room.RoomExample;
+import com.ecjtu.kongtao.bean.room.RoomExample.Criteria;
 import com.ecjtu.kongtao.mapper.RoomMapper;
 import com.ecjtu.kongtao.service.RoomService;
 import org.springframework.stereotype.Service;
@@ -27,8 +27,8 @@ public class RoomServiceImpl implements RoomService {
     }
 
     @Override
-    public Room getRoom(Integer id) {
-        return roomMapper.selectByPrimaryKey(id);
+    public Room getRoom(Integer roomId) {
+        return roomMapper.selectByPrimaryKey(roomId);
     }
 
     @Override
