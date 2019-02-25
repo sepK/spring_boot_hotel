@@ -24,7 +24,9 @@ public enum ErrorCode {
     /**用户名或者密码错误*/
     ERROR_PARAM_LOGIN(6, "请输入正确的用户名或密码"),
     /**房间不存在*/
-    ERROR_ROOM_NOT_EXIST(7, "请选择合适的房间")
+    ERROR_ROOM_NOT_EXIST(7, "请选择合适的房间"),
+    /**时间范围不正确*/
+    ERROR_TIME_RANGE_ERROR(8, "请输入正确的时间"),
     ;
 
     /**错误码*/

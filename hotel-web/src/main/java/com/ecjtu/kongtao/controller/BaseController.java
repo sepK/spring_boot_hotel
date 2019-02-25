@@ -29,6 +29,8 @@ public class BaseController {
     protected OrderInfoService orderInfoService;
     @Autowired
     protected RoomService roomService;
+    @Autowired
+    protected HousingService housingService;
 
     @ExceptionHandler
     @ResponseBody

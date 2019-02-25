@@ -32,7 +32,7 @@ public class AdminController extends BaseController{
     public Result checkAdminInfo(Admin admin, HttpServletRequest httpServletRequest){
         if(adminService.checkInfo(admin)) {
             httpServletRequest.getSession().setAttribute(SessionKey.USER, admin);
-            httpServletRequest.getSession().setMaxInactiveInterval(60 * 5);
+            //httpServletRequest.getSession().setMaxInactiveInterval(60 * 5);
             return Result.success();
         }
         return Result.fail();

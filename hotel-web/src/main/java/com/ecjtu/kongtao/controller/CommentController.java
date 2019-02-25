@@ -44,25 +44,25 @@ public class CommentController extends BaseController{
         return Result.success().add("pageInfo", pageInfo);
     }
 
-    @RequestMapping(value = "/comment/{roomId}", method = RequestMethod.GET)
+    @RequestMapping(value = "/comment/{commentId}", method = RequestMethod.GET)
     @ResponseBody
-    public Result getUserComment(@PathVariable("roomId") Integer roomId){
-        UserComment comment = commentService.getCommentById(roomId);
+    public Result getUserComment(@PathVariable("commentId") Integer commentId){
+        UserComment comment = commentService.getCommentById(commentId);
         comment.setUser(userService.getUser(comment.getUserId()));
         comment.setRoom(roomService.getRoom(comment.getRoomId()));
         return Result.success().add("comment", comment);
     }
 
-    @RequestMapping(value = "/comment/{roomId}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/comment/{commentId}", method = RequestMethod.DELETE)
     @ResponseBody
-    public Result delUserComment(@PathVariable("roomId") Integer roomId) {
-        commentService.delUserCommentById(roomId);
+    public Result delUserComment(@PathVariable("commentId") Integer commentId) {
+        commentService.delUserCommentById(commentId);
         return Result.success();
     }
 
-    @RequestMapping(value = "/comment/{roomId}", method = RequestMethod.PUT)
+    @RequestMapping(value = "/comment/{commentId}", method = RequestMethod.PUT)
     @ResponseBody
-    public Result saveUserComment(@PathVariable("roomId") Integer roomId, UserComment comment) {
+    public Result saveUserComment(@PathVariable("commentId") Integer commentId, UserComment comment) {
         commentService.saveUserComment(comment);
         return Result.success();
     }

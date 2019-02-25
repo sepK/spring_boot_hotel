@@ -40,13 +40,13 @@ public class CommentServiceImpl extends BaseService implements CommentService {
     }
 
     @Override
-    public UserComment getCommentById(Integer roomId) {
-        return userCommentMapper.selectByPrimaryKey(roomId);
+    public UserComment getCommentById(Integer commentId) {
+        return userCommentMapper.selectByPrimaryKey(commentId);
     }
 
     @Override
-    public void delUserCommentById(Integer roomId) {
-        userCommentMapper.deleteByPrimaryKey(roomId);
+    public void delUserCommentById(Integer commentId) {
+        userCommentMapper.deleteByPrimaryKey(commentId);
     }
 
     @Override
