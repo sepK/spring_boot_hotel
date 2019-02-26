@@ -1,6 +1,7 @@
 package com.ecjtu.kongtao.controller;
 
 import com.ecjtu.kongtao.bean.employee.Employee;
+import com.ecjtu.kongtao.manager.SessionManager;
 import com.ecjtu.kongtao.utils.ConfigKey;
 import com.ecjtu.kongtao.utils.Result;
 import com.github.pagehelper.PageHelper;
@@ -8,6 +9,7 @@ import com.github.pagehelper.PageInfo;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -24,7 +26,8 @@ public class EmployeeController extends BaseController {
 
     @RequestMapping(value = "/employees", method = RequestMethod.GET)
     @ResponseBody
-    public Result getEmployee(@RequestParam("pn") Integer pn) {
+    public Result getEmployee(@RequestParam("pn") Integer pn, HttpServletRequest request) {
+        SessionManager.setSession(request);
         PageHelper.startPage(pn, ConfigKey.DEFAULT_PAGE_SIZE);
         List<Employee> list = employeeService.getEmps();
         PageInfo<Employee> pageInfo = new PageInfo<>(list, ConfigKey.NAVIGATE_PAGE);

@@ -1,5 +1,6 @@
 package com.ecjtu.kongtao.manager;
 
+import com.ecjtu.kongtao.bean.employee.EmployeeType;
 import com.ecjtu.kongtao.bean.room.RoomStatus;
 import com.ecjtu.kongtao.bean.room.RoomType;
 import com.ecjtu.kongtao.utils.SessionKey;
@@ -28,6 +29,10 @@ public class SessionManager {
         if (session.getAttribute(SessionKey.ROOM_STATUS) == null) {
             List<RoomStatus> roomStatuses = Stream.of(RoomStatus.values()).collect(Collectors.toList());
             session.setAttribute(SessionKey.ROOM_STATUS, roomStatuses);
+        }
+        if (session.getAttribute(SessionKey.EMPLOYEE_TYPE) == null) {
+            List<EmployeeType> employeeTypes = Stream.of(EmployeeType.values()).collect(Collectors.toList());
+            session.setAttribute(SessionKey.EMPLOYEE_TYPE, employeeTypes);
         }
     }
 }

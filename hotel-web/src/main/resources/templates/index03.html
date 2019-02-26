@@ -60,8 +60,13 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label">职务</label>
                         <div class="col-sm-10">
-                            <input type="text" name="duty" class="form-control" id="duty_update_input">
-                            <span class="help-block"></span>
+                            <select class="form-control" name="duty" id = "duty_update_input">
+                                <span th:each = "emplyoeeType : ${session.EMPLOYEE_TYPE}">
+                                    <option th:value = "${emplyoeeType.getType()}"  th:text = "${emplyoeeType.getDesc()}"></option>
+                                </span>
+                            </select>
+                            <!--<input type="text" name="duty" class="form-control" id="duty_update_input">
+                            <span class="help-block"></span>-->
                         </div>
                     </div>
                 </form>
@@ -119,8 +124,13 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label">职务</label>
                         <div class="col-sm-10">
-                            <input type="text" name="duty" class="form-control" id="duty_add_input">
-                            <span class="help-block"></span>
+                            <select class="form-control" name="duty" id = "duty_add_input">
+                                <span th:each = "emplyoeeType : ${session.EMPLOYEE_TYPE}">
+                                    <option th:value = "${emplyoeeType.getType()}"  th:text = "${emplyoeeType.getDesc()}"></option>
+                                </span>
+                            </select>
+                            <!--<input type="text" name="duty" class="form-control" id="duty_add_input">
+                            <span class="help-block"></span>-->
                         </div>
                     </div>
                 </form>
@@ -342,7 +352,7 @@
                 }
                 $("#age_update_input").val(emp.age);
                 $("#phone_update_input").val(emp.phone);
-                $("#duty_update_input").val(emp.duty);
+                $("#duty_update_input select").val(emp.duty);
             }
         });
     }
