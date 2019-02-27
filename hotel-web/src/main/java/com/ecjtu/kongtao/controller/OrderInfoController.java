@@ -32,15 +32,15 @@ public class OrderInfoController extends BaseController{
         return Result.success().add("pageInfo", pageInfo);
     }
 
-    @RequestMapping(value = "/order/{id}",method = RequestMethod.GET)
+    @RequestMapping(value = "/order/{orderId}",method = RequestMethod.GET)
     @ResponseBody
-    public Result getOrder(@PathVariable("id") Integer id){
-        OrderInfo orderInfo = orderInfoService.getOrder(id);
+    public Result getOrder(@PathVariable("orderId") Integer orderId){
+        OrderInfo orderInfo = orderInfoService.getOrder(orderId);
         return Result.success().add("orderInfo", orderInfo);
     }
-    @RequestMapping(value = "/order/{id}", method = RequestMethod.PUT)
+    @RequestMapping(value = "/order/{orderId}", method = RequestMethod.PUT)
     @ResponseBody
-    public Result updateOrder(OrderInfo orderInfo){
+    public Result updateOrder(@PathVariable("orderId") Integer orderId, OrderInfo orderInfo){
         orderInfoService.updateOrder(orderInfo);
         return Result.success();
 
@@ -52,34 +52,34 @@ public class OrderInfoController extends BaseController{
         return Result.success();
 
     }
-    @RequestMapping(value = "/searchOrders",method = RequestMethod.GET)
+    @RequestMapping(value = "/searchOrders", method = RequestMethod.GET)
     @ResponseBody
-    public Result searchOrders(@RequestParam("roomid") Integer roomid){
-        List<OrderInfo> list = orderInfoService.getOrdersByRoomId(roomid);
+    public Result searchOrders(@RequestParam("roomId") Integer roomId){
+        List<OrderInfo> list = orderInfoService.getOrdersByRoomId(roomId);
         return Result.success().add("list",list);
     }
 
-    @RequestMapping(value = "/order/{id}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/order/{orderId}", method = RequestMethod.DELETE)
     @ResponseBody
-    public Result delOrder(@PathVariable("id") Integer id){
-        if(orderInfoService.delOrder(id)){
+    public Result delOrder(@PathVariable("orderId") Integer orderId){
+        if(orderInfoService.delOrder(orderId)){
             return Result.success();
         }else{
             return Result.fail();
         }
     }
 
-    @RequestMapping(value = "/addIndent/{id}",method = RequestMethod.POST)
+    @RequestMapping(value = "/addIndent/{roomId}",method = RequestMethod.POST)
     @ResponseBody
-    public Result addIndent(@PathVariable("id") Integer roomId, Indent indent){
+    public Result addIndent(@PathVariable("roomId") Integer roomId, Indent indent){
         return orderInfoService.addIndent(roomId, indent);
     }
 
     @RequestMapping(value = "/getIndents",method = RequestMethod.GET)
     @ResponseBody
-    public Result getIndents(@RequestParam("cusname") String cusname){
-        List<Indent> indents = orderInfoService.getIndents(cusname);
-        return Result.success().add("indents",indents);
+    public Result getIndents(@RequestParam("userName") String userName){
+        List<Indent> indents = orderInfoService.getIndents(userName);
+        return Result.success().add("indents", indents);
     }
 
     @RequestMapping(value = "/updateIndent",method = RequestMethod.POST)

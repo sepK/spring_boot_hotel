@@ -55,7 +55,7 @@ public class UserController extends BaseController{
 
 	@RequestMapping(value="/user/{userId}", method= RequestMethod.POST)
 	@ResponseBody
-	public Result updateUser(User user) {
+	public Result updateUser(@PathVariable("userId") Integer userId, User user) {
 		userService.updateUser(user);
 		return Result.success();
 	}
@@ -86,7 +86,7 @@ public class UserController extends BaseController{
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
     @ResponseBody
-    public Result login(User user, Model model){
+    public Result login(User user){
         if(userService.login(user)){
             return Result.success().add("user",user);
         }else{

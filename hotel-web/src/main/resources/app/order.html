@@ -68,7 +68,7 @@
         $(".header").load("/app/header.html");
         $(".footer").load("/app/footer.html");
         $(".header_menu").load("/app/menu.html");
-        if(JSON.parse(sessionStorage.getItem("user")) == null){
+        if(JSON.parse(sessionStorage.getItem("user")) === null){
             $("#build_rooms_div").html("<h1>请先登录......</h1>");
         }else {
             $.ajax({
