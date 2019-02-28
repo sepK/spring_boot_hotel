@@ -21,6 +21,7 @@ public class LoginFilter implements Filter {
             "/assets",
             "/adminLogin",
             "/static",
+            "/app",
     };
     @Override
     public void destroy() {
