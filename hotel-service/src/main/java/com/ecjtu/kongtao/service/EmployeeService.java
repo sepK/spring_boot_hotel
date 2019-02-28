@@ -43,8 +43,17 @@ public interface EmployeeService {
      */
     void delEmp(Integer id);
 
-
+    /**
+     * 检查员工名称是否存在
+     * @param empName
+     * @return
+     */
     boolean checkEmpName(String empName);
 
+    /**
+     * 通过员工姓名查找员工信息
+     * @param empName
+     * @return
+     */
     List<Employee> getEmpsByName(String empName);
 }

@@ -70,21 +70,4 @@ public class RoomServiceImpl implements RoomService {
         return roomMapper.selectByExampleWithBLOBs(example);
     }
 
-
-    @Deprecated
-    @Transactional(rollbackFor = Exception.class)
-    public List<Room> getEmptyRooms() {
-        /*RoomExample roomExample = new RoomExample();
-        Criteria criteria = roomExample.createCriteria();
-        criteria.andStatusEqualTo(Short.valueOf("0"));
-        List<Picture> pictures = new ArrayList<>();
-        List<Room> rooms = roomMapper.selectByExampleWithBLOBs(roomExample);
-        for (Room room:rooms) {
-            List<Photo> photos = photoService.searchPhotos(room.getId());
-            Picture picture = new Picture(room,photos);
-            pictures.add(picture);
-        }
-        return pictures;*/
-        return null;
-    }
 }

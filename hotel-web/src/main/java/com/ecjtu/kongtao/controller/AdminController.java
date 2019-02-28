@@ -2,6 +2,7 @@ package com.ecjtu.kongtao.controller;
 
 import com.ecjtu.kongtao.bean.admin.Admin;
 import com.ecjtu.kongtao.manager.SessionManager;
+import com.ecjtu.kongtao.utils.ErrorCode;
 import com.ecjtu.kongtao.utils.Result;
 import com.ecjtu.kongtao.utils.SessionKey;
 import com.sun.org.apache.regexp.internal.RE;
@@ -35,7 +36,7 @@ public class AdminController extends BaseController{
             //httpServletRequest.getSession().setMaxInactiveInterval(60 * 5);
             return Result.success();
         }
-        return Result.fail();
+        return Result.fail(ErrorCode.ERROR_PARAM_LOGIN);
     }
 
 }

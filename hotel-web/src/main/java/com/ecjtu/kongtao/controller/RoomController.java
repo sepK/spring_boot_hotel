@@ -1,6 +1,7 @@
 package com.ecjtu.kongtao.controller;
 
 import com.ecjtu.kongtao.bean.room.Room;
+import com.ecjtu.kongtao.bean.room.RoomStatus;
 import com.ecjtu.kongtao.bean.room.RoomType;
 import com.ecjtu.kongtao.manager.SessionManager;
 import com.ecjtu.kongtao.utils.ConfigKey;
@@ -94,8 +95,7 @@ public class RoomController extends BaseController{
     @RequestMapping(value = "/emptyRooms", method = RequestMethod.GET)
     @ResponseBody
     public Result emptyRooms(){
-        //todo
-        List<Room> rooms = null;
+        List<Room> rooms = roomService.getRoomByStatus((short) RoomStatus.IDLE.getStatus());
         return Result.success().add("rooms", rooms);
     }
 

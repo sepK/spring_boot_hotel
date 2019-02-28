@@ -93,23 +93,22 @@ public class OrderInfoServiceImpl extends BaseService implements OrderInfoServic
         addOrder(orderInfo);
         return Result.success();
     }
-    public List<OrderInfo> getOrdersByCusname(String userName){
+
+    private List<OrderInfo> getOrdersByUserName(String userName){
         OrderInfoExample example = new OrderInfoExample();
         OrderInfoExample.Criteria criteria = example.createCriteria();
-        //criteria.andUserIdEqualTo(userName);
+
         return orderInfoMapper.selectByExampleWithBLOBs(example);
     }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public List<Indent> getIndents(String cusname) {
-        List<Indent> indents = new ArrayList<Indent>();
-        List<OrderInfo> orderInfos = getOrdersByCusname(cusname);
-        for (OrderInfo orderInfo:orderInfos) {
+    public List<Indent> getIndents(String userName) {
+        List<Indent> indents = new ArrayList<>();
+        List<OrderInfo> orderInfos = getOrdersByUserName(userName);
+        for (OrderInfo orderInfo : orderInfos) {
             Indent indent = new Indent();
             indent.setOrderInfo(orderInfo);
-           // indent.setPicture(photoService.searchPhotos(orderInfo.getRoomid()).get(0).getPicture());
-            //indent.setIntake(intakeService.getIntakeByCusNameAndRoomId(orderInfo.getRoomid(),orderInfo.getCusname()));
             indents.add(indent);
         }
         return indents;

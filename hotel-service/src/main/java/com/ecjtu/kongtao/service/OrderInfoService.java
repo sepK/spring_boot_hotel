@@ -39,13 +39,39 @@ public interface OrderInfoService {
      */
     void addOrder(OrderInfo orderInfo);
 
+    /**
+     *  通过roomId获取订单信息
+     * @param roomId
+     * @return
+     */
     List<OrderInfo> getOrdersByRoomId(Integer roomId);
 
+    /**
+     *  删除订单信息
+     * @param id
+     * @return
+     */
     boolean delOrder(Integer id);
 
+    /**
+     * 添加入住信息
+     * @param roomId
+     * @param indent
+     * @return
+     */
     Result addIndent(Integer roomId, Indent indent);
 
-    List<Indent> getIndents(String cusname);
+    /**
+     *  获取入住信息
+     * @param userName 用户名
+     * @return
+     */
+    List<Indent> getIndents(String userName);
 
+    /**
+     * 更新入住信息
+     * @param orderInfo
+     * @return
+     */
     Result updateIndent(OrderInfo orderInfo);
 }
