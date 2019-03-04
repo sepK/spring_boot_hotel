@@ -22,6 +22,10 @@ public class LoginFilter implements Filter {
             "/adminLogin",
             "/static",
             "/app",
+            "/js",
+            "/css",
+            "/images",
+            "/user/verifyCode",
     };
     @Override
     public void destroy() {

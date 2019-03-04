@@ -1,29 +1,11 @@
 ﻿<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 <head>
     <meta charset="utf-8">
     <!-- TITLE -->
     <title>迎宾大酒店</title>
-    <link rel="shortcut icon" th:href="@{/favicon.ico}" />
-    <!--<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="format-detection" content="telephone=no">
-    <meta name="apple-mobile-web-app-capable" content="yes">-->
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- GOOGLE FONT
-    <link href='http://fonts.googleapis.com/css?family=Hind:400,300,500,600%7cMontserrat:400,700'rel='stylesheet' type='text/css'>
-    -->
-    <!-- CSS LIBRARY -->
-    <link rel="stylesheet" type="text/css" th:href="@{/css/lib/font-awesome.min.css}">
-    <link rel="stylesheet" type="text/css" th:href="@{/css/lib/font-lotusicon.css}">
-    <link rel="stylesheet" type="text/css" th:href="@{/css/lib/bootstrap.min.css}">
-    <link rel="stylesheet" type="text/css" th:href="@{/css/lib/owl.carousel.css}">
-    <link rel="stylesheet" type="text/css" th:href="@{/css/lib/jquery-ui.min.css}">
-    <link rel="stylesheet" type="text/css" th:href="@{/css/lib/magnific-popup.css}">
-    <link rel="stylesheet" type="text/css" th:href="@{/css/lib/settings.css}">
-    <link rel="stylesheet" type="text/css" th:href="@{/css/lib/bootstrap-select.min.css}">
-    <!-- MAIN STYLE -->
-    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+    <link rel="shortcut icon" href="../favicon.ico" />
+    <header class="header"></header>
 </head>
 <body>
 <!-- PRELOADER -->
@@ -35,6 +17,7 @@
 <!-- PAGE WRAP -->
 <div id="page-wrap">
     <!-- HEADER -->
+    <header class="header_menu"></header>
     <!-- END / HEADER -->
     <!-- BANNER SLIDER -->
     <section class="section-slider">
@@ -42,11 +25,11 @@
         <div id="slider-revolution">
             <ul>
                 <li data-transition="fade">
-                    <img th:src="@{/images/slider/img-1.jpg}" data-bgposition="left center" data-duration="14000"
+                    <img src="../images/slider/img-1.jpg" data-bgposition="left center" data-duration="14000"
                          data-bgpositionend="right center" alt="">
                     <div class="tp-caption sft fadeout slider-caption-sub slider-caption-1" data-x="center" data-y="100"
                          data-speed="700" data-start="1500" data-easing="easeOutBack">
-                        <img th:src="@{/images/slider/hom1-slide1.png}" alt="icons">
+                        <img src="../images/slider/hom1-slide1.png" alt="icons">
                     </div>
                     <div class="tp-caption sft fadeout slider-caption-sub slider-caption-1" data-x="center" data-y="240"
                          data-speed="700" data-start="1500" data-easing="easeOutBack">欢迎来到
@@ -60,12 +43,12 @@
                 </li>
 
                 <li data-transition="fade">
-                    <img th:src="@{/images/slider/img-1.jpg}" data-bgposition="left center" data-duration="14000"
+                    <img src="../images/slider/img-1.jpg" data-bgposition="left center" data-duration="14000"
                          data-bgpositionend="right center" alt="">
 
                     <div class="tp-caption sft fadeout" data-x="center" data-y="195" data-speed="700" data-start="1300"
                          data-easing="easeOutBack">
-                        <img th:src="@{/images/icon-slider-1.png}" alt="">
+                        <img src="../images/icon-slider-1.png" alt="">
                     </div>
 
                     <div class="tp-caption sft fadeout slider-caption-sub slider-caption-sub-3" data-x="center"
@@ -84,7 +67,7 @@
 
                     <div class="tp-caption sfb fadeout slider-caption-sub slider-caption-sub-3" data-x="center"
                          data-y="395" data-easing="easeOutBack" data-speed="700" data-start="2400">
-                        <img th:src="@{/images/icon-slider-2.png}" alt=""></div>
+                        <img src="../images/icon-slider-2.png" alt=""></div>
                 </li>
             </ul>
         </div>
@@ -136,7 +119,7 @@
                     <div class="col-md-12">
                         <div class="accomd-modations-header">
                             <h2 class="heading">房间 & 价格</h2>
-                            <img th:src="@{/images/icon-accmod.png}" alt="icon">
+                            <img src="../images/icon-accmod.png" alt="icon">
                             <p>Semper ac dolor vitae accumsan. Cras interdum hendrerit lacinia. Phasellus accumsan urna
                                 vitae molestie interdum. Nam sed placerat libero, non eleifend dolor.
                             </p>
@@ -161,7 +144,7 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="img">
-                            <a href="#"><img th:src="@{/images/home/about/img-1.jpg}" alt=""></a>
+                            <a href="#"><img src="../images/home/about/img-1.jpg" alt=""></a>
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -189,7 +172,7 @@
                 <div class="row">
                     <div class="col-md-6 col-md-push-6">
                         <div class="img">
-                            <img th:src="@{/images/home/ourbest/img-1.jpg}" alt="">
+                            <img src="../images/home/ourbest/img-1.jpg" alt="">
                         </div>
                     </div>
                     <div class="col-md-6 col-md-pull-6 ">
@@ -199,12 +182,12 @@
                                 阿瓦隆的领先酒店与亲切的岛屿酒店，周到的设施和
                                 与众不同。</p>
                             <ul>
-                                <li><img th:src="@{/images/home/ourbest/icon-3.png}" alt="icon">250间5星最佳客房</li>
-                                <li><img th:src="@{/images/home/ourbest/icon-2.png}" alt="icon">小酒吧和冰箱</li>
-                                <li><img th:src="@{/images/home/ourbest/icon-4.png}" alt="icon">双漩涡按摩浴缸</li>
-                                <li><img th:src="@{/images/home/ourbest/icon-5.png}" alt="icon">奢华的紧密织物</li>
-                                <li><img th:src="@{/images/home/ourbest/icon-1.png}" alt="icon">每日早餐</li>
-                                <li><img th:src="@{/images/home/ourbest/icon-6.png}" alt="icon">窗外的海景</li>
+                                <li><img src="../images/home/ourbest/icon-3.png" alt="icon">250间5星最佳客房</li>
+                                <li><img src="../images/home/ourbest/icon-2.png" alt="icon">小酒吧和冰箱</li>
+                                <li><img src="../images/home/ourbest/icon-4.png" alt="icon">双漩涡按摩浴缸</li>
+                                <li><img src="../images/home/ourbest/icon-5.png" alt="icon">奢华的紧密织物</li>
+                                <li><img src="../images/home/ourbest/icon-1.png" alt="icon">每日早餐</li>
+                                <li><img src="../images/home/ourbest/icon-6.png" alt="icon">窗外的海景</li>
                             </ul>
                         </div>
                     </div>
@@ -227,7 +210,7 @@
                             <!-- ITEM -->
                             <div class="guestbook-item">
                                 <div class="img">
-                                    <img th:src="@{/mages/avatar/img-5.jpg}" alt="">
+                                    <img src="../images/avatar/img-5.jpg" alt="">
                                 </div>
 
                                 <div class="text">
@@ -273,7 +256,7 @@
                                         <div class="event-item">
                                             <div class="img hover-zoom">
                                                 <a href="#">
-                                                    <img th:src="@{/images/home/eventdeal/img-1.jpg}" alt="">
+                                                    <img src="../images/home/eventdeal/img-1.jpg" alt="">
                                                 </a>
                                             </div>
                                         </div>
@@ -281,7 +264,7 @@
                                         <div class="event-item">
                                             <div class="img hover-zoom">
                                                 <a href="#">
-                                                    <img th:src="@{/images/home/eventdeal/img-1.jpg}" alt="">
+                                                    <img src="../images/home/eventdeal/img-1.jpg" alt="">
                                                 </a>
                                             </div>
                                         </div>
@@ -295,7 +278,7 @@
                                     <div class="event-item">
                                         <div class="img hover-zoom">
                                             <a href="#">
-                                                <img th:src="@{/images/home/eventdeal/img-2.jpg}" alt="">
+                                                <img src="../images/home/eventdeal/img-2.jpg" alt="">
                                             </a>
                                         </div>
                                         <div class="text">
@@ -314,7 +297,7 @@
                                     <div class="event-item">
                                         <div class="img hover-zoom">
                                             <a href="#">
-                                                <img th:src="@{/images/home/eventdeal/img-2.jpg}" alt="">
+                                                <img src="../images/home/eventdeal/img-2.jpg" alt="">
                                             </a>
                                         </div>
                                         <div class="text">
@@ -344,7 +327,7 @@
                                 <div class="col-md-12">
                                     <div class="news-item">
                                         <div class="img">
-                                            <a href="#"><img th:src="@{/images/home/lotusnews/img-1.jpg}" alt=""></a>
+                                            <a href="#"><img src="../images/home/lotusnews/img-1.jpg" alt=""></a>
                                         </div>
                                         <div class="text">
                                             <span class="date">21 / 5</span>
@@ -359,7 +342,7 @@
                                 <div class="col-md-12">
                                     <div class="news-item">
                                         <div class="img">
-                                            <a href="#"><img th:src="@{/images/home/lotusnews/img-1.jpg}" alt=""></a>
+                                            <a href="#"><img src="../images/home/lotusnews/img-1.jpg" alt=""></a>
                                         </div>
                                         <div class="text">
                                             <span class="date">8 / 5</span>
@@ -374,7 +357,7 @@
                                 <div class="col-md-12">
                                     <div class="news-item">
                                         <div class="img">
-                                            <a href="#"><img th:src="@{/images/home/lotusnews/img-1.jpg}" alt=""></a>
+                                            <a href="#"><img src="../images/home/lotusnews/img-1.jpg" alt=""></a>
                                         </div>
                                         <div class="text">
                                             <span class="date">16 / 2</span>
@@ -427,8 +410,8 @@
                         <!-- ITEM -->
                         <div class="item-isotope ground bathroom dining suite">
                             <div class="gallery_item">
-                                <a th:href="@{/images/gallery/popup/img-1.jpg}" class="gallery-popup mfp-image" title="Luxury Room view all">
-                                    <img th:src="@{/images/gallery/img-1.jpg}" alt="">
+                                <a href="../images/gallery/popup/img-1.jpg" class="gallery-popup mfp-image" title="Luxury Room view all">
+                                    <img src="../images/gallery/img-1.jpg" alt="">
                                 </a>
                             </div>
                         </div>
@@ -448,31 +431,36 @@
     <!-- END / FOOTER -->
 </div>
 <!-- END / PAGE WRAP -->
-<script type="text/javascript" th:src="@{/js/lib/jquery-1.11.0.min.js}"></script>
-<script type="text/javascript" th:src="@{/js/lib/jquery-ui.min.js}"></script>
-<script type="text/javascript" th:src="@{/js/lib/bootstrap.min.js}"></script>
-<script type="text/javascript" th:src="@{/js/lib/bootstrap-select.js}"></script>
-<!--<script th:src="@{http://ditu.google.cn/maps/api/js?v=3.exp&amp;signed_in=true"></script>-->
-<script type="text/javascript" th:src="@{/js/lib/isotope.pkgd.min.js}"></script>
-<script type="text/javascript" th:src="@{/js/lib/jquery.themepunch.revolution.min.js}"></script>
-<script type="text/javascript" th:src="@{/js/lib/jquery.themepunch.tools.min.js}"></script>
-<script type="text/javascript" th:src="@{/js/lib/owl.carousel.js}"></script>
-<script type="text/javascript" th:src="@{/js/lib/jquery.appear.min.js}"></script>
-<script type="text/javascript" th:src="@{/js/lib/jquery.countTo.js}"></script>
-<script type="text/javascript" th:src="@{/js/lib/jquery.countdown.min.js}"></script>
-<script type="text/javascript" th:src="@{/js/lib/jquery.parallax-1.1.3.js}"></script>
-<script type="text/javascript" th:src="@{/js/lib/jquery.magnific-popup.min.js}"></script>
-<script type="text/javascript" th:src="@{/js/lib/SmoothScroll.js}"></script>
-<script type="text/javascript" th:src="@{/js/scripts.js}"></script>
-<script type="text/javascript">
-   (function () {
+<!-- LOAD JQUERY -->
+<script type="text/javascript" src="../js/lib/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="../js/lib/jquery-ui.min.js"></script>
+<script type="text/javascript" src="../js/lib/bootstrap.min.js"></script>
+<script type="text/javascript" src="../js/lib/bootstrap-select.js"></script>
+<!---<script src="http://ditu.google.cn/maps/api/../js?v=3.exp&amp;signed_in=true"></script>--->
+<script type="text/javascript" src="../js/lib/isotope.pkgd.min.js"></script>
+<script type="text/javascript" src="../js/lib/jquery.themepunch.revolution.min.js"></script>
+<script type="text/javascript" src="../js/lib/jquery.themepunch.tools.min.js"></script>
+<script type="text/javascript" src="../js/lib/owl.carousel.js"></script>
+<script type="text/javascript" src="../js/lib/jquery.appear.min.js"></script>
+<script type="text/javascript" src="../js/lib/jquery.countTo.js"></script>
+<script type="text/javascript" src="../js/lib/jquery.countdown.min.js"></script>
+<script type="text/javascript" src="../js/lib/jquery.parallax-1.1.3.js"></script>
+<script type="text/javascript" src="../js/lib/jquery.magnific-popup.min.js"></script>
+<script type="text/javascript" src="../js/lib/SmoothScroll.js"></script>
+<!-- validate -->
+<script type="text/javascript" src="../js/lib/jquery.form.min.js"></script>
+<script type="text/javascript" src="../js/lib/jquery.validate.min.js"></script>
+<!-- Custom jQuery -->
+<script type="text/javascript" src="../js/scripts.js"></script>
+<script>
+    $(function () {
         $(".header").load("/app/header.html");
         $(".footer").load("/app/footer.html");
         $(".header_menu").load("/app/menu.html");
         $.ajax({
-            url: "/room/pictures",
-            data: "pn=1",
+            url: "/app/rooms",
             type: "GET",
+            data: "pn=1",
             success: function (result) {
                 var html = "";
                 $.each(result.extend.pageInfo.list, function (index, item) {
@@ -482,26 +470,24 @@
                     html += "<div class='col-xs-4'>\n" +
                         "<div class='accomd-modations-room'>\n" +
                         "<div class='img'>\n";
-                    $.each(item.photos, function (index, photo) {
-                        html += "<a href='#'><img src=" + photo.picture + " ></a>\n";
-                    });
+                    html += "<a href='#'><img src=" + item.picture + " ></a>\n";
                     html += "</div>\n" +
                         "<div class='text'>\n" +
-                        "<h2><a href='#'>" + item.room.type + "</a></h2>\n" +
+                        "<h2><a href='#'>" + item.type + "</a></h2>\n" +
                         "<p class='price'>\n" +
-                        "<span class='amout'>" + item.room.price + "￥</span>/day\n" +
+                        "<span class='amout'>" + item.price + "￥</span>/day\n" +
                         "</p>\n" +
                         "</div>\n" +
                         "</div>\n" +
                         "</div>";
-                    if (index % 6 == 5) {
+                    if (index % 6 === 5) {
                         html += "</div>"
                     }
                 });
                 $("#rooms_get_div").html(html);
             }
         });
-    })
+    });
 </script>
 </body>
 </html>
