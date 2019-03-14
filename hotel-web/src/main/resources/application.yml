@@ -2,9 +2,9 @@ spring:
   thymeleaf:
       cache: false
       encoding: UTF-8
-      mode: HTML5
+      mode: HTML
   profiles:
-    active: dao
+    active: dao,redis
   servlet:
     multipart:
       enabled: true
