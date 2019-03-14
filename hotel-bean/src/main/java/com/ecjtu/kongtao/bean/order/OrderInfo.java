@@ -1,8 +1,8 @@
 package com.ecjtu.kongtao.bean.order;
 
+import com.ecjtu.kongtao.bean.employee.Employee;
 import com.ecjtu.kongtao.bean.room.Room;
 import com.ecjtu.kongtao.bean.user.User;
-import com.ecjtu.kongtao.bean.employee.Employee;
 
 /**
  * @author sepK

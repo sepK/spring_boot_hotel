@@ -8,9 +8,7 @@ import com.ecjtu.kongtao.service.HousingService;
 import com.ecjtu.kongtao.service.RoomService;
 import com.ecjtu.kongtao.service.UserService;
 import com.ecjtu.kongtao.utils.ErrorCode;
-import com.ecjtu.kongtao.utils.Result;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.List;

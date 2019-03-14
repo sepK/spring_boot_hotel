@@ -7,7 +7,6 @@ import com.ecjtu.kongtao.bean.room.RoomExample.Criteria;
 import com.ecjtu.kongtao.mapper.RoomMapper;
 import com.ecjtu.kongtao.service.RoomService;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.List;

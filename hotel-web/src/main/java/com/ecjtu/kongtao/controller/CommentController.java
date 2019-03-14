@@ -1,13 +1,12 @@
 package com.ecjtu.kongtao.controller;
 
+import com.ecjtu.kongtao.bean.comment.UserComment;
 import com.ecjtu.kongtao.bean.room.Room;
 import com.ecjtu.kongtao.bean.user.User;
-import com.ecjtu.kongtao.bean.comment.UserComment;
 import com.ecjtu.kongtao.exception.UserException;
 import com.ecjtu.kongtao.utils.ConfigKey;
 import com.ecjtu.kongtao.utils.ErrorCode;
 import com.ecjtu.kongtao.utils.Result;
-import com.ecjtu.kongtao.utils.SessionKey;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
@@ -17,7 +16,6 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;

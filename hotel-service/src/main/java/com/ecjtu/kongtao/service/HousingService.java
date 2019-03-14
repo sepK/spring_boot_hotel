@@ -2,7 +2,6 @@ package com.ecjtu.kongtao.service;
 
 
 import com.ecjtu.kongtao.bean.housing.Housing;
-import com.ecjtu.kongtao.utils.Result;
 
 import java.util.List;
 

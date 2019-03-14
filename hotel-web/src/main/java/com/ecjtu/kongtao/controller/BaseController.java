@@ -3,12 +3,10 @@ package com.ecjtu.kongtao.controller;
 
 import com.ecjtu.kongtao.exception.UserException;
 import com.ecjtu.kongtao.service.*;
-import com.ecjtu.kongtao.utils.ErrorCode;
 import com.ecjtu.kongtao.utils.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
