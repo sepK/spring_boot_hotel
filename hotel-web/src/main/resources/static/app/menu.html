@@ -46,7 +46,7 @@
         </div>
     </div>
 </header>
-<div class="modal fade" id="cusUpdateModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade" id="userUpdateModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -60,14 +60,14 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label">用户名</label>
                         <div class="col-sm-10">
-                            <input type="text" name="customerName" class="form-control" id="cusName_update_input">
+                            <input type="text" name="userName" class="form-control" id="userName_update_input">
                             <span class="help-block"></span>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-2 control-label">密码</label>
                         <div class="col-sm-10">
-                            <input type="password" class="form-control" name="password" id="password_update_input"/>
+                            <input type="password" class="form-control" name="password" id="password_update_input" />
                             <span class="help-block"></span>
                         </div>
                     </div>
@@ -75,12 +75,12 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <button type="button" class="btn btn-primary" id="cus_login_btn">登录</button>
+                <button type="button" class="btn btn-primary" id="user_login_btn">登录</button>
             </div>
         </div>
     </div>
 </div>
-<div class="modal fade" id="cusAddModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade" id="userAddModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -94,14 +94,14 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label">用户名</label>
                         <div class="col-sm-10">
-                            <input type="text" name="customerName" class="form-control" id="cusName_add_input">
+                            <input type="text" name="userName" class="form-control" id="userName_add_input">
                             <span class="help-block"></span>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-2 control-label">密码</label>
                         <div class="col-sm-10">
-                            <input type="password" name="password" class="form-control" id="cusPassWord_add_input">
+                            <input type="password" name="password" class="form-control" id="userPassWord_add_input">
                             <span class="help-block"></span>
                         </div>
                     </div>
@@ -113,7 +113,7 @@
                             </label>
                             <label class="radio-inline">
                                 <input type="radio" name="sex" id="sex_add_input2" value="女"> 女
-                        </label>
+                            </label>
                         </div>
                     </div>
                     <div class="form-group">
@@ -133,37 +133,38 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label">验证码</label>
                         <div class="col-sm-5">
-                            <input type="text" name="verifyCode" class="form-control" placeholder="请输入验证码" id="verifyCode_add_input"/>
+                            <input type="text" name="verifyCode" class="form-control" placeholder="请输入验证码"
+                                id="verifyCode_add_input" />
                             <span class="help-block"></span>
                         </div>
                         <div class="col-sm-5">
-                            <img src="/user/verifyCode" onclick="myRefresh(this)" id="img_add"/>
+                            <img src="/user/verifyCode" onclick="myRefresh(this)" id="img_add" />
                         </div>
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <button type="button" class="btn btn-primary" id="cus_add_btn">保存</button>
+                <button type="button" class="btn btn-primary" id="user_add_btn">保存</button>
             </div>
         </div>
     </div>
 </div>
 <script>
     var user = JSON.parse(sessionStorage.getItem("user"));
-    if(user != null){
+    if (user != null) {
         login();
-    }else {
+    } else {
         $("#register_modal_btn").click(function () {
-            reset_form("#cusAddModal form");
+            reset_form("#userAddModal form");
             myRefresh(document.getElementById("img_add"));
-            $("#cusAddModal").modal({
+            $("#userAddModal").modal({
                 backdrop: "static"
             });
         });
 
         $("#login_modal_btn").click(function () {
-            $("#cusUpdateModal").modal({
+            $("#userUpdateModal").modal({
                 backdrop: "static"
             });
         });
@@ -176,17 +177,17 @@
 
 
 
-    $("#cus_login_btn").click(function () {
+    $("#user_login_btn").click(function () {
         $.ajax({
-            url:"/customer/login",
-            type:"POST",
-            data:$("#cusUpdateModal form").serialize(),
-            success:function (result) {
+            url: "/user/login",
+            type: "POST",
+            data: $("#userUpdateModal form").serialize(),
+            success: function (result) {
                 alert(result.msg);
-                if(result.code === 200){
-                    sessionStorage.setItem("user",JSON.stringify(result.extend.user));
+                if (result.code === 200) {
+                    sessionStorage.setItem("user", JSON.stringify(result.extend.user));
                     user = JSON.parse(sessionStorage.getItem("user"));
-                    $("#cusUpdateModal").modal("hide");
+                    $("#userUpdateModal").modal("hide");
                     login();
                     window.location.reload();
                 }
@@ -195,49 +196,50 @@
     });
 
     function login() {
-        $("#login_modal_btn").off();
-        $("#register_modal_btn").off();
-        $("#register_modal_btn").html("退出");
-        $("#register_modal_btn").on("click",function () {
+        var register = $("#register_modal_btn");
+        var login = $("#login_modal_btn");
+        login.off();
+        register.off();
+        register.html("退出");
+        register.on("click", function () {
             sessionStorage.removeItem("user");
-            window.location.href="/customer/logout";
+            window.location.href = "/user/logout";
         });
-        $("#login_modal_btn").html(user.customerName);
+        login.html(user.userName);
     }
 
-    $("#cus_add_btn").click(function () {
+    $("#user_add_btn").click(function () {
         if (!validate_add_form()) {
             return false;
         }
         $.ajax({
-            url: "/customer/customer",
+            url: "/user/user",
             type: "POST",
-            data: $("#cusAddModal form").serialize(),
+            data: $("#userAddModal form").serialize(),
             success: function (result) {
-                $("#cusAddModal").modal("hide");
+                $("#userAddModal").modal("hide");
                 alert(result.msg);
-                to_page("customers", totalRecord);
+                to_page("users", totalRecord);
             }
         });
     });
     function validate_add_form() {
         //1、拿到要校验的数据，使用正则表达式
-        if ($("#cusName_add_input").attr("ajax-va") == "error") {
+        if ($("#userName_add_input").attr("ajax-va") === "error") {
             return false;
         }
-        if ($("#verifyCode_add_input").attr("ajax-va") == "error") {
+        if ($("#verifyCode_add_input").attr("ajax-va") === "error") {
             return false;
         }
-        var cusName = $("#cusName_add_input").val();
+        var userName = $("#userName_add_input").val();
         var regName = /(^[a-zA-Z0-9_-]{6,16}$)|(^[\u2E80-\u9FFF]{2,5})/;
-        if (!regName.test(cusName)) {
-            show_validate_msg("#cusName_add_input", "error",
+        if (!regName.test(userName)) {
+            show_validate_msg("#userName_add_input", "error",
                 "用户名可以是2-5位中文或者6-16位英文和数字的组合");
             return false;
         } else {
-            show_validate_msg("#cusName_add_input", "success", "");
+            show_validate_msg("#userName_add_input", "success", "");
         }
-        ;
 
         //2、校验邮箱信息
         var email = $("#email_add_input").val();
@@ -265,27 +267,27 @@
         //清除当前元素的校验状态
         $(ele).parent().removeClass("has-success has-error");
         $(ele).next("span").text("");
-        if ("success" == status) {
+        if ("success" === status) {
             $(ele).parent().addClass("has-success");
             $(ele).next("span").text(msg);
-        } else if ("error" == status) {
+        } else if ("error" === status) {
             $(ele).parent().addClass("has-error");
             $(ele).next("span").text(msg);
         }
     }
 
-    $("#cusName_add_input").change(function () {
-        checkName("#cusName_add_input");
+    $("#userName_add_input").change(function () {
+        checkName("#userName_add_input");
     });
 
     function checkName(element) {
-        var cusName = $(element).val();
+        var userName = $(element).val();
         $.ajax({
-            url: "/customer/checkName",
-            data: "cusName=" + cusName,
+            url: "/user/checkName",
+            data: "userName=" + userName,
             type: "POST",
             success: function (result) {
-                if (result.code == 400) {
+                if (result.code === 400) {
                     show_validate_msg(element, "error", "用户名已存在");
                     $(element).attr("ajax-va", "error");
                 } else {
@@ -299,7 +301,7 @@
         function () {
             var verifyCode = $("#verifyCode_add_input").val();
             $.ajax({
-                url: "/customer/checkVerifyCode",
+                url: "/user/checkVerifyCode",
                 type: "POST",
                 data: "verifyCode=" + verifyCode,
                 success: function (result) {
@@ -318,12 +320,12 @@
     function myRefresh(e) {
         const source = e.src; // 获得原来的 src 中的内容
         var index = source.indexOf("?"); // 从 source 中寻找 ? 第一次出现的位置 (如果不存在则返回 -1 )
+        var date = new Date();
         if (index > -1) { // 如果找到了 ?  就进入内部
             var s = source.substring(0, index); // 从 source 中截取 index 之前的内容 ( index 以及 index 之后的内容都被舍弃 )
-            var time = new Date().getTime(); // 从 新创建的 Date 对象的实例中获得该时间对应毫秒值
+            var time = date.getTime(); // 从 新创建的 Date 对象的实例中获得该时间对应毫秒值
             e.src = s + "?time=" + time; // 将 加了 尾巴 的 地址 重新放入到 src 上
         } else {
-            var date = new Date();
             e.src = source + "?time=" + date.getTime();
         }
     }
