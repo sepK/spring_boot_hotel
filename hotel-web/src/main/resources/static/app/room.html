@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <title>迎宾大酒店</title>
-    <link rel="shortcut icon" href="../static/favicon.ico" />
+    <link rel="shortcut icon" href="../favicon.ico" />
     <header class="header"></header>
 </head>
 <div id="preloader">
@@ -45,7 +45,7 @@
                         <div class="form-group">
                             <label class="col-sm-2 control-label">客户名</label>
                             <div class="col-sm-10">
-                                <input type="text" name="orderInfo.cusname" class="form-control" id="cusname_add_input">
+                                <input type="text" name="orderInfo.userName" class="form-control" id="userName_add_input">
                                 <span class="help-block"></span>
                             </div>
                         </div>
@@ -136,7 +136,7 @@
                     "</ul>\n" +
                     "</div>\n" +
                     "<div class='bot'>\n" +
-                    "<span class='price'>起步价<span class='amout' >$" + item.room.price + "</span> /days</span>\n" +
+                    "<span class='price'>起步价<span class='amount' >$" + item.room.price + "</span> /days</span>\n" +
                     "<a class='awe-btn awe-btn-13 add_btn' room_id=" + item.room.id + " price=" + item.room.price + ">立即预定</a>\n" +
                     "</div>\n" +
                     "</div>\n" +
@@ -146,14 +146,14 @@
         }
     });
     $(document).on("click", ".add_btn", function () {
-        if (user == null) {
-            $("#cusUpdateModal").modal({
+        if (user === null) {
+            $("#userUpdateModal").modal({
                 backdrop: "static"
             });
         } else {
             $("#indent_add_btn").attr("add_id", $(this).attr("room_id"));
             $("#money_add_input").val($(this).attr("price"));
-            $("#cusname_add_input").val(user.customerName);
+            $("#userName_add_input").val(user.userName);
             $("#indentAddModal").modal({
                 backdrop: "static"
             });

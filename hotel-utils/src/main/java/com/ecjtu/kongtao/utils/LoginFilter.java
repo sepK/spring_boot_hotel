@@ -26,6 +26,12 @@ public class LoginFilter implements Filter {
             "/css",
             "/images",
             "/user/verifyCode",
+            "/room/emptyRooms",
+            "/order/addIndent/",
+            "/order/getIndents",
+            "/order/updateIndent",
+            "/user/checkVerifyCode",
+            "/room/rooms"
     };
     @Override
     public void destroy() {

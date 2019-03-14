@@ -60,7 +60,7 @@ public class UserController extends BaseController{
 		return Result.success();
 	}
 
-	@RequestMapping("/user")
+	@RequestMapping(value = "/user", method = RequestMethod.PUT)
 	@ResponseBody
 	public Result addUser(User user) {
 		userService.addUser(user);

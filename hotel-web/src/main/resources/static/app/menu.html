@@ -214,7 +214,7 @@
         }
         $.ajax({
             url: "/user/user",
-            type: "POST",
+            type: "PUT",
             data: $("#userAddModal form").serialize(),
             success: function (result) {
                 $("#userAddModal").modal("hide");
