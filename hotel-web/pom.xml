@@ -26,7 +26,6 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-thymeleaf</artifactId>
-			<version>${thymeleaf-version}</version>
 		</dependency>
 
 		<!--引入pageHelper分页插件 -->

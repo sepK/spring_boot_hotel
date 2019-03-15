@@ -1,4 +1,4 @@
-package com.ecjtu.kongtao.utils;
+package com.ecjtu.kongtao.config;
 
 import java.io.FileWriter;
 import java.io.IOException;

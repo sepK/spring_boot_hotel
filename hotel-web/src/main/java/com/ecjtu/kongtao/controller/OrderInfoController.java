@@ -2,7 +2,7 @@ package com.ecjtu.kongtao.controller;
 
 import com.ecjtu.kongtao.bean.housing.Indent;
 import com.ecjtu.kongtao.bean.order.OrderInfo;
-import com.ecjtu.kongtao.utils.ConfigKey;
+import com.ecjtu.kongtao.config.ConfigKey;
 import com.ecjtu.kongtao.utils.Result;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;

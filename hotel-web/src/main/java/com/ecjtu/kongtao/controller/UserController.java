@@ -1,7 +1,7 @@
 package com.ecjtu.kongtao.controller;
 
 import com.ecjtu.kongtao.bean.user.User;
-import com.ecjtu.kongtao.utils.ConfigKey;
+import com.ecjtu.kongtao.config.ConfigKey;
 import com.ecjtu.kongtao.utils.ErrorCode;
 import com.ecjtu.kongtao.utils.GraphicHelper;
 import com.ecjtu.kongtao.utils.Result;

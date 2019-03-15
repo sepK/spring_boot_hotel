@@ -1,4 +1,4 @@
-package com.ecjtu.kongtao.utils;
+package com.ecjtu.kongtao.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;

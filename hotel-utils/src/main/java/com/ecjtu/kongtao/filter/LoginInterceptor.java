@@ -1,5 +1,6 @@
-package com.ecjtu.kongtao.utils;
+package com.ecjtu.kongtao.filter;
 
+import com.ecjtu.kongtao.utils.SessionKey;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 

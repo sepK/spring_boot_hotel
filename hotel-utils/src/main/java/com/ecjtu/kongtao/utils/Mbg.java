@@ -13,7 +13,7 @@ import java.util.List;
 /**
  * @author sepK
  */
-public class MBGTest {
+public class Mbg {
 
 	public static void main(String[] args) throws Exception {
 		List<String> warnings = new ArrayList<>();

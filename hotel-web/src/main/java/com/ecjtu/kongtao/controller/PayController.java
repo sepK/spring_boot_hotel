@@ -6,7 +6,7 @@ import com.alipay.api.DefaultAlipayClient;
 import com.alipay.api.internal.util.AlipaySignature;
 import com.alipay.api.request.AlipayTradePagePayRequest;
 import com.ecjtu.kongtao.bean.pay.AlipayVo;
-import com.ecjtu.kongtao.utils.AlipayConfig;
+import com.ecjtu.kongtao.config.AlipayConfig;
 import com.google.gson.Gson;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -70,7 +70,15 @@ public class PayController extends BaseController {
             throws AlipayApiException {
         Map<String, String> map = new HashMap<>();
         Map<String, String[]> requestParams = request.getParameterMap();
-        for (Iterator<String> iter = requestParams.keySet().iterator(); iter.hasNext();) {
+        requestParams.forEach((key, values) -> {
+            String valueStr = "";
+            for (int i = 0; i < values.length; i++) {
+                valueStr = (i == values.length - 1) ? valueStr + values[i] : valueStr + values[i] + ",";
+                System.out.println(valueStr);
+            }
+            map.put(key, valueStr);
+        });
+        /*for (Iterator<String> iter = requestParams.keySet().iterator(); iter.hasNext();) {
             String name = iter.next();
             String[] values = requestParams.get(name);
             String valueStr = "";
@@ -79,8 +87,8 @@ public class PayController extends BaseController {
                 System.out.println(valueStr);
             }
             map.put(name, valueStr);
-        }
-        boolean signVerified = false;
+        }*/
+        boolean signVerified;
         try {
             signVerified = AlipaySignature.rsaCheckV1(map, AlipayConfig.ALIPAY_PUBLIC_KEY, AlipayConfig.CHARSET, AlipayConfig.SIGN_TYPE);
         } catch (AlipayApiException e) {
