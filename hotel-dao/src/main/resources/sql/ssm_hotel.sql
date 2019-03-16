@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50530
 File Encoding         : 65001
 
-Date: 2019-02-22 18:05:46
+Date: 2019-03-16 12:35:54
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -25,6 +25,11 @@ CREATE TABLE `t_admin` (
   `password` varchar(20) NOT NULL COMMENT '密码',
   PRIMARY KEY (`admin_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of t_admin
+-- ----------------------------
+INSERT INTO `t_admin` VALUES ('1', 'admin', 'admin');
 
 -- ----------------------------
 -- Table structure for t_employee
@@ -42,6 +47,10 @@ CREATE TABLE `t_employee` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
+-- Records of t_employee
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for t_housing
 -- ----------------------------
 DROP TABLE IF EXISTS `t_housing`;
@@ -55,6 +64,10 @@ CREATE TABLE `t_housing` (
   PRIMARY KEY (`housing_id`),
   KEY `roomid` (`room_id`,`user_id`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of t_housing
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for t_order_info
@@ -72,6 +85,10 @@ CREATE TABLE `t_order_info` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
+-- Records of t_order_info
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for t_room
 -- ----------------------------
 DROP TABLE IF EXISTS `t_room`;
@@ -85,7 +102,13 @@ CREATE TABLE `t_room` (
   `introduce` text NOT NULL COMMENT '房间简介',
   PRIMARY KEY (`room_id`),
   KEY `room_number` (`room_number`,`type`,`status`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of t_room
+-- ----------------------------
+INSERT INTO `t_room` VALUES ('1', '101', '1', '150', '00003', '/images/76be09ee-19d2-477e-96b7-358e49b9f90c.jpg', '1');
+INSERT INTO `t_room` VALUES ('2', '102', '1', '150', '00003', '/images/fae5f587-797e-4bff-8b92-55d80c5a2741.jpg', '1111');
 
 -- ----------------------------
 -- Table structure for t_user
@@ -103,18 +126,27 @@ CREATE TABLE `t_user` (
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
+-- Records of t_user
+-- ----------------------------
+INSERT INTO `t_user` VALUES ('1', 'kongtao', '123456', '男', '15797694133', '1351808875@qq.com');
+
+-- ----------------------------
 -- Table structure for t_user_comment
 -- ----------------------------
 DROP TABLE IF EXISTS `t_user_comment`;
 CREATE TABLE `t_user_comment` (
   `comment_id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '评论id  自增',
   `user_id` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '评论人id',
-  `room_id` int(2) NOT NULL COMMENT '房间id',
+  `room_id` int(11) NOT NULL COMMENT '房间id',
   `level` int(5) unsigned NOT NULL DEFAULT '1' COMMENT '评级等级',
   `comment` text NOT NULL COMMENT '评论',
   `create_time` timestamp NOT NULL DEFAULT '1978-12-31 16:00:00' COMMENT '评论时间',
   `last_modify_time` timestamp NOT NULL DEFAULT '1978-12-31 16:00:00' ON UPDATE CURRENT_TIMESTAMP COMMENT '上次修改时间',
   PRIMARY KEY (`comment_id`),
   KEY `user_id` (`user_id`,`room_id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of t_user_comment
+-- ----------------------------
 SET FOREIGN_KEY_CHECKS=1;

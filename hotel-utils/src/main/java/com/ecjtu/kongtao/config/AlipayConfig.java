@@ -30,7 +30,7 @@ public class AlipayConfig {
     public static String CHARSET = "utf-8";
 
     /** 支付宝网关*/
-    public static String GATEWAY_URL = "https://openapi.alipay.com/gateway.do";
+    public static String GATEWAY_URL = "https://openapi.alipaydev.com/gateway.do";
 
     /** 日志地址*/
     public static String LOG_PAH = "";
