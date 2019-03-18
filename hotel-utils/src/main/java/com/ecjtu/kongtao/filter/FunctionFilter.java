@@ -1,6 +1,7 @@
 package com.ecjtu.kongtao.filter;
 
 import com.ecjtu.kongtao.utils.SessionKey;
+import org.slf4j.Logger;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.*;
@@ -12,8 +13,10 @@ import java.io.IOException;
 /**
  * @author sepK
  */
-@Component("loginFilter")
-public class LoginFilter implements Filter {
+@Component("FunctionFilter")
+public class FunctionFilter implements Filter {
+
+    private static Logger log = org.slf4j.LoggerFactory.getLogger(FunctionFilter.class);
 
     /**不过滤的uri*/
     private static String[] notFilter = new String[] {
@@ -59,7 +62,11 @@ public class LoginFilter implements Filter {
             response.sendRedirect("/login");
             return;
         }
-        chain.doFilter(req, res);
+        long in = System.currentTimeMillis();
+        log.info(uri +" in "+ in);
+        chain.doFilter(request, response);
+        log.info(uri +" out "+(System.currentTimeMillis() - in));
+
     }
 
     @Override
