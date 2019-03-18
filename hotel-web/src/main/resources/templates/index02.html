@@ -124,10 +124,10 @@
                             <label class="col-sm-2 control-label">房间状态</label>
                             <div class="col-sm-10">
                                 <select class="form-control" name="status" id="status_add_input">
-                                    <option value="0">空闲</option>
-                                    <option value="1">预定</option>
-                                    <option value="2">入住</option>
-                                    <option value="3">退房</option>
+                                    <span th:each="roomStatus : ${session.ROOM_STATUS}">
+                                        <option th:value="${roomStatus.getStatus()}" th:text="${roomStatus.getDesc()}">
+                                        </option>
+                                    </span>
                                 </select>
                                 <span class="help-block"></span>
                             </div>
@@ -349,6 +349,7 @@
             });
         });
         $(document).on("click", ".edit_btn", function () {
+            reset_form("#roomUpdateModal form");
             getRoom($(this).attr("edit-id"));
 
             $("#room_update_btn").attr("edit-id", $(this).attr("edit-id"));
@@ -397,8 +398,7 @@
             formData.append("roomNumber", $("#roomNumber_update_input").val());
             formData.append("type", $("#type_update_input").val());
             formData.append("price", $("#price_update_input").val());
-            var status = $("#status_update_input").val();
-            formData.append("status", status === "空闲" ? 0 : status === "预定" ? 1 : status === "入住" ? 2 : 3);
+            formData.append("status", $("#status_update_input").val());
             formData.append("introduce", $("#introduce_update_input").val());
             $.ajax({
                 url: "/room/room/" + $(this).attr("edit-id"),

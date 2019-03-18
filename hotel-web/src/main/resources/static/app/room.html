@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <title>迎宾大酒店</title>
-    <link rel="shortcut icon" href="../favicon.ico" />
+    <link rel="shortcut icon" href="../favicon.ico"/>
     <header class="header"></header>
 </head>
 <div id="preloader">
@@ -45,31 +45,32 @@
                         <div class="form-group">
                             <label class="col-sm-2 control-label">客户名</label>
                             <div class="col-sm-10">
-                                <input type="text" name="orderInfo.userName" class="form-control" id="userName_add_input">
+                                <input type="text" name="orderInfo.user.userName" class="form-control"
+                                       id="userName_add_input">
                                 <span class="help-block"></span>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-2 control-label">入住时间</label>
                             <div class="col-sm-10">
-                                <input type="datetime" name="intake.startTime" class="form-control awe-calendar from"
-                                    id="startTime_add_input">
+                                <input type="datetime" name="housing.startTime" class="form-control awe-calendar from"
+                                       id="startTime_add_input">
                                 <span class="help-block"></span>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-2 control-label">结束时间</label>
                             <div class="col-sm-10">
-                                <input type="datetime" name="intake.endTime" class="form-control awe-calendar to"
-                                    id="endTime_add_input">
+                                <input type="datetime" name="housing.endTime" class="form-control awe-calendar to"
+                                       id="endTime_add_input">
                                 <span class="help-block"></span>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-2 control-label">价格</label>
                             <div class="col-sm-10">
-                                <input type="text" name="intake.money" class="form-control" id="money_add_input"
-                                    readonly>
+                                <input type="text" name="housing.costMoney" class="form-control" id="money_add_input"
+                                       readonly>
                                 <span class="help-block"></span>
                             </div>
                         </div>
@@ -77,7 +78,7 @@
                             <label class="col-sm-2 control-label">备注</label>
                             <div class="col-sm-10">
                                 <input type="text" name="orderInfo.introduce" class="form-control"
-                                    id="introduce_add_input">
+                                       id="introduce_add_input">
                                 <span class="help-block"></span>
                             </div>
                         </div>
@@ -120,14 +121,12 @@
             $.each(result.extend.rooms, function (index, item) {
                 html += "<div class='col-md-6'>\n" +
                     "<div class='room_item-1'>\n" +
-                    "<h2><a href='#'>" + item.room.type + "</a></h2>\n" +
+                    "<h2><a href='#'>" + item.type + "</a></h2>\n" +
                     "<div class='img'>\n";
-                $.each(item.photos, function (index, photo) {
-                    html += "<a href='#'><img src=" + photo.picture + " alt=''></a>\n";
-                });
+                html += "<a href='#'><img src=" + item.picture + " alt=''></a>\n";
                 html += "</div>\n" +
                     "<div class='desc'>\n" +
-                    "<p>" + item.room.introduce + "</p>\n" +
+                    "<p>" + item.introduce + "</p>\n" +
                     "<ul>\n" +
                     "<li>Max: 4 Person(s)</li>\n" +
                     "<li>Size: 35 m2 / 376 ft2</li>\n" +
@@ -136,8 +135,8 @@
                     "</ul>\n" +
                     "</div>\n" +
                     "<div class='bot'>\n" +
-                    "<span class='price'>起步价<span class='amount' >$" + item.room.price + "</span> /days</span>\n" +
-                    "<a class='awe-btn awe-btn-13 add_btn' room_id=" + item.room.id + " price=" + item.room.price + ">立即预定</a>\n" +
+                    "<span class='price'>起步价<span class='amount' >$" + item.price + "</span> /days</span>\n" +
+                    "<a class='awe-btn awe-btn-13 add_btn' room_id=" + item.roomId + " price=" + item.price + ">立即预定</a>\n" +
                     "</div>\n" +
                     "</div>\n" +
                     "</div>";

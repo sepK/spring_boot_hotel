@@ -88,7 +88,8 @@ public class OrderInfoServiceImpl extends BaseService implements OrderInfoServic
         Housing housing = indent.getHousing();
         orderInfo.setOrderStatus(Integer.valueOf("1"));
         orderInfo.setRoomId(roomId);
-        housing.setUserId(orderInfo.getUserId());
+        //orderInfo.getUserId()
+        housing.setUserId(1);
         housing.setRoomId(roomId);
         addOrder(orderInfo);
         return Result.success();

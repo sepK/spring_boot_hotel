@@ -33,11 +33,11 @@ public class PayController extends BaseController {
     private String pay() throws AlipayApiException {
         //这个应该是从前端端传过来的，这里为了测试就从后台写死了
         AlipayVo vo = new AlipayVo();
-        vo.setOutTradeNo(UUID.randomUUID().toString().replace("-", ""));
-        vo.setTotalAmount("0.01");
-        vo.setSubject("nelson-test-title");
+        vo.setOut_trade_no(UUID.randomUUID().toString().replace("-", ""));
+        vo.setTotal_amount("0.01");
+        vo.setSubject("test");
         //这个是固定的
-        vo.setProductCode("FAST_INSTANT_TRADE_PAY");
+        vo.setProduct_code("FAST_INSTANT_TRADE_PAY");
         String json = new Gson().toJson(vo);
         System.out.println(json);
 

@@ -2,7 +2,6 @@ package com.ecjtu.kongtao.bean.housing;
 
 import com.ecjtu.kongtao.bean.room.Room;
 import com.ecjtu.kongtao.bean.user.User;
-import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -52,7 +51,7 @@ public class Housing implements Serializable {
     public void setUserId(Integer userId) {
         this.userId = userId;
     }
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
+
     public Date getStartTime() {
         return startTime;
     }
@@ -60,7 +59,7 @@ public class Housing implements Serializable {
     public void setStartTime(Date startTime) {
         this.startTime = startTime;
     }
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
+
     public Date getEndTime() {
         return endTime;
     }
