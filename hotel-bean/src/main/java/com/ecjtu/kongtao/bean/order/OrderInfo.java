@@ -4,10 +4,12 @@ import com.ecjtu.kongtao.bean.employee.Employee;
 import com.ecjtu.kongtao.bean.room.Room;
 import com.ecjtu.kongtao.bean.user.User;
 
+import java.io.Serializable;
+
 /**
  * @author sepK
  */
-public class OrderInfo {
+public class OrderInfo implements Serializable {
     /**订单id*/
     private Integer orderId;
     /**房间id*/

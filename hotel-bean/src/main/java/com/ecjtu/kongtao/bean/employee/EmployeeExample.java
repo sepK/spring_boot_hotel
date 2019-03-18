@@ -1,12 +1,13 @@
 package com.ecjtu.kongtao.bean.employee;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * @author sepK
  */
-public class EmployeeExample {
+public class EmployeeExample implements Serializable {
     protected String orderByClause;
 
     protected boolean distinct;

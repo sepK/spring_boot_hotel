@@ -1,5 +1,6 @@
 package com.ecjtu.kongtao.bean.housing;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -7,7 +8,7 @@ import java.util.List;
 /**
  * @author sepK
  */
-public class HousingExample {
+public class HousingExample implements Serializable {
     protected String orderByClause;
 
     protected boolean distinct;

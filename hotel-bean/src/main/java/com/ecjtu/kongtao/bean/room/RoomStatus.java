@@ -1,10 +1,12 @@
 package com.ecjtu.kongtao.bean.room;
 
+import java.io.Serializable;
+
 /**
  * @author t.k
  * @date 2019/2/22 15:39
  */
-public enum RoomStatus {
+public enum RoomStatus implements Serializable{
     /**空闲*/
     IDLE("空闲", 0),
     /**预定*/

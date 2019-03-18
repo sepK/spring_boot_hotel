@@ -1,10 +1,12 @@
 package com.ecjtu.kongtao.bean.room;
 
+import java.io.Serializable;
+
 /**
  * @author t.k
  * @date 2019/2/21 16:57
  */
-public enum RoomType {
+public enum RoomType implements Serializable{
     /**标准间*/
     NORMAL_ROOM("标准间", 1),
     /**单人间*/

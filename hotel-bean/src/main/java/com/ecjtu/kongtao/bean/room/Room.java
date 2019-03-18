@@ -1,9 +1,11 @@
 package com.ecjtu.kongtao.bean.room;
 
+import java.io.Serializable;
+
 /**
  * @author sepK
  */
-public class Room {
+public class Room implements Serializable {
     /**房间id*/
     private Integer roomId;
     /**房间号*/

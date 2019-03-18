@@ -1,12 +1,13 @@
 package com.ecjtu.kongtao.bean.user;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * @author sepK
  */
-public class UserExample {
+public class UserExample implements Serializable {
     protected String orderByClause;
 
     protected boolean distinct;

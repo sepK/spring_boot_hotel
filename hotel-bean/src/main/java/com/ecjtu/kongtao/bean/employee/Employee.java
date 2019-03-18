@@ -1,9 +1,11 @@
 package com.ecjtu.kongtao.bean.employee;
 
+import java.io.Serializable;
+
 /**
  * @author sepK
  */
-public class Employee {
+public class Employee implements Serializable {
     /**员工id*/
     private Integer empId;
     /**员工名字*/

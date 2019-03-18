@@ -1,12 +1,13 @@
 package com.ecjtu.kongtao.bean.admin;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * @author sepK
  */
-public class AdminExample {
+public class AdminExample implements Serializable {
     protected String orderByClause;
 
     protected boolean distinct;

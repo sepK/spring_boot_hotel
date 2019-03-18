@@ -1,9 +1,11 @@
 package com.ecjtu.kongtao.bean.user;
 
+import java.io.Serializable;
+
 /**
  * @author sepK
  */
-public class User {
+public class User implements Serializable {
     /**用户id*/
     private Integer userId;
     /**用户名*/

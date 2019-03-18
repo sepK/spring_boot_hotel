@@ -1,10 +1,12 @@
 package com.ecjtu.kongtao.bean.employee;
 
+import java.io.Serializable;
+
 /**
  * @author t.k
  * @date 2019/2/22 15:16
  */
-public enum EmployeeType {
+public enum EmployeeType implements Serializable{
     /**前台收银员*/
     NORMAL_ROOM("前台收银员",1),
     /**服务员*/

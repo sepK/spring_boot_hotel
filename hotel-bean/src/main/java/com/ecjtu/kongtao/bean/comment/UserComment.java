@@ -4,12 +4,13 @@ import com.ecjtu.kongtao.bean.room.Room;
 import com.ecjtu.kongtao.bean.user.User;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * @author sepK
  */
-public class UserComment {
+public class UserComment implements Serializable {
     /**评论id*/
     private Integer commentId;
     /**评论人id*/

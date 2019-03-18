@@ -1,12 +1,13 @@
 package com.ecjtu.kongtao.bean.order;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * @author sepK
  */
-public class OrderInfoExample {
+public class OrderInfoExample implements Serializable {
     protected String orderByClause;
 
     protected boolean distinct;

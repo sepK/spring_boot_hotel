@@ -1,5 +1,6 @@
 package com.ecjtu.kongtao.bean.comment;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -7,7 +8,7 @@ import java.util.List;
 /**
  * @author sepK
  */
-public class UserCommentExample {
+public class UserCommentExample implements Serializable {
     protected String orderByClause;
 
     protected boolean distinct;

@@ -1,12 +1,13 @@
 package com.ecjtu.kongtao.bean.room;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * @author sepK
  */
-public class RoomExample {
+public class RoomExample implements Serializable {
     protected String orderByClause;
 
     protected boolean distinct;

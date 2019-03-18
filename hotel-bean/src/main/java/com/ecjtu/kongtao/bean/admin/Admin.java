@@ -1,9 +1,11 @@
 package com.ecjtu.kongtao.bean.admin;
 
+import java.io.Serializable;
+
 /**
  * @author sepK
  */
-public class Admin {
+public class Admin implements Serializable{
     /**管理员id*/
     private Integer adminId;
     /**管理员登录名*/

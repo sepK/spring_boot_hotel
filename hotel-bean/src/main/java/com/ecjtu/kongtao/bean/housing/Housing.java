@@ -4,12 +4,13 @@ import com.ecjtu.kongtao.bean.room.Room;
 import com.ecjtu.kongtao.bean.user.User;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * @author sepK
  */
-public class Housing {
+public class Housing implements Serializable {
     /**入住id*/
     private Integer housingId;
     /**房间id*/
