@@ -105,7 +105,7 @@ public class RoomController extends BaseController{
     private void upLoadPhoto(MultipartFile file, Room room){
         if(!file.isEmpty()) {
             String originalFilename = file.getOriginalFilename();
-            String path = "F:\\Idea Project\\spring-boot\\hotel-web\\src\\main\\resources\\static\\images\\";
+            String path = "F:\\Idea Project\\spring-boot\\hotel-web\\src\\main\\resources\\static\\images\\rooms\\";
 
             String newFileName = UUID.randomUUID() + originalFilename.substring(originalFilename.lastIndexOf("."));
             File newFile = new File(path + newFileName);
