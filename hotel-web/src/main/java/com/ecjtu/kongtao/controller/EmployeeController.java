@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -51,6 +52,9 @@ public class EmployeeController extends BaseController {
     @RequestMapping(value = "/employee", method = RequestMethod.POST)
     @ResponseBody
     public Result addEmp(Employee employee) {
+        Date now = new Date();
+        employee.setCreateTime(now);
+        employee.setLastModifyTime(now);
         employeeService.addEmp(employee);
         return  Result.success();
     }

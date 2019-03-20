@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -51,6 +52,9 @@ public class OrderInfoController extends BaseController{
     @RequestMapping(value = "/order", method = RequestMethod.POST)
     @ResponseBody
     public Result addOrder(OrderInfo orderInfo){
+        Date now = new Date();
+        orderInfo.setCreateTime(now);
+        orderInfo.setLastModifyTime(now);
         orderInfoService.addOrder(orderInfo);
         return Result.success();
 

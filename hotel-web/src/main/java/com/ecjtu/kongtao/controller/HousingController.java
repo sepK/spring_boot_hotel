@@ -67,6 +67,9 @@ public class HousingController extends BaseController{
                 if (housing.getEndTime().before(housing.getStartTime())) {
                     throw new UserException(ErrorCode.ERROR_TIME_RANGE_ERROR);
                 } else {
+                    Date now = new Date();
+                    housing.setCreateTime(now);
+                    housing.setLastModifyTime(now);
                     housingService.addHousing(housing);
                 }
             }

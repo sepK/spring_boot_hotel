@@ -354,8 +354,10 @@
                     url: "/user/user/" + userId,
                     type: "DELETE",
                     success: function (result) {
+                        if (result.code === 200) {
+                            to_page("users", totalRecord);
+                        }
                         alert(result.msg);
-                        to_page("users", currentPage);
                     }
                 });
             }
@@ -368,9 +370,11 @@
                     type: "POST",
                     data: $("#userUpdateModal form").serialize(),
                     success: function (result) {
-                        $("#userUpdateModal").modal("hide");
+                        if (result.code === 200) {
+                            $("#userUpdateModal").modal("hide");
+                            to_page("users", totalRecord);
+                        }
                         alert(result.msg);
-                        to_page("users", currentPage);
                     }
                 });
             });
@@ -388,7 +392,6 @@
                         to_page("users", totalRecord);
                     }
                     alert(result.msg);
-
                 }
             });
         });
@@ -474,7 +477,7 @@
                 data: "userName=" + userName,
                 type: "POST",
                 success: function (result) {
-                    if (result.code === 400) {
+                    if (result.code !== 200) {
                         show_validate_msg(element, "error", "用户名已存在");
                         $(element).attr("ajax-va", "error");
                     } else {
@@ -493,7 +496,7 @@
                     type: "POST",
                     data: "verifyCode=" + verifyCode,
                     success: function (result) {
-                        if (result.code === 400) {
+                        if (result.code !== 200) {
                             show_validate_msg("#verifyCode_add_input",
                                 "error", "验证码错误");
                             $("#verifyCode_add_input").attr("ajax-va", "error");

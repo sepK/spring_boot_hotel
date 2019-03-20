@@ -302,10 +302,10 @@
 
             ul.append(firstPageLi).append(prePageLi);
             $.each(result.extend.pageInfo.navigatepageNums, function (index, item) {
-                if (item != 0) {
+                if (item !== 0) {
                     var numLi = $("<li></li>")
                         .append($("<a></a>").append(item));
-                    if (result.extend.pageInfo.pageNum == item) {
+                    if (result.extend.pageInfo.pageNum === item) {
                         numLi.addClass("active");
                     }
                     numLi.click(function () {
@@ -371,8 +371,10 @@
                     url: "/employee/employee/" + empId,
                     type: "DELETE",
                     success: function (result) {
+                        if (result.code === 200) {
+                            to_page("employees", currentPage);
+                        }
                         alert(result.msg);
-                        to_page("employees", currentPage);
                     }
                 });
             }
@@ -385,9 +387,11 @@
                     type: "PUT",
                     data: $("#empsUpdateModal form").serialize(),
                     success: function (result) {
-                        $("#empsUpdateModal").modal("hide");
+                        if (result.code === 200) {
+                            $("#empsUpdateModal").modal("hide");
+                            to_page("employees", currentPage);
+                        }
                         alert(result.msg);
-                        to_page("employees", currentPage);
                     }
                 });
             });
@@ -400,9 +404,11 @@
                 type: "POST",
                 data: $("#empsAddModal form").serialize(),
                 success: function (result) {
-                    $("#empsAddModal").modal("hide");
+                    if (result.code === 200) {
+                        $("#empsAddModal").modal("hide");
+                        to_page("employees", currentPage);
+                    }
                     alert(result.msg);
-                    to_page("employees", totalRecord);
                 }
             });
         });
@@ -445,8 +451,8 @@
                 type: "GET",
                 data: "empName=" + $(this).val(),
                 success: function (result) {
-                    if (result.code === 400) {
-                        show_validate_msg("#empName_add_input", "error", "用户名已经存在");
+                    if (result.code !== 200) {
+                        show_validate_msg("#empName_add_input", "error", "员工已经存在");
                         $("#empName_add_input").attr("ajax-va", "error");
                     } else {
                         show_validate_msg("#empName_add_input", "success", "");

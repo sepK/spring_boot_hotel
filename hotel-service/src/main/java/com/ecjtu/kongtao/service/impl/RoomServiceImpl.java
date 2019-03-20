@@ -9,6 +9,7 @@ import com.ecjtu.kongtao.service.RoomService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -37,6 +38,9 @@ public class RoomServiceImpl implements RoomService {
 
     @Override
     public void addRoom(Room room) {
+        Date now = new Date();
+        room.setCreateTime(now);
+        room.setLastModifyTime(now);
         roomMapper.insert(room);
     }
 

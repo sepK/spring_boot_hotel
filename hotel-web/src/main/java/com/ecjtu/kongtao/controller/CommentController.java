@@ -75,6 +75,9 @@ public class CommentController extends BaseController{
         if (users.size() <= 0) {
             throw new UserException(ErrorCode.ERROR_USER_NOT_EXIST);
         }
+        Date now = new Date();
+        comment.setCreateTime(now);
+        comment.setLastModifyTime(now);
         return  commentService.addUserComment(comment, rooms.get(0), users.get(0));
     }
 

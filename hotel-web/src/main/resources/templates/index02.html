@@ -388,8 +388,10 @@
                     url: "/room/room/" + roomId,
                     type: "DELETE",
                     success: function (result) {
+                        if (result.code === 200) {
+                            to_page("rooms", totalRecord);
+                        }
                         alert(result.msg);
-                        to_page("rooms", currentPage);
                     }
                 });
             }
@@ -414,9 +416,11 @@
                 processData: false,
                 contentType: false,
                 success: function (result) {
-                    $("#roomUpdateModal").modal("hide");
+                    if (result.code === 200) {
+                        $("#roomUpdateModal").modal("hide");
+                        to_page("rooms", totalRecord);
+                    }
                     alert(result.msg);
-                    to_page("rooms", currentPage);
                 }
             });
         });
@@ -441,9 +445,11 @@
                 processData: false,
                 contentType: false,
                 success: function (result) {
-                    $("#roomAddModal").modal("hide");
+                    if (result.code === 200) {
+                        $("#roomAddModal").modal("hide");
+                        to_page("rooms", totalRecord);
+                    }
                     alert(result.msg);
-                    to_page("rooms", totalRecord);
                 }
             });
         });
@@ -486,7 +492,7 @@
                 type: "POST",
                 data: "roomNumber=" + $(this).val(),
                 success: function (result) {
-                    if (result.code === 400) {
+                    if (result.code !== 200) {
                         show_validate_msg("#roomNumber_add_input", "error", "房间号存在");
                         $("#roomNumber_add_input").attr("ajax-va", "error");
                     } else {

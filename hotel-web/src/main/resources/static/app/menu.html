@@ -152,7 +152,7 @@
 </div>
 <script>
     var user = JSON.parse(sessionStorage.getItem("user"));
-    if (user != null) {
+    if (user !== null) {
         login();
     } else {
         $("#register_modal_btn").click(function () {
@@ -183,14 +183,17 @@
             type: "POST",
             data: $("#userUpdateModal form").serialize(),
             success: function (result) {
-                alert(result.msg);
                 if (result.code === 200) {
                     sessionStorage.setItem("user", JSON.stringify(result.extend.user));
                     user = JSON.parse(sessionStorage.getItem("user"));
                     $("#userUpdateModal").modal("hide");
                     login();
                     window.location.reload();
+                    alert("登录成功");
+                } else {
+                    alert("系统异常，请重新登录");
                 }
+
             }
         });
     });

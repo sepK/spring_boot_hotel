@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -62,6 +63,9 @@ public class UserController extends BaseController{
 	@RequestMapping(value = "/user", method = RequestMethod.PUT)
 	@ResponseBody
 	public Result addUser(User user) {
+		Date now = new Date();
+		user.setCreateTime(now);
+		user.setLastModifyTime(now);
 		userService.addUser(user);
 		return Result.success();
 	}

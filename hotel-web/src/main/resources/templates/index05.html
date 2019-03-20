@@ -344,8 +344,10 @@
                     url: "/comment/comment/" + commentId,
                     type: "DELETE",
                     success: function (result) {
+                        if (result.code === 200) {
+                            to_page("comments", currentPage);
+                        }
                         alert(result.msg);
-                        to_page("comments", currentPage);
                     }
                 });
             }
@@ -359,9 +361,11 @@
                     type: "PUT",
                     data: $("#commentUpdateModal form").serialize(),
                     success: function (result) {
-                        $("#commentUpdateModal").modal("hide");
+                        if (result.code === 200) {
+                            $("#commentUpdateModal").modal("hide");
+                            to_page("comments", currentPage);
+                        }
                         alert(result.msg);
-                        to_page("comments", currentPage);
                     }
                 });
             });
@@ -377,11 +381,9 @@
                 success: function (result) {
                     if (result.code === 200) {
                         $("#commentAddModal").modal("hide");
-                    } else {
-
+                        to_page("comments", currentPage);
                     }
                     alert(result.msg);
-                    to_page("comments", totalRecord);
                 }
             });
         });
@@ -412,10 +414,10 @@
             //清除当前元素的校验状态
             $(ele).parent().removeClass("has-success has-error");
             $(ele).next("span").text("");
-            if ("success" == status) {
+            if ("success" === status) {
                 $(ele).parent().addClass("has-success");
                 $(ele).next("span").text(msg);
-            } else if ("error" == status) {
+            } else if ("error" === status) {
                 $(ele).parent().addClass("has-error");
                 $(ele).next("span").text(msg);
             }

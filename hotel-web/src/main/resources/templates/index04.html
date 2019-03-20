@@ -296,10 +296,10 @@
 
             ul.append(firstPageLi).append(prePageLi);
             $.each(result.extend.pageInfo.navigatepageNums, function (index, item) {
-                if (item != 0) {
+                if (item !== 0) {
                     var numLi = $("<li></li>")
                         .append($("<a></a>").append(item));
-                    if (result.extend.pageInfo.pageNum == item) {
+                    if (result.extend.pageInfo.pageNum === item) {
                         numLi.addClass("active");
                     }
                     numLi.click(function () {
@@ -360,8 +360,10 @@
                     url: "/order/order/" + id,
                     type: "DELETE",
                     success: function (result) {
+                        if (result.code === 200) {
+                            to_page("orders", currentPage);
+                        }
                         alert(result.msg);
-                        to_page("orders", currentPage);
                     }
                 });
             }
@@ -374,9 +376,11 @@
                     type: "PUT",
                     data: $("#orderUpdateModal form").serialize(),
                     success: function (result) {
-                        $("#orderUpdateModal").modal("hide");
+                        if (result.code === 200) {
+                            $("#orderUpdateModal").modal("hide");
+                            to_page("orders", currentPage);
+                        }
                         alert(result.msg);
-                        to_page("orders", currentPage);
                     }
                 });
             });
@@ -390,12 +394,12 @@
                 type: "POST",
                 data: $("#orderAddModal form").serialize(),
                 success: function (result) {
-                    if (result.code == 400) {
-                    } else {
+                    if (result.code === 200) {
                         $("#orderAddModal").modal("hide");
+                        to_page("orders", currentPage);
                     }
                     alert(result.msg);
-                    to_page("orders", totalRecord);
+
                 }
             });
         });

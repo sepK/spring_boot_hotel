@@ -362,8 +362,10 @@
                     url: "/housing/housing/" + id,
                     type: "DELETE",
                     success: function (result) {
+                        if (result.code === 200) {
+                            to_page("housings", currentPage);
+                        }
                         alert(result.msg);
-                        to_page("housings", currentPage);
                     }
                 });
             }
@@ -379,9 +381,9 @@
                     success: function (result) {
                         if (result.code === 200) {
                             $("#housingUpdateModal").modal("hide");
+                            to_page("housings", currentPage);
                         }
                         alert(result.msg);
-                        to_page("housings", currentPage);
                     }
                 });
             });
@@ -396,10 +398,10 @@
                 data: $("#housingAddModal form").serialize(),
                 success: function (result) {
                     if (result.code === 200) {
-                        $("#housingUpdateModal").modal("hide");
+                        $("#housingAddModal").modal("hide");
+                        to_page("housings", currentPage);
                     }
                     alert(result.msg);
-                    to_page("housings", totalRecord);
                 }
             });
         });

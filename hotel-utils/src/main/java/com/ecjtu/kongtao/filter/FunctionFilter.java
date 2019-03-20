@@ -36,6 +36,7 @@ public class FunctionFilter implements Filter {
             "/user/checkVerifyCode",
             "/room/rooms",
             "/alipay",
+            "/user/logout"
     };
     @Override
     public void destroy() {
