@@ -22,6 +22,14 @@ public class Housing implements Serializable {
     private Date endTime;
     /**支付金额*/
     private Double costMoney;
+    /**
+     * 创建时间
+     */
+    private Date createTime;
+    /**
+     * 上次修改时间
+     */
+    private Date lastModifyTime;
 
     /**非入库字段 用户*/
     private User user;
@@ -90,5 +98,21 @@ public class Housing implements Serializable {
 
     public void setRoom(Room room) {
         this.room = room;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    public Date getLastModifyTime() {
+        return lastModifyTime;
+    }
+
+    public void setLastModifyTime(Date lastModifyTime) {
+        this.lastModifyTime = lastModifyTime;
     }
 }

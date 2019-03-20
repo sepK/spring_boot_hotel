@@ -8,6 +8,8 @@
     <result column="age" jdbcType="INTEGER" property="age" />
     <result column="phone" jdbcType="CHAR" property="phone" />
     <result column="duty" jdbcType="VARCHAR" property="duty" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+    <result column="last_modify_time" jdbcType="TIMESTAMP" property="lastModifyTime"/>
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -68,7 +70,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    emp_id, emp_name, sex, age, phone, duty
+    emp_id, emp_name, sex, age, phone, duty, create_time, last_modify_time
   </sql>
   <select id="selectByExample" parameterType="com.ecjtu.kongtao.bean.employee.EmployeeExample" resultMap="BaseResultMap">
     select
@@ -101,10 +103,12 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.ecjtu.kongtao.bean.employee.Employee">
-    insert into t_employee (emp_id, emp_name, sex, 
-      age, phone, duty)
-    values (#{empId,jdbcType=INTEGER}, #{empName,jdbcType=CHAR}, #{sex,jdbcType=CHAR}, 
-      #{age,jdbcType=INTEGER}, #{phone,jdbcType=CHAR}, #{duty,jdbcType=VARCHAR})
+    insert into t_employee (emp_id, emp_name, sex,
+    age, phone, duty, create_time,
+    last_modify_time)
+    values (#{empId,jdbcType=INTEGER}, #{empName,jdbcType=CHAR}, #{sex,jdbcType=CHAR},
+    #{age,jdbcType=INTEGER}, #{phone,jdbcType=CHAR}, #{duty,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP},
+    #{lastModifyTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.ecjtu.kongtao.bean.employee.Employee">
     insert into t_employee
@@ -127,6 +131,12 @@
       <if test="duty != null">
         duty,
       </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="lastModifyTime != null">
+        last_modify_time,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="empId != null">
@@ -146,6 +156,12 @@
       </if>
       <if test="duty != null">
         #{duty,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastModifyTime != null">
+        #{lastModifyTime,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
@@ -176,6 +192,12 @@
       <if test="record.duty != null">
         duty = #{record.duty,jdbcType=VARCHAR},
       </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.lastModifyTime != null">
+        last_modify_time = #{record.lastModifyTime,jdbcType=TIMESTAMP},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -188,7 +210,9 @@
       sex = #{record.sex,jdbcType=CHAR},
       age = #{record.age,jdbcType=INTEGER},
       phone = #{record.phone,jdbcType=CHAR},
-      duty = #{record.duty,jdbcType=VARCHAR}
+    duty = #{record.duty,jdbcType=VARCHAR},
+    create_time = #{record.createTime,jdbcType=TIMESTAMP},
+    last_modify_time = #{record.lastModifyTime,jdbcType=TIMESTAMP}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -211,6 +235,12 @@
       <if test="duty != null">
         duty = #{duty,jdbcType=VARCHAR},
       </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastModifyTime != null">
+        last_modify_time = #{lastModifyTime,jdbcType=TIMESTAMP},
+      </if>
     </set>
     where emp_id = #{empId,jdbcType=INTEGER}
   </update>
@@ -220,7 +250,9 @@
       sex = #{sex,jdbcType=CHAR},
       age = #{age,jdbcType=INTEGER},
       phone = #{phone,jdbcType=CHAR},
-      duty = #{duty,jdbcType=VARCHAR}
+    duty = #{duty,jdbcType=VARCHAR},
+    create_time = #{createTime,jdbcType=TIMESTAMP},
+    last_modify_time = #{lastModifyTime,jdbcType=TIMESTAMP}
     where emp_id = #{empId,jdbcType=INTEGER}
   </update>
 </mapper>

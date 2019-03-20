@@ -8,6 +8,8 @@
     <result column="price" jdbcType="DOUBLE" property="price" />
     <result column="status" jdbcType="SMALLINT" property="status" />
     <result column="picture" jdbcType="VARCHAR" property="picture" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+    <result column="last_modify_time" jdbcType="TIMESTAMP" property="lastModifyTime"/>
   </resultMap>
   <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.ecjtu.kongtao.bean.room.Room">
     <result column="introduce" jdbcType="LONGVARCHAR" property="introduce" />
@@ -71,7 +73,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    room_id, room_number, type, price, status, picture
+    room_id, room_number, type, price, status, picture, create_time, last_modify_time
   </sql>
   <sql id="Blob_Column_List">
     introduce
@@ -107,7 +109,7 @@
     </if>
   </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
-    select 
+    select
     <include refid="Base_Column_List" />
     ,
     <include refid="Blob_Column_List" />
@@ -125,12 +127,14 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.ecjtu.kongtao.bean.room.Room">
-    insert into t_room (room_id, room_number, type, 
-      price, status, picture, 
-      introduce)
-    values (#{roomId,jdbcType=INTEGER}, #{roomNumber,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER}, 
-      #{price,jdbcType=DOUBLE}, #{status,jdbcType=SMALLINT}, #{picture,jdbcType=VARCHAR}, 
-      #{introduce,jdbcType=LONGVARCHAR})
+    insert into t_room (room_id, room_number, type,
+    price, status, picture,
+    create_time, last_modify_time, introduce
+    )
+    values (#{roomId,jdbcType=INTEGER}, #{roomNumber,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER},
+    #{price,jdbcType=DOUBLE}, #{status,jdbcType=SMALLINT}, #{picture,jdbcType=VARCHAR},
+    #{createTime,jdbcType=TIMESTAMP}, #{lastModifyTime,jdbcType=TIMESTAMP}, #{introduce,jdbcType=LONGVARCHAR}
+    )
   </insert>
   <insert id="insertSelective" parameterType="com.ecjtu.kongtao.bean.room.Room">
     insert into t_room
@@ -152,6 +156,12 @@
       </if>
       <if test="picture != null">
         picture,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="lastModifyTime != null">
+        last_modify_time,
       </if>
       <if test="introduce != null">
         introduce,
@@ -175,6 +185,12 @@
       </if>
       <if test="picture != null">
         #{picture,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastModifyTime != null">
+        #{lastModifyTime,jdbcType=TIMESTAMP},
       </if>
       <if test="introduce != null">
         #{introduce,jdbcType=LONGVARCHAR},
@@ -208,6 +224,12 @@
       <if test="record.picture != null">
         picture = #{record.picture,jdbcType=VARCHAR},
       </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.lastModifyTime != null">
+        last_modify_time = #{record.lastModifyTime,jdbcType=TIMESTAMP},
+      </if>
       <if test="record.introduce != null">
         introduce = #{record.introduce,jdbcType=LONGVARCHAR},
       </if>
@@ -224,6 +246,8 @@
       price = #{record.price,jdbcType=DOUBLE},
       status = #{record.status,jdbcType=SMALLINT},
       picture = #{record.picture,jdbcType=VARCHAR},
+    create_time = #{record.createTime,jdbcType=TIMESTAMP},
+    last_modify_time = #{record.lastModifyTime,jdbcType=TIMESTAMP},
       introduce = #{record.introduce,jdbcType=LONGVARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -236,7 +260,9 @@
       type = #{record.type,jdbcType=INTEGER},
       price = #{record.price,jdbcType=DOUBLE},
       status = #{record.status,jdbcType=SMALLINT},
-      picture = #{record.picture,jdbcType=VARCHAR}
+    picture = #{record.picture,jdbcType=VARCHAR},
+    create_time = #{record.createTime,jdbcType=TIMESTAMP},
+    last_modify_time = #{record.lastModifyTime,jdbcType=TIMESTAMP}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -259,6 +285,12 @@
       <if test="picture != null">
         picture = #{picture,jdbcType=VARCHAR},
       </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastModifyTime != null">
+        last_modify_time = #{lastModifyTime,jdbcType=TIMESTAMP},
+      </if>
       <if test="introduce != null">
         introduce = #{introduce,jdbcType=LONGVARCHAR},
       </if>
@@ -272,6 +304,8 @@
       price = #{price,jdbcType=DOUBLE},
       status = #{status,jdbcType=SMALLINT},
       picture = #{picture,jdbcType=VARCHAR},
+    create_time = #{createTime,jdbcType=TIMESTAMP},
+    last_modify_time = #{lastModifyTime,jdbcType=TIMESTAMP},
       introduce = #{introduce,jdbcType=LONGVARCHAR}
     where room_id = #{roomId,jdbcType=INTEGER}
   </update>
@@ -281,7 +315,9 @@
       type = #{type,jdbcType=INTEGER},
       price = #{price,jdbcType=DOUBLE},
       status = #{status,jdbcType=SMALLINT},
-      picture = #{picture,jdbcType=VARCHAR}
+    picture = #{picture,jdbcType=VARCHAR},
+    create_time = #{createTime,jdbcType=TIMESTAMP},
+    last_modify_time = #{lastModifyTime,jdbcType=TIMESTAMP}
     where room_id = #{roomId,jdbcType=INTEGER}
   </update>
 </mapper>

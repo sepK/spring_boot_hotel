@@ -5,6 +5,7 @@ import com.ecjtu.kongtao.bean.room.Room;
 import com.ecjtu.kongtao.bean.user.User;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * @author sepK
@@ -22,6 +23,14 @@ public class OrderInfo implements Serializable {
     private Integer empId;
     /**备注*/
     private String introduce;
+    /**
+     * 创建时间
+     */
+    private Date createTime;
+    /**
+     * 上次修改时间
+     */
+    private Date lastModifyTime;
 
     /**非入库字段 用户*/
     private User user;
@@ -100,5 +109,21 @@ public class OrderInfo implements Serializable {
 
     public void setEmployee(Employee employee) {
         this.employee = employee;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    public Date getLastModifyTime() {
+        return lastModifyTime;
+    }
+
+    public void setLastModifyTime(Date lastModifyTime) {
+        this.lastModifyTime = lastModifyTime;
     }
 }

@@ -56,10 +56,14 @@ public class HousingServiceImpl extends BaseService implements HousingService{
     }
 
     @Override
-    public Housing getHousingByUserNameAndRoomId(Integer roomId, String userName) {
+    public Housing getHousingByUserIdAndRoomId(Integer roomId, Integer userId) {
         HousingExample example = new HousingExample();
         HousingExample.Criteria criteria = example.createCriteria();
-        return housingMapper.selectByExample(example).get(0);
+        criteria.andRoomIdEqualTo(roomId);
+        criteria.andUserIdEqualTo(userId);
+        List<Housing> housings = housingMapper.selectByExample(example);
+
+        return housings.size() > 0 ? housings.get(0) : null;
     }
 
     @Override

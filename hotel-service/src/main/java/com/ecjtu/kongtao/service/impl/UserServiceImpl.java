@@ -6,6 +6,7 @@ import com.ecjtu.kongtao.service.BaseService;
 import com.ecjtu.kongtao.service.UserService;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 
@@ -44,7 +45,19 @@ public class UserServiceImpl extends BaseService implements UserService {
 	}
 
 	@Override
+	public User getUser(String userName) {
+		UserExample customerExample = new UserExample();
+		UserExample.Criteria criteria = customerExample.createCriteria();
+		criteria.andUserNameEqualTo(userName);
+		List<User> users = userMapper.selectByExample(customerExample);
+		return users.size() > 0 ? users.get(0) : null;
+	}
+
+	@Override
 	public void addUser(User user) {
+		Date now = new Date();
+		user.setCreateTime(now);
+		user.setLastModifyTime(now);
 		userMapper.insert(user);
 	}
 

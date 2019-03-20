@@ -8,6 +8,8 @@
     <result column="start_time" jdbcType="TIMESTAMP" property="startTime" />
     <result column="end_time" jdbcType="TIMESTAMP" property="endTime" />
     <result column="cost_money" jdbcType="DOUBLE" property="costMoney" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+    <result column="last_modify_time" jdbcType="TIMESTAMP" property="lastModifyTime"/>
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -68,7 +70,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    housing_id, room_id, user_id, start_time, end_time, cost_money
+    housing_id, room_id, user_id, start_time, end_time, cost_money, create_time, last_modify_time
   </sql>
   <select id="selectByExample" parameterType="com.ecjtu.kongtao.bean.housing.HousingExample" resultMap="BaseResultMap">
     select
@@ -101,12 +103,12 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.ecjtu.kongtao.bean.housing.Housing">
-    insert into t_housing (housing_id, room_id, user_id, 
-      start_time, end_time, cost_money
-      )
-    values (#{housingId,jdbcType=INTEGER}, #{roomId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, 
-      #{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, #{costMoney,jdbcType=DOUBLE}
-      )
+    insert into t_housing (housing_id, room_id, user_id,
+    start_time, end_time, cost_money,
+    create_time, last_modify_time)
+    values (#{housingId,jdbcType=INTEGER}, #{roomId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER},
+    #{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, #{costMoney,jdbcType=DOUBLE},
+    #{createTime,jdbcType=TIMESTAMP}, #{lastModifyTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.ecjtu.kongtao.bean.housing.Housing">
     insert into t_housing
@@ -129,6 +131,12 @@
       <if test="costMoney != null">
         cost_money,
       </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="lastModifyTime != null">
+        last_modify_time,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="housingId != null">
@@ -148,6 +156,12 @@
       </if>
       <if test="costMoney != null">
         #{costMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastModifyTime != null">
+        #{lastModifyTime,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
@@ -178,6 +192,12 @@
       <if test="record.costMoney != null">
         cost_money = #{record.costMoney,jdbcType=DOUBLE},
       </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.lastModifyTime != null">
+        last_modify_time = #{record.lastModifyTime,jdbcType=TIMESTAMP},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -190,7 +210,9 @@
       user_id = #{record.userId,jdbcType=INTEGER},
       start_time = #{record.startTime,jdbcType=TIMESTAMP},
       end_time = #{record.endTime,jdbcType=TIMESTAMP},
-      cost_money = #{record.costMoney,jdbcType=DOUBLE}
+    cost_money = #{record.costMoney,jdbcType=DOUBLE},
+    create_time = #{record.createTime,jdbcType=TIMESTAMP},
+    last_modify_time = #{record.lastModifyTime,jdbcType=TIMESTAMP}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -213,6 +235,12 @@
       <if test="costMoney != null">
         cost_money = #{costMoney,jdbcType=DOUBLE},
       </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastModifyTime != null">
+        last_modify_time = #{lastModifyTime,jdbcType=TIMESTAMP},
+      </if>
     </set>
     where housing_id = #{housingId,jdbcType=INTEGER}
   </update>
@@ -222,7 +250,9 @@
       user_id = #{userId,jdbcType=INTEGER},
       start_time = #{startTime,jdbcType=TIMESTAMP},
       end_time = #{endTime,jdbcType=TIMESTAMP},
-      cost_money = #{costMoney,jdbcType=DOUBLE}
+    cost_money = #{costMoney,jdbcType=DOUBLE},
+    create_time = #{createTime,jdbcType=TIMESTAMP},
+    last_modify_time = #{lastModifyTime,jdbcType=TIMESTAMP}
     where housing_id = #{housingId,jdbcType=INTEGER}
   </update>
 </mapper>

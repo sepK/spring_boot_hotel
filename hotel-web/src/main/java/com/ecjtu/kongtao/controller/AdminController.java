@@ -30,8 +30,7 @@ public class AdminController extends BaseController{
     @ResponseBody
     public Result checkAdminInfo(Admin admin, HttpServletRequest httpServletRequest){
         if(adminService.checkInfo(admin)) {
-            httpServletRequest.getSession().setAttribute(SessionKey.USER, admin);
-            //httpServletRequest.getSession().setMaxInactiveInterval(60 * 5);
+            httpServletRequest.getSession().setAttribute(SessionKey.ADMIN_USER, admin);
             return Result.success();
         }
         return Result.fail(ErrorCode.ERROR_PARAM_LOGIN);

@@ -38,19 +38,20 @@
                         <div class="form-group">
                             <label class="col-sm-2 control-label">客户名</label>
                             <div class="col-sm-10">
-                                <input type="text" name="userName" class="form-control" id="userName_update_input"
-                                    readonly="readonly" />
+                                <input type="text" name="user.userName" class="form-control" id="userName_update_input"
+                                       readonly="readonly"/>
                                 <span class="help-block"></span>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-2 control-label">客房状态</label>
+                            <label class="col-sm-2 control-label">订单状态</label>
                             <div class="col-sm-10">
-                                <select class="form-control" name="status">
-                                    <option value="1">预定</option>
-                                    <option value="2">入住</option>
-                                    <option value="3">退房</option>
-                                    <option value="0">完成</option>
+                                <select class="form-control" name="orderStatus" id="status_update_input">
+                                    <span th:each="orderStatus : ${session.ORDER_STATUS}">
+                                        <option th:value="${orderStatus.getStatus()}"
+                                                th:text="${orderStatus.getDesc()}">
+                                        </option>
+                                    </span>
                                 </select>
                                 <span class="help-block"></span>
                             </div>
@@ -104,13 +105,14 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-2 control-label">客房状态</label>
+                            <label class="col-sm-2 control-label">订单状态</label>
                             <div class="col-sm-10">
-                                <select class="form-control" name="status">
-                                    <option value="1">预定</option>
-                                    <option value="2">入住</option>
-                                    <option value="3">退房</option>
-                                    <option value="0">完成</option>
+                                <select class="form-control" name="orderStatus" id="status_add_input">
+                                    <span th:each="orderStatus : ${session.ORDER_STATUS}">
+                                        <option th:value="${orderStatus.getStatus()}"
+                                                th:text="${orderStatus.getDesc()}">
+                                        </option>
+                                    </span>
                                 </select>
                                 <span class="help-block"></span>
                             </div>
@@ -151,7 +153,7 @@
             </div>
             <div class="col-md-2 header-right login">
                 <span class="glyphicon glyphicon-user"></span>
-                <span class="username" th:text="${session.USER.getAdminName()}">admin</span>
+                <span class="username" th:text="${session.ADMIN_USER.getAdminName()}">admin</span>
             </div>
         </div>
     </div>
@@ -224,10 +226,11 @@
         function build_order_table(result) {
             $("#order_table tbody").empty();
             $.each(result, function (index, item) {
-                var idTd = $("<td></td>").append(item.id);
+                var orderIdTd = $("<td></td>").append(item.orderId);
                 var roomIdTd = $("<td></td>").append(item.roomId);
-                var userNameTd = $("<td></td>").append(item.userName);
-                var statusTd = $("<td></td>").append(item.status === 1 ? "预定" : item.status === 2 ? "入住" : item.status === 3 ? "退房" : "完成");
+                var userNameTd = $("<td></td>").append(item.user.userName);
+                var statusTd = $("<td></td>").append(item.orderStatus === 1 ? "预定" : item.orderStatus === 2 ? "入住" : item.orderStatus === 3 ? "退房"
+                    : item.orderStatus === 4 ? "完成" : "取消");
                 var empIdTd = $("<td></td>").append(item.empId);
                 var introduceTd = $("<td></td>").append(item.introduce);
 
@@ -235,12 +238,12 @@
                 var editBtn = $("<button></button>").addClass("btn btn-primary btn-sm edit_btn").append(
                     $("<span></span>").addClass("glyphicon glyphicon-pencil")).append("编辑");
 
-                editBtn.attr("edit-id", item.id);
+                editBtn.attr("edit-id", item.orderId);
                 var delBtn = $("<button></button>").addClass("btn btn-danger btn-sm delete_btn").append(
                     $("<span></span>").addClass("glyphicon glyphicon-trash")).append("删除");
-                delBtn.attr("del-id", item.id);
+                delBtn.attr("del-id", item.orderId);
                 var btnTd = $("<td></td>").append(editBtn).append(" ").append(delBtn);
-                $("<tr></tr>").append(idTd).append(roomIdTd).append(userNameTd)
+                $("<tr></tr>").append(orderIdTd).append(roomIdTd).append(userNameTd)
                     .append(statusTd).append(introduceTd).append(empIdTd).append(btnTd)
                     .appendTo("#order_table tbody");
             });
@@ -341,8 +344,8 @@
                 success: function (result) {
                     var orderInfo = result.extend.orderInfo;
                     $("#roomId_update_input").val(orderInfo.roomId);
-                    $("#userName_update_input").val(orderInfo.userName);
-                    $("#orderUpdateModal select").val(orderInfo.status);
+                    $("#userName_update_input").val(orderInfo.user.userName);
+                    $("#status_update_input").val(orderInfo.orderStatus);
                     $("#empId_update_input").val(orderInfo.empId);
                     $("#introduce_update_input").val(orderInfo.introduce);
                 }

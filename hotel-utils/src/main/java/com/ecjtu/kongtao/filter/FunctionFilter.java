@@ -34,7 +34,8 @@ public class FunctionFilter implements Filter {
             "/order/getIndents",
             "/order/updateIndent",
             "/user/checkVerifyCode",
-            "/room/rooms"
+            "/room/rooms",
+            "/alipay",
     };
     @Override
     public void destroy() {
@@ -55,7 +56,7 @@ public class FunctionFilter implements Filter {
             }
         }
         if (doFilter) {
-            if(request.getSession().getAttribute(SessionKey.USER) != null){
+            if (request.getSession().getAttribute(SessionKey.ADMIN_USER) != null) {
                 chain.doFilter(req, res);
                 return;
             }

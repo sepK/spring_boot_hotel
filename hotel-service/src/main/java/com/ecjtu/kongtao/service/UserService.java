@@ -70,4 +70,12 @@ public interface UserService {
 	 * @return true or false
 	 */
 	boolean checkName(String name);
+
+    /**
+     * 通过用户名获取用户
+     *
+     * @param userName
+     * @return
+     */
+    User getUser(String userName);
 }

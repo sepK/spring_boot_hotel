@@ -73,7 +73,9 @@
                         <div class="form-group">
                             <label class="col-sm-2 control-label">房间照片</label>
                             <div class="col-sm-10">
-                                <input type="file" name="file" class="form-control" id="picture_update_input">
+                                <span class="btn btn-success fileinput-button file-up"><span>上传</span>
+                                    <input type="file" name="file" class="form-control" id="picture_update_input">
+                                </span>
                             </div>
                         </div>
                     </form>
@@ -142,7 +144,10 @@
                         <div class="form-group">
                             <label class="col-sm-2 control-label">房间照片</label>
                             <div class="col-sm-10">
-                                <input type="file" name="file" class="form-control" id="picture_add_input">
+                                <span class="btn btn-success fileinput-button file-up"><span>上传</span>
+                                    <input type="file" name="file" class="form-control" id="picture_add_input">
+                                </span>
+
                             </div>
                         </div>
                     </form>
@@ -167,7 +172,7 @@
             </div>
             <div class="col-md-2 header-right login">
                 <span class="glyphicon glyphicon-user"></span>
-                <span class="username" th:text="${session.USER.getAdminName()}">admin</span>
+                <span class="username" th:text="${session.ADMIN_USER.getAdminName()}">admin</span>
             </div>
         </div>
     </div>
@@ -365,11 +370,11 @@
                 type: "GET",
                 success: function (result) {
                     var room = result.extend.room;
-                    $("#type_update_input select").val(room.type);
+                    $("#type_update_input").val(room.type);
                     $("#price_update_input").val(room.price);
                     $("#roomNumber_update_input").val(room.roomNumber);
                     $("#introduce_update_input").val(room.introduce);
-                    $("#status_update_input select").val(room.status);
+                    $("#status_update_input").val(room.status);
                 }
             });
         }
@@ -505,6 +510,21 @@
             });
         });
     </script>
+    <style>
+        .fileinput-button {
+            position: relative;
+            display: inline-block;
+            overflow: hidden;
+        }
+
+        .fileinput-button input {
+            position: absolute;
+            left: 0px;
+            top: 0px;
+            opacity: 0;
+            -ms-filter: 'alpha(opacity=0)';
+        }
+    </style>
 </body>
 
 </html>

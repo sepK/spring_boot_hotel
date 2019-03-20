@@ -1,6 +1,7 @@
 package com.ecjtu.kongtao.manager;
 
 import com.ecjtu.kongtao.bean.employee.EmployeeType;
+import com.ecjtu.kongtao.bean.order.OrderStatus;
 import com.ecjtu.kongtao.bean.room.RoomStatus;
 import com.ecjtu.kongtao.bean.room.RoomType;
 import com.ecjtu.kongtao.utils.RedisUtils;
@@ -39,6 +40,10 @@ public class SessionManager {
         if (ObjectUtils.isEmpty(session.getAttribute(SessionKey.EMPLOYEE_TYPE))) {
             List<EmployeeType> employeeTypes = Stream.of(EmployeeType.values()).collect(Collectors.toList());
             session.setAttribute(SessionKey.EMPLOYEE_TYPE, employeeTypes);
+        }
+        if (ObjectUtils.isEmpty(session.getAttribute(SessionKey.ORDER_STATUS))) {
+            List<OrderStatus> orderStatus = Stream.of(OrderStatus.values()).collect(Collectors.toList());
+            session.setAttribute(SessionKey.ORDER_STATUS, orderStatus);
         }
     }
 }

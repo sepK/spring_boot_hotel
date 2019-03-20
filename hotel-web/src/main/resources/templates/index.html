@@ -138,7 +138,7 @@
             </div>
             <div class="col-md-2 header-right login">
                 <span class="glyphicon glyphicon-user"></span>
-                <span class="username" th:text="${session.USER.getAdminName()}">admin</span>
+                <span class="username" th:text="${session.ADMIN_USER.getAdminName()}">admin</span>
             </div>
         </div>
     </div>
@@ -380,12 +380,15 @@
             }
             $.ajax({
                 url: "/user/user",
-                type: "POST",
+                type: "PUT",
                 data: $("#userAddModal form").serialize(),
                 success: function (result) {
-                    $("#userAddModal").modal("hide");
+                    if (result.code === 200) {
+                        $("#userAddModal").modal("hide");
+                        to_page("users", totalRecord);
+                    }
                     alert(result.msg);
-                    to_page("users", totalRecord);
+
                 }
             });
         });

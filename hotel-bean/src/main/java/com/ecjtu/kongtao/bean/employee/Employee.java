@@ -1,6 +1,7 @@
 package com.ecjtu.kongtao.bean.employee;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * @author sepK
@@ -18,6 +19,14 @@ public class Employee implements Serializable {
     private String phone;
     /**职责*/
     private String duty;
+    /**
+     * 创建时间
+     */
+    private Date createTime;
+    /**
+     * 上次修改时间
+     */
+    private Date lastModifyTime;
 
     public Integer getEmpId() {
         return empId;
@@ -65,5 +74,21 @@ public class Employee implements Serializable {
 
     public void setDuty(String duty) {
         this.duty = duty == null ? null : duty.trim();
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    public Date getLastModifyTime() {
+        return lastModifyTime;
+    }
+
+    public void setLastModifyTime(Date lastModifyTime) {
+        this.lastModifyTime = lastModifyTime;
     }
 }

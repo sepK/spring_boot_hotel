@@ -109,7 +109,7 @@ public class RoomController extends BaseController{
 
             String newFileName = UUID.randomUUID() + originalFilename.substring(originalFilename.lastIndexOf("."));
             File newFile = new File(path + newFileName);
-            room.setPicture("/images/" + newFileName);
+            room.setPicture("/images/rooms/" + newFileName);
             try {
                 file.transferTo(newFile);
             } catch (IllegalStateException | IOException e) {

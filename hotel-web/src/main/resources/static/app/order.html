@@ -64,12 +64,12 @@
                 $.ajax({
                     url: "/order/getIndents",
                     type: "GET",
-                    data: "userName=" + JSON.parse(sessionStorage.getItem("user")).customerName,
+                    data: "userName=" + JSON.parse(sessionStorage.getItem("user")).userName,
                     success: function (result) {
                         var html = "";
                         $.each(result.extend.indents, function (index, item) {
-
-                            var ostatus = item.orderInfo.ostatus === 1 ? "预定" : item.orderInfo.ostatus === 2 ? "入住" : item.orderInfo.ostatus === 3 ? "退房" : "完成";
+                            var ostatus = item.orderInfo.orderStatus === 1 ? "预定" : item.orderInfo.orderStatus === 2 ? "入住" : item.orderInfo.orderStatus === 3 ? "退房"
+                                : item.orderInfo.orderStatus === 4 ? "完成" : "取消";
                             html += "<div class='order'>\n" +
                                 "<div class='pic'><img src='" + item.picture + "' alt=''></div>\n" +
                                 "<div class='hotel'>\n" +
@@ -79,7 +79,7 @@
                                 "<ul>\n" +
                                 "<li>\n" +
                                 "<span>价格</span>\n" +
-                                "<span>" + item.intake.money + "</span>\n" +
+                                "<span>" + item.housing.costMoney + "</span>\n" +
                                 "</li>\n" +
                                 "<li>\n" +
                                 "<span>种类</span>\n" +
@@ -87,7 +87,7 @@
                                 "</li>\n" +
                                 "<li>\n" +
                                 "<span>时间</span>\n" +
-                                "<span>" + item.intake.startTime + "~" + item.intake.endTime + "</span>\n" +
+                                "<span>" + item.housing.startTime + "~" + item.housing.endTime + "</span>\n" +
                                 "</li>\n" +
                                 "<li>\n" +
                                 "<span class='box'>备注</span>\n" +
@@ -98,11 +98,10 @@
                                 "<span>" + ostatus + "</span>\n" +
                                 "</li>\n";
                             if (ostatus === "预定") {
-                                html += "<button type='button' class='btn btn-primary pay_btn' pay-id=" + item.orderInfo.id + ">付款</button>\n";
-                                html += "<button type='button' class='btn btn-warning finsh_btn' finsh-id=" + item.orderInfo.id + ">完成订单</button>\n";
+                                html += "<button type='button' class='btn btn-primary pay_btn' pay-id=" + item.orderInfo.orderId + ">付款</button>\n";
+                                html += "<button type='button' class='btn btn-warning finsh_btn' finsh-id=" + item.orderInfo.orderId + ">取消订单</button>\n";
                             } else if (ostatus === "入住") {
-                                html += "<button type='button' class='btn btn-warning finsh_btn' finsh-id=" + item.orderInfo.id + ">完成订单</button>\n";
-                                html += "<button type='button' class='btn btn-danger checkout_btn' checkout-id=" + item.orderInfo.id + ">退房</button>\n";
+                                html += "<button type='button' class='btn btn-danger checkout_btn' checkout-id=" + item.orderInfo.orderId + ">退房</button>\n";
                             } else if (ostatus === "退房") {
                                 html += "<button type='button' class='btn btn-danger checkout_btn' disabled='disabled'>退房中</button>\n";
                             } else {
@@ -114,7 +113,7 @@
                         });
                         $("#build_rooms_div").html(html);
                         if ($("#build_rooms_div").html() === "") {
-                            $("#build_rooms_div").html("<h1>暂时还没有订单 快来消费吧</h1>");
+                            $("#build_rooms_div").html("<h1>暂时还没有订单 赶快消费吧</h1>");
                         }
                     }
                 });
@@ -122,7 +121,7 @@
                     $.ajax({
                         url: "/order/updateIndent",
                         type: "POST",
-                        data: "id=" + $(this).attr("pay-id") + "&ostatus=2",
+                        data: "orderId=" + $(this).attr("pay-id") + "&orderStatus=2",
                         success: function () {
                             window.location.reload();
                         }
@@ -132,7 +131,7 @@
                     $.ajax({
                         url: "/order/updateIndent",
                         type: "POST",
-                        data: "id=" + $(this).attr("checkout-id") + "&ostatus=3",
+                        data: "orderId=" + $(this).attr("checkout-id") + "&orderStatus=3",
                         success: function () {
                             window.location.reload();
                         }
@@ -142,7 +141,7 @@
                     $.ajax({
                         url: "/order/updateIndent",
                         type: "POST",
-                        data: "id=" + $(this).attr("finsh-id") + "&ostatus=0",
+                        data: "orderId=" + $(this).attr("finsh-id") + "&orderStatus=5",
                         success: function () {
                             window.location.reload();
                         }

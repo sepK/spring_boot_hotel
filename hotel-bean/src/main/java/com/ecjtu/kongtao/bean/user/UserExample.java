@@ -1,13 +1,13 @@
 package com.ecjtu.kongtao.bean.user;
 
-import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
  * @author sepK
  */
-public class UserExample implements Serializable {
+public class UserExample {
     protected String orderByClause;
 
     protected boolean distinct;
@@ -15,7 +15,7 @@ public class UserExample implements Serializable {
     protected List<Criteria> oredCriteria;
 
     public UserExample() {
-        oredCriteria = new ArrayList<>();
+        oredCriteria = new ArrayList<Criteria>();
     }
 
     public void setOrderByClause(String orderByClause) {
@@ -72,7 +72,7 @@ public class UserExample implements Serializable {
 
         protected GeneratedCriteria() {
             super();
-            criteria = new ArrayList<>();
+            criteria = new ArrayList<Criterion>();
         }
 
         public boolean isValid() {
@@ -515,6 +515,126 @@ public class UserExample implements Serializable {
 
         public Criteria andMailNotBetween(String value1, String value2) {
             addCriterion("mail not between", value1, value2, "mail");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimeIsNull() {
+            addCriterion("create_time is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimeIsNotNull() {
+            addCriterion("create_time is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimeEqualTo(Date value) {
+            addCriterion("create_time =", value, "createTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimeNotEqualTo(Date value) {
+            addCriterion("create_time <>", value, "createTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimeGreaterThan(Date value) {
+            addCriterion("create_time >", value, "createTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimeGreaterThanOrEqualTo(Date value) {
+            addCriterion("create_time >=", value, "createTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimeLessThan(Date value) {
+            addCriterion("create_time <", value, "createTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimeLessThanOrEqualTo(Date value) {
+            addCriterion("create_time <=", value, "createTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimeIn(List<Date> values) {
+            addCriterion("create_time in", values, "createTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimeNotIn(List<Date> values) {
+            addCriterion("create_time not in", values, "createTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimeBetween(Date value1, Date value2) {
+            addCriterion("create_time between", value1, value2, "createTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimeNotBetween(Date value1, Date value2) {
+            addCriterion("create_time not between", value1, value2, "createTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastModifyTimeIsNull() {
+            addCriterion("last_modify_time is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastModifyTimeIsNotNull() {
+            addCriterion("last_modify_time is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastModifyTimeEqualTo(Date value) {
+            addCriterion("last_modify_time =", value, "lastModifyTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastModifyTimeNotEqualTo(Date value) {
+            addCriterion("last_modify_time <>", value, "lastModifyTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastModifyTimeGreaterThan(Date value) {
+            addCriterion("last_modify_time >", value, "lastModifyTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastModifyTimeGreaterThanOrEqualTo(Date value) {
+            addCriterion("last_modify_time >=", value, "lastModifyTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastModifyTimeLessThan(Date value) {
+            addCriterion("last_modify_time <", value, "lastModifyTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastModifyTimeLessThanOrEqualTo(Date value) {
+            addCriterion("last_modify_time <=", value, "lastModifyTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastModifyTimeIn(List<Date> values) {
+            addCriterion("last_modify_time in", values, "lastModifyTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastModifyTimeNotIn(List<Date> values) {
+            addCriterion("last_modify_time not in", values, "lastModifyTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastModifyTimeBetween(Date value1, Date value2) {
+            addCriterion("last_modify_time between", value1, value2, "lastModifyTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastModifyTimeNotBetween(Date value1, Date value2) {
+            addCriterion("last_modify_time not between", value1, value2, "lastModifyTime");
             return (Criteria) this;
         }
     }

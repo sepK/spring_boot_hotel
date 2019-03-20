@@ -3,12 +3,14 @@ package com.ecjtu.kongtao.controller;
 import com.ecjtu.kongtao.bean.housing.Indent;
 import com.ecjtu.kongtao.bean.order.OrderInfo;
 import com.ecjtu.kongtao.config.ConfigKey;
+import com.ecjtu.kongtao.manager.SessionManager;
 import com.ecjtu.kongtao.utils.Result;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -25,7 +27,8 @@ public class OrderInfoController extends BaseController{
 
     @RequestMapping(value = "/orders",method = RequestMethod.GET)
     @ResponseBody
-    public Result getOrders(@RequestParam("pn") Integer pn){
+    public Result getOrders(@RequestParam("pn") Integer pn, HttpServletRequest request) {
+        SessionManager.setSession(request);
         PageHelper.startPage(pn, ConfigKey.DEFAULT_PAGE_SIZE);
         List<OrderInfo> list = orderInfoService.getOrders();
         PageInfo<OrderInfo> pageInfo = new PageInfo<>(list, ConfigKey.NAVIGATE_PAGE);
@@ -77,7 +80,8 @@ public class OrderInfoController extends BaseController{
 
     @RequestMapping(value = "/getIndents",method = RequestMethod.GET)
     @ResponseBody
-    public Result getIndents(@RequestParam("userName") String userName){
+    public Result getIndents(@RequestParam("userName") String userName, HttpServletRequest request) {
+        SessionManager.setSession(request);
         List<Indent> indents = orderInfoService.getIndents(userName);
         return Result.success().add("indents", indents);
     }

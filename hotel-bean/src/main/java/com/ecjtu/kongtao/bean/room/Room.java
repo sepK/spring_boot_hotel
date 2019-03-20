@@ -1,6 +1,7 @@
 package com.ecjtu.kongtao.bean.room;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * @author sepK
@@ -20,6 +21,14 @@ public class Room implements Serializable {
     private String picture;
     /**房间简介*/
     private String introduce;
+    /**
+     * 创建时间
+     */
+    private Date createTime;
+    /**
+     * 上次修改时间
+     */
+    private Date lastModifyTime;
 
     public Integer getRoomId() {
         return roomId;
@@ -75,5 +84,21 @@ public class Room implements Serializable {
 
     public void setIntroduce(String introduce) {
         this.introduce = introduce == null ? null : introduce.trim();
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    public Date getLastModifyTime() {
+        return lastModifyTime;
+    }
+
+    public void setLastModifyTime(Date lastModifyTime) {
+        this.lastModifyTime = lastModifyTime;
     }
 }

@@ -125,10 +125,10 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.ecjtu.kongtao.bean.comment.UserComment">
-    insert into t_user_comment (comment_id, user_id, room_id,
+    insert into t_user_comment (comment_id, user_id, room_id, 
       level, create_time, last_modify_time, 
       comment)
-    values (#{commentId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{roomId,jdbcType=INTEGER},
+    values (#{commentId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{roomId,jdbcType=INTEGER}, 
       #{level,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{lastModifyTime,jdbcType=TIMESTAMP}, 
       #{comment,jdbcType=LONGVARCHAR})
   </insert>
@@ -196,7 +196,7 @@
       <if test="record.userId != null">
         user_id = #{record.userId,jdbcType=INTEGER},
       </if>
-      <if test="record.rroomId!= null">
+      <if test="record.roomId != null">
         room_id = #{record.roomId,jdbcType=INTEGER},
       </if>
       <if test="record.level != null">

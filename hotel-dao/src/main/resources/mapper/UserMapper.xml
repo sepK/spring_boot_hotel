@@ -8,6 +8,8 @@
     <result column="sex" jdbcType="CHAR" property="sex" />
     <result column="phone" jdbcType="VARCHAR" property="phone" />
     <result column="mail" jdbcType="VARCHAR" property="mail" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+    <result column="last_modify_time" jdbcType="TIMESTAMP" property="lastModifyTime"/>
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -68,7 +70,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    user_id, user_name, password, sex, phone, mail
+    user_id, user_name, password, sex, phone, mail, create_time, last_modify_time
   </sql>
   <select id="selectByExample" parameterType="com.ecjtu.kongtao.bean.user.UserExample" resultMap="BaseResultMap">
     select
@@ -101,10 +103,12 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.ecjtu.kongtao.bean.user.User">
-    insert into t_user (user_id, user_name, password, 
-      sex, phone, mail)
-    values (#{userId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
-      #{sex,jdbcType=CHAR}, #{phone,jdbcType=VARCHAR}, #{mail,jdbcType=VARCHAR})
+    insert into t_user (user_id, user_name, password,
+    sex, phone, mail, create_time,
+    last_modify_time)
+    values (#{userId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR},
+    #{sex,jdbcType=CHAR}, #{phone,jdbcType=VARCHAR}, #{mail,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP},
+    #{lastModifyTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.ecjtu.kongtao.bean.user.User">
     insert into t_user
@@ -127,6 +131,12 @@
       <if test="mail != null">
         mail,
       </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="lastModifyTime != null">
+        last_modify_time,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="userId != null">
@@ -146,6 +156,12 @@
       </if>
       <if test="mail != null">
         #{mail,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastModifyTime != null">
+        #{lastModifyTime,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
@@ -176,6 +192,12 @@
       <if test="record.mail != null">
         mail = #{record.mail,jdbcType=VARCHAR},
       </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.lastModifyTime != null">
+        last_modify_time = #{record.lastModifyTime,jdbcType=TIMESTAMP},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -188,7 +210,9 @@
       password = #{record.password,jdbcType=VARCHAR},
       sex = #{record.sex,jdbcType=CHAR},
       phone = #{record.phone,jdbcType=VARCHAR},
-      mail = #{record.mail,jdbcType=VARCHAR}
+    mail = #{record.mail,jdbcType=VARCHAR},
+    create_time = #{record.createTime,jdbcType=TIMESTAMP},
+    last_modify_time = #{record.lastModifyTime,jdbcType=TIMESTAMP}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -211,6 +235,12 @@
       <if test="mail != null">
         mail = #{mail,jdbcType=VARCHAR},
       </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastModifyTime != null">
+        last_modify_time = #{lastModifyTime,jdbcType=TIMESTAMP},
+      </if>
     </set>
     where user_id = #{userId,jdbcType=INTEGER}
   </update>
@@ -220,7 +250,9 @@
       password = #{password,jdbcType=VARCHAR},
       sex = #{sex,jdbcType=CHAR},
       phone = #{phone,jdbcType=VARCHAR},
-      mail = #{mail,jdbcType=VARCHAR}
+    mail = #{mail,jdbcType=VARCHAR},
+    create_time = #{createTime,jdbcType=TIMESTAMP},
+    last_modify_time = #{lastModifyTime,jdbcType=TIMESTAMP}
     where user_id = #{userId,jdbcType=INTEGER}
   </update>
 </mapper>

@@ -50,8 +50,8 @@ public interface HousingService {
     /**
      *  通过用户名和房间id 获取入住信息
      * @param roomId
-     * @param userName
+     * @param userId
      * @return
      */
-    Housing getHousingByUserNameAndRoomId(Integer roomId, String userName);
+    Housing getHousingByUserIdAndRoomId(Integer roomId, Integer userId);
 }
