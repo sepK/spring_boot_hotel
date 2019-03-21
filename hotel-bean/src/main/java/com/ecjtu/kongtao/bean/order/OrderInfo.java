@@ -1,6 +1,7 @@
 package com.ecjtu.kongtao.bean.order;
 
 import com.ecjtu.kongtao.bean.employee.Employee;
+import com.ecjtu.kongtao.bean.housing.Housing;
 import com.ecjtu.kongtao.bean.room.Room;
 import com.ecjtu.kongtao.bean.user.User;
 
@@ -13,8 +14,14 @@ import java.util.Date;
 public class OrderInfo implements Serializable {
     /**订单id*/
     private Integer orderId;
-    /**房间id*/
-    private Integer roomId;
+    /**
+     * 订单号
+     */
+    private String orderNumber;
+    /**
+     * 房间id
+     */
+    private Integer housingId;
     /**用户id*/
     private Integer userId;
     /**订单状态*/
@@ -24,12 +31,24 @@ public class OrderInfo implements Serializable {
     /**备注*/
     private String introduce;
     /**
-     * 创建时间
+     * 支付时间
      */
-    private Date createTime;
+    private Date payTime;
     /**
-     * 上次修改时间
+     * 入住 开始时间
      */
+    private Date startTime;
+    /**
+     * 入住 结束时间
+     */
+    private Date endTime;
+    /**
+     * 消耗金额
+     */
+    private Double costMoney;
+    /** 创建时间*/
+    private Date createTime;
+    /** 上次修改时间*/
     private Date lastModifyTime;
 
     /**非入库字段 用户*/
@@ -38,6 +57,8 @@ public class OrderInfo implements Serializable {
     private Room room;
     /**非入库字段 员工*/
     private Employee employee;
+    /**非入库字段 入住信息*/
+    private Housing housing;
 
     public Integer getOrderId() {
         return orderId;
@@ -47,12 +68,12 @@ public class OrderInfo implements Serializable {
         this.orderId = orderId;
     }
 
-    public Integer getRoomId() {
-        return roomId;
+    public Integer getHousingId() {
+        return housingId;
     }
 
-    public void setRoomId(Integer roomId) {
-        this.roomId = roomId;
+    public void setHousingId(Integer housingId) {
+        this.housingId = housingId;
     }
 
     public Integer getUserId() {
@@ -125,5 +146,53 @@ public class OrderInfo implements Serializable {
 
     public void setLastModifyTime(Date lastModifyTime) {
         this.lastModifyTime = lastModifyTime;
+    }
+
+    public String getOrderNumber() {
+        return orderNumber;
+    }
+
+    public void setOrderNumber(String orderNumber) {
+        this.orderNumber = orderNumber;
+    }
+
+    public Date getPayTime() {
+        return payTime;
+    }
+
+    public void setPayTime(Date payTime) {
+        this.payTime = payTime;
+    }
+
+    public Housing getHousing() {
+        return housing;
+    }
+
+    public void setHousing(Housing housing) {
+        this.housing = housing;
+    }
+
+    public Date getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(Date startTime) {
+        this.startTime = startTime;
+    }
+
+    public Date getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(Date endTime) {
+        this.endTime = endTime;
+    }
+
+    public Double getCostMoney() {
+        return costMoney;
+    }
+
+    public void setCostMoney(Double costMoney) {
+        this.costMoney = costMoney;
     }
 }

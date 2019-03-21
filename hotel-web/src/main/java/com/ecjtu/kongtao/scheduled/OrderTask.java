@@ -22,7 +22,7 @@ public class OrderTask extends BaseService {
     @Autowired
     private HousingService housingService;
 
-    @Scheduled(cron = "0/5 * * * * ?")
+    @Scheduled(cron = "0 0/10 * * * ?")
     public void checkOrder() {
         List<OrderInfo> orderInfos = orderInfoMapper.selectByExample(null);
         Date now = new Date();
@@ -30,7 +30,7 @@ public class OrderTask extends BaseService {
             if (orderInfo.getOrderStatus() == OrderStatus.BOOKED.getStatus() && orderInfo.getCreateTime().getTime() > now.getTime() - 10 * 60 * 1000) {
                 orderInfo.setOrderStatus(OrderStatus.CANCEL_ORDER.getStatus());
             } else if (orderInfo.getOrderStatus() == OrderStatus.CHECK_IN.getStatus()) {
-                Housing housing = housingService.getHousingByUserIdAndRoomId(orderInfo.getRoomId(), orderInfo.getUserId());
+                Housing housing = housingService.getHousing(orderInfo.getHousingId());
                 if (housing.getEndTime().getTime() >= now.getTime()) {
                     orderInfo.setOrderStatus(OrderStatus.FINISH.getStatus());
                 }
