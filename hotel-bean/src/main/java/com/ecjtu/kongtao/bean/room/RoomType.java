@@ -1,6 +1,7 @@
 package com.ecjtu.kongtao.bean.room;
 
 import java.io.Serializable;
+import java.util.stream.Stream;
 
 /**
  * @author t.k
@@ -36,5 +37,9 @@ public enum RoomType implements Serializable{
 
     public int getType() {
         return type;
+    }
+
+    public static RoomType conventToRoomType(int type) {
+        return Stream.of(RoomType.values()).filter(roomType -> roomType.getType() == type).findAny().orElse(null);
     }
 }
