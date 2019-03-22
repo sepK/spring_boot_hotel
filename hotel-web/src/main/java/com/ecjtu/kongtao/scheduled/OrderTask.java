@@ -1,6 +1,5 @@
 package com.ecjtu.kongtao.scheduled;
 
-import com.ecjtu.kongtao.bean.housing.Housing;
 import com.ecjtu.kongtao.bean.order.OrderInfo;
 import com.ecjtu.kongtao.bean.order.OrderStatus;
 import com.ecjtu.kongtao.service.BaseService;
@@ -22,7 +21,7 @@ public class OrderTask extends BaseService {
     @Autowired
     private HousingService housingService;
 
-    @Scheduled(cron = "0 0/10 * * * ?")
+    @Scheduled(cron = "0/5 * * * * ?")
     public void checkOrder() {
         List<OrderInfo> orderInfos = orderInfoMapper.selectByExample(null);
         Date now = new Date();
@@ -30,8 +29,7 @@ public class OrderTask extends BaseService {
             if (orderInfo.getOrderStatus() == OrderStatus.BOOKED.getStatus() && orderInfo.getCreateTime().getTime() > now.getTime() - 10 * 60 * 1000) {
                 orderInfo.setOrderStatus(OrderStatus.CANCEL_ORDER.getStatus());
             } else if (orderInfo.getOrderStatus() == OrderStatus.CHECK_IN.getStatus()) {
-                Housing housing = housingService.getHousing(orderInfo.getHousingId());
-                if (housing.getEndTime().getTime() >= now.getTime()) {
+                if (orderInfo.getEndTime().getTime() >= now.getTime()) {
                     orderInfo.setOrderStatus(OrderStatus.FINISH.getStatus());
                 }
             }

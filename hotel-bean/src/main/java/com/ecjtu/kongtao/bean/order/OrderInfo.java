@@ -1,7 +1,6 @@
 package com.ecjtu.kongtao.bean.order;
 
 import com.ecjtu.kongtao.bean.employee.Employee;
-import com.ecjtu.kongtao.bean.housing.Housing;
 import com.ecjtu.kongtao.bean.room.Room;
 import com.ecjtu.kongtao.bean.user.User;
 
@@ -21,7 +20,7 @@ public class OrderInfo implements Serializable {
     /**
      * 房间id
      */
-    private Integer housingId;
+    private Integer roomId;
     /**用户id*/
     private Integer userId;
     /**订单状态*/
@@ -57,8 +56,6 @@ public class OrderInfo implements Serializable {
     private Room room;
     /**非入库字段 员工*/
     private Employee employee;
-    /**非入库字段 入住信息*/
-    private Housing housing;
 
     public Integer getOrderId() {
         return orderId;
@@ -68,12 +65,12 @@ public class OrderInfo implements Serializable {
         this.orderId = orderId;
     }
 
-    public Integer getHousingId() {
-        return housingId;
+    public Integer getRoomId() {
+        return roomId;
     }
 
-    public void setHousingId(Integer housingId) {
-        this.housingId = housingId;
+    public void setRoomId(Integer roomId) {
+        this.roomId = roomId;
     }
 
     public Integer getUserId() {
@@ -162,14 +159,6 @@ public class OrderInfo implements Serializable {
 
     public void setPayTime(Date payTime) {
         this.payTime = payTime;
-    }
-
-    public Housing getHousing() {
-        return housing;
-    }
-
-    public void setHousing(Housing housing) {
-        this.housing = housing;
     }
 
     public Date getStartTime() {

@@ -1,11 +1,9 @@
 package com.ecjtu.kongtao.service.impl;
 
 import com.ecjtu.kongtao.bean.employee.Employee;
-import com.ecjtu.kongtao.bean.housing.Housing;
 import com.ecjtu.kongtao.bean.housing.Indent;
 import com.ecjtu.kongtao.bean.order.OrderInfo;
 import com.ecjtu.kongtao.bean.order.OrderInfoExample;
-import com.ecjtu.kongtao.bean.order.OrderStatus;
 import com.ecjtu.kongtao.bean.room.Room;
 import com.ecjtu.kongtao.bean.user.User;
 import com.ecjtu.kongtao.exception.UserException;
@@ -33,8 +31,6 @@ public class OrderInfoServiceImpl extends BaseService implements OrderInfoServic
     private UserService userService;
     @Resource
     private EmployeeService employeeService;
-    @Resource
-    HousingService housingService;
 
     @Override
     public List<OrderInfo> getOrders() {
@@ -45,17 +41,9 @@ public class OrderInfoServiceImpl extends BaseService implements OrderInfoServic
                 Employee employee = employeeMapper.selectByPrimaryKey(orderInfo.getEmpId());
                 orderInfo.setEmployee(employee);
             }
-            Housing housing = null;
-            Room room;
-            if (orderInfo.getOrderStatus() == OrderStatus.BOOKED.getStatus()) {
-                room = roomService.getRoom(orderInfo.getHousingId());
-            } else {
-                housing = housingService.getHousing(orderInfo.getHousingId());
-                room = roomService.getRoom(housing.getRoomId());
-            }
+            Room room = roomService.getRoom(orderInfo.getRoomId());
             orderInfo.setUser(user);
             orderInfo.setRoom(room);
-            orderInfo.setHousing(housing);
         });
         return orderInfos;
     }
@@ -68,17 +56,9 @@ public class OrderInfoServiceImpl extends BaseService implements OrderInfoServic
             Employee employee = employeeMapper.selectByPrimaryKey(orderInfo.getEmpId());
             orderInfo.setEmployee(employee);
         }
-        Housing housing = null;
-        Room room;
-        if (orderInfo.getOrderStatus() == OrderStatus.BOOKED.getStatus()) {
-            room = roomService.getRoom(orderInfo.getHousingId());
-        } else {
-            housing = housingService.getHousing(orderInfo.getHousingId());
-            room = roomService.getRoom(housing.getRoomId());
-        }
+        Room room = roomService.getRoom(orderInfo.getRoomId());
         orderInfo.setUser(user);
         orderInfo.setRoom(room);
-        orderInfo.setHousing(housing);
         return orderInfo;
     }
 
@@ -86,7 +66,7 @@ public class OrderInfoServiceImpl extends BaseService implements OrderInfoServic
     @Transactional(rollbackFor = Exception.class)
     public void updateOrder(OrderInfo orderInfo) {
         Room room = new Room();
-        room.setRoomId(orderInfo.getHousing().getRoomId());
+        room.setRoomId(orderInfo.getRoomId());
         room.setStatus(Short.valueOf(orderInfo.getOrderStatus().toString()));
         roomService.updateRoom(room);
         User user = userService.getUser(orderInfo.getUser().getUserName());
@@ -97,7 +77,7 @@ public class OrderInfoServiceImpl extends BaseService implements OrderInfoServic
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void addOrder(OrderInfo orderInfo) {
-        Room room = roomService.getRoom(orderInfo.getHousing().getRoomId());
+        Room room = roomService.getRoom(orderInfo.getRoomId());
             if (room == null) {
                 throw new UserException(ErrorCode.ERROR_PARA);
             } else if (room.getStatus() != 0) {
@@ -131,7 +111,7 @@ public class OrderInfoServiceImpl extends BaseService implements OrderInfoServic
         Date now = new Date();
         OrderInfo orderInfo = indent.getOrderInfo();
         orderInfo.setOrderStatus(Integer.valueOf("1"));
-        orderInfo.setOrderNumber(UUID.randomUUID().toString().replace("-", ""));
+        orderInfo.setOrderNumber(now.getTime() + UUID.randomUUID().toString().replace("-", "").substring(1, 10));
         User user = userService.getUser(orderInfo.getUser().getUserName());
         if (ObjectUtils.isEmpty(user)) {
             throw new UserException(ErrorCode.ERROR_USER_NOT_EXIST);
@@ -139,7 +119,7 @@ public class OrderInfoServiceImpl extends BaseService implements OrderInfoServic
         orderInfo.setUserId(user.getUserId());
         orderInfo.setCreateTime(now);
         orderInfo.setLastModifyTime(now);
-        orderInfo.setHousingId(roomId);
+        orderInfo.setRoomId(roomId);
         orderInfoMapper.insertSelective(orderInfo);
         return Result.success();
     }
@@ -160,7 +140,7 @@ public class OrderInfoServiceImpl extends BaseService implements OrderInfoServic
         for (OrderInfo orderInfo : orderInfos) {
             Indent indent = new Indent();
             indent.setOrderInfo(orderInfo);
-            Room room = roomService.getRoom(orderInfo.getHousingId());
+            Room room = roomService.getRoom(orderInfo.getRoomId());
             indent.setPicture(room.getPicture());
             indents.add(indent);
         }
@@ -170,8 +150,7 @@ public class OrderInfoServiceImpl extends BaseService implements OrderInfoServic
     @Override
     @Transactional(rollbackFor = Exception.class)
     public Result updateIndent(OrderInfo orderInfo) {
-        Housing housing = housingService.getHousing(orderInfo.getHousingId());
-        Room room = roomService.getRoom(housing.getRoomId());
+        Room room = roomService.getRoom(orderInfo.getRoomId());
         room.setStatus(Short.valueOf(orderInfo.getOrderStatus().toString()));
         orderInfoMapper.updateByPrimaryKeySelective(orderInfo);
         roomService.updateRoom(room);
