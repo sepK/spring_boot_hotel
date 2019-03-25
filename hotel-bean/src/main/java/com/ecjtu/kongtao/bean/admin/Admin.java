@@ -6,12 +6,18 @@ import java.util.Date;
 /**
  * @author sepK
  */
-public class Admin implements Serializable{
-    /**管理员id*/
+public class Admin implements Serializable {
+    /**
+     * 管理员id
+     */
     private Integer adminId;
-    /**管理员登录名*/
+    /**
+     * 管理员登录名
+     */
     private String adminName;
-    /**管理员密码*/
+    /**
+     * 管理员密码
+     */
     private String password;
     /**
      * 创建时间
@@ -21,6 +27,7 @@ public class Admin implements Serializable{
      * 上次修改时间
      */
     private Date lastModifyTime;
+
     public Integer getAdminId() {
         return adminId;
     }

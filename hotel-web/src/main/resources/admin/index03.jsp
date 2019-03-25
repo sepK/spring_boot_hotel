@@ -13,7 +13,7 @@
     <script src="${BasePath }/static/bootstrap/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="${BasePath }/static/bootstrap/css/bootstrap.css">
     <link rel="stylesheet" href="${BasePath }/static/css/index.css">
-    <link rel="shortcut icon" href="${BasePath }/static/favicon.ico" />
+    <link rel="shortcut icon" href="${BasePath }/static/favicon.ico"/>
     <script src="${BasePath }/static/js/jquery.js"></script>
     <script src="${BasePath }/static/bootstrap/js/bootstrap.js"></script>
 </head>

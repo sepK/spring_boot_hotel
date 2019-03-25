@@ -1,97 +1,113 @@
-*{
+* {
     margin: 0;
     padding: 0;
     list-style: none;
 }
-.order{
+
+.order {
     width: 1200px;
     height: 500px;
     /*background-color: yellow;*/
 }
-.order .pic{
+
+.order .pic {
     width: 600px;
     height: 500px;
     float: left;
 }
-.order .pic>img{
+
+.order .pic > img {
     width: 600px;
     height: 500px;
 }
-.order .hotel{
+
+.order .hotel {
     margin-top: 50px;
     width: 600px;
     height: 50px;
     float: left;
     text-align: center;
     line-height: 50px;
-    font-size:20px;
+    font-size: 20px;
 }
-.order .lis{
+
+.order .lis {
     width: 600px;
     height: 450px;
     float: left;
 }
-.order .lis>ul{
+
+.order .lis > ul {
     position: relative;
 }
-.order .lis>ul>li{
+
+.order .lis > ul > li {
     margin-left: 20px;
     padding-left: 10px;
     box-sizing: border-box;
 }
-.order .lis>ul>li:nth-child(1){
+
+.order .lis > ul > li:nth-child(1) {
     width: 600px;
     height: 50px;
     line-height: 50px;
-    font-size:15px;
+    font-size: 15px;
 }
-.order .lis>ul>li:nth-child(2){
+
+.order .lis > ul > li:nth-child(2) {
     width: 600px;
     height: 50px;
     line-height: 50px;
-    font-size:15px;
+    font-size: 15px;
 }
-.order .lis>ul>li:nth-child(3){
+
+.order .lis > ul > li:nth-child(3) {
     width: 600px;
     height: 50px;
     line-height: 50px;
-    font-size:15px;
+    font-size: 15px;
 }
-.order .lis>ul>li:nth-child(4){
+
+.order .lis > ul > li:nth-child(4) {
     width: 600px;
     height: auto;
     position: relative;
 }
-.order .lis>ul>li:nth-child(5){
+
+.order .lis > ul > li:nth-child(5) {
     width: 600px;
     height: 50px;
     line-height: 50px;
-    font-size:15px;
+    font-size: 15px;
 }
-.order .lis>ul>li>span:nth-child(1){
+
+.order .lis > ul > li > span:nth-child(1) {
     display: inline-block;
     width: 50px;
     height: 100%;
 }
-.order .lis>ul>li>span:nth-child(2){
+
+.order .lis > ul > li > span:nth-child(2) {
     display: inline-block;
     width: 500px;
     height: 100%;
     background-color: #fff;
 }
-.order .lis>ul>li .box{
+
+.order .lis > ul > li .box {
     position: absolute;
     top: 0;
     left: 10px;
     width: 50px;
     height: 50px;
 }
-.order .lis>ul>li .boxs{
+
+.order .lis > ul > li .boxs {
     display: inline-block;
     margin-left: 50px;
 }
 
-.order .lis>ul>.pay_btn{
+.order .lis > ul > .pay_btn {
     display: inline-block;
     margin-left: -160px;
     position: absolute;
@@ -100,7 +116,7 @@
 
 }
 
-.order .lis>ul>.checkout_btn{
+.order .lis > ul > .checkout_btn {
     display: inline-block;
     margin-left: -70px;
     position: absolute;
@@ -108,7 +124,7 @@
     left: 50%;
 }
 
-.order .lis>ul>.finsh_btn{
+.order .lis > ul > .finsh_btn {
     display: inline-block;
     margin-left: 20px;
     position: absolute;

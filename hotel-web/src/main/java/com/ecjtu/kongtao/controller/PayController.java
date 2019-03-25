@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -57,16 +56,16 @@ public class PayController extends BaseController {
     }
 
     /**
+     * @param request
+     * @param out_trade_no 商户订单号
+     * @param trade_no     支付宝交易凭证号
+     * @param trade_status 交易状态
+     * @return String
+     * @throws AlipayApiException
+     * @throws
      * @Title: alipayNotify
      * @Description: 支付宝回调接口
      * @author nelson
-     * @param request
-     * @param out_trade_no 商户订单号
-     * @param trade_no 支付宝交易凭证号
-     * @param trade_status 交易状态
-     * @throws AlipayApiException
-     * @return String
-     * @throws
      */
     @PostMapping(value = "notify")
     private String notify(HttpServletRequest request, String out_trade_no, String trade_no, String trade_status)
@@ -107,43 +106,19 @@ public class PayController extends BaseController {
     }
 
     /**
+     * @param request
+     * @param out_trade_no 商户订单号
+     * @param trade_no     支付宝交易凭证号
+     * @return String
+     * @throws AlipayApiException
+     * @throws
      * @Title: alipayReturn
      * @Description: 支付宝回调接口
      * @author nelson
-     * @param request
-     * @param out_trade_no 商户订单号
-     * @param trade_no 支付宝交易凭证号
-     * @throws AlipayApiException
-     * @return String
-     * @throws
      */
     @GetMapping(value = "return")
-    private String returnUrl(Map<String, String> params, HttpServletRequest request, String out_trade_no,String trade_no,String total_amount)
+    private String returnUrl(Map<String, String> params, HttpServletRequest request, String out_trade_no, String trade_no, String total_amount)
             throws AlipayApiException {
-        Map<String, String> map = new HashMap<>();
-        Map<String, String[]> requestParams = request.getParameterMap();
-        for (Iterator<String> iterator = requestParams.keySet().iterator(); iterator.hasNext();) {
-            String name = iterator.next();
-            String[] values = requestParams.get(name);
-            String valueStr = "";
-            for (int i = 0; i < values.length; i++) {
-                valueStr = (i == values.length - 1) ? valueStr + values[i] : valueStr + values[i] + ",";
-            }
-            map.put(name, valueStr);
-        }
-        boolean signVerified;
-        try {
-            signVerified = AlipaySignature.rsaCheckV1(map, AlipayConfig.ALIPAY_PUBLIC_KEY, AlipayConfig.CHARSET, AlipayConfig.SIGN_TYPE);
-        } catch (AlipayApiException e) {
-            e.printStackTrace();
-            //验签发生异常,则直接返回失败
-            return ("fail");
-        }
-        if (signVerified) {
-            return ("success");
-        } else {
-            System.out.println("验证失败,不去更新状态");
-            return ("fail");
-        }
+        return "redirect: /app/order.html";
     }
 }

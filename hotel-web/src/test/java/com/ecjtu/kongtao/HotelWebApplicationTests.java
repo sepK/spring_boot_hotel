@@ -12,12 +12,13 @@ import javax.annotation.Resource;
 @SpringBootTest
 public class HotelWebApplicationTests {
 
-	@Resource
-	private RedisTemplate<String, String> redisTemplate;
-	@Test
-	public void testSet() {
-		this.redisTemplate.opsForValue().set("study", "java");
-		System.out.println(this.redisTemplate.opsForValue().get("study"));
-	}
+    @Resource
+    private RedisTemplate<String, String> redisTemplate;
+
+    @Test
+    public void testSet() {
+        this.redisTemplate.opsForValue().set("study", "java");
+        System.out.println(this.redisTemplate.opsForValue().get("study"));
+    }
 
 }

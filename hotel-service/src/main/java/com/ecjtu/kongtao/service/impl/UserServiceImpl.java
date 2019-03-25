@@ -16,79 +16,80 @@ import java.util.List;
 @Service
 public class UserServiceImpl extends BaseService implements UserService {
 
-	@Override
-	public List<User> getUsers() {
-		return userMapper.selectByExample(null);
-	}
+    @Override
+    public List<User> getUsers() {
+        return userMapper.selectByExample(null);
+    }
 
-	@Override
-	public User getUser(Integer userId) {
-		return userMapper.selectByPrimaryKey(userId);
-	}
+    @Override
+    public User getUser(Integer userId) {
+        return userMapper.selectByPrimaryKey(userId);
+    }
 
-	@Override
-	public void delUser(Integer userId) {
-		userMapper.deleteByPrimaryKey(userId);
-	}
+    @Override
+    public void delUser(Integer userId) {
+        userMapper.deleteByPrimaryKey(userId);
+    }
 
-	@Override
-	public void updateUser(User user) {
-		userMapper.updateByPrimaryKeySelective(user);
-	}
+    @Override
+    public void updateUser(User user) {
+        userMapper.updateByPrimaryKeySelective(user);
+    }
 
-	@Override
-	public List<User> searchUser(String userName) {
-		UserExample customerExample = new UserExample();
-		UserExample.Criteria criteria = customerExample.createCriteria();
-		criteria.andUserNameLike("%" + userName + "%");
-		return userMapper.selectByExample(customerExample);
-	}
+    @Override
+    public List<User> searchUser(String userName) {
+        UserExample customerExample = new UserExample();
+        UserExample.Criteria criteria = customerExample.createCriteria();
+        criteria.andUserNameLike("%" + userName + "%");
+        return userMapper.selectByExample(customerExample);
+    }
 
-	@Override
-	public User getUser(String userName) {
-		UserExample customerExample = new UserExample();
-		UserExample.Criteria criteria = customerExample.createCriteria();
-		criteria.andUserNameEqualTo(userName);
-		List<User> users = userMapper.selectByExample(customerExample);
-		return users.size() > 0 ? users.get(0) : null;
-	}
+    @Override
+    public User getUser(String userName) {
+        UserExample customerExample = new UserExample();
+        UserExample.Criteria criteria = customerExample.createCriteria();
+        criteria.andUserNameEqualTo(userName);
+        List<User> users = userMapper.selectByExample(customerExample);
+        return users.size() > 0 ? users.get(0) : null;
+    }
 
-	@Override
-	public void addUser(User user) {
-		Date now = new Date();
-		user.setCreateTime(now);
-		user.setLastModifyTime(now);
-		userMapper.insert(user);
-	}
+    @Override
+    public void addUser(User user) {
+        Date now = new Date();
+        user.setCreateTime(now);
+        user.setLastModifyTime(now);
+        userMapper.insert(user);
+    }
 
-	@Override
-	public boolean checkUserById(Integer userId) {
-		UserExample example = new UserExample();
-		UserExample.Criteria criteria = example.createCriteria();
-		criteria.andUserIdEqualTo(userId);
-		return userMapper.selectByExample(example).size() == 0;
-	}
+    @Override
+    public boolean checkUserById(Integer userId) {
+        UserExample example = new UserExample();
+        UserExample.Criteria criteria = example.createCriteria();
+        criteria.andUserIdEqualTo(userId);
+        return userMapper.selectByExample(example).size() == 0;
+    }
 
-	@Override
-	public boolean login(User user) {
-		UserExample example = new UserExample();
+    @Override
+    public boolean login(User user) {
+        UserExample example = new UserExample();
         UserExample.Criteria criteria = example.createCriteria();
         criteria.andUserNameEqualTo(user.getUserName());
         criteria.andPasswordEqualTo(user.getPassword());
         return userMapper.selectByExample(example) != null;
-	}
+    }
 
-	/**
-	 * 检查用户名是否被占用
-	 * @param name 名称
-	 * @return true or false
-	 */
-	@Override
-	public boolean checkName(String name) {
-		UserExample example = new UserExample();
-		UserExample.Criteria criteria = example.createCriteria();
-		criteria.andUserNameEqualTo(name);
-		return userMapper.selectByExample(example).size() == 0;
-	}
+    /**
+     * 检查用户名是否被占用
+     *
+     * @param name 名称
+     * @return true or false
+     */
+    @Override
+    public boolean checkName(String name) {
+        UserExample example = new UserExample();
+        UserExample.Criteria criteria = example.createCriteria();
+        criteria.andUserNameEqualTo(name);
+        return userMapper.selectByExample(example).size() == 0;
+    }
 
 }

@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <title>迎宾大酒店</title>
     <header class="header"></header>
-    <link rel="shortcut icon" href="../static/favicon.ico" />
+    <link rel="shortcut icon" href="../static/favicon.ico"/>
     <link rel="stylesheet" type="text/css" href="css/order.css">
 </head>
 <body>
@@ -68,9 +68,9 @@
         $(".header").load("/app/header.html");
         $(".footer").load("/app/footer.html");
         $(".header_menu").load("/app/menu.html");
-        if(JSON.parse(sessionStorage.getItem("user")) === null){
+        if (JSON.parse(sessionStorage.getItem("user")) === null) {
             $("#build_rooms_div").html("<h1>请先登录......</h1>");
-        }else {
+        } else {
             $.ajax({
                 url: "/order/getIndents",
                 type: "GET",
@@ -81,82 +81,82 @@
 
                         var ostatus = item.orderInfo.ostatus === 1 ? "预定" : item.orderInfo.ostatus === 2 ? "入住" : item.orderInfo.ostatus === 3 ? "退房" : "完成";
                         html += "<div class='order'>\n" +
-                                "<div class='pic'><img src='" + item.picture + "' alt=''></div>\n" +
-                                "<div class='hotel'>\n" +
-                                "精致生活,别具一格&nbsp;&nbsp;&nbsp;迎宾大酒店欢迎您!\n" +
-                                "</div>\n" +
-                                "<div class='lis'>\n" +
-                                "<ul>\n" +
-                                "<li>\n" +
-                                "<span>价格</span>\n" +
-                                "<span>" + item.intake.money + "</span>\n" +
-                                "</li>\n" +
-                                "<li>\n" +
-                                "<span>种类</span>\n" +
-                                "<span>豪华套间</span>\n" +
-                                "</li>\n" +
-                                "<li>\n" +
-                                "<span>时间</span>\n" +
-                                "<span>" + item.intake.startTime + "~" + item.intake.endTime + "</span>\n" +
-                                "</li>\n" +
-                                "<li>\n" +
-                                "<span class='box'>备注</span>\n" +
-                                "<div class='boxs'>" + item.orderInfo.introduce + "</div>\n" +
-                                "</li>\n" +
-                                "<li>\n" +
-                                "<span>状态</span>\n" +
-                                "<span>" + ostatus + "</span>\n" +
-                                "</li>\n";
-                        if(ostatus === "预定"){
-                            html +=  "<button type='button' class='btn btn-primary pay_btn' pay-id=" + item.orderInfo.id + ">付款</button>\n" ;
-                            html +=  "<button type='button' class='btn btn-warning finsh_btn' finsh-id=" + item.orderInfo.id + ">完成订单</button>\n" ;
-                        }else if(ostatus === "入住"){
-                            html +=  "<button type='button' class='btn btn-warning finsh_btn' finsh-id=" + item.orderInfo.id + ">完成订单</button>\n" ;
-                            html +=  "<button type='button' class='btn btn-danger checkout_btn' checkout-id=" + item.orderInfo.id + ">退房</button>\n" ;
-                        }else if(ostatus === "退房"){
-                            html +=  "<button type='button' class='btn btn-danger checkout_btn' disabled='disabled'>退房中</button>\n" ;
-                        }else {
-                            html +=  "<button type='button' class='btn btn-warning finsh_btn' disabled='disabled'>订单已经完成</button>\n" ;
+                            "<div class='pic'><img src='" + item.picture + "' alt=''></div>\n" +
+                            "<div class='hotel'>\n" +
+                            "精致生活,别具一格&nbsp;&nbsp;&nbsp;迎宾大酒店欢迎您!\n" +
+                            "</div>\n" +
+                            "<div class='lis'>\n" +
+                            "<ul>\n" +
+                            "<li>\n" +
+                            "<span>价格</span>\n" +
+                            "<span>" + item.intake.money + "</span>\n" +
+                            "</li>\n" +
+                            "<li>\n" +
+                            "<span>种类</span>\n" +
+                            "<span>豪华套间</span>\n" +
+                            "</li>\n" +
+                            "<li>\n" +
+                            "<span>时间</span>\n" +
+                            "<span>" + item.intake.startTime + "~" + item.intake.endTime + "</span>\n" +
+                            "</li>\n" +
+                            "<li>\n" +
+                            "<span class='box'>备注</span>\n" +
+                            "<div class='boxs'>" + item.orderInfo.introduce + "</div>\n" +
+                            "</li>\n" +
+                            "<li>\n" +
+                            "<span>状态</span>\n" +
+                            "<span>" + ostatus + "</span>\n" +
+                            "</li>\n";
+                        if (ostatus === "预定") {
+                            html += "<button type='button' class='btn btn-primary pay_btn' pay-id=" + item.orderInfo.id + ">付款</button>\n";
+                            html += "<button type='button' class='btn btn-warning finsh_btn' finsh-id=" + item.orderInfo.id + ">完成订单</button>\n";
+                        } else if (ostatus === "入住") {
+                            html += "<button type='button' class='btn btn-warning finsh_btn' finsh-id=" + item.orderInfo.id + ">完成订单</button>\n";
+                            html += "<button type='button' class='btn btn-danger checkout_btn' checkout-id=" + item.orderInfo.id + ">退房</button>\n";
+                        } else if (ostatus === "退房") {
+                            html += "<button type='button' class='btn btn-danger checkout_btn' disabled='disabled'>退房中</button>\n";
+                        } else {
+                            html += "<button type='button' class='btn btn-warning finsh_btn' disabled='disabled'>订单已经完成</button>\n";
                         }
                         html += "</ul>\n" +
-                                "</div>\n" +
-                                "</div>";
+                            "</div>\n" +
+                            "</div>";
                     });
                     $("#build_rooms_div").html(html);
-                    if($("#build_rooms_div").html() === ""){
+                    if ($("#build_rooms_div").html() === "") {
                         $("#build_rooms_div").html("<h1>暂时还没有订单 快来消费吧</h1>");
                     }
                 }
             });
-            $(document).on("click",".pay_btn",function () {
+            $(document).on("click", ".pay_btn", function () {
                 $.ajax({
-                    url:"/order/updateIndent",
-                    type:"POST",
-                    data:"id="+$(this).attr("pay-id")+"&ostatus=2",
-                    success:function () {
+                    url: "/order/updateIndent",
+                    type: "POST",
+                    data: "id=" + $(this).attr("pay-id") + "&ostatus=2",
+                    success: function () {
                         window.location.reload();
                     }
                 });
             });
-            $(document).on("click",".checkout_btn",function () {
+            $(document).on("click", ".checkout_btn", function () {
                 $.ajax({
-                    url:"/order/updateIndent",
-                    type:"POST",
-                    data:"id="+$(this).attr("checkout-id")+"&ostatus=3",
-                    success:function () {
+                    url: "/order/updateIndent",
+                    type: "POST",
+                    data: "id=" + $(this).attr("checkout-id") + "&ostatus=3",
+                    success: function () {
                         window.location.reload();
                     }
                 });
             });
-            $(document).on("click",".finsh_btn",function () {
-                    $.ajax({
-                        url:"/order/updateIndent",
-                        type:"POST",
-                        data:"id="+$(this).attr("finsh-id")+"&ostatus=0",
-                        success:function () {
-                            window.location.reload();
-                        }
-                    });
+            $(document).on("click", ".finsh_btn", function () {
+                $.ajax({
+                    url: "/order/updateIndent",
+                    type: "POST",
+                    data: "id=" + $(this).attr("finsh-id") + "&ostatus=0",
+                    success: function () {
+                        window.location.reload();
+                    }
+                });
             });
         }
     });

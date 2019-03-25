@@ -470,9 +470,9 @@
             url = $(target).data('video');
 
         var has_query_string = url.split('?', url);
-        if(typeof has_query_string[1] == 'string'){
-            url += '&' +$(target).data('query-string');
-        }else{
+        if (typeof has_query_string[1] == 'string') {
+            url += '&' + $(target).data('query-string');
+        } else {
             url += '?' + $(target).data('query-string');
         }
         $(target).find('iframe').attr('src', url);

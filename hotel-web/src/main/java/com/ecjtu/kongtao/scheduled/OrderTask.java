@@ -21,7 +21,7 @@ public class OrderTask extends BaseService {
     @Autowired
     private HousingService housingService;
 
-    @Scheduled(cron = "0/5 * * * * ?")
+    @Scheduled(cron = "0 0/30 * * * ?")
     public void checkOrder() {
         List<OrderInfo> orderInfos = orderInfoMapper.selectByExample(null);
         Date now = new Date();

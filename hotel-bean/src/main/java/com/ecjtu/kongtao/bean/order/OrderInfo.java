@@ -11,7 +11,11 @@ import java.util.Date;
  * @author sepK
  */
 public class OrderInfo implements Serializable {
-    /**订单id*/
+
+    private static final long serialVersionUID = 1L;
+    /**
+     * 订单id
+     */
     private Integer orderId;
     /**
      * 订单号
@@ -21,13 +25,21 @@ public class OrderInfo implements Serializable {
      * 房间id
      */
     private Integer roomId;
-    /**用户id*/
+    /**
+     * 用户id
+     */
     private Integer userId;
-    /**订单状态*/
+    /**
+     * 订单状态
+     */
     private Integer orderStatus;
-    /**操作员工id*/
+    /**
+     * 操作员工id
+     */
     private Integer empId;
-    /**备注*/
+    /**
+     * 备注
+     */
     private String introduce;
     /**
      * 支付时间
@@ -45,16 +57,26 @@ public class OrderInfo implements Serializable {
      * 消耗金额
      */
     private Double costMoney;
-    /** 创建时间*/
+    /**
+     * 创建时间
+     */
     private Date createTime;
-    /** 上次修改时间*/
+    /**
+     * 上次修改时间
+     */
     private Date lastModifyTime;
 
-    /**非入库字段 用户*/
+    /**
+     * 非入库字段 用户
+     */
     private User user;
-    /**非入库字段 房间*/
+    /**
+     * 非入库字段 房间
+     */
     private Room room;
-    /**非入库字段 员工*/
+    /**
+     * 非入库字段 员工
+     */
     private Employee employee;
 
     public Integer getOrderId() {
@@ -184,4 +206,6 @@ public class OrderInfo implements Serializable {
     public void setCostMoney(Double costMoney) {
         this.costMoney = costMoney;
     }
+
+
 }

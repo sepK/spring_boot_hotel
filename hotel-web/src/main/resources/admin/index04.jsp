@@ -12,7 +12,7 @@
     <link href="${BasePath }/static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <script src="${BasePath }/static/bootstrap/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="${BasePath }/static/bootstrap/css/bootstrap.css">
-    <link rel="shortcut icon" href="${BasePath }/static/favicon.ico" />
+    <link rel="shortcut icon" href="${BasePath }/static/favicon.ico"/>
     <link rel="stylesheet" href="${BasePath }/static/css/index.css">
     <script src="${BasePath }/static/js/jquery.js"></script>
     <script src="${BasePath }/static/bootstrap/js/bootstrap.js"></script>
@@ -482,8 +482,8 @@
 
     function validate_add_form() {
         /*if ($("#roomNumber_add_input").attr("ajax-va") == "error") {
-            return false;
-        }*/
+         return false;
+         }*/
         return true;
     }
 

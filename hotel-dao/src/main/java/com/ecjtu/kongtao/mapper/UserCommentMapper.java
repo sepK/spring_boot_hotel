@@ -15,6 +15,7 @@ public interface UserCommentMapper {
 
     /**
      * 带条件的统计数量
+     *
      * @param example
      * @return
      */
@@ -30,6 +31,7 @@ public interface UserCommentMapper {
 
     /**
      * 通过主键删除
+     *
      * @param commentId
      * @return
      */
@@ -37,12 +39,14 @@ public interface UserCommentMapper {
 
     /**
      * 插入一条评论
+     *
      * @param userComment bean
      */
     void insert(UserComment userComment);
 
     /**
      * 有选择的插入（允许值为空）
+     *
      * @param record
      * @return
      */
@@ -50,6 +54,7 @@ public interface UserCommentMapper {
 
     /**
      * 查询（可以查询到text属性）
+     *
      * @param example
      * @return
      */
@@ -57,6 +62,7 @@ public interface UserCommentMapper {
 
     /**
      * 带条件的查询
+     *
      * @param example
      * @return
      */
@@ -64,6 +70,7 @@ public interface UserCommentMapper {
 
     /**
      * 通过主键查询
+     *
      * @param commentId
      * @return
      */
@@ -71,6 +78,7 @@ public interface UserCommentMapper {
 
     /**
      * 有选择的更新
+     *
      * @param record
      * @param example
      * @return
@@ -79,6 +87,7 @@ public interface UserCommentMapper {
 
     /**
      * 带text属性的任意条件更新
+     *
      * @param record
      * @param example
      * @return
@@ -87,6 +96,7 @@ public interface UserCommentMapper {
 
     /**
      * 任意条件更新
+     *
      * @param record
      * @param example
      * @return
@@ -95,6 +105,7 @@ public interface UserCommentMapper {
 
     /**
      * 通过主键更新（值允许为空）
+     *
      * @param record
      * @return
      */
@@ -102,6 +113,7 @@ public interface UserCommentMapper {
 
     /**
      * 通过主键更新（值允许为空，带text属性的）
+     *
      * @param record
      * @return
      */
@@ -109,6 +121,7 @@ public interface UserCommentMapper {
 
     /**
      * 通过主键更新
+     *
      * @param record
      * @return
      */

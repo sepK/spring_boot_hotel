@@ -1,6 +1,5 @@
 package com.ecjtu.kongtao.service.impl;
 
-import com.ecjtu.kongtao.bean.employee.Employee;
 import com.ecjtu.kongtao.bean.housing.Indent;
 import com.ecjtu.kongtao.bean.order.OrderInfo;
 import com.ecjtu.kongtao.bean.order.OrderInfoExample;
@@ -34,32 +33,12 @@ public class OrderInfoServiceImpl extends BaseService implements OrderInfoServic
 
     @Override
     public List<OrderInfo> getOrders() {
-        List<OrderInfo> orderInfos = orderInfoMapper.selectByExampleWithBLOBs(null);
-        orderInfos.forEach(orderInfo -> {
-            User user = userMapper.selectByPrimaryKey(orderInfo.getUserId());
-            if (!ObjectUtils.isEmpty(orderInfo.getEmpId()) && orderInfo.getEmpId() > 0) {
-                Employee employee = employeeMapper.selectByPrimaryKey(orderInfo.getEmpId());
-                orderInfo.setEmployee(employee);
-            }
-            Room room = roomService.getRoom(orderInfo.getRoomId());
-            orderInfo.setUser(user);
-            orderInfo.setRoom(room);
-        });
-        return orderInfos;
+        return orderInfoMapper.selectByExampleWithBLOBs(null);
     }
 
     @Override
     public OrderInfo getOrder(Integer id) {
-        OrderInfo orderInfo = orderInfoMapper.selectByPrimaryKey(id);
-        User user = userMapper.selectByPrimaryKey(orderInfo.getUserId());
-        if (!ObjectUtils.isEmpty(orderInfo.getEmpId()) && orderInfo.getEmpId() > 0) {
-            Employee employee = employeeMapper.selectByPrimaryKey(orderInfo.getEmpId());
-            orderInfo.setEmployee(employee);
-        }
-        Room room = roomService.getRoom(orderInfo.getRoomId());
-        orderInfo.setUser(user);
-        orderInfo.setRoom(room);
-        return orderInfo;
+        return orderInfoMapper.selectByPrimaryKey(id);
     }
 
     @Override
@@ -78,19 +57,19 @@ public class OrderInfoServiceImpl extends BaseService implements OrderInfoServic
     @Transactional(rollbackFor = Exception.class)
     public void addOrder(OrderInfo orderInfo) {
         Room room = roomService.getRoom(orderInfo.getRoomId());
-            if (room == null) {
-                throw new UserException(ErrorCode.ERROR_PARA);
-            } else if (room.getStatus() != 0) {
-                throw new UserException(ErrorCode.ERROR_HOUSE_NOT_UNOCCUPIED);
-            } else if (userService.checkUserById(orderInfo.getUserId())) {
-                throw new UserException(ErrorCode.ERROR_USER_NOT_EXIST);
-            } else if(orderInfo.getEmpId() != null && employeeService.getEmp(orderInfo.getEmpId()) == null) {
-                throw new UserException(ErrorCode.ERROR_EMPLOYEE_NOT_EXIST);
-            } else {
-                room.setStatus(Short.valueOf(orderInfo.getOrderStatus().toString()));
-                roomService.updateRoom(room);
-                orderInfoMapper.insertSelective(orderInfo);
-            }
+        if (room == null) {
+            throw new UserException(ErrorCode.ERROR_PARA);
+        } else if (room.getStatus() != 0) {
+            throw new UserException(ErrorCode.ERROR_HOUSE_NOT_UNOCCUPIED);
+        } else if (userService.checkUserById(orderInfo.getUserId())) {
+            throw new UserException(ErrorCode.ERROR_USER_NOT_EXIST);
+        } else if (orderInfo.getEmpId() != null && employeeService.getEmp(orderInfo.getEmpId()) == null) {
+            throw new UserException(ErrorCode.ERROR_EMPLOYEE_NOT_EXIST);
+        } else {
+            room.setStatus(Short.valueOf(orderInfo.getOrderStatus().toString()));
+            roomService.updateRoom(room);
+            orderInfoMapper.insertSelective(orderInfo);
+        }
     }
 
     @Override
@@ -124,7 +103,7 @@ public class OrderInfoServiceImpl extends BaseService implements OrderInfoServic
         return Result.success();
     }
 
-    private List<OrderInfo> getOrdersByUserName(String userName){
+    private List<OrderInfo> getOrdersByUserName(String userName) {
         User user = userService.getUser(userName);
         OrderInfoExample example = new OrderInfoExample();
         OrderInfoExample.Criteria criteria = example.createCriteria();

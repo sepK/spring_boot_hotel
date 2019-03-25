@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 public interface AdminService {
     /**
      * 检查管理员信息
+     *
      * @param admin
      * @return
      */

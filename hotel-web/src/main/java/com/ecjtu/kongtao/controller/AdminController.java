@@ -14,22 +14,22 @@ import javax.servlet.http.HttpServletRequest;
  * @author sepK
  */
 @Controller
-public class AdminController extends BaseController{
+public class AdminController extends BaseController {
 
     @RequestMapping("/login")
-    public String toLogin(){
+    public String toLogin() {
         return "login";
     }
 
     @RequestMapping("/index07")
-    public String toIndex(){
+    public String toIndex() {
         return "/admin/index07";
     }
 
     @RequestMapping("/adminLogin")
     @ResponseBody
-    public Result checkAdminInfo(Admin admin, HttpServletRequest httpServletRequest){
-        if(adminService.checkInfo(admin)) {
+    public Result checkAdminInfo(Admin admin, HttpServletRequest httpServletRequest) {
+        if (adminService.checkInfo(admin)) {
             httpServletRequest.getSession().setAttribute(SessionKey.ADMIN_USER, admin);
             return Result.success();
         }

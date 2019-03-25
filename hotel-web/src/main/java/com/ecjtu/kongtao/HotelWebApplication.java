@@ -17,7 +17,7 @@ import org.springframework.session.data.redis.config.annotation.web.http.EnableR
 @EnableScheduling
 public class HotelWebApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(HotelWebApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(HotelWebApplication.class, args);
+    }
 }

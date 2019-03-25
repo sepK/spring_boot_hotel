@@ -124,7 +124,7 @@
                             </label>
                             <label class="radio-inline">
                                 <input type="radio" name="sex" id="sex_add_input2" value="女"> 女
-                        </label>
+                            </label>
                         </div>
                     </div>
                     <div class="form-group">
@@ -144,7 +144,8 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label">验证码</label>
                         <div class="col-sm-5">
-                            <input type="text" name="verifyCode" class="form-control" placeholder="请输入验证码" id="verifyCode_add_input"/>
+                            <input type="text" name="verifyCode" class="form-control" placeholder="请输入验证码"
+                                   id="verifyCode_add_input"/>
                             <span class="help-block"></span>
                         </div>
                         <div class="col-sm-5">
@@ -162,9 +163,9 @@
 </div>
 <script>
     var user = JSON.parse(sessionStorage.getItem("user"));
-    if(user != null){
+    if (user != null) {
         login();
-    }else {
+    } else {
         $("#register_modal_btn").click(function () {
             reset_form("#cusAddModal form");
             myRefersh(document.getElementById("img_add"));
@@ -186,16 +187,15 @@
     }
 
 
-
     $("#cus_login_btn").click(function () {
         $.ajax({
-            url:"/customer/login",
-            type:"POST",
-            data:$("#cusUpdateModal form").serialize(),
-            success:function (result) {
+            url: "/customer/login",
+            type: "POST",
+            data: $("#cusUpdateModal form").serialize(),
+            success: function (result) {
                 alert(result.msg);
-                if(result.code == 200){
-                    sessionStorage.setItem("user",JSON.stringify(result.extend.user));
+                if (result.code == 200) {
+                    sessionStorage.setItem("user", JSON.stringify(result.extend.user));
                     user = JSON.parse(sessionStorage.getItem("user"));
                     $("#cusUpdateModal").modal("hide");
                     login();
@@ -209,9 +209,9 @@
         $("#login_modal_btn").off();
         $("#register_modal_btn").off();
         $("#register_modal_btn").html("退出");
-        $("#register_modal_btn").on("click",function () {
+        $("#register_modal_btn").on("click", function () {
             sessionStorage.removeItem("user");
-            window.location.href="/customer/logout";
+            window.location.href = "/customer/logout";
         });
         $("#login_modal_btn").html(user.customerName);
     }

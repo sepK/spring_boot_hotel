@@ -19,14 +19,14 @@ import java.util.List;
  */
 @Controller
 @RequestMapping("/order")
-public class OrderInfoController extends BaseController{
+public class OrderInfoController extends BaseController {
 
     @RequestMapping("/index04")
-    public String toIndex(){
+    public String toIndex() {
         return "index04";
     }
 
-    @RequestMapping(value = "/orders",method = RequestMethod.GET)
+    @RequestMapping(value = "/orders", method = RequestMethod.GET)
     @ResponseBody
     public Result getOrders(@RequestParam("pn") Integer pn, HttpServletRequest request) {
         SessionManager.setSession(request);
@@ -36,22 +36,24 @@ public class OrderInfoController extends BaseController{
         return Result.success().add("pageInfo", pageInfo);
     }
 
-    @RequestMapping(value = "/order/{orderId}",method = RequestMethod.GET)
+    @RequestMapping(value = "/order/{orderId}", method = RequestMethod.GET)
     @ResponseBody
-    public Result getOrder(@PathVariable("orderId") Integer orderId){
+    public Result getOrder(@PathVariable("orderId") Integer orderId) {
         OrderInfo orderInfo = orderInfoService.getOrder(orderId);
         return Result.success().add("orderInfo", orderInfo);
     }
+
     @RequestMapping(value = "/order/{orderId}", method = RequestMethod.PUT)
     @ResponseBody
-    public Result updateOrder(@PathVariable("orderId") Integer orderId, OrderInfo orderInfo){
+    public Result updateOrder(@PathVariable("orderId") Integer orderId, OrderInfo orderInfo) {
         orderInfoService.updateOrder(orderInfo);
         return Result.success();
 
     }
+
     @RequestMapping(value = "/order", method = RequestMethod.POST)
     @ResponseBody
-    public Result addOrder(OrderInfo orderInfo){
+    public Result addOrder(OrderInfo orderInfo) {
         Date now = new Date();
         orderInfo.setCreateTime(now);
         orderInfo.setLastModifyTime(now);
@@ -59,30 +61,31 @@ public class OrderInfoController extends BaseController{
         return Result.success();
 
     }
+
     @RequestMapping(value = "/searchOrders", method = RequestMethod.GET)
     @ResponseBody
-    public Result searchOrders(@RequestParam("roomId") Integer roomId){
+    public Result searchOrders(@RequestParam("roomId") Integer roomId) {
         List<OrderInfo> list = orderInfoService.getOrdersByRoomId(roomId);
-        return Result.success().add("list",list);
+        return Result.success().add("list", list);
     }
 
     @RequestMapping(value = "/order/{orderId}", method = RequestMethod.DELETE)
     @ResponseBody
-    public Result delOrder(@PathVariable("orderId") Integer orderId){
-        if(orderInfoService.delOrder(orderId)){
+    public Result delOrder(@PathVariable("orderId") Integer orderId) {
+        if (orderInfoService.delOrder(orderId)) {
             return Result.success();
-        }else{
+        } else {
             return Result.fail();
         }
     }
 
-    @RequestMapping(value = "/addIndent/{roomId}",method = RequestMethod.POST)
+    @RequestMapping(value = "/addIndent/{roomId}", method = RequestMethod.POST)
     @ResponseBody
-    public Result addIndent(@PathVariable("roomId") Integer roomId, Indent indent){
+    public Result addIndent(@PathVariable("roomId") Integer roomId, Indent indent) {
         return orderInfoService.addIndent(roomId, indent);
     }
 
-    @RequestMapping(value = "/getIndents",method = RequestMethod.GET)
+    @RequestMapping(value = "/getIndents", method = RequestMethod.GET)
     @ResponseBody
     public Result getIndents(@RequestParam("userName") String userName, HttpServletRequest request) {
         SessionManager.setSession(request);
@@ -90,9 +93,9 @@ public class OrderInfoController extends BaseController{
         return Result.success().add("indents", indents);
     }
 
-    @RequestMapping(value = "/updateIndent",method = RequestMethod.POST)
+    @RequestMapping(value = "/updateIndent", method = RequestMethod.POST)
     @ResponseBody
-    public Result updateIndent(OrderInfo orderInfo){
+    public Result updateIndent(OrderInfo orderInfo) {
         return orderInfoService.updateIndent(orderInfo);
     }
 }

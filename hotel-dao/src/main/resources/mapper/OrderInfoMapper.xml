@@ -1,394 +1,409 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ecjtu.kongtao.mapper.OrderInfoMapper">
-  <resultMap id="BaseResultMap" type="com.ecjtu.kongtao.bean.order.OrderInfo">
-    <id column="order_id" jdbcType="INTEGER" property="orderId" />
-      <result column="order_number" jdbcType="VARCHAR" property="orderNumber"/>
-    <result column="room_id" jdbcType="INTEGER" property="roomId"/>
-    <result column="user_id" jdbcType="INTEGER" property="userId" />
-    <result column="order_status" jdbcType="INTEGER" property="orderStatus" />
-    <result column="emp_id" jdbcType="INTEGER" property="empId" />
-      <result column="pay_time" jdbcType="TIMESTAMP" property="payTime"/>
-      <result column="start_time" jdbcType="TIMESTAMP" property="startTime"/>
-      <result column="end_time" jdbcType="TIMESTAMP" property="endTime"/>
-      <result column="cost_money" jdbcType="DOUBLE" property="costMoney"/>
-      <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
-      <result column="last_modify_time" jdbcType="TIMESTAMP" property="lastModifyTime"/>
-  </resultMap>
-  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.ecjtu.kongtao.bean.order.OrderInfo">
-    <result column="introduce" jdbcType="LONGVARCHAR" property="introduce" />
-  </resultMap>
-  <sql id="Example_Where_Clause">
-    <where>
-      <foreach collection="oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue">
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue">
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue">
-                  and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
+    <resultMap id="BaseResultMap" type="com.ecjtu.kongtao.bean.order.OrderInfo">
+        <id column="order_id" jdbcType="INTEGER" property="orderId"/>
+        <result column="order_number" jdbcType="VARCHAR" property="orderNumber"/>
+        <result column="room_id" jdbcType="INTEGER" property="roomId"/>
+        <result column="user_id" jdbcType="INTEGER" property="userId"/>
+        <result column="order_status" jdbcType="INTEGER" property="orderStatus"/>
+        <result column="emp_id" jdbcType="INTEGER" property="empId"/>
+        <result column="pay_time" jdbcType="TIMESTAMP" property="payTime"/>
+        <result column="start_time" jdbcType="TIMESTAMP" property="startTime"/>
+        <result column="end_time" jdbcType="TIMESTAMP" property="endTime"/>
+        <result column="cost_money" jdbcType="DOUBLE" property="costMoney"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="last_modify_time" jdbcType="TIMESTAMP" property="lastModifyTime"/>
+        <association property="room" column="room_id" select="com.ecjtu.kongtao.mapper.RoomMapper.selectByPrimaryKey">
+        </association>
+        <association property="user" column="user_id" select="com.ecjtu.kongtao.mapper.UserMapper.selectByPrimaryKey">
+        </association>
+        <association property="employee" column="emp_id"
+                     select="com.ecjtu.kongtao.mapper.EmployeeMapper.selectByPrimaryKey">
+        </association>
+    </resultMap>
+    <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.ecjtu.kongtao.bean.order.OrderInfo">
+        <result column="introduce" jdbcType="LONGVARCHAR" property="introduce"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
             </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Update_By_Example_Where_Clause">
-    <where>
-      <foreach collection="example.oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue">
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue">
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue">
-                  and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
             </foreach>
-          </trim>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+        order_id, order_number, room_id, user_id, order_status, emp_id, pay_time, start_time,
+        end_time, cost_money, create_time, last_modify_time
+    </sql>
+    <sql id="Blob_Column_List">
+        introduce
+    </sql>
+    <select id="selectByExampleWithBLOBs" parameterType="com.ecjtu.kongtao.bean.order.OrderInfoExample"
+            resultMap="ResultMapWithBLOBs">
+        select
+        <if test="distinct">
+            distinct
         </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Base_Column_List">
-    order_id, order_number, room_id, user_id, order_status, emp_id, pay_time, start_time,
-      end_time, cost_money, create_time, last_modify_time
-  </sql>
-  <sql id="Blob_Column_List">
-    introduce
-  </sql>
-  <select id="selectByExampleWithBLOBs" parameterType="com.ecjtu.kongtao.bean.order.OrderInfoExample" resultMap="ResultMapWithBLOBs">
-    select
-    <if test="distinct">
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
-    from t_order_info
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null">
-      order by ${orderByClause}
-    </if>
-  </select>
-  <select id="selectByExample" parameterType="com.ecjtu.kongtao.bean.order.OrderInfoExample" resultMap="BaseResultMap">
-    select
-    <if test="distinct">
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    from t_order_info
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null">
-      order by ${orderByClause}
-    </if>
-  </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
-    select 
-    <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
-    from t_order_info
-    where order_id = #{orderId,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from t_order_info
-    where order_id = #{orderId,jdbcType=INTEGER}
-  </delete>
-  <delete id="deleteByExample" parameterType="com.ecjtu.kongtao.bean.order.OrderInfoExample">
-    delete from t_order_info
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-  </delete>
-  <insert id="insert" parameterType="com.ecjtu.kongtao.bean.order.OrderInfo">
-    insert into t_order_info (order_id, order_number, room_id,
-      user_id, order_status, emp_id,
-      pay_time, start_time, end_time,
-      cost_money, create_time, last_modify_time,
-      introduce)
-    values (#{orderId,jdbcType=INTEGER}, #{orderNumber,jdbcType=VARCHAR}, #{roomId,jdbcType=INTEGER},
-      #{userId,jdbcType=INTEGER}, #{orderStatus,jdbcType=INTEGER}, #{empId,jdbcType=INTEGER},
-      #{payTime,jdbcType=TIMESTAMP}, #{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP},
-      #{costMoney,jdbcType=DOUBLE}, #{createTime,jdbcType=TIMESTAMP}, #{lastModifyTime,jdbcType=TIMESTAMP},
-      #{introduce,jdbcType=LONGVARCHAR})
-  </insert>
-  <insert id="insertSelective" parameterType="com.ecjtu.kongtao.bean.order.OrderInfo">
-    insert into t_order_info
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="orderId != null">
-        order_id,
-      </if>
-        <if test="orderNumber != null">
-            order_number,
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from t_order_info
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
         </if>
-      <if test="roomId != null">
-        room_id,
-      </if>
-      <if test="userId != null">
-        user_id,
-      </if>
-      <if test="orderStatus != null">
-        order_status,
-      </if>
-      <if test="empId != null">
-        emp_id,
-      </if>
-        <if test="payTime != null">
-            pay_time,
+        <if test="orderByClause != null">
+            order by ${orderByClause}
         </if>
-        <if test="startTime != null">
-            start_time,
+    </select>
+    <select id="selectByExample" parameterType="com.ecjtu.kongtao.bean.order.OrderInfoExample"
+            resultMap="BaseResultMap">
+        select
+        <if test="distinct">
+            distinct
         </if>
-        <if test="endTime != null">
-            end_time,
+        <include refid="Base_Column_List"/>
+        from t_order_info
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
         </if>
-        <if test="costMoney != null">
-            cost_money,
+        <if test="orderByClause != null">
+            order by ${orderByClause}
         </if>
-      <if test="createTime != null">
-        create_time,
-      </if>
-      <if test="lastModifyTime != null">
-        last_modify_time,
-      </if>
-      <if test="introduce != null">
-        introduce,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="orderId != null">
-        #{orderId,jdbcType=INTEGER},
-      </if>
-        <if test="orderNumber != null">
-            #{orderNumber,jdbcType=VARCHAR},
+    </select>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from t_order_info
+        where order_id = #{orderId,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        DELETE FROM t_order_info
+        WHERE order_id = #{orderId,jdbcType=INTEGER}
+    </delete>
+    <delete id="deleteByExample" parameterType="com.ecjtu.kongtao.bean.order.OrderInfoExample">
+        delete from t_order_info
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
         </if>
-      <if test="roomId != null">
-        #{roomId,jdbcType=INTEGER},
-      </if>
-      <if test="userId != null">
-        #{userId,jdbcType=INTEGER},
-      </if>
-      <if test="orderStatus != null">
-        #{orderStatus,jdbcType=INTEGER},
-      </if>
-      <if test="empId != null">
-        #{empId,jdbcType=INTEGER},
-      </if>
-        <if test="payTime != null">
-            #{payTime,jdbcType=TIMESTAMP},
+    </delete>
+    <insert id="insert" parameterType="com.ecjtu.kongtao.bean.order.OrderInfo">
+        INSERT INTO t_order_info (order_id, order_number, room_id,
+                                  user_id, order_status, emp_id,
+                                  pay_time, start_time, end_time,
+                                  cost_money, create_time, last_modify_time,
+                                  introduce)
+        VALUES (#{orderId,jdbcType=INTEGER}, #{orderNumber,jdbcType=VARCHAR}, #{roomId,jdbcType=INTEGER},
+                                             #{userId,jdbcType=INTEGER}, #{orderStatus,jdbcType=INTEGER},
+                                             #{empId,jdbcType=INTEGER},
+                                             #{payTime,jdbcType=TIMESTAMP}, #{startTime,jdbcType=TIMESTAMP},
+                                             #{endTime,jdbcType=TIMESTAMP},
+                                             #{costMoney,jdbcType=DOUBLE}, #{createTime,jdbcType=TIMESTAMP},
+                #{lastModifyTime,jdbcType=TIMESTAMP},
+                #{introduce,jdbcType=LONGVARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="com.ecjtu.kongtao.bean.order.OrderInfo">
+        insert into t_order_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="orderId != null">
+                order_id,
+            </if>
+            <if test="orderNumber != null">
+                order_number,
+            </if>
+            <if test="roomId != null">
+                room_id,
+            </if>
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="orderStatus != null">
+                order_status,
+            </if>
+            <if test="empId != null">
+                emp_id,
+            </if>
+            <if test="payTime != null">
+                pay_time,
+            </if>
+            <if test="startTime != null">
+                start_time,
+            </if>
+            <if test="endTime != null">
+                end_time,
+            </if>
+            <if test="costMoney != null">
+                cost_money,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="lastModifyTime != null">
+                last_modify_time,
+            </if>
+            <if test="introduce != null">
+                introduce,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="orderId != null">
+                #{orderId,jdbcType=INTEGER},
+            </if>
+            <if test="orderNumber != null">
+                #{orderNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="roomId != null">
+                #{roomId,jdbcType=INTEGER},
+            </if>
+            <if test="userId != null">
+                #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="orderStatus != null">
+                #{orderStatus,jdbcType=INTEGER},
+            </if>
+            <if test="empId != null">
+                #{empId,jdbcType=INTEGER},
+            </if>
+            <if test="payTime != null">
+                #{payTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="startTime != null">
+                #{startTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="endTime != null">
+                #{endTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="costMoney != null">
+                #{costMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="lastModifyTime != null">
+                #{lastModifyTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="introduce != null">
+                #{introduce,jdbcType=LONGVARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.ecjtu.kongtao.bean.order.OrderInfoExample"
+            resultType="java.lang.Long">
+        select count(*) from t_order_info
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
         </if>
-        <if test="startTime != null">
-            #{startTime,jdbcType=TIMESTAMP},
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update t_order_info
+        <set>
+            <if test="record.orderId != null">
+                order_id = #{record.orderId,jdbcType=INTEGER},
+            </if>
+            <if test="record.orderNumber != null">
+                order_number = #{record.orderNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="record.roomId != null">
+                room_id = #{record.roomId,jdbcType=INTEGER},
+            </if>
+            <if test="record.userId != null">
+                user_id = #{record.userId,jdbcType=INTEGER},
+            </if>
+            <if test="record.orderStatus != null">
+                order_status = #{record.orderStatus,jdbcType=INTEGER},
+            </if>
+            <if test="record.empId != null">
+                emp_id = #{record.empId,jdbcType=INTEGER},
+            </if>
+            <if test="record.payTime != null">
+                pay_time = #{record.payTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.startTime != null">
+                start_time = #{record.startTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.endTime != null">
+                end_time = #{record.endTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.costMoney != null">
+                cost_money = #{record.costMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="record.createTime != null">
+                create_time = #{record.createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.lastModifyTime != null">
+                last_modify_time = #{record.lastModifyTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.introduce != null">
+                introduce = #{record.introduce,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
         </if>
-        <if test="endTime != null">
-            #{endTime,jdbcType=TIMESTAMP},
-        </if>
-        <if test="costMoney != null">
-            #{costMoney,jdbcType=DOUBLE},
-        </if>
-      <if test="createTime != null">
-        #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="lastModifyTime != null">
-        #{lastModifyTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="introduce != null">
-        #{introduce,jdbcType=LONGVARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <select id="countByExample" parameterType="com.ecjtu.kongtao.bean.order.OrderInfoExample" resultType="java.lang.Long">
-    select count(*) from t_order_info
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-  </select>
-  <update id="updateByExampleSelective" parameterType="map">
-    update t_order_info
-    <set>
-      <if test="record.orderId != null">
-        order_id = #{record.orderId,jdbcType=INTEGER},
-      </if>
-        <if test="record.orderNumber != null">
-            order_number = #{record.orderNumber,jdbcType=VARCHAR},
-        </if>
-      <if test="record.roomId != null">
+    </update>
+    <update id="updateByExampleWithBLOBs" parameterType="map">
+        update t_order_info
+        set order_id = #{record.orderId,jdbcType=INTEGER},
+        order_number = #{record.orderNumber,jdbcType=VARCHAR},
         room_id = #{record.roomId,jdbcType=INTEGER},
-      </if>
-      <if test="record.userId != null">
         user_id = #{record.userId,jdbcType=INTEGER},
-      </if>
-      <if test="record.orderStatus != null">
         order_status = #{record.orderStatus,jdbcType=INTEGER},
-      </if>
-      <if test="record.empId != null">
         emp_id = #{record.empId,jdbcType=INTEGER},
-      </if>
-        <if test="record.payTime != null">
-            pay_time = #{record.payTime,jdbcType=TIMESTAMP},
-        </if>
-        <if test="record.startTime != null">
-            start_time = #{record.startTime,jdbcType=TIMESTAMP},
-        </if>
-        <if test="record.endTime != null">
-            end_time = #{record.endTime,jdbcType=TIMESTAMP},
-        </if>
-        <if test="record.costMoney != null">
-            cost_money = #{record.costMoney,jdbcType=DOUBLE},
-        </if>
-      <if test="record.createTime != null">
+        pay_time = #{record.payTime,jdbcType=TIMESTAMP},
+        start_time = #{record.startTime,jdbcType=TIMESTAMP},
+        end_time = #{record.endTime,jdbcType=TIMESTAMP},
+        cost_money = #{record.costMoney,jdbcType=DOUBLE},
         create_time = #{record.createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="record.lastModifyTime != null">
         last_modify_time = #{record.lastModifyTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="record.introduce != null">
-        introduce = #{record.introduce,jdbcType=LONGVARCHAR},
-      </if>
-    </set>
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExampleWithBLOBs" parameterType="map">
-    update t_order_info
-    set order_id = #{record.orderId,jdbcType=INTEGER},
-      order_number = #{record.orderNumber,jdbcType=VARCHAR},
-    room_id = #{record.roomId,jdbcType=INTEGER},
-      user_id = #{record.userId,jdbcType=INTEGER},
-      order_status = #{record.orderStatus,jdbcType=INTEGER},
-      emp_id = #{record.empId,jdbcType=INTEGER},
-      pay_time = #{record.payTime,jdbcType=TIMESTAMP},
-      start_time = #{record.startTime,jdbcType=TIMESTAMP},
-      end_time = #{record.endTime,jdbcType=TIMESTAMP},
-      cost_money = #{record.costMoney,jdbcType=DOUBLE},
-      create_time = #{record.createTime,jdbcType=TIMESTAMP},
-      last_modify_time = #{record.lastModifyTime,jdbcType=TIMESTAMP},
-      introduce = #{record.introduce,jdbcType=LONGVARCHAR}
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExample" parameterType="map">
-    update t_order_info
-    set order_id = #{record.orderId,jdbcType=INTEGER},
-      order_number = #{record.orderNumber,jdbcType=VARCHAR},
-    room_id = #{record.roomId,jdbcType=INTEGER},
-      user_id = #{record.userId,jdbcType=INTEGER},
-      order_status = #{record.orderStatus,jdbcType=INTEGER},
-      emp_id = #{record.empId,jdbcType=INTEGER},
-      pay_time = #{record.payTime,jdbcType=TIMESTAMP},
-      start_time = #{record.startTime,jdbcType=TIMESTAMP},
-      end_time = #{record.endTime,jdbcType=TIMESTAMP},
-      cost_money = #{record.costMoney,jdbcType=DOUBLE},
-      create_time = #{record.createTime,jdbcType=TIMESTAMP},
-      last_modify_time = #{record.lastModifyTime,jdbcType=TIMESTAMP}
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.ecjtu.kongtao.bean.order.OrderInfo">
-    update t_order_info
-    <set>
-        <if test="orderNumber != null">
-            order_number = #{orderNumber,jdbcType=VARCHAR},
+        introduce = #{record.introduce,jdbcType=LONGVARCHAR}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
         </if>
-      <if test="roomId != null">
-        room_id = #{roomId,jdbcType=INTEGER},
-      </if>
-      <if test="userId != null">
-        user_id = #{userId,jdbcType=INTEGER},
-      </if>
-      <if test="orderStatus != null">
-        order_status = #{orderStatus,jdbcType=INTEGER},
-      </if>
-      <if test="empId != null">
-        emp_id = #{empId,jdbcType=INTEGER},
-      </if>
-        <if test="payTime != null">
-            pay_time = #{payTime,jdbcType=TIMESTAMP},
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update t_order_info
+        set order_id = #{record.orderId,jdbcType=INTEGER},
+        order_number = #{record.orderNumber,jdbcType=VARCHAR},
+        room_id = #{record.roomId,jdbcType=INTEGER},
+        user_id = #{record.userId,jdbcType=INTEGER},
+        order_status = #{record.orderStatus,jdbcType=INTEGER},
+        emp_id = #{record.empId,jdbcType=INTEGER},
+        pay_time = #{record.payTime,jdbcType=TIMESTAMP},
+        start_time = #{record.startTime,jdbcType=TIMESTAMP},
+        end_time = #{record.endTime,jdbcType=TIMESTAMP},
+        cost_money = #{record.costMoney,jdbcType=DOUBLE},
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+        last_modify_time = #{record.lastModifyTime,jdbcType=TIMESTAMP}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
         </if>
-        <if test="startTime != null">
-            start_time = #{startTime,jdbcType=TIMESTAMP},
-        </if>
-        <if test="endTime != null">
-            end_time = #{endTime,jdbcType=TIMESTAMP},
-        </if>
-        <if test="costMoney != null">
-            cost_money = #{costMoney,jdbcType=DOUBLE},
-        </if>
-      <if test="createTime != null">
-        create_time = #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="lastModifyTime != null">
-        last_modify_time = #{lastModifyTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="introduce != null">
-        introduce = #{introduce,jdbcType=LONGVARCHAR},
-      </if>
-    </set>
-    where order_id = #{orderId,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.ecjtu.kongtao.bean.order.OrderInfo">
-    update t_order_info
-      set order_number = #{orderNumber,jdbcType=VARCHAR},
-    room_id = #{roomId,jdbcType=INTEGER},
-      user_id = #{userId,jdbcType=INTEGER},
-      order_status = #{orderStatus,jdbcType=INTEGER},
-      emp_id = #{empId,jdbcType=INTEGER},
-      pay_time = #{payTime,jdbcType=TIMESTAMP},
-      start_time = #{startTime,jdbcType=TIMESTAMP},
-      end_time = #{endTime,jdbcType=TIMESTAMP},
-      cost_money = #{costMoney,jdbcType=DOUBLE},
-      create_time = #{createTime,jdbcType=TIMESTAMP},
-      last_modify_time = #{lastModifyTime,jdbcType=TIMESTAMP},
-      introduce = #{introduce,jdbcType=LONGVARCHAR}
-    where order_id = #{orderId,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.ecjtu.kongtao.bean.order.OrderInfo">
-    update t_order_info
-      set order_number = #{orderNumber,jdbcType=VARCHAR},
-    room_id = #{roomId,jdbcType=INTEGER},
-      user_id = #{userId,jdbcType=INTEGER},
-      order_status = #{orderStatus,jdbcType=INTEGER},
-      emp_id = #{empId,jdbcType=INTEGER},
-      pay_time = #{payTime,jdbcType=TIMESTAMP},
-      start_time = #{startTime,jdbcType=TIMESTAMP},
-      end_time = #{endTime,jdbcType=TIMESTAMP},
-      cost_money = #{costMoney,jdbcType=DOUBLE},
-      create_time = #{createTime,jdbcType=TIMESTAMP},
-      last_modify_time = #{lastModifyTime,jdbcType=TIMESTAMP}
-    where order_id = #{orderId,jdbcType=INTEGER}
-  </update>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.ecjtu.kongtao.bean.order.OrderInfo">
+        update t_order_info
+        <set>
+            <if test="orderNumber != null">
+                order_number = #{orderNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="roomId != null">
+                room_id = #{roomId,jdbcType=INTEGER},
+            </if>
+            <if test="userId != null">
+                user_id = #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="orderStatus != null">
+                order_status = #{orderStatus,jdbcType=INTEGER},
+            </if>
+            <if test="empId != null">
+                emp_id = #{empId,jdbcType=INTEGER},
+            </if>
+            <if test="payTime != null">
+                pay_time = #{payTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="startTime != null">
+                start_time = #{startTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="endTime != null">
+                end_time = #{endTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="costMoney != null">
+                cost_money = #{costMoney,jdbcType=DOUBLE},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="lastModifyTime != null">
+                last_modify_time = #{lastModifyTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="introduce != null">
+                introduce = #{introduce,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        where order_id = #{orderId,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.ecjtu.kongtao.bean.order.OrderInfo">
+        UPDATE t_order_info
+        SET order_number     = #{orderNumber,jdbcType=VARCHAR},
+            room_id          = #{roomId,jdbcType=INTEGER},
+            user_id          = #{userId,jdbcType=INTEGER},
+            order_status     = #{orderStatus,jdbcType=INTEGER},
+            emp_id           = #{empId,jdbcType=INTEGER},
+            pay_time         = #{payTime,jdbcType=TIMESTAMP},
+            start_time       = #{startTime,jdbcType=TIMESTAMP},
+            end_time         = #{endTime,jdbcType=TIMESTAMP},
+            cost_money       = #{costMoney,jdbcType=DOUBLE},
+            create_time      = #{createTime,jdbcType=TIMESTAMP},
+            last_modify_time = #{lastModifyTime,jdbcType=TIMESTAMP},
+            introduce        = #{introduce,jdbcType=LONGVARCHAR}
+        WHERE order_id = #{orderId,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.ecjtu.kongtao.bean.order.OrderInfo">
+        UPDATE t_order_info
+        SET order_number     = #{orderNumber,jdbcType=VARCHAR},
+            room_id          = #{roomId,jdbcType=INTEGER},
+            user_id          = #{userId,jdbcType=INTEGER},
+            order_status     = #{orderStatus,jdbcType=INTEGER},
+            emp_id           = #{empId,jdbcType=INTEGER},
+            pay_time         = #{payTime,jdbcType=TIMESTAMP},
+            start_time       = #{startTime,jdbcType=TIMESTAMP},
+            end_time         = #{endTime,jdbcType=TIMESTAMP},
+            cost_money       = #{costMoney,jdbcType=DOUBLE},
+            create_time      = #{createTime,jdbcType=TIMESTAMP},
+            last_modify_time = #{lastModifyTime,jdbcType=TIMESTAMP}
+        WHERE order_id = #{orderId,jdbcType=INTEGER}
+    </update>
 </mapper>

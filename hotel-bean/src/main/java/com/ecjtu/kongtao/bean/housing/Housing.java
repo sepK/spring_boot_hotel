@@ -10,17 +10,29 @@ import java.util.Date;
  * @author sepK
  */
 public class Housing implements Serializable {
-    /**入住id*/
+    /**
+     * 入住id
+     */
     private Integer housingId;
-    /**房间id*/
+    /**
+     * 房间id
+     */
     private Integer roomId;
-    /**用户id*/
+    /**
+     * 用户id
+     */
     private Integer userId;
-    /**开始时间*/
+    /**
+     * 开始时间
+     */
     private Date startTime;
-    /**结束时间*/
+    /**
+     * 结束时间
+     */
     private Date endTime;
-    /**支付金额*/
+    /**
+     * 支付金额
+     */
     private Double costMoney;
     /**
      * 创建时间
@@ -31,9 +43,13 @@ public class Housing implements Serializable {
      */
     private Date lastModifyTime;
 
-    /**非入库字段 用户*/
+    /**
+     * 非入库字段 用户
+     */
     private User user;
-    /**非入库字段 房间*/
+    /**
+     * 非入库字段 房间
+     */
     private Room room;
 
     public Integer getHousingId() {

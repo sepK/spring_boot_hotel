@@ -17,8 +17,7 @@ public class RedisUtils {
     private RedisTemplate<String, Object> redisTemplate;
 
     /**
-     *
-     * @param key 键
+     * @param key   键
      * @param value 值
      * @param <K>
      */

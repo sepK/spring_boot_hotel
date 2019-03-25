@@ -13,11 +13,17 @@ public class SessionKey {
      * 管理员用户
      */
     public static final String ADMIN_USER = "ADMIN_USER";
-    /**房间号*/
+    /**
+     * 房间号
+     */
     public static final String ROOM_NUMBER = "ROOM_NUMBER";
-    /**员工职位*/
+    /**
+     * 员工职位
+     */
     public static final String EMPLOYEE_TYPE = "EMPLOYEE_TYPE";
-    /**房间状态*/
+    /**
+     * 房间状态
+     */
     public static final String ROOM_STATUS = "ROOM_STATUS";
     /**
      * 订单状态

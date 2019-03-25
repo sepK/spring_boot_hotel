@@ -23,6 +23,7 @@ public interface OrderInfoMapper {
 
     /**
      * 带条件的删除
+     *
      * @param example
      * @return
      */
@@ -30,6 +31,7 @@ public interface OrderInfoMapper {
 
     /**
      * 通过主键删除
+     *
      * @param orderId
      * @return
      */
@@ -37,6 +39,7 @@ public interface OrderInfoMapper {
 
     /**
      * 插入一条记录
+     *
      * @param record
      * @return
      */
@@ -44,6 +47,7 @@ public interface OrderInfoMapper {
 
     /**
      * 有选择的插入（允许值为空）
+     *
      * @param record
      * @return
      */
@@ -51,6 +55,7 @@ public interface OrderInfoMapper {
 
     /**
      * 查询（可以查询到text属性）
+     *
      * @param example
      * @return
      */
@@ -58,6 +63,7 @@ public interface OrderInfoMapper {
 
     /**
      * 带条件的查询
+     *
      * @param example
      * @return
      */
@@ -65,6 +71,7 @@ public interface OrderInfoMapper {
 
     /**
      * 通过主键查询
+     *
      * @param orderId
      * @return
      */
@@ -72,6 +79,7 @@ public interface OrderInfoMapper {
 
     /**
      * 有选择的更新
+     *
      * @param record
      * @param example
      * @return
@@ -80,6 +88,7 @@ public interface OrderInfoMapper {
 
     /**
      * 带text属性的任意条件更新
+     *
      * @param record
      * @param example
      * @return
@@ -88,6 +97,7 @@ public interface OrderInfoMapper {
 
     /**
      * 任意条件更新
+     *
      * @param record
      * @param example
      * @return
@@ -96,6 +106,7 @@ public interface OrderInfoMapper {
 
     /**
      * 通过主键更新（值允许为空）
+     *
      * @param record
      * @return
      */
@@ -103,6 +114,7 @@ public interface OrderInfoMapper {
 
     /**
      * 通过主键更新（值允许为空，带text属性的）
+     *
      * @param record
      * @return
      */
@@ -110,6 +122,7 @@ public interface OrderInfoMapper {
 
     /**
      * 通过主键更新
+     *
      * @param record
      * @return
      */

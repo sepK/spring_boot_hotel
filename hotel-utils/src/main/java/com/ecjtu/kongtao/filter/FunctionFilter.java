@@ -18,8 +18,10 @@ public class FunctionFilter implements Filter {
 
     private static Logger log = org.slf4j.LoggerFactory.getLogger(FunctionFilter.class);
 
-    /**不过滤的uri*/
-    private static String[] notFilter = new String[] {
+    /**
+     * 不过滤的uri
+     */
+    private static String[] notFilter = new String[]{
             "/login",
             "/assets",
             "/adminLogin",
@@ -38,6 +40,7 @@ public class FunctionFilter implements Filter {
             "/alipay",
             "/user/logout"
     };
+
     @Override
     public void destroy() {
 
@@ -45,13 +48,13 @@ public class FunctionFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws ServletException, IOException {
-        HttpServletRequest request = (HttpServletRequest)req;
-        HttpServletResponse response =(HttpServletResponse)res;
+        HttpServletRequest request = (HttpServletRequest) req;
+        HttpServletResponse response = (HttpServletResponse) res;
         HttpSession session = request.getSession();
         String uri = request.getRequestURI().trim();
         boolean doFilter = true;
         for (String s : notFilter) {
-            if(uri.contains(s)){
+            if (uri.contains(s)) {
                 doFilter = false;
                 break;
             }
@@ -65,9 +68,9 @@ public class FunctionFilter implements Filter {
             return;
         }
         long in = System.currentTimeMillis();
-        log.info(uri +" in "+ in);
+        log.info(uri + " in " + in);
         chain.doFilter(request, response);
-        log.info(uri +" out "+(System.currentTimeMillis() - in));
+        log.info(uri + " out " + (System.currentTimeMillis() - in));
 
     }
 

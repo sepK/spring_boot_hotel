@@ -31,12 +31,7 @@ public class CommentServiceImpl extends BaseService implements CommentService {
 
     @Override
     public List<UserComment> getAllComments() {
-        List<UserComment> userComments = userCommentMapper.selectByExampleWithBLOBs(null);
-        userComments.forEach(userComment -> {
-            userComment.setUser(userService.getUser(userComment.getUserId()));
-            userComment.setRoom(roomService.getRoom(userComment.getRoomId()));
-        });
-        return userComments;
+        return userCommentMapper.selectByExampleWithBLOBs(null);
     }
 
     @Override
@@ -57,10 +52,10 @@ public class CommentServiceImpl extends BaseService implements CommentService {
     @Override
     public Result addUserComment(UserComment comment, Room room, User user) {
         if (roomService.checkRoomNumber(room.getRoomNumber())) {
-           throw new UserException(ErrorCode.ERROR_HOUSE_NOT_EXIST);
+            throw new UserException(ErrorCode.ERROR_HOUSE_NOT_EXIST);
         } else {
             if (userService.checkUserById(user.getUserId())) {
-              throw new UserException(ErrorCode.ERROR_USER_NOT_EXIST);
+                throw new UserException(ErrorCode.ERROR_USER_NOT_EXIST);
             } else {
                 comment.setRoomId(room.getRoomId());
                 comment.setUserId(user.getUserId());

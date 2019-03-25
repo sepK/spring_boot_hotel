@@ -11,44 +11,44 @@ import java.util.Random;
  * @author sepK
  */
 public final class GraphicHelper {
-	
-	public static String create(final int width, final int height, final String imgType, OutputStream output) {
-		StringBuilder stringBuilder = new StringBuilder();
-		Random random = new Random();
 
-		BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
-		Graphics graphic = image.getGraphics();
+    public static String create(final int width, final int height, final String imgType, OutputStream output) {
+        StringBuilder stringBuilder = new StringBuilder();
+        Random random = new Random();
 
-		graphic.setColor(Color.getColor("F8F8F8"));
-		graphic.fillRect(0, 0, width, height);
+        BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+        Graphics graphic = image.getGraphics();
 
-		Color[] colors = new Color[] { Color.BLUE, Color.GRAY, Color.GREEN, Color.RED, Color.BLACK, Color.ORANGE,
-				Color.CYAN };
-		for (int i = 0; i < 50; i++) {
-			graphic.setColor(colors[random.nextInt(colors.length)]);
-			final int x = random.nextInt(width);
-			final int y = random.nextInt(height);
-			final int w = random.nextInt(20);
-			final int h = random.nextInt(20);
-			final int signA = random.nextBoolean() ? 1 : -1;
-			final int signB = random.nextBoolean() ? 1 : -1;
-			graphic.drawLine(x, y, x + w * signA, y + h * signB);
-		}
+        graphic.setColor(Color.getColor("F8F8F8"));
+        graphic.fillRect(0, 0, width, height);
 
-		graphic.setFont(new Font("Comic Sans MS", Font.BOLD, 30));
-		for (int i = 0; i < 6; i++) {
-			final int temp = random.nextInt(26) + 97;
-			String s = String.valueOf((char) temp);
-			stringBuilder.append(s);
-			graphic.setColor(colors[random.nextInt(colors.length)]);
-			graphic.drawString(s, i * (width / 6), height - (height / 3));
-		}
-		graphic.dispose();
-		try {
-			ImageIO.write(image, imgType, output);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return stringBuilder.toString();
-	}
+        Color[] colors = new Color[]{Color.BLUE, Color.GRAY, Color.GREEN, Color.RED, Color.BLACK, Color.ORANGE,
+                Color.CYAN};
+        for (int i = 0; i < 50; i++) {
+            graphic.setColor(colors[random.nextInt(colors.length)]);
+            final int x = random.nextInt(width);
+            final int y = random.nextInt(height);
+            final int w = random.nextInt(20);
+            final int h = random.nextInt(20);
+            final int signA = random.nextBoolean() ? 1 : -1;
+            final int signB = random.nextBoolean() ? 1 : -1;
+            graphic.drawLine(x, y, x + w * signA, y + h * signB);
+        }
+
+        graphic.setFont(new Font("Comic Sans MS", Font.BOLD, 30));
+        for (int i = 0; i < 6; i++) {
+            final int temp = random.nextInt(26) + 97;
+            String s = String.valueOf((char) temp);
+            stringBuilder.append(s);
+            graphic.setColor(colors[random.nextInt(colors.length)]);
+            graphic.drawString(s, i * (width / 6), height - (height / 3));
+        }
+        graphic.dispose();
+        try {
+            ImageIO.write(image, imgType, output);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return stringBuilder.toString();
+    }
 }

@@ -7,17 +7,29 @@ import java.util.Date;
  * @author sepK
  */
 public class Employee implements Serializable {
-    /**员工id*/
+    /**
+     * 员工id
+     */
     private Integer empId;
-    /**员工名字*/
+    /**
+     * 员工名字
+     */
     private String empName;
-    /**性别*/
+    /**
+     * 性别
+     */
     private String sex;
-    /**年龄*/
+    /**
+     * 年龄
+     */
     private Integer age;
-    /**电话*/
+    /**
+     * 电话
+     */
     private String phone;
-    /**职责*/
+    /**
+     * 职责
+     */
     private String duty;
     /**
      * 创建时间

@@ -22,14 +22,14 @@ import java.util.UUID;
  */
 @Controller
 @RequestMapping("/room")
-public class RoomController extends BaseController{
+public class RoomController extends BaseController {
 
     @RequestMapping("/index02")
-    public String toIndex(){
+    public String toIndex() {
         return "index02";
     }
 
-    @RequestMapping(value="/rooms",method = RequestMethod.GET)
+    @RequestMapping(value = "/rooms", method = RequestMethod.GET)
     @ResponseBody
     public Result getRooms(@RequestParam() Integer pn, HttpServletRequest request) {
         SessionManager.setSession(request);
@@ -41,7 +41,7 @@ public class RoomController extends BaseController{
 
     @RequestMapping(value = "/room/{roomId}", method = RequestMethod.GET)
     @ResponseBody
-    public Result getRoom(@PathVariable("roomId") Integer roomId){
+    public Result getRoom(@PathVariable("roomId") Integer roomId) {
         Room room = roomService.getRoom(roomId);
         return Result.success().add("room", room);
     }
@@ -56,14 +56,15 @@ public class RoomController extends BaseController{
 
     @RequestMapping(value = "/room/{roomId}", method = RequestMethod.DELETE)
     @ResponseBody
-    public Result delRoom(@PathVariable("roomId") Integer roomId){
+    public Result delRoom(@PathVariable("roomId") Integer roomId) {
         roomService.delRoom(roomId);
         return Result.success();
 
     }
+
     @RequestMapping(value = "/searchRoom", method = RequestMethod.POST)
     @ResponseBody
-    public Result searchRoom(@RequestParam("roomNumber") String roomNumber){
+    public Result searchRoom(@RequestParam("roomNumber") String roomNumber) {
         List<Room> list = roomService.searchRoomByRoomNumber(roomNumber);
         return Result.success().add("list", list);
     }
@@ -79,17 +80,17 @@ public class RoomController extends BaseController{
 
     @RequestMapping(value = "/checkRoomNumber", method = RequestMethod.POST)
     @ResponseBody
-    public Result checkRoomNumber(@RequestParam("roomNumber") String number){
-        if(roomService.checkRoomNumber(number)){
+    public Result checkRoomNumber(@RequestParam("roomNumber") String number) {
+        if (roomService.checkRoomNumber(number)) {
             return Result.success();
-        }else {
+        } else {
             return Result.fail();
         }
     }
 
     @RequestMapping(value = "/emptyRooms", method = RequestMethod.GET)
     @ResponseBody
-    public Result emptyRooms(){
+    public Result emptyRooms() {
         List<Room> rooms = roomService.getRoomByStatus((short) RoomStatus.IDLE.getStatus());
         return Result.success().add("rooms", rooms);
     }
@@ -97,13 +98,13 @@ public class RoomController extends BaseController{
 
     @RequestMapping("/searchByStatus")
     @ResponseBody
-    public Result searchByStatus(@RequestParam("status") short status){
+    public Result searchByStatus(@RequestParam("status") short status) {
         List<Room> list = roomService.getRoomByStatus(status);
         return Result.success().add("list", list);
     }
 
-    private void upLoadPhoto(MultipartFile file, Room room){
-        if(!file.isEmpty()) {
+    private void upLoadPhoto(MultipartFile file, Room room) {
+        if (!file.isEmpty()) {
             String originalFilename = file.getOriginalFilename();
             String path = "F:\\Idea Project\\spring-boot\\hotel-web\\src\\main\\resources\\static\\images\\rooms\\";
 

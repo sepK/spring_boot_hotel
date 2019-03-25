@@ -17,7 +17,7 @@ import java.util.List;
  * @author sepK
  */
 @Service
-public class HousingServiceImpl extends BaseService implements HousingService{
+public class HousingServiceImpl extends BaseService implements HousingService {
     @Resource
     private RoomService roomService;
     @Resource
@@ -35,10 +35,10 @@ public class HousingServiceImpl extends BaseService implements HousingService{
 
     @Override
     public void saveHousing(Housing housing) {
-        if(housing.getEndTime().compareTo(housing.getStartTime()) <= 0){
+        if (housing.getEndTime().compareTo(housing.getStartTime()) <= 0) {
             //"结束时间小于开始时间"
             throw new UserException(ErrorCode.ERROR_TIME_RANGE_ERROR);
-        }else{
+        } else {
             housingMapper.updateByPrimaryKeySelective(housing);
         }
     }
@@ -62,7 +62,6 @@ public class HousingServiceImpl extends BaseService implements HousingService{
         criteria.andRoomIdEqualTo(roomId);
         criteria.andUserIdEqualTo(userId);
         List<Housing> housings = housingMapper.selectByExample(example);
-
         return housings.size() > 0 ? housings.get(0) : null;
     }
 

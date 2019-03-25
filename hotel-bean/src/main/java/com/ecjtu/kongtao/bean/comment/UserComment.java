@@ -10,23 +10,41 @@ import java.util.Date;
  * @author sepK
  */
 public class UserComment implements Serializable {
-    /**评论id*/
+    /**
+     * 评论id
+     */
     private Integer commentId;
-    /**评论人id*/
+    /**
+     * 评论人id
+     */
     private Integer userId;
-    /**房间id*/
+    /**
+     * 房间id
+     */
     private Integer roomId;
-    /**评级等级*/
+    /**
+     * 评级等级
+     */
     private Integer level;
-    /**评论时间*/
+    /**
+     * 评论时间
+     */
     private Date createTime;
-    /**上次修改时间*/
+    /**
+     * 上次修改时间
+     */
     private Date lastModifyTime;
-    /**评论*/
+    /**
+     * 评论
+     */
     private String comment;
-    /**非入库字段 用户*/
+    /**
+     * 非入库字段 用户
+     */
     private User user;
-    /**非入库字段 房间*/
+    /**
+     * 非入库字段 房间
+     */
     private Room room;
 
     public Integer getCommentId() {

@@ -7,17 +7,29 @@ import java.util.Date;
  * @author sepK
  */
 public class User implements Serializable {
-    /**用户id*/
+    /**
+     * 用户id
+     */
     private Integer userId;
-    /**用户名*/
+    /**
+     * 用户名
+     */
     private String userName;
-    /**用户密码*/
+    /**
+     * 用户密码
+     */
     private String password;
-    /**性别*/
+    /**
+     * 性别
+     */
     private String sex;
-    /**电话*/
+    /**
+     * 电话
+     */
     private String phone;
-    /**邮箱*/
+    /**
+     * 邮箱
+     */
     private String mail;
     /**
      * 创建时间

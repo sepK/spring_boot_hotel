@@ -22,6 +22,7 @@ public interface EmployeeMapper {
 
     /**
      * 带条件的删除
+     *
      * @param example
      * @return
      */
@@ -29,6 +30,7 @@ public interface EmployeeMapper {
 
     /**
      * 通过主键删除
+     *
      * @param empId
      * @return
      */
@@ -36,6 +38,7 @@ public interface EmployeeMapper {
 
     /**
      * 插入一条记录
+     *
      * @param record
      * @return
      */
@@ -43,6 +46,7 @@ public interface EmployeeMapper {
 
     /**
      * 有选择的插入（允许值为空）
+     *
      * @param record
      * @return
      */
@@ -50,6 +54,7 @@ public interface EmployeeMapper {
 
     /**
      * 带条件的查询
+     *
      * @param example
      * @return
      */
@@ -57,6 +62,7 @@ public interface EmployeeMapper {
 
     /**
      * 通过主键查询
+     *
      * @param empId
      * @return
      */
@@ -64,6 +70,7 @@ public interface EmployeeMapper {
 
     /**
      * 有选择的更新
+     *
      * @param record
      * @param example
      * @return
@@ -72,6 +79,7 @@ public interface EmployeeMapper {
 
     /**
      * 任意条件更新
+     *
      * @param record
      * @param example
      * @return
@@ -80,6 +88,7 @@ public interface EmployeeMapper {
 
     /**
      * 通过主键更新（值允许为空）
+     *
      * @param record
      * @return
      */
@@ -87,6 +96,7 @@ public interface EmployeeMapper {
 
     /**
      * 通过主键更新
+     *
      * @param record
      * @return
      */

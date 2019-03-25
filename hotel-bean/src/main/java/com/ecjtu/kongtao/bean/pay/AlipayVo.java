@@ -6,7 +6,7 @@ import java.io.Serializable;
  * @author t.k
  * @date 2019/3/14 16:50
  */
-public class AlipayVo implements Serializable{
+public class AlipayVo implements Serializable {
     private static final long serialVersionUID = 1L;
     /**
      * 订单名称

@@ -23,8 +23,10 @@ public class SessionManager {
 
     @Autowired
     private RedisUtils redisUtils;
+
     /**
      * 给页面一些常用的固定数据添加session 如 房间类型 员工职位
+     *
      * @param request
      */
     public static void setSession(HttpServletRequest request) {

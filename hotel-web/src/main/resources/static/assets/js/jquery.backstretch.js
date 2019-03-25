@@ -1,6 +1,6 @@
 /*! Backstretch - v2.0.4 - 2013-06-19
-* http://srobbin.com/jquery-plugins/backstretch/
-* Copyright (c) 2013 Scott Robbin; Licensed MIT */
+ * http://srobbin.com/jquery-plugins/backstretch/
+ * Copyright (c) 2013 Scott Robbin; Licensed MIT */
 
 ;(function ($, window, undefined) {
     'use strict';
@@ -17,7 +17,7 @@
         /*
          * Scroll the page one pixel to get the right window height on iOS
          * Pretty harmless for everyone else
-        */
+         */
         if ($(window).scrollTop() === 0) {
             window.scrollTo(0, 0);
         }

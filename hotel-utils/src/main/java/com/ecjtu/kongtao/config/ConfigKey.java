@@ -6,8 +6,12 @@ package com.ecjtu.kongtao.config;
  */
 public class ConfigKey {
 
-    /**页面默认大小*/
+    /**
+     * 页面默认大小
+     */
     public static final Integer DEFAULT_PAGE_SIZE = 10;
-    /**页面默认导航页大小*/
+    /**
+     * 页面默认导航页大小
+     */
     public static final Integer NAVIGATE_PAGE = 5;
 }

@@ -25,11 +25,11 @@ import java.util.List;
  */
 @Controller
 @RequestMapping("/comment")
-public class CommentController extends BaseController{
+public class CommentController extends BaseController {
 
 
     @RequestMapping("/index05")
-    public String toIndex(){
+    public String toIndex() {
         return "index05";
     }
 
@@ -44,7 +44,7 @@ public class CommentController extends BaseController{
 
     @RequestMapping(value = "/comment/{commentId}", method = RequestMethod.GET)
     @ResponseBody
-    public Result getUserComment(@PathVariable("commentId") Integer commentId){
+    public Result getUserComment(@PathVariable("commentId") Integer commentId) {
         UserComment comment = commentService.getCommentById(commentId);
         comment.setUser(userService.getUser(comment.getUserId()));
         comment.setRoom(roomService.getRoom(comment.getRoomId()));
@@ -64,9 +64,10 @@ public class CommentController extends BaseController{
         commentService.saveUserComment(comment);
         return Result.success();
     }
+
     @RequestMapping(value = "/comment", method = RequestMethod.POST)
     @ResponseBody
-    public Result addUserComment(@RequestParam("roomNumber") String roomNumber, @RequestParam("userName") String userName, UserComment comment){
+    public Result addUserComment(@RequestParam("roomNumber") String roomNumber, @RequestParam("userName") String userName, UserComment comment) {
         List<Room> rooms = roomService.searchRoomByRoomNumber(roomNumber);
         if (rooms.size() <= 0) {
             throw new UserException(ErrorCode.ERROR_ROOM_NOT_EXIST);
@@ -78,7 +79,7 @@ public class CommentController extends BaseController{
         Date now = new Date();
         comment.setCreateTime(now);
         comment.setLastModifyTime(now);
-        return  commentService.addUserComment(comment, rooms.get(0), users.get(0));
+        return commentService.addUserComment(comment, rooms.get(0), users.get(0));
     }
 
     @RequestMapping(value = "/searchComments", method = RequestMethod.GET)

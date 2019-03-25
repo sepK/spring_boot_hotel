@@ -15,12 +15,14 @@ import java.util.List;
 public interface OrderInfoService {
     /**
      * 获取所有订单信息
+     *
      * @return 订单信息列表
      */
     List<OrderInfo> getOrders();
 
     /**
      * 通过id获取订单
+     *
      * @param id
      * @return
      */
@@ -28,6 +30,7 @@ public interface OrderInfoService {
 
     /**
      * 更新订单信息
+     *
      * @param orderInfo 订单信息
      * @return
      */
@@ -35,19 +38,22 @@ public interface OrderInfoService {
 
     /**
      * 添加订单信息
+     *
      * @param orderInfo 订单信息
      */
     void addOrder(OrderInfo orderInfo);
 
     /**
-     *  通过roomId获取订单信息
+     * 通过roomId获取订单信息
+     *
      * @param roomId
      * @return
      */
     List<OrderInfo> getOrdersByRoomId(Integer roomId);
 
     /**
-     *  删除订单信息
+     * 删除订单信息
+     *
      * @param id
      * @return
      */
@@ -55,6 +61,7 @@ public interface OrderInfoService {
 
     /**
      * 添加入住信息
+     *
      * @param roomId
      * @param indent
      * @return
@@ -62,7 +69,8 @@ public interface OrderInfoService {
     Result addIndent(Integer roomId, Indent indent);
 
     /**
-     *  获取入住信息
+     * 获取入住信息
+     *
      * @param userName 用户名
      * @return
      */
@@ -70,6 +78,7 @@ public interface OrderInfoService {
 
     /**
      * 更新入住信息
+     *
      * @param orderInfo
      * @return
      */
