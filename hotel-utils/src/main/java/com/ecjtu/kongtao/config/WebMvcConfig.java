@@ -16,4 +16,5 @@ public class WebMvcConfig implements WebMvcConfigurer {
         registry.addResourceHandler("/images/**").addResourceLocations("file:/Idea Project/spring-boot/hotel-web/src/main/resources/static/images/");
     }
 
+
 }

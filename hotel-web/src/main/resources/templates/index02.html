@@ -230,7 +230,7 @@
     </div>
 </div>
 <script type="text/javascript">
-    var totalRecord, currentPage;
+    let totalRecord, currentPage;
     $(function () {
         to_page("rooms", 1);
     });
@@ -253,23 +253,23 @@
     function build_room_table(result) {
         $("#room_table tbody").empty();
         $.each(result, function (index, item) {
-            var typeTd = $("<td></td>").append(item.type);
-            var priceTd = $("<td></td>").append(item.price);
-            var statusTd = $("<td></td>").append(item.status === 0 ? "空闲" : item.status === 1 ? "预定" : item.status === 2 ? "入住" : "退房");
-            var introduceTd = $("<td></td>").append(item.introduce);
-            var roomNumberTd = $("<td></td>").append(item.roomNumber);
-            var roomIdTd = $("<td></td>").append(item.roomId);
-            var pictureTd = "<td><img src=" + item.picture + " style='width:50px;height:25px'/></td>"
+            let typeTd = $("<td></td>").append(item.type);
+            let priceTd = $("<td></td>").append(item.price);
+            let statusTd = $("<td></td>").append(item.status === 0 ? "空闲" : item.status === 1 ? "预定" : item.status === 2 ? "入住" : "退房");
+            let introduceTd = $("<td></td>").append(item.introduce);
+            let roomNumberTd = $("<td></td>").append(item.roomNumber);
+            let roomIdTd = $("<td></td>").append(item.roomId);
+            let pictureTd = "<td><img src=" + item.picture + " style='width:50px;height:25px'/></td>"
 
 
-            var editBtn = $("<button></button>").addClass("btn btn-primary btn-sm edit_btn").append(
+            let editBtn = $("<button></button>").addClass("btn btn-primary btn-sm edit_btn").append(
                 $("<span></span>").addClass("glyphicon glyphicon-pencil")).append("编辑");
 
             editBtn.attr("edit-id", item.roomId);
-            var delBtn = $("<button></button>").addClass("btn btn-danger btn-sm delete_btn").append(
+            let delBtn = $("<button></button>").addClass("btn btn-danger btn-sm delete_btn").append(
                 $("<span></span>").addClass("glyphicon glyphicon-trash")).append("删除");
             delBtn.attr("del-id", item.roomId);
-            var btnTd = $("<td></td>").append(editBtn).append(" ").append(delBtn);
+            let btnTd = $("<td></td>").append(editBtn).append(" ").append(delBtn);
             $("<tr></tr>").append(roomIdTd).append(roomNumberTd).append(typeTd).append(priceTd)
                 .append(statusTd).append(introduceTd).append(pictureTd).append(btnTd)
                 .appendTo("#room_table tbody");
@@ -288,10 +288,10 @@
 
     function build_page_nav(method, result) {
         $("#page_nav_area").empty();
-        var ul = $("<ul></ul>").addClass("pagination");
+        let ul = $("<ul></ul>").addClass("pagination");
 
-        var firstPageLi = $("<li></li>").append($("<a></a>").append("首页").attr("href", "#"));
-        var prePageLi = $("<li></li>").append(
+        let firstPageLi = $("<li></li>").append($("<a></a>").append("首页").attr("href", "#"));
+        let prePageLi = $("<li></li>").append(
             $("<a></a>").append("&laquo;"));
         if (result.extend.pageInfo.hasPreviousPage === false) {
             firstPageLi.addClass("disabled");
@@ -305,9 +305,9 @@
             });
         }
 
-        var nextPageLi = $("<li></li>").append(
+        let nextPageLi = $("<li></li>").append(
             $("<a></a>").append("&raquo;"));
-        var lastPageLi = $("<li></li>").append(
+        let lastPageLi = $("<li></li>").append(
             $("<a></a>").append("末页").attr("href", "#"));
         if (result.extend.pageInfo.hasNextPage === false) {
             nextPageLi.addClass("disabled");
@@ -324,7 +324,7 @@
         ul.append(firstPageLi).append(prePageLi);
         $.each(result.extend.pageInfo.navigatepageNums, function (index, item) {
             if (item != 0) {
-                var numLi = $("<li></li>").append($("<a></a>").append(item));
+                let numLi = $("<li></li>").append($("<a></a>").append(item));
                 if (result.extend.pageInfo.pageNum === item) {
                     numLi.addClass("active");
                 }
@@ -336,7 +336,7 @@
         });
         ul.append(nextPageLi).append(lastPageLi);
 
-        var navEle = $("<nav></nav>").append(ul);
+        let navEle = $("<nav></nav>").append(ul);
         navEle.appendTo("#page_nav_area");
     }
 
@@ -369,7 +369,7 @@
             url: "/room/room/" + roomId,
             type: "GET",
             success: function (result) {
-                var room = result.extend.room;
+                let room = result.extend.room;
                 $("#type_update_input").val(room.type);
                 $("#price_update_input").val(room.price);
                 $("#roomNumber_update_input").val(room.roomNumber);
@@ -381,8 +381,8 @@
 
     //删除
     $(document).on("click", ".delete_btn", function () {
-        var roomNumber = $(this).parents("tr").find("td:eq(5)").text();
-        var roomId = $(this).attr("del-id");
+        let roomNumber = $(this).parents("tr").find("td:eq(5)").text();
+        let roomId = $(this).attr("del-id");
         if (confirm("确认删除【" + roomNumber + "】吗？")) {
             $.ajax({
                 url: "/room/room/" + roomId,
@@ -400,7 +400,7 @@
         if (validate_form("#room_update_btn")) {
             return false;
         }
-        var formData = new FormData();
+        let formData = new FormData();
         formData.append("file", $("#picture_update_input")[0].files[0]);
         formData.append("roomNumber", $("#roomNumber_update_input").val());
         formData.append("type", $("#type_update_input").val());
@@ -429,7 +429,7 @@
         if (validate_form("#room_add_btn")) {
             return false;
         }
-        var formData = new FormData();
+        let formData = new FormData();
         formData.append("file", $("#picture_add_input")[0].files[0]);
         formData.append("roomNumber", $("#roomNumber_add_input").val());
         formData.append("type", $("#type_add_input").val());

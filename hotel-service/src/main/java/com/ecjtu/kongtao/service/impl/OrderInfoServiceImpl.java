@@ -9,6 +9,7 @@ import com.ecjtu.kongtao.exception.UserException;
 import com.ecjtu.kongtao.service.*;
 import com.ecjtu.kongtao.utils.ErrorCode;
 import com.ecjtu.kongtao.utils.Result;
+import org.springframework.cache.annotation.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.ObjectUtils;
@@ -23,6 +24,7 @@ import java.util.UUID;
  * @author sepK
  */
 @Service
+@CacheConfig(cacheNames = "orderInfo")
 public class OrderInfoServiceImpl extends BaseService implements OrderInfoService {
     @Resource
     private RoomService roomService;
@@ -32,17 +34,20 @@ public class OrderInfoServiceImpl extends BaseService implements OrderInfoServic
     private EmployeeService employeeService;
 
     @Override
+    @Cacheable(key = "'all'", sync = true)
     public List<OrderInfo> getOrders() {
         return orderInfoMapper.selectByExampleWithBLOBs(null);
     }
 
     @Override
-    public OrderInfo getOrder(Integer id) {
-        return orderInfoMapper.selectByPrimaryKey(id);
+    @Cacheable(key = "#orderId")
+    public OrderInfo getOrder(Integer orderId) {
+        return orderInfoMapper.selectByPrimaryKey(orderId);
     }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
+    @Caching(put = @CachePut(key = "#orderInfo.orderId"), evict = @CacheEvict(key = "'all'"))
     public void updateOrder(OrderInfo orderInfo) {
         Room room = new Room();
         room.setRoomId(orderInfo.getRoomId());
@@ -55,6 +60,7 @@ public class OrderInfoServiceImpl extends BaseService implements OrderInfoServic
 
     @Override
     @Transactional(rollbackFor = Exception.class)
+    @Caching(put = @CachePut(key = "#orderInfo.orderId"), evict = @CacheEvict(key = "'all'"))
     public void addOrder(OrderInfo orderInfo) {
         Room room = roomService.getRoom(orderInfo.getRoomId());
         if (room == null) {
@@ -73,6 +79,7 @@ public class OrderInfoServiceImpl extends BaseService implements OrderInfoServic
     }
 
     @Override
+    @Cacheable(key = "#result[0].userId", sync = true)
     public List<OrderInfo> getOrdersByRoomId(Integer roomId) {
         OrderInfoExample example = new OrderInfoExample();
         OrderInfoExample.Criteria criteria = example.createCriteria();
@@ -81,11 +88,13 @@ public class OrderInfoServiceImpl extends BaseService implements OrderInfoServic
     }
 
     @Override
-    public boolean delOrder(Integer id) {
-        return orderInfoMapper.deleteByPrimaryKey(id) > 0;
+    @Caching(evict = {@CacheEvict(key = "#orderId"), @CacheEvict(key = "'all")})
+    public boolean delOrder(Integer orderId) {
+        return orderInfoMapper.deleteByPrimaryKey(orderId) > 0;
     }
 
     @Override
+    @Caching(put = @CachePut(key = "#indent.orderInfo.orderId"), evict = @CacheEvict(key = "'all'"))
     public Result addIndent(Integer roomId, Indent indent) {
         Date now = new Date();
         OrderInfo orderInfo = indent.getOrderInfo();
@@ -113,6 +122,7 @@ public class OrderInfoServiceImpl extends BaseService implements OrderInfoServic
 
     @Override
     @Transactional(rollbackFor = Exception.class)
+    @Cacheable(key = "'get' + #userName")
     public List<Indent> getIndents(String userName) {
         List<Indent> indents = new ArrayList<>();
         List<OrderInfo> orderInfos = getOrdersByUserName(userName);
@@ -128,6 +138,7 @@ public class OrderInfoServiceImpl extends BaseService implements OrderInfoServic
 
     @Override
     @Transactional(rollbackFor = Exception.class)
+    @Caching(evict = {@CacheEvict(key = "#orderInfo.orderId"), @CacheEvict(key = "'all")})
     public Result updateIndent(OrderInfo orderInfo) {
         Room room = roomService.getRoom(orderInfo.getRoomId());
         room.setStatus(Short.valueOf(orderInfo.getOrderStatus().toString()));

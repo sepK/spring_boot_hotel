@@ -30,7 +30,7 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label">ID</label>
                         <div class="col-sm-10">
-                            <input type="text" name="id" class="form-control" id="id_update_input"
+                            <input type="text" name="housingId" class="form-control" id="id_update_input"
                                    readonly="readonly"/>
                             <span class="help-block"></span>
                         </div>
@@ -38,7 +38,7 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label">房间号</label>
                         <div class="col-sm-10">
-                            <input type="text" name="roomNumber" class="form-control" id="roomNumber_update_input"
+                            <input type="text" name="room.roomNumber" class="form-control" id="roomNumber_update_input"
                                    readonly="readonly"/>
                             <span class="help-block"></span>
                         </div>
@@ -46,7 +46,7 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label">客户名称</label>
                         <div class="col-sm-10">
-                            <input type="text" name="userName" class="form-control" id="userName_update_input"
+                            <input type="text" name="user.userName" class="form-control" id="userName_update_input"
                                    readonly="readonly"/>
                             <span class="help-block"></span>
                         </div>
@@ -97,14 +97,14 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label">房间号</label>
                         <div class="col-sm-10">
-                            <input type="text" name="roomNumber" class="form-control" id="roomNumber_add_input"/>
+                            <input type="text" name="room.roomNumber" class="form-control" id="roomNumber_add_input"/>
                             <span class="help-block"></span>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-2 control-label">客户名称</label>
                         <div class="col-sm-10">
-                            <input type="text" name="userName" class="form-control" id="userName_add_input"/>
+                            <input type="text" name="user.userName" class="form-control" id="userName_add_input"/>
                             <span class="help-block"></span>
                         </div>
                     </div>
@@ -205,7 +205,7 @@
     </div>
 </div>
 <script type="text/javascript">
-    var totalRecord, currentPage;
+    let totalRecord, currentPage;
     $(function () {
         to_page("housings", 1);
     });
@@ -228,22 +228,22 @@
     function build_housing_table(result) {
         $("#housing_table tbody").empty();
         $.each(result, function (index, item) {
-            var idTd = $("<td></td>").append(item.id);
-            var userNameTd = $("<td></td>").append(item.userName);
-            var roomNumberTd = $("<td></td>").append(item.roomNumber);
-            var startTimeTd = $("<td></td>").append(item.startTime);
-            var endTimeTd = $("<td></td>").append(item.endTime);
-            var costMoneyTd = $("<td></td>").append(item.costMoney);
+            let idTd = $("<td></td>").append(item.housingId);
+            let userNameTd = $("<td></td>").append(item.user.userName);
+            let roomNumberTd = $("<td></td>").append(item.room.roomNumber);
+            let startTimeTd = $("<td></td>").append(item.startTime);
+            let endTimeTd = $("<td></td>").append(item.endTime);
+            let costMoneyTd = $("<td></td>").append(item.costMoney);
 
 
-            var editBtn = $("<button></button>").addClass("btn btn-primary btn-sm edit_btn").append(
+            let editBtn = $("<button></button>").addClass("btn btn-primary btn-sm edit_btn").append(
                 $("<span></span>").addClass("glyphicon glyphicon-pencil")).append("编辑");
 
-            editBtn.attr("edit-id", item.id);
-            var delBtn = $("<button></button>").addClass("btn btn-danger btn-sm delete_btn").append(
+            editBtn.attr("edit-id", item.housingId);
+            let delBtn = $("<button></button>").addClass("btn btn-danger btn-sm delete_btn").append(
                 $("<span></span>").addClass("glyphicon glyphicon-trash")).append("删除");
-            delBtn.attr("del-id", item.id);
-            var btnTd = $("<td></td>").append(editBtn).append(" ").append(delBtn);
+            delBtn.attr("del-id", item.housingId);
+            let btnTd = $("<td></td>").append(editBtn).append(" ").append(delBtn);
             $("<tr></tr>").append(idTd).append(roomNumberTd).append(userNameTd)
                 .append(startTimeTd).append(endTimeTd).append(costMoneyTd).append(btnTd)
                 .appendTo("#housing_table tbody");
@@ -262,10 +262,10 @@
 
     function build_page_nav(method, result) {
         $("#page_nav_area").empty();
-        var ul = $("<ul></ul>").addClass("pagination");
+        let ul = $("<ul></ul>").addClass("pagination");
 
-        var firstPageLi = $("<li></li>").append($("<a></a>").append("首页").attr("href", "#"));
-        var prePageLi = $("<li></li>").append(
+        let firstPageLi = $("<li></li>").append($("<a></a>").append("首页").attr("href", "#"));
+        let prePageLi = $("<li></li>").append(
             $("<a></a>").append("&laquo;"));
         if (result.extend.pageInfo.hasPreviousPage === false) {
             firstPageLi.addClass("disabled");
@@ -279,9 +279,9 @@
             });
         }
 
-        var nextPageLi = $("<li></li>").append(
+        let nextPageLi = $("<li></li>").append(
             $("<a></a>").append("&raquo;"));
-        var lastPageLi = $("<li></li>").append(
+        let lastPageLi = $("<li></li>").append(
             $("<a></a>").append("末页").attr("href", "#"));
         if (result.extend.pageInfo.hasNextPage === false) {
             nextPageLi.addClass("disabled");
@@ -297,8 +297,8 @@
 
         ul.append(firstPageLi).append(prePageLi);
         $.each(result.extend.pageInfo.navigatepageNums, function (index, item) {
-            if (item != 0) {
-                var numLi = $("<li></li>")
+            if (item !== 0) {
+                let numLi = $("<li></li>")
                     .append($("<a></a>").append(item));
                 if (result.extend.pageInfo.pageNum === item) {
                     numLi.addClass("active");
@@ -311,7 +311,7 @@
         });
         ul.append(nextPageLi).append(lastPageLi);
 
-        var navEle = $("<nav></nav>").append(ul);
+        let navEle = $("<nav></nav>").append(ul);
         navEle.appendTo("#page_nav_area");
     }
 
@@ -329,7 +329,7 @@
         });
     });
     $(document).on("click", ".edit_btn", function () {
-        gethousing($(this).attr("edit-id"));
+        getHousing($(this).attr("edit-id"));
 
         $("#housing_update_btn").attr("edit-id", $(this).attr("edit-id"));
         $("#housingUpdateModal").modal({
@@ -338,12 +338,12 @@
     });
 
     //回显信息
-    function gethousing(id) {
+    function getHousing(id) {
         $.ajax({
             url: "/housing/housing/" + id,
             type: "GET",
             success: function (result) {
-                var housing = result.extend.housing;
+                let housing = result.extend.housing;
                 $("#userName_update_input").val(housing.userName);
                 $("#id_update_input").val(housing.id);
                 $("#roomNumber_update_input").val(housing.roomNumber);
@@ -356,7 +356,7 @@
 
     //删除
     $(document).on("click", ".delete_btn", function () {
-        var id = $(this).attr("del-id");
+        let id = $(this).attr("del-id");
         if (confirm("确认删除吗？")) {
             $.ajax({
                 url: "/housing/housing/" + id,

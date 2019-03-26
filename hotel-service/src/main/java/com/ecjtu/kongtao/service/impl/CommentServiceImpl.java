@@ -12,6 +12,7 @@ import com.ecjtu.kongtao.service.RoomService;
 import com.ecjtu.kongtao.service.UserService;
 import com.ecjtu.kongtao.utils.ErrorCode;
 import com.ecjtu.kongtao.utils.Result;
+import org.springframework.cache.annotation.*;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
@@ -23,6 +24,7 @@ import java.util.List;
  * @author sepK
  */
 @Service
+@CacheConfig(cacheNames = "userComment")
 public class CommentServiceImpl extends BaseService implements CommentService {
     @Resource
     private UserService userService;
@@ -30,26 +32,31 @@ public class CommentServiceImpl extends BaseService implements CommentService {
     private RoomService roomService;
 
     @Override
+    @Cacheable(key = "'all'")
     public List<UserComment> getAllComments() {
         return userCommentMapper.selectByExampleWithBLOBs(null);
     }
 
     @Override
+    @Cacheable(key = "#commentId")
     public UserComment getCommentById(Integer commentId) {
         return userCommentMapper.selectByPrimaryKey(commentId);
     }
 
     @Override
+    @Caching(evict = {@CacheEvict(key = "#commentId"), @CacheEvict(key = "'all")})
     public void delUserCommentById(Integer commentId) {
         userCommentMapper.deleteByPrimaryKey(commentId);
     }
 
     @Override
+    @Caching(put = @CachePut(key = "#comment.commentId"), evict = @CacheEvict(key = "'all'"))
     public void saveUserComment(UserComment comment) {
         userCommentMapper.updateByPrimaryKeySelective(comment);
     }
 
     @Override
+    @Caching(put = @CachePut(key = "#comment.commentId"), evict = @CacheEvict(key = "'all'"))
     public Result addUserComment(UserComment comment, Room room, User user) {
         if (roomService.checkRoomNumber(room.getRoomNumber())) {
             throw new UserException(ErrorCode.ERROR_HOUSE_NOT_EXIST);
@@ -68,6 +75,7 @@ public class CommentServiceImpl extends BaseService implements CommentService {
     }
 
     @Override
+    @Cacheable(key = "'search' + #userName")
     public List<UserComment> searchUserComments(String userName) {
         UserCommentExample example = new UserCommentExample();
         UserCommentExample.Criteria criteria = example.createCriteria();

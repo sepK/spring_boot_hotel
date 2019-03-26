@@ -21,4 +21,5 @@ spring:
         connection-timeout: 10000
 logging:
   level:
-      com.ecjtu.kongtao: debug
+      root: info
+      com.ecjtu.kongtao.mapper: debug

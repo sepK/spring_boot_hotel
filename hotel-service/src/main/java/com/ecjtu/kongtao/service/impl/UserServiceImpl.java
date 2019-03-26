@@ -4,6 +4,10 @@ import com.ecjtu.kongtao.bean.user.User;
 import com.ecjtu.kongtao.bean.user.UserExample;
 import com.ecjtu.kongtao.service.BaseService;
 import com.ecjtu.kongtao.service.UserService;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.Caching;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -17,26 +21,31 @@ import java.util.List;
 public class UserServiceImpl extends BaseService implements UserService {
 
     @Override
+    @Cacheable(value = "user", key = "'all'")
     public List<User> getUsers() {
         return userMapper.selectByExample(null);
     }
 
     @Override
+    @Cacheable(value = "user", key = "#userId")
     public User getUser(Integer userId) {
         return userMapper.selectByPrimaryKey(userId);
     }
 
     @Override
+    @Caching(evict = {@CacheEvict(value = "user", key = "#userId"), @CacheEvict(value = "user", key = "'all'")})
     public void delUser(Integer userId) {
         userMapper.deleteByPrimaryKey(userId);
     }
 
     @Override
+    @Caching(put = @CachePut(value = "user", key = "#user.userId"), evict = @CacheEvict(value = "user", key = "'all'"))
     public void updateUser(User user) {
         userMapper.updateByPrimaryKeySelective(user);
     }
 
     @Override
+    @Cacheable(value = "user", key = "'search' + #userName")
     public List<User> searchUser(String userName) {
         UserExample customerExample = new UserExample();
         UserExample.Criteria criteria = customerExample.createCriteria();
@@ -45,6 +54,7 @@ public class UserServiceImpl extends BaseService implements UserService {
     }
 
     @Override
+    @Cacheable(value = "user", key = "'get' + #userName")
     public User getUser(String userName) {
         UserExample customerExample = new UserExample();
         UserExample.Criteria criteria = customerExample.createCriteria();
@@ -54,6 +64,7 @@ public class UserServiceImpl extends BaseService implements UserService {
     }
 
     @Override
+    @Caching(put = @CachePut(value = "user", key = "#user.userId"), evict = @CacheEvict(value = "user", key = "'all'"))
     public void addUser(User user) {
         Date now = new Date();
         user.setCreateTime(now);
@@ -62,6 +73,7 @@ public class UserServiceImpl extends BaseService implements UserService {
     }
 
     @Override
+    @Cacheable(value = "user", key = "'check' + #userId")
     public boolean checkUserById(Integer userId) {
         UserExample example = new UserExample();
         UserExample.Criteria criteria = example.createCriteria();
@@ -70,6 +82,7 @@ public class UserServiceImpl extends BaseService implements UserService {
     }
 
     @Override
+    @Cacheable(value = "user", key = "'login' + #user.userId")
     public boolean login(User user) {
         UserExample example = new UserExample();
         UserExample.Criteria criteria = example.createCriteria();
@@ -81,14 +94,15 @@ public class UserServiceImpl extends BaseService implements UserService {
     /**
      * 检查用户名是否被占用
      *
-     * @param name 名称
+     * @param userName 名称
      * @return true or false
      */
     @Override
-    public boolean checkName(String name) {
+    @Cacheable(value = "user", key = "'check' + #userName")
+    public boolean checkName(String userName) {
         UserExample example = new UserExample();
         UserExample.Criteria criteria = example.createCriteria();
-        criteria.andUserNameEqualTo(name);
+        criteria.andUserNameEqualTo(userName);
         return userMapper.selectByExample(example).size() == 0;
     }
 

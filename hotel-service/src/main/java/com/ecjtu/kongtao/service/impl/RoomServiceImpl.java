@@ -6,6 +6,7 @@ import com.ecjtu.kongtao.bean.room.RoomExample;
 import com.ecjtu.kongtao.bean.room.RoomExample.Criteria;
 import com.ecjtu.kongtao.mapper.RoomMapper;
 import com.ecjtu.kongtao.service.RoomService;
+import org.springframework.cache.annotation.*;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -16,27 +17,32 @@ import java.util.List;
  * @author sepK
  */
 @Service
+@CacheConfig(cacheNames = "room")
 public class RoomServiceImpl implements RoomService {
 
     @Resource
     private RoomMapper roomMapper;
 
     @Override
+    @Cacheable(key = "'all'")
     public List<Room> getRooms() {
         return roomMapper.selectByExampleWithBLOBs(null);
     }
 
     @Override
+    @Cacheable(key = "#roomId")
     public Room getRoom(Integer roomId) {
         return roomMapper.selectByPrimaryKey(roomId);
     }
 
     @Override
+    @Caching(put = @CachePut(key = "#room.roomId"), evict = @CacheEvict(key = "'all'"))
     public void updateRoom(Room room) {
         roomMapper.updateByPrimaryKeySelective(room);
     }
 
     @Override
+    @Caching(put = @CachePut(key = "#room.roomId"), evict = @CacheEvict(key = "'all'"))
     public void addRoom(Room room) {
         Date now = new Date();
         room.setCreateTime(now);
@@ -45,19 +51,22 @@ public class RoomServiceImpl implements RoomService {
     }
 
     @Override
-    public boolean checkRoomNumber(String number) {
+    @Cacheable(key = "'check' + #roomNumber")
+    public boolean checkRoomNumber(String roomNumber) {
         RoomExample example = new RoomExample();
         Criteria criteria = example.createCriteria();
-        criteria.andRoomNumberEqualTo(number);
+        criteria.andRoomNumberEqualTo(roomNumber);
         return roomMapper.selectByExample(example).size() == 0;
     }
 
     @Override
-    public void delRoom(Integer id) {
-        roomMapper.deleteByPrimaryKey(id);
+    @Caching(evict = {@CacheEvict(key = "#roomId"), @CacheEvict(key = "'all")})
+    public void delRoom(Integer roomId) {
+        roomMapper.deleteByPrimaryKey(roomId);
     }
 
     @Override
+    @Cacheable(key = "'search' + #roomNumber")
     public List<Room> searchRoomByRoomNumber(String roomNumber) {
         RoomExample example = new RoomExample();
         Criteria criteria = example.createCriteria();
@@ -66,6 +75,7 @@ public class RoomServiceImpl implements RoomService {
     }
 
     @Override
+    @Cacheable(key = "'get' + #status")
     public List<Room> getRoomByStatus(short status) {
         RoomExample example = new RoomExample();
         Criteria criteria = example.createCriteria();

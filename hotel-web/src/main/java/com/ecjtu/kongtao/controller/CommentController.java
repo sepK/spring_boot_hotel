@@ -46,8 +46,6 @@ public class CommentController extends BaseController {
     @ResponseBody
     public Result getUserComment(@PathVariable("commentId") Integer commentId) {
         UserComment comment = commentService.getCommentById(commentId);
-        comment.setUser(userService.getUser(comment.getUserId()));
-        comment.setRoom(roomService.getRoom(comment.getRoomId()));
         return Result.success().add("comment", comment);
     }
 

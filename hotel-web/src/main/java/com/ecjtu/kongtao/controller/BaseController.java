@@ -4,10 +4,11 @@ package com.ecjtu.kongtao.controller;
 import com.ecjtu.kongtao.exception.UserException;
 import com.ecjtu.kongtao.service.*;
 import com.ecjtu.kongtao.utils.Result;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import javax.annotation.Resource;
 
 /**
  * @author sepK
@@ -15,19 +16,19 @@ import org.springframework.web.bind.annotation.ResponseBody;
  */
 @ControllerAdvice
 public class BaseController {
-    @Autowired
+    @Resource
     protected AdminService adminService;
-    @Autowired
+    @Resource
     protected CommentService commentService;
-    @Autowired
+    @Resource
     protected UserService userService;
-    @Autowired
+    @Resource
     protected EmployeeService employeeService;
-    @Autowired
+    @Resource
     protected OrderInfoService orderInfoService;
-    @Autowired
+    @Resource
     protected RoomService roomService;
-    @Autowired
+    @Resource
     protected HousingService housingService;
 
     @ExceptionHandler
