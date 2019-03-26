@@ -66,9 +66,9 @@
                 type: "GET",
                 data: "userName=" + JSON.parse(sessionStorage.getItem("user")).userName,
                 success: function (result) {
-                    var html = "";
+                    let html = "";
                     $.each(result.extend.indents, function (index, item) {
-                        var ostatus = item.orderInfo.orderStatus === 1 ? "预定" : item.orderInfo.orderStatus === 2 ? "入住" : item.orderInfo.orderStatus === 3 ? "退房"
+                        let ostatus = item.orderInfo.orderStatus === 1 ? "预定" : item.orderInfo.orderStatus === 2 ? "入住" : item.orderInfo.orderStatus === 3 ? "退房"
                             : item.orderInfo.orderStatus === 4 ? "完成" : "取消";
                         html += "<div class='order'>\n" +
                             "<div class='pic'><img src='" + item.picture + "' alt=''></div>\n" +

@@ -47,7 +47,7 @@ public class OrderInfoServiceImpl extends BaseService implements OrderInfoServic
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    @Caching(put = @CachePut(key = "#orderInfo.orderId"), evict = @CacheEvict(key = "'all'"))
+    @Caching(put = @CachePut(key = "#orderInfo.orderId"), evict = @CacheEvict(key = "'all'", allEntries = true))
     public void updateOrder(OrderInfo orderInfo) {
         Room room = new Room();
         room.setRoomId(orderInfo.getRoomId());
@@ -60,7 +60,7 @@ public class OrderInfoServiceImpl extends BaseService implements OrderInfoServic
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    @Caching(put = @CachePut(key = "#orderInfo.orderId"), evict = @CacheEvict(key = "'all'"))
+    @Caching(put = @CachePut(key = "#orderInfo.orderId"), evict = @CacheEvict(key = "'all'", allEntries = true))
     public void addOrder(OrderInfo orderInfo) {
         Room room = roomService.getRoom(orderInfo.getRoomId());
         if (room == null) {
@@ -88,13 +88,13 @@ public class OrderInfoServiceImpl extends BaseService implements OrderInfoServic
     }
 
     @Override
-    @Caching(evict = {@CacheEvict(key = "#orderId"), @CacheEvict(key = "'all")})
+    @Caching(evict = {@CacheEvict(key = "#orderId"), @CacheEvict(key = "'all", allEntries = true)})
     public boolean delOrder(Integer orderId) {
         return orderInfoMapper.deleteByPrimaryKey(orderId) > 0;
     }
 
     @Override
-    @Caching(put = @CachePut(key = "#indent.orderInfo.orderId"), evict = @CacheEvict(key = "'all'"))
+    @Caching(put = @CachePut(key = "#indent.orderInfo.orderId"), evict = @CacheEvict(key = "'all'", allEntries = true))
     public Result addIndent(Integer roomId, Indent indent) {
         Date now = new Date();
         OrderInfo orderInfo = indent.getOrderInfo();
@@ -138,7 +138,7 @@ public class OrderInfoServiceImpl extends BaseService implements OrderInfoServic
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    @Caching(evict = {@CacheEvict(key = "#orderInfo.orderId"), @CacheEvict(key = "'all")})
+    @Caching(evict = {@CacheEvict(key = "#orderInfo.orderId"), @CacheEvict(key = "'all", allEntries = true)})
     public Result updateIndent(OrderInfo orderInfo) {
         Room room = roomService.getRoom(orderInfo.getRoomId());
         room.setStatus(Short.valueOf(orderInfo.getOrderStatus().toString()));

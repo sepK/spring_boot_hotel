@@ -283,7 +283,7 @@
             if (item != 0) {
                 let numLi = $("<li></li>")
                     .append($("<a></a>").append(item));
-                if (result.extend.pageInfo.pageNum == item) {
+                if (result.extend.pageInfo.pageNum === item) {
                     numLi.addClass("active");
                 }
                 numLi.click(function () {

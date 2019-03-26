@@ -36,13 +36,13 @@ public class RoomServiceImpl implements RoomService {
     }
 
     @Override
-    @Caching(put = @CachePut(key = "#room.roomId"), evict = @CacheEvict(key = "'all'"))
+    @Caching(put = @CachePut(key = "#room.roomId"), evict = @CacheEvict(key = "'all'", allEntries = true))
     public void updateRoom(Room room) {
         roomMapper.updateByPrimaryKeySelective(room);
     }
 
     @Override
-    @Caching(put = @CachePut(key = "#room.roomId"), evict = @CacheEvict(key = "'all'"))
+    @Caching(put = @CachePut(key = "#room.roomId"), evict = @CacheEvict(key = "'all'", allEntries = true))
     public void addRoom(Room room) {
         Date now = new Date();
         room.setCreateTime(now);
@@ -60,7 +60,7 @@ public class RoomServiceImpl implements RoomService {
     }
 
     @Override
-    @Caching(evict = {@CacheEvict(key = "#roomId"), @CacheEvict(key = "'all")})
+    @Caching(evict = {@CacheEvict(key = "#roomId", allEntries = true), @CacheEvict(key = "'all")})
     public void delRoom(Integer roomId) {
         roomMapper.deleteByPrimaryKey(roomId);
     }

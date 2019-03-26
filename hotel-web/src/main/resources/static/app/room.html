@@ -117,7 +117,7 @@
         url: "/room/emptyRooms",
         type: "GET",
         success: function (result) {
-            var html = "";
+            let html = "";
             $.each(result.extend.rooms, function (index, item) {
                 html += "<div class='col-md-6'>\n" +
                     "<div class='room_item-1'>\n" +
@@ -128,14 +128,14 @@
                     "<div class='desc'>\n" +
                     "<p>" + item.introduce + "</p>\n" +
                     "<ul>\n" +
-                    "<li>Max: 4 Person(s)</li>\n" +
-                    "<li>Size: 35 m2 / 376 ft2</li>\n" +
+                    "<li>最多: 4 人</li>\n" +
+                    "<li>面积：35平方米/ 376平方英尺</li>\n" +
                     "<li>View: Ocen</li>\n" +
-                    "<li>Bed: King-size or twin beds</li>\n" +
+                    "<li>床型：单人床</li>\n" +
                     "</ul>\n" +
                     "</div>\n" +
                     "<div class='bot'>\n" +
-                    "<span class='price'>起步价<span class='amount' >$" + item.price + "</span> /days</span>\n" +
+                    "<span class='price'>起步价<span class='amount' >¥" + item.price + "</span> /天</span>\n" +
                     "<a class='awe-btn awe-btn-13 add_btn' room_id=" + item.roomId + " price=" + item.price + ">立即预定</a>\n" +
                     "</div>\n" +
                     "</div>\n" +

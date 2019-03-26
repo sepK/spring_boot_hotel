@@ -266,7 +266,7 @@
         let firstPageLi = $("<li></li>").append($("<a></a>").append("首页").attr("href", "#"));
         let prePageLi = $("<li></li>").append(
             $("<a></a>").append("&laquo;"));
-        if (result.extend.pageInfo.hasPreviousPage == false) {
+        if (result.extend.pageInfo.hasPreviousPage === false) {
             firstPageLi.addClass("disabled");
             prePageLi.addClass("disabled");
         } else {
@@ -282,7 +282,7 @@
             $("<a></a>").append("&raquo;"));
         let lastPageLi = $("<li></li>").append(
             $("<a></a>").append("末页").attr("href", "#"));
-        if (result.extend.pageInfo.hasNextPage == false) {
+        if (result.extend.pageInfo.hasNextPage === false) {
             nextPageLi.addClass("disabled");
             lastPageLi.addClass("disabled");
         } else {
