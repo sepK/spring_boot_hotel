@@ -1,7 +1,7 @@
 package com.ecjtu.kongtao.bean.comment;
 
 import com.ecjtu.kongtao.bean.room.Room;
-import com.ecjtu.kongtao.bean.user.UserVO;
+import com.ecjtu.kongtao.bean.user.User;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -41,7 +41,7 @@ public class UserComment implements Serializable {
     /**
      * 非入库字段 用户
      */
-    private UserVO userVO;
+    private User user;
     /**
      * 非入库字段 房间
      */
@@ -103,12 +103,12 @@ public class UserComment implements Serializable {
         this.comment = comment == null ? null : comment.trim();
     }
 
-    public UserVO getUserVO() {
-        return userVO;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserVO(UserVO userVO) {
-        this.userVO = userVO;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public Room getRoom() {
