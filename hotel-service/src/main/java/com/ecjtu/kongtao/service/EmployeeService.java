@@ -21,10 +21,10 @@ public interface EmployeeService {
     /**
      * 通过员工id 查询员工信息
      *
-     * @param id 员工id
+     * @param empId 员工id
      * @return 员工信息
      */
-    Employee getEmp(Integer id);
+    Employee getEmp(Integer empId);
 
     /**
      * 保存员工信息
@@ -37,30 +37,29 @@ public interface EmployeeService {
      * 添加员工信息
      *
      * @param employee 员工信息
-     * @return
      */
     void addEmp(Employee employee);
 
     /**
      * 删除员工信息
      *
-     * @param id
+     * @param empId 员工id
      */
-    void delEmp(Integer id);
+    void delEmp(Integer empId);
 
     /**
      * 检查员工名称是否存在
      *
-     * @param empName
-     * @return
+     * @param empName 员工姓名
+     * @return true or false
      */
     boolean checkEmpName(String empName);
 
     /**
      * 通过员工姓名查找员工信息
      *
-     * @param empName
-     * @return
+     * @param empName 员工姓名
+     * @return 员工信息
      */
     List<Employee> getEmpsByName(String empName);
 }

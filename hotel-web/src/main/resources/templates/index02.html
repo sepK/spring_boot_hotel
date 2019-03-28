@@ -323,7 +323,7 @@
 
         ul.append(firstPageLi).append(prePageLi);
         $.each(result.extend.pageInfo.navigatepageNums, function (index, item) {
-            if (item != 0) {
+            if (item !== 0) {
                 let numLi = $("<li></li>").append($("<a></a>").append(item));
                 if (result.extend.pageInfo.pageNum === item) {
                     numLi.addClass("active");

@@ -4,6 +4,7 @@ package com.ecjtu.kongtao.controller;
 import com.ecjtu.kongtao.exception.UserException;
 import com.ecjtu.kongtao.service.*;
 import com.ecjtu.kongtao.utils.Result;
+import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -31,12 +32,12 @@ public class BaseController {
     @Resource
     protected HousingService housingService;
 
-    @ExceptionHandler
+    @ExceptionHandler(value = Exception.class)
     @ResponseBody
     public Result exception(Exception exp) {
         if (exp instanceof UserException) {
             UserException userException = (UserException) exp;
-            if (userException.getErrorCode() != null) {
+            if (!ObjectUtils.isEmpty(userException.getErrorCode())) {
                 return Result.fail(userException.getErrorCode());
             }
         }

@@ -1,6 +1,7 @@
 package com.ecjtu.kongtao.bean.order;
 
 import java.io.Serializable;
+import java.util.stream.Stream;
 
 /**
  * @author t.k
@@ -43,5 +44,9 @@ public enum OrderStatus implements Serializable {
 
     public int getStatus() {
         return status;
+    }
+
+    public OrderStatus convertTo(int status) {
+        return Stream.of(OrderStatus.values()).filter(orderStatus -> orderStatus.getStatus() == status).findAny().orElse(null);
     }
 }

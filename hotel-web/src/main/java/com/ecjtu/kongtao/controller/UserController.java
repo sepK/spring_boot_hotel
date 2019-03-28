@@ -105,7 +105,7 @@ public class UserController extends BaseController {
     @RequestMapping("/checkVerifyCode")
     @ResponseBody
     public Result checkVerifyCode(String verifyCode, HttpSession session) {
-        if (session.getAttribute("/user/verifyCode").equals(verifyCode)) {
+        if (session.getAttribute(ConfigKey.GRAPHIC_HELPER_URI).equals(verifyCode)) {
             return Result.success();
         } else {
             return Result.fail();

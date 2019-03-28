@@ -1,6 +1,7 @@
 package com.ecjtu.kongtao.bean.employee;
 
 import java.io.Serializable;
+import java.util.stream.Stream;
 
 /**
  * @author t.k
@@ -51,5 +52,9 @@ public enum EmployeeType implements Serializable {
 
     public int getType() {
         return type;
+    }
+
+    public EmployeeType convertTo(int type) {
+        return Stream.of(EmployeeType.values()).filter(employeeType -> employeeType.getType() == type).findAny().orElse(null);
     }
 }

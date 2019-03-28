@@ -23,16 +23,15 @@ public interface OrderInfoService {
     /**
      * 通过id获取订单
      *
-     * @param id
-     * @return
+     * @param orderId 订单id
+     * @return 订单信息
      */
-    OrderInfo getOrder(Integer id);
+    OrderInfo getOrder(Integer orderId);
 
     /**
      * 更新订单信息
      *
      * @param orderInfo 订单信息
-     * @return
      */
     void updateOrder(OrderInfo orderInfo);
 
@@ -46,25 +45,25 @@ public interface OrderInfoService {
     /**
      * 通过roomId获取订单信息
      *
-     * @param roomId
-     * @return
+     * @param roomId 房间id
+     * @return 订单信息
      */
     List<OrderInfo> getOrdersByRoomId(Integer roomId);
 
     /**
      * 删除订单信息
      *
-     * @param id
-     * @return
+     * @param orderId 订单id
+     * @return true or false
      */
-    boolean delOrder(Integer id);
+    boolean delOrder(Integer orderId);
 
     /**
      * 添加入住信息
      *
-     * @param roomId
-     * @param indent
-     * @return
+     * @param roomId 房间id
+     * @param indent 中间bean
+     * @return result
      */
     Result addIndent(Integer roomId, Indent indent);
 
@@ -72,15 +71,15 @@ public interface OrderInfoService {
      * 获取入住信息
      *
      * @param userName 用户名
-     * @return
+     * @return indent 中间bean
      */
     List<Indent> getIndents(String userName);
 
     /**
      * 更新入住信息
      *
-     * @param orderInfo
-     * @return
+     * @param orderInfo 订单信息
+     * @return result
      */
     Result updateIndent(OrderInfo orderInfo);
 }

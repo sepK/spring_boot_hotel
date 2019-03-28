@@ -1,6 +1,7 @@
 package com.ecjtu.kongtao.bean.room;
 
 import java.io.Serializable;
+import java.util.stream.Stream;
 
 /**
  * @author t.k
@@ -39,5 +40,10 @@ public enum RoomStatus implements Serializable {
 
     public int getStatus() {
         return status;
+    }
+
+
+    public RoomStatus convertTo(int status) {
+        return Stream.of(RoomStatus.values()).filter(roomStatus -> roomStatus.getStatus() == status).findAny().orElse(null);
     }
 }

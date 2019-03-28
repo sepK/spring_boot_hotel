@@ -70,7 +70,7 @@ public class PayController extends BaseController {
     @PostMapping(value = "notify")
     private String notify(HttpServletRequest request, String out_trade_no, String trade_no, String trade_status)
             throws AlipayApiException {
-        Map<String, String> map = new HashMap<>();
+        Map<String, String> map = new HashMap<>(8);
         Map<String, String[]> requestParams = request.getParameterMap();
         requestParams.forEach((key, values) -> {
             String valueStr = "";

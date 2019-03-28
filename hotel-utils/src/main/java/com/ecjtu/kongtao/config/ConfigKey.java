@@ -14,4 +14,5 @@ public class ConfigKey {
      * 页面默认导航页大小
      */
     public static final Integer NAVIGATE_PAGE = 5;
+    public static final String GRAPHIC_HELPER_URI = "/user/verifyCode";
 }

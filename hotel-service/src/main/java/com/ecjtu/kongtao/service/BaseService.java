@@ -1,7 +1,8 @@
 package com.ecjtu.kongtao.service;
 
 import com.ecjtu.kongtao.mapper.*;
-import org.springframework.beans.factory.annotation.Autowired;
+
+import javax.annotation.Resource;
 
 /**
  * @author t.k
@@ -9,19 +10,19 @@ import org.springframework.beans.factory.annotation.Autowired;
  */
 public class BaseService {
 
-    @Autowired
+    @Resource
     protected AdminMapper adminMapper;
-    @Autowired
+    @Resource
     protected UserCommentMapper userCommentMapper;
-    @Autowired
+    @Resource
     protected UserMapper userMapper;
-    @Autowired
+    @Resource
     protected EmployeeMapper employeeMapper;
-    @Autowired
+    @Resource
     protected HousingMapper housingMapper;
-    @Autowired
+    @Resource
     protected OrderInfoMapper orderInfoMapper;
-    @Autowired
+    @Resource
     protected RoomMapper roomMapper;
 
 }

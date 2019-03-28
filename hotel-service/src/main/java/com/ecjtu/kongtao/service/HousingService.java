@@ -12,53 +12,53 @@ public interface HousingService {
     /**
      * 获取所有入住信息
      *
-     * @return
+     * @return 入住信息
      */
     List<Housing> getHousings();
 
     /**
      * 通过主键id获取入住信息
      *
-     * @param housingId
-     * @return
+     * @param housingId 入住id
+     * @return 入住信息
      */
     Housing getHousing(Integer housingId);
 
     /**
      * 保存入住信息
      *
-     * @param housing
+     * @param housing 入住信息
      */
     void saveHousing(Housing housing);
 
     /**
      * 添加入住信息
      *
-     * @param housing
+     * @param housing 入住信息
      */
     void addHousing(Housing housing);
 
     /**
      * 删除入住信息
      *
-     * @param housingId
+     * @param housingId 入住id
      */
     void delHousing(Integer housingId);
 
     /**
      * 搜索入住信息
      *
-     * @param userName
-     * @return
+     * @param userName 用户名
+     * @return 入住信息
      */
     List<Housing> searchHousings(String userName);
 
     /**
      * 通过用户名和房间id 获取入住信息
      *
-     * @param roomId
-     * @param userId
-     * @return
+     * @param roomId 房间id
+     * @param userId 用户名
+     * @return 入住信息
      */
     Housing getHousingByUserIdAndRoomId(Integer roomId, Integer userId);
 }
