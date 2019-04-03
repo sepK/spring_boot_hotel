@@ -100,7 +100,7 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label">客户名</label>
                         <div class="col-sm-10">
-                            <input type="text" name="userName" class="form-control" id="userName_add_input">
+                            <input type="text" name="user.userName" class="form-control" id="userName_add_input">
                             <span class="help-block"></span>
                         </div>
                     </div>
@@ -114,6 +114,13 @@
                                         </option>
                                     </span>
                             </select>
+                            <span class="help-block"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">金额</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="costMoney" class="form-control" id="cost_money_add_input">
                             <span class="help-block"></span>
                         </div>
                     </div>
@@ -142,7 +149,7 @@
 </div>
 <div class="container">
     <div class="row header">
-        <div class="col-md-2 header-left"><img src="/static/images/logo.png" alt=""></div>
+        <div class="col-md-2 header-left"><img th:src="@{/images/logo.png}" alt=""></div>
         <div class="col-md-8 header-center">
             <ul class="ul">
                 <li><span class="title">酒店后台管理</span></li>
@@ -182,9 +189,11 @@
                     <thead>
                     <tr>
                         <th>订单ID</th>
+                        <th>订单号</th>
                         <th>房间ID</th>
                         <th>用户名</th>
                         <th>订单状态</th>
+                        <th>金额</th>
                         <th>备注</th>
                         <th>负责人</th>
                         <th>操作</th>
@@ -233,6 +242,8 @@
                 : item.orderStatus === 4 ? "完成" : "取消");
             let empIdTd = $("<td></td>").append(item.empId);
             let introduceTd = $("<td></td>").append(item.introduce);
+            let orderNumberTd = $("<td></td>").append(item.orderNumber);
+            let costMoneyTd = $("<td></td>").append(item.costMoney);
 
 
             let editBtn = $("<button></button>").addClass("btn btn-primary btn-sm edit_btn").append(
@@ -243,8 +254,8 @@
                 $("<span></span>").addClass("glyphicon glyphicon-trash")).append("删除");
             delBtn.attr("del-id", item.orderId);
             let btnTd = $("<td></td>").append(editBtn).append(" ").append(delBtn);
-            $("<tr></tr>").append(orderIdTd).append(roomIdTd).append(userNameTd)
-                .append(statusTd).append(introduceTd).append(empIdTd).append(btnTd)
+            $("<tr></tr>").append(orderIdTd).append(orderNumberTd).append(roomIdTd).append(userNameTd)
+                .append(statusTd).append(costMoneyTd).append(introduceTd).append(empIdTd).append(btnTd)
                 .appendTo("#order_table tbody");
         });
     }
@@ -386,9 +397,6 @@
         });
     //添加
     $("#order_add_btn").click(function () {
-        if (!validate_add_form()) {
-            return false;
-        }
         $.ajax({
             url: "/order/order",
             type: "POST",

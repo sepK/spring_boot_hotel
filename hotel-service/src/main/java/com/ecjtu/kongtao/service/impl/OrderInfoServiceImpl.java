@@ -55,25 +55,28 @@ public class OrderInfoServiceImpl extends BaseService implements OrderInfoServic
         roomService.updateRoom(room);
         User user = userService.getUser(orderInfo.getUser().getUserName());
         orderInfo.setUserId(user.getUserId());
-        orderInfoMapper.updateByPrimaryKey(orderInfo);
+        orderInfoMapper.updateByPrimaryKeySelective(orderInfo);
     }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    @Caching(put = @CachePut(key = "#orderInfo.orderId"), evict = @CacheEvict(key = "'all'", allEntries = true))
+    @Caching(evict = @CacheEvict(key = "'all'", allEntries = true))
     public void addOrder(OrderInfo orderInfo) {
         Room room = roomService.getRoom(orderInfo.getRoomId());
+        User user = userService.getUser(orderInfo.getUser().getUserName());
         if (room == null) {
-            throw new UserException(ErrorCode.ERROR_PARA);
+            throw new UserException(ErrorCode.ERROR_HOUSE_NOT_EXIST);
         } else if (room.getStatus() != 0) {
             throw new UserException(ErrorCode.ERROR_HOUSE_NOT_UNOCCUPIED);
-        } else if (userService.checkUserById(orderInfo.getUserId())) {
+        } else if (user == null) {
             throw new UserException(ErrorCode.ERROR_USER_NOT_EXIST);
         } else if (orderInfo.getEmpId() != null && employeeService.getEmp(orderInfo.getEmpId()) == null) {
             throw new UserException(ErrorCode.ERROR_EMPLOYEE_NOT_EXIST);
         } else {
             room.setStatus(Short.valueOf(orderInfo.getOrderStatus().toString()));
             roomService.updateRoom(room);
+            orderInfo.setUserId(user.getUserId());
+            orderInfo.setOrderNumber(System.currentTimeMillis() + UUID.randomUUID().toString().replace("-", "").substring(1, 10));
             orderInfoMapper.insertSelective(orderInfo);
         }
     }
@@ -94,7 +97,7 @@ public class OrderInfoServiceImpl extends BaseService implements OrderInfoServic
     }
 
     @Override
-    @Caching(put = @CachePut(key = "#indent.orderInfo.orderId"), evict = @CacheEvict(key = "'all'", allEntries = true))
+    @Caching(evict = @CacheEvict(key = "'all'", allEntries = true))
     public Result addIndent(Integer roomId, Indent indent) {
         Date now = new Date();
         OrderInfo orderInfo = indent.getOrderInfo();

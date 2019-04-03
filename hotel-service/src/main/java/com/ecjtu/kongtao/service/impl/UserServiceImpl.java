@@ -2,8 +2,10 @@ package com.ecjtu.kongtao.service.impl;
 
 import com.ecjtu.kongtao.bean.user.User;
 import com.ecjtu.kongtao.bean.user.UserExample;
+import com.ecjtu.kongtao.exception.UserException;
 import com.ecjtu.kongtao.service.BaseService;
 import com.ecjtu.kongtao.service.UserService;
+import com.ecjtu.kongtao.utils.ErrorCode;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
@@ -64,11 +66,14 @@ public class UserServiceImpl extends BaseService implements UserService {
     }
 
     @Override
-    @Caching(put = @CachePut(value = "user", key = "#user.userId"), evict = @CacheEvict(value = "user", key = "'all'"))
+    @Caching(evict = @CacheEvict(value = "user", key = "'all'"))
     public void addUser(User user) {
         Date now = new Date();
         user.setCreateTime(now);
         user.setLastModifyTime(now);
+        if (checkName(user.getUserName())) {
+            throw new UserException(ErrorCode.ERROR_USER_NAME_ALREADY_EXIST);
+        }
         userMapper.insert(user);
     }
 

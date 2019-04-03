@@ -46,7 +46,7 @@
                             <label class="col-sm-2 control-label">客户名</label>
                             <div class="col-sm-10">
                                 <input type="text" name="orderInfo.user.userName" class="form-control"
-                                       id="userName_add_input">
+                                       id="user_userName_add_input">
                                 <span class="help-block"></span>
                             </div>
                         </div>
@@ -152,7 +152,7 @@
         } else {
             $("#indent_add_btn").attr("add_id", $(this).attr("room_id"));
             $("#money_add_input").val($(this).attr("price"));
-            $("#userName_add_input").val(user.userName);
+            $("#user_userName_add_input").val(user.userName);
             $("#indentAddModal").modal({
                 backdrop: "static"
             });

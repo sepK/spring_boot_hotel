@@ -50,7 +50,7 @@ public class CommentServiceImpl extends BaseService implements CommentService {
     }
 
     @Override
-    @Caching(put = @CachePut(key = "#comment.commentId"), evict = @CacheEvict(key = "'all'"))
+    @Caching(evict = @CacheEvict(key = "'all'"))
     public void saveUserComment(UserComment comment) {
         userCommentMapper.updateByPrimaryKeySelective(comment);
     }

@@ -31,11 +31,11 @@ public class EmployeeServiceImpl extends BaseService implements EmployeeService 
     @Override
     @Caching(put = @CachePut(key = "#employee.empId"), evict = @CacheEvict(key = "'all'"))
     public void saveEmp(Employee employee) {
-        employeeMapper.updateByPrimaryKey(employee);
+        employeeMapper.updateByPrimaryKeySelective(employee);
     }
 
     @Override
-    @Caching(put = @CachePut(key = "#employee.empId"), evict = @CacheEvict(key = "'all'"))
+    @Caching(evict = @CacheEvict(key = "'all'"))
     public void addEmp(Employee employee) {
         employeeMapper.insert(employee);
     }

@@ -48,7 +48,7 @@ public class HousingServiceImpl extends BaseService implements HousingService {
     }
 
     @Override
-    @Caching(put = @CachePut(key = "#housing.housingId"), evict = @CacheEvict(key = "'all'"))
+    @Caching(evict = @CacheEvict(key = "'all'"))
     public void addHousing(Housing housing) {
         housingMapper.insert(housing);
     }

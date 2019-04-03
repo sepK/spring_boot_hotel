@@ -42,7 +42,7 @@ public class RoomServiceImpl implements RoomService {
     }
 
     @Override
-    @Caching(put = @CachePut(key = "#room.roomId"), evict = @CacheEvict(key = "'all'", allEntries = true))
+    @Caching(evict = @CacheEvict(key = "'all'", allEntries = true))
     public void addRoom(Room room) {
         Date now = new Date();
         room.setCreateTime(now);

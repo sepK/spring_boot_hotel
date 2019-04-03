@@ -73,11 +73,11 @@
             dataType: "json",
             data: $("#login_form").serialize(),
             success: function (result) {
-                if (result.code === 400) {
-                    alert("用户密码错误或者用户不存在");
-                    window.location.href = "login";
-                } else {
+                if (result.code === 200) {
                     window.location.href = "user/index";
+                } else {
+                    alert(result.msg);
+                    window.location.href = "login";
                 }
             }
         });

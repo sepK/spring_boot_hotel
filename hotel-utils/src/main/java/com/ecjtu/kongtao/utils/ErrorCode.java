@@ -47,8 +47,8 @@ public enum ErrorCode {
     /**
      * 时间范围不正确
      */
-    ERROR_TIME_RANGE_ERROR(8, "请输入正确的时间"),;
-
+    ERROR_TIME_RANGE_ERROR(8, "请输入正确的时间"),
+    ERROR_USER_NAME_ALREADY_EXIST(9, "用户名已被使用"),;
     /**
      * 错误码
      */
