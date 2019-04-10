@@ -1,6 +1,7 @@
 package com.ecjtu.kongtao.service;
 
 import com.ecjtu.kongtao.mapper.*;
+import com.ecjtu.kongtao.utils.RedisUtils;
 
 import javax.annotation.Resource;
 
@@ -24,5 +25,7 @@ public class BaseService {
     protected OrderInfoMapper orderInfoMapper;
     @Resource
     protected RoomMapper roomMapper;
+    @Resource
+    protected RedisUtils redisUtils;
 
 }

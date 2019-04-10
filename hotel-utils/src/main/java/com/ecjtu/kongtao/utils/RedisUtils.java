@@ -2,8 +2,10 @@ package com.ecjtu.kongtao.utils;
 
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
+import org.springframework.util.ObjectUtils;
 
 import javax.annotation.Resource;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -27,7 +29,13 @@ public class RedisUtils {
         } else {
             redisTemplate.opsForValue().set(key, value);
         }
+    }
 
+    public void deleteKeysPrefix(String prefix) {
+        Set<String> keys = redisTemplate.keys(prefix);
+        if (!ObjectUtils.isEmpty(keys)) {
+            redisTemplate.delete(keys);
+        }
     }
 
 }

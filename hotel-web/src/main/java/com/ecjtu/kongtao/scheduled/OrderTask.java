@@ -1,6 +1,7 @@
 package com.ecjtu.kongtao.scheduled;
 
 import com.ecjtu.kongtao.bean.order.OrderInfo;
+import com.ecjtu.kongtao.bean.order.OrderInfoExample;
 import com.ecjtu.kongtao.bean.order.OrderStatus;
 import com.ecjtu.kongtao.service.BaseService;
 import com.ecjtu.kongtao.service.HousingService;
@@ -25,12 +26,14 @@ public class OrderTask extends BaseService {
      */
     private static final int TEN_MINUTE = 10 * 60 * 1000;
 
-    @Scheduled(cron = "0 0/30 * * * ?")
+    @Scheduled(cron = "0 0/10 * * * ?")
     public void checkOrder() {
-        List<OrderInfo> orderInfos = orderInfoMapper.selectByExample(null);
+        OrderInfoExample orderInfoExample = new OrderInfoExample();
+        orderInfoExample.createCriteria().andOrderStatusNotEqualTo(OrderStatus.FINISH.getStatus()).andOrderStatusNotEqualTo(OrderStatus.CANCEL_ORDER.getStatus());
+        List<OrderInfo> orderInfos = orderInfoMapper.selectByExample(orderInfoExample);
         Date now = new Date();
         orderInfos.forEach(orderInfo -> {
-            if (orderInfo.getOrderStatus() == OrderStatus.BOOKED.getStatus() && orderInfo.getCreateTime().getTime() > now.getTime() - TEN_MINUTE) {
+            if (orderInfo.getOrderStatus() == OrderStatus.BOOKED.getStatus() && orderInfo.getCreateTime().getTime() < now.getTime() - TEN_MINUTE) {
                 orderInfo.setOrderStatus(OrderStatus.CANCEL_ORDER.getStatus());
             } else if (orderInfo.getOrderStatus() == OrderStatus.CHECK_IN.getStatus()) {
                 if (orderInfo.getEndTime().getTime() >= now.getTime()) {
@@ -39,7 +42,6 @@ public class OrderTask extends BaseService {
             }
             orderInfoMapper.updateByPrimaryKey(orderInfo);
         });
-
-        System.out.println(now.getTime());
+        redisUtils.deleteKeysPrefix("orderInfo*");
     }
 }
