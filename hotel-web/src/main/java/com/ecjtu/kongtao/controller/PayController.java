@@ -6,10 +6,13 @@ import com.alipay.api.DefaultAlipayClient;
 import com.alipay.api.internal.util.AlipaySignature;
 import com.alipay.api.request.AlipayTradePagePayRequest;
 import com.ecjtu.kongtao.bean.order.OrderInfo;
+import com.ecjtu.kongtao.bean.order.OrderStatus;
 import com.ecjtu.kongtao.bean.pay.AlipayVo;
 import com.ecjtu.kongtao.bean.room.RoomType;
 import com.ecjtu.kongtao.config.AlipayConfig;
+import com.ecjtu.kongtao.config.ConfigKey;
 import com.google.gson.Gson;
+import org.slf4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,7 +32,7 @@ import java.util.Map;
 @Controller
 @RequestMapping("/alipay")
 public class PayController extends BaseController {
-
+    private static Logger log = org.slf4j.LoggerFactory.getLogger(PayController.class);
     @GetMapping("pay")
     @ResponseBody
     private String pay(OrderInfo orderInfo) throws AlipayApiException {
@@ -62,7 +65,6 @@ public class PayController extends BaseController {
      * @param trade_status 交易状态
      * @return String
      * @throws AlipayApiException
-     * @throws
      * @Title: alipayNotify
      * @Description: 支付宝回调接口
      * @author nelson
@@ -76,7 +78,6 @@ public class PayController extends BaseController {
             String valueStr = "";
             for (int i = 0; i < values.length; i++) {
                 valueStr = (i == values.length - 1) ? valueStr + values[i] : valueStr + values[i] + ",";
-                System.out.println(valueStr);
             }
             map.put(key, valueStr);
         });
@@ -93,9 +94,13 @@ public class PayController extends BaseController {
             OrderInfo info = orders.stream().filter(orderInfo -> orderInfo.getOrderNumber().equals(out_trade_no)).findAny().orElse(null);
             if (ObjectUtils.isEmpty(info)) {
                 return ("fail");
+
             } else {
-                info.setOrderStatus(Integer.valueOf(trade_status));
-                orderInfoService.updateIndent(info);
+                log.info("return success update mysql");
+                if (trade_status.equals(ConfigKey.TRADE_SUCCESS)) {
+                    info.setOrderStatus(OrderStatus.CHECK_IN.getStatus());
+                    orderInfoService.updateIndent(info);
+                }
                 return ("success");
             }
 
@@ -111,7 +116,6 @@ public class PayController extends BaseController {
      * @param trade_no     支付宝交易凭证号
      * @return String
      * @throws AlipayApiException
-     * @throws
      * @Title: alipayReturn
      * @Description: 支付宝回调接口
      * @author nelson

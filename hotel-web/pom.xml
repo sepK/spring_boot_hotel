@@ -38,7 +38,7 @@
     </dependencies>
 
     <build>
-        <finalName>hotel-starter</finalName>
+        <finalName>hotel</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>

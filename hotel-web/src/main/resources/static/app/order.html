@@ -97,15 +97,17 @@
                             "<span>状态</span>\n" +
                             "<span>" + ostatus + "</span>\n" +
                             "</li>\n";
-                        if (ostatus === "预定") {
+                        if (item.orderInfo.orderStatus === 1) {
                             html += "<button type='button' class='btn btn-primary pay_btn' pay-id=" + item.orderInfo.orderId + ">付款</button>\n";
-                            html += "<button type='button' class='btn btn-warning finsh_btn' finsh-id=" + item.orderInfo.orderId + ">取消订单</button>\n";
-                        } else if (ostatus === "入住") {
+                            html += "<button type='button' class='btn btn-warning finish_btn' finish-id=" + item.orderInfo.orderId + ">取消订单</button>\n";
+                        } else if (item.orderInfo.orderStatus === 2) {
                             html += "<button type='button' class='btn btn-danger checkout_btn' checkout-id=" + item.orderInfo.orderId + ">退房</button>\n";
-                        } else if (ostatus === "退房") {
+                        } else if (item.orderInfo.orderStatus === 3) {
                             html += "<button type='button' class='btn btn-danger checkout_btn' disabled='disabled'>退房中</button>\n";
-                        } else {
-                            html += "<button type='button' class='btn btn-warning finsh_btn' disabled='disabled'>订单已经完成</button>\n";
+                        } else if (item.orderInfo.orderStatus === 4) {
+                            html += "<button type='button' class='btn btn-warning finish_btn' disabled='disabled'>订单已经完成</button>\n";
+                        } else if (item.orderInfo.orderStatus === 5) {
+                            html += "<button type='button' class='btn btn-warning finish_btn' disabled='disabled'>订单已经取消</button>\n";
                         }
                         html += "</ul>\n" +
                             "</div>\n" +
@@ -140,11 +142,11 @@
                     }
                 });
             });
-            $(document).on("click", ".finsh_btn", function () {
+            $(document).on("click", ".finish_btn", function () {
                 $.ajax({
                     url: "/order/updateIndent",
                     type: "POST",
-                    data: "orderId=" + $(this).attr("finsh-id") + "&orderStatus=5",
+                    data: "orderId=" + $(this).attr("finish-id") + "&orderStatus=5",
                     success: function () {
                         window.location.reload();
                     }

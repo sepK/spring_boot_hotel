@@ -53,16 +53,16 @@
                         <div class="form-group">
                             <label class="col-sm-2 control-label">入住时间</label>
                             <div class="col-sm-10">
-                                <input type="date" name="orderInfo.startTime" class="form-control awe-calendar from"
-                                       id="startTime_add_input" value="2018-08-17">
+                                <input type="datetime" name="orderInfo.startTime" class="form-control awe-calendar from"
+                                       id="startTime_add_input" value="2019-04-17 00:00:00">
                                 <span class="help-block"></span>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-2 control-label">结束时间</label>
                             <div class="col-sm-10">
-                                <input type="date" name="orderInfo.endTime" class="form-control awe-calendar to"
-                                       id="endTime_add_input" value="2018-08-17">
+                                <input type="datetime" name="orderInfo.endTime" class="form-control awe-calendar to"
+                                       id="endTime_add_input" value="2019-04-18 00:00:00">
                                 <span class="help-block"></span>
                             </div>
                         </div>
@@ -145,14 +145,14 @@
         }
     });
     $(document).on("click", ".add_btn", function () {
-        if (user === null) {
+        if (JSON.parse(sessionStorage.getItem("user")) === null) {
             $("#userUpdateModal").modal({
                 backdrop: "static"
             });
         } else {
             $("#indent_add_btn").attr("add_id", $(this).attr("room_id"));
             $("#money_add_input").val($(this).attr("price"));
-            $("#user_userName_add_input").val(user.userName);
+            $("#user_userName_add_input").val(JSON.parse(sessionStorage.getItem("user")).userName);
             $("#indentAddModal").modal({
                 backdrop: "static"
             });

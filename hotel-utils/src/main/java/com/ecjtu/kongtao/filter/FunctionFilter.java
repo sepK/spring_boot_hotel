@@ -68,9 +68,9 @@ public class FunctionFilter implements Filter {
             return;
         }
         long in = System.currentTimeMillis();
-        log.info(uri + " in " + in);
+        //log.info(uri + " in " + in);
         chain.doFilter(request, response);
-        log.info(uri + " out " + (System.currentTimeMillis() - in));
+        //log.info(uri + " out " + (System.currentTimeMillis() - in));
 
     }
 

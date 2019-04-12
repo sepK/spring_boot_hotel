@@ -15,4 +15,5 @@ public class ConfigKey {
      */
     public static final Integer NAVIGATE_PAGE = 5;
     public static final String GRAPHIC_HELPER_URI = "/user/verifyCode";
+    public static final String TRADE_SUCCESS = "TRADE_SUCCESS";
 }
